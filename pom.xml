@@ -19,6 +19,15 @@
 
   <dependencies>
     <!-- https://mvnrepository.com/artifact/com.badlogicgames.gdx/gdx -->
+    
+    <!-- Junit -->
+    <dependency>
+		<groupId>org.junit.jupiter</groupId>
+		<artifactId>junit-jupiter-engine</artifactId>
+		<version>5.2.0</version>
+		<scope>test</scope>
+	</dependency>
+    
     <dependency>
       <groupId>com.badlogicgames.gdx</groupId>
       <artifactId>gdx</artifactId>
