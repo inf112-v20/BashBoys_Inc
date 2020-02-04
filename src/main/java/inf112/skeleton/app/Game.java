@@ -1,22 +1,10 @@
 package inf112.skeleton.app;
 
-import com.badlogic.gdx.ApplicationListener;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-
 import java.util.ArrayList;
-
 public class Game {
     private ArrayList<Player> players = new ArrayList<>();
-    private Player currentPlayer;
-    private numPlayers;
+    private int numPlayers;
     private Board board;
-    private Deck deck;
-
-    private ViewEngine viewEngine;
 
     /**
      * Create a new game
@@ -24,11 +12,9 @@ public class Game {
      * @param width
      * @param height
      */
-    public Game(int numPlayers, int width, int height, ViewEngine viewEngine) {
-        this.viewEngine = viewEngine;
+    public Game(int numPlayers, int width, int height) {
         this.numPlayers = numPlayers;
-        this.board = new Map(width, height);
-        this.deck = new Deck();
+        this.board = new Board(12, 12);
     }
 
     /**
@@ -47,10 +33,15 @@ public class Game {
         players.remove(player);
     }
 
-    /**
-     * Display game on screen by passing the viewEngine to all render functions
-     */
-    private void renderGame() {
-        board.render(viewEngine);
+    public ArrayList<IMapObject> getObjects() {
+        return this.board.getObjects();
+    }
+
+    public int getWidth() {
+        return this.board.width;
+    }
+
+    public int getHeight() {
+        return this.board.height;
     }
 }

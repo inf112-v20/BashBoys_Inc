@@ -27,4 +27,9 @@ public interface IMapObject {
      */
     public void remove();
 
+    /**
+     * Return name
+     * @return
+     */
+    public String getName();
 }
