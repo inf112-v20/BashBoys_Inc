@@ -16,7 +16,7 @@ public class AppTest {
 
 	@BeforeAll
 	public static void first() {
-		System.out.println("A");
+		System.out.println("A");//Placeholder
 	}
 
 	@BeforeEach
