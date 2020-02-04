@@ -11,6 +11,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.TestInfo;
 
 import inf112.skeleton.app.enums.Direction;
+import inf112.skeleton.app.enums.LeftRight;
 import inf112.skeleton.app.object.TestRobot;
 
 /**
@@ -53,9 +54,9 @@ public class AppTest {
     public void dirTest() {
         TestRobot robot = new TestRobot();
         assertEquals(robot.getDir(), Direction.NORTH);
-        robot.turn(Direction.SOUTH);
+        robot.turn(LeftRight.LEFT);
         assertFalse(robot.getDir() == Direction.NORTH);
-        assertEquals(robot.getDir(), Direction.SOUTH);
+        assertEquals(robot.getDir(), Direction.WEST);
     }
     
     @Test
@@ -63,9 +64,10 @@ public class AppTest {
     public void moveTest() {
         TestRobot robot = new TestRobot();
         assertEquals(robot.getX(), 0);
-        robot.turn(Direction.SOUTH);
-        assertFalse(robot.getDir() == Direction.NORTH);
-        assertEquals(robot.getDir(), Direction.SOUTH);
+        robot.turn(LeftRight.RIGHT);
+        robot.move(3);
+        assertFalse(robot.getX()==3);
+        assertEquals(robot.getY(), 3);
     }
 
 }

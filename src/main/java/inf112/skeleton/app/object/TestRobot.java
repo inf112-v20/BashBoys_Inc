@@ -44,32 +44,33 @@ public class TestRobot implements IDirectionalObject {
         return dir;
     }
 
+    /**
+     * Replace later, does not check collision, wall or valid move
+     * Game could move instead easier to check collisions and stuff
+     * @param amount - Amount to move in direction
+     */
+    public void move(int amount) {
+        switch(dir) {
+        case NORTH:
+            xPos+=amount;
+            break;
+        case SOUTH:
+            xPos-=amount;
+            break;
+        case EAST:
+            yPos+=amount;
+            break;
+        case WEST:
+            yPos-=amount;
+            break;
+            
+        }
+    }
+    
     @Override
     public void turn(LeftRight lr) {
         dir = Direction.turn(lr,dir);
 
-    }
-    
-    /**
-     * Replace later, does not check coalition, wall or valid move
-     * @param i - Amount to move in direction
-     */
-    public void move(int i) {
-        switch(dir) {
-        case NORTH:
-            xPos+=i;
-            break;
-        case SOUTH:
-            xPos-=i;
-            break;
-        case EAST:
-            yPos+=i;
-            break;
-        case WEST:
-            yPos-=i;
-            break;
-            
-        }
     }
 
     @Override
