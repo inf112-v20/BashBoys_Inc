@@ -1,6 +1,6 @@
 package inf112.skeleton.app;
 
-public interface MapObject {
+public interface IMapObject {
 
     /**
      * Get X coordinate
@@ -26,4 +26,5 @@ public interface MapObject {
      * Remove object from map
      */
     public void remove();
+
 }

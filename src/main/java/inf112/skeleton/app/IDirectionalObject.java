@@ -1,6 +1,6 @@
 package inf112.skeleton.app;
 
-public interface DirectionalObject extends MapObject {
+public interface IDirectionalObject extends IMapObject {
 
 	/**
 	 * Get direction

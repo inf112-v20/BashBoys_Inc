@@ -1,6 +1,6 @@
 package inf112.skeleton.app;
 
-public enum Dir {
+public enum Direction {
 
 	NORTH,
 	SOUTH,
