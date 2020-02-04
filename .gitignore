@@ -27,3 +27,20 @@ target
 hs_err_pid*
 mvn-app.iml
 assets/.DS_Store
+/bin/
+
+# eclipse specific
+*.pydevproject
+.project
+.metadata
+bin/**
+tmp/**
+tmp/**/*
+*.tmp
+*.bak
+*.swp
+*~.nib
+local.properties
+.classpath
+.settings/
+.loadpath
