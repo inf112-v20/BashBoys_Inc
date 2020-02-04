@@ -5,12 +5,12 @@ public interface MapObject {
     /**
      * Get X coordinate
      */
-    public void getX();
+    public int getX();
 
     /**
      * Get Y coordinate
      */
-    public void getY();
+    public int getY();
 
     /**
      * Set X coordinate
