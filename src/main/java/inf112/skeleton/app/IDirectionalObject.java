@@ -22,3 +22,4 @@ public interface IDirectionalObject extends IMapObject {
      */
     public void turn(LeftRight lr, int turnss);
 }
+
