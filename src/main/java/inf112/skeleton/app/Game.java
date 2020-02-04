@@ -10,41 +10,44 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import java.util.ArrayList;
 
 public class Game {
-    ArrayList<Player> players = new ArrayList<>();
-    Player currentPLayer;
-    Map board;
+	ArrayList<Player> players = new ArrayList<>();
+	Player currentPLayer;
+	Map board;
 
-    /**
-     * Create a new game
-     * @param numPlayers
-     * @param width
-     * @param height
-     */
-    public Game(int numPlayers, int width, int height) {
-        this.board = new Map(width, height);
-    }
+	/**
+	 * Create a new game
+	 * 
+	 * @param numPlayers
+	 * @param width
+	 * @param height
+	 */
+	public Game(int numPlayers, int width, int height) {
+		this.board = new Map(width, height);
+	}
 
-    /**
-     * Add player to game
-     * @param player
-     */
-    public void addPlayer(Player player) {
-        players.add(player);
-    }
+	/**
+	 * Add player to game
+	 * 
+	 * @param player
+	 */
+	public void addPlayer(Player player) {
+		players.add(player);
+	}
 
-    /**
-     * Remove player from game
-     * @param player
-     */
-    public void removePlayer(Player player) {
-        players.remove(player);
-    }
+	/**
+	 * Remove player from game
+	 * 
+	 * @param player
+	 */
+	public void removePlayer(Player player) {
+		players.remove(player);
+	}
 
-    /**
-     * Display game on screen
-     */
-    private void renderGame() {
+	/**
+	 * Display game on screen
+	 */
+	private void renderGame() {
 
-    }
+	}
 
 }

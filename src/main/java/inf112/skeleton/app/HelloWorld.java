@@ -8,41 +8,41 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class HelloWorld implements ApplicationListener {
-    private SpriteBatch batch;
-    private BitmapFont font;
+	private SpriteBatch batch;
+	private BitmapFont font;
 
-    @Override
-    public void create() {
-        batch = new SpriteBatch();
-        font = new BitmapFont();
-        font.setColor(Color.RED);
-    }
+	@Override
+	public void create() {
+		batch = new SpriteBatch();
+		font = new BitmapFont();
+		font.setColor(Color.RED);
+	}
 
-    @Override
-    public void dispose() {
-        batch.dispose();
-        font.dispose();
-    }
+	@Override
+	public void dispose() {
+		batch.dispose();
+		font.dispose();
+	}
 
-    @Override
-    public void render() {
-        Gdx.gl.glClearColor(1, 1, 1, 1);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+	@Override
+	public void render() {
+		Gdx.gl.glClearColor(1, 1, 1, 1);
+		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        batch.begin();
-        font.draw(batch, "Bye World", 200, 200);
-        batch.end();
-    }
+		batch.begin();
+		font.draw(batch, "Bye World", 200, 200);
+		batch.end();
+	}
 
-    @Override
-    public void resize(int width, int height) {
-    }
+	@Override
+	public void resize(int width, int height) {
+	}
 
-    @Override
-    public void pause() {
-    }
+	@Override
+	public void pause() {
+	}
 
-    @Override
-    public void resume() {
-    }
+	@Override
+	public void resume() {
+	}
 }

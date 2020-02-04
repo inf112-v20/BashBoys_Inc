@@ -12,34 +12,36 @@ import org.junit.jupiter.api.TestInfo;
 /**
  * Unit test for simple App.
  */
-public class AppTest 
-{
-    @BeforeEach
-    public void init(TestInfo testInfo) {
-    	System.out.println("Start..." + testInfo.getDisplayName());
-    }  
-    @AfterEach
-    public void tearDown(TestInfo testInfo) {
-    	System.out.println("Finished..." + testInfo.getDisplayName());
-    }
-    
-    
-    /**
-     * Rigorous Test :-)
-     */
-    @Test
-    @DisplayName("AssertTrue(true)")
-    public void shouldAnswerWithTrue()
-    {
-        assertTrue( true );
-    }
+public class AppTest {
 
-    @Test
-    @DisplayName("AssertFalse(false)")
-    public void shouldAnswerWithFalse()
-    {
-        assertFalse( false );
-    }
-    
-    
+	@BeforeAll
+	public static void first() {
+		System.out.println("A");
+	}
+
+	@BeforeEach
+	public void init(TestInfo testInfo) {
+		System.out.println("Start..." + testInfo.getDisplayName());
+	}
+
+	@AfterEach
+	public void tearDown(TestInfo testInfo) {
+		System.out.println("Finished..." + testInfo.getDisplayName());
+	}
+
+	/**
+	 * Rigorous Test :-)
+	 */
+	@Test
+	@DisplayName("AssertTrue(true)")
+	public void shouldAnswerWithTrue() {
+		assertTrue(true);
+	}
+
+	@Test
+	@DisplayName("AssertFalse(false)")
+	public void shouldAnswerWithFalse() {
+		assertFalse(false);
+	}
+
 }
