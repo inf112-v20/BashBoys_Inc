@@ -8,10 +8,11 @@ public class Board {
 
     /**
      * Constructs an empty board
+     * 
      * @param width
      * @param height
      */
-    Board(int width, int height){
+    Board(int width, int height) {
         this.width = width;
         this.height = height;
         board = new MapObject[width][height];
@@ -19,11 +20,12 @@ public class Board {
 
     /**
      * Add item to board at (x,y) and set item pos = (x,y)
+     * 
      * @param item
      * @param x
      * @param y
      */
-    public void addItem(MapObject item, int x, int y){
+    public void addItem(MapObject item, int x, int y) {
         item.setX(x);
         item.setY(y);
         board[x][y] = item;
@@ -31,14 +33,16 @@ public class Board {
 
     /**
      * Remove item form board
+     * 
      * @param item
      */
-    public void removeItem(MapObject item){
+    public void removeItem(MapObject item) {
         board[item.getX()][item.getY()] = null;
     }
 
     /**
      * Move item to (x,y)
+     * 
      * @param item
      * @param x
      * @param y
@@ -50,6 +54,7 @@ public class Board {
 
     /**
      * Get Item on board
+     * 
      * @param item
      * @return MapObject item
      */
@@ -59,11 +64,12 @@ public class Board {
 
     /**
      * Get item at (x,y)
+     * 
      * @param x
      * @param y
      * @return MapObject item
      */
-    public MapObject getItem(int x, int y){
+    public MapObject getItem(int x, int y) {
         return board[x][y];
     }
 
