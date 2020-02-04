@@ -3,7 +3,7 @@ package inf112.skeleton.app;
 public class Robot implements IMapObject {
     private int x = 5;
     private int y = 5;
-    private String name = "Robot";
+    private String name = "RobotFaceSouth";
 
     public void Robot() {
     }

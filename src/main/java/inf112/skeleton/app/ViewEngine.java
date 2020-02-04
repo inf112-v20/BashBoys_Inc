@@ -16,7 +16,8 @@ public class ViewEngine extends ApplicationAdapter {
     private OrthogonalTiledMapRenderer renderer;
     private OrthographicCamera camera;
 
-    private HashMap<String, TiledMapTile> tiles = new HashMap<>();
+    private HashMap<String, TiledMapTile> mapTiles = new HashMap<>();
+    private HashMap<String, TiledMapTile> robotTiles = new HashMap<>();
     private TiledMapTileLayer.Cell playerNormalCell;
     private TiledMapTileLayer boardLayer;
     private TiledMapTileLayer objectLayer;
@@ -40,11 +41,19 @@ public class ViewEngine extends ApplicationAdapter {
         camera = new OrthographicCamera();
 
         // Add textures
-        tiledMapTileSet = map.getTileSets().getTileSet(0);
-        for (TiledMapTile tile:tiledMapTileSet) {
+        TiledMapTileSet mapTileSet = map.getTileSets().getTileSet("MapTileSet");
+        for (TiledMapTile tile:mapTileSet) {
             Object property = tile.getProperties().get("name");
             if (property != null) {
-                tiles.put((String) property, tile);
+                mapTiles.put((String) property, tile);
+            }
+        }
+
+        TiledMapTileSet robotTileSet = map.getTileSets().getTileSet("RobotTileSet");
+        for (TiledMapTile tile:robotTileSet) {
+            Object property = tile.getProperties().get("name");
+            if (property != null) {
+                robotTiles.put((String) property, tile);
             }
         }
     }
@@ -66,13 +75,28 @@ public class ViewEngine extends ApplicationAdapter {
             if (gameObject != null) {
                 int x = gameObject.getX();
                 int y = gameObject.getY();
-                TiledMapTileLayer.Cell cell = robotLayer.getCell(x, y);
-                if (cell == null) {
-                    cell = new TiledMapTileLayer.Cell();
-                    robotLayer.setCell(x, y, cell);
+
+                if (gameObject instanceof Robot) {
+                    // GameObject is a robot, get tile from robotTileSet and add to robotLayer
+                    TiledMapTileLayer.Cell cell = robotLayer.getCell(x, y);
+                    if (cell == null) {
+                        cell = new TiledMapTileLayer.Cell();
+                        robotLayer.setCell(x, y, cell);
+                    }
+
+                    TiledMapTile tile = getRobotTileByName(gameObject.getName());
+                    cell.setTile(tile);
+                } else {
+                    // GameObject is not a robot do something else
+                    TiledMapTileLayer.Cell cell = boardLayer.getCell(x, y);
+                    if (cell == null) {
+                        cell = new TiledMapTileLayer.Cell();
+                        boardLayer.setCell(x, y, cell);
+                    }
+
+                    TiledMapTile tile = getMapTileByName(gameObject.getName());
+                    cell.setTile(tile);
                 }
-                TiledMapTile tile = getTileByName(gameObject.getName());
-                cell.setTile(tile);
             }
         }
 
@@ -96,7 +120,11 @@ public class ViewEngine extends ApplicationAdapter {
     public void resume() {
     }
 
-    private TiledMapTile getTileByName(String name) {
-        return tiles.get(name);
+    private TiledMapTile getMapTileByName(String name) {
+        return mapTiles.get(name);
+    }
+
+    private TiledMapTile getRobotTileByName(String name) {
+        return robotTiles.get(name);
     }
 }
