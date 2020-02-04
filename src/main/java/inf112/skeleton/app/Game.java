@@ -27,7 +27,7 @@ public class Game {
     public Game(int numPlayers, int width, int height, ViewEngine viewEngine) {
         this.viewEngine = viewEngine;
         this.numPlayers = numPlayers;
-        this.board = new Board(width, height);
+        this.board = new Map(width, height);
         this.deck = new Deck();
     }
 
