@@ -33,7 +33,7 @@ public class Game {
         players.remove(player);
     }
 
-    public ArrayList<MapObject> getObjects() {
+    public ArrayList<IMapObject> getObjects() {
         return this.board.getObjects();
     }
 

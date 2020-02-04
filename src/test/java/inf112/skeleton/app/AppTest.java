@@ -53,7 +53,7 @@ public class AppTest {
     public void dirTest() {
         TestRobot robot = new TestRobot();
         assertEquals(robot.getDir(), Direction.NORTH);
-        robot.turn(Direction.SOUTH);
+        //robot.turn(Direction.SOUTH);
         assertFalse(robot.getDir() == Direction.NORTH);
         assertEquals(robot.getDir(), Direction.SOUTH);
     }
@@ -63,7 +63,7 @@ public class AppTest {
     public void moveTest() {
         TestRobot robot = new TestRobot();
         assertEquals(robot.getX(), 0);
-        robot.turn(Direction.SOUTH);
+        //robot.turn(Direction.SOUTH);
         assertFalse(robot.getDir() == Direction.NORTH);
         assertEquals(robot.getDir(), Direction.SOUTH);
     }

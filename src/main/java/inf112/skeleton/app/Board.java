@@ -6,7 +6,7 @@ public class Board {
 
     public int width;
     public int height;
-    private MapObject[][] board;
+    private IMapObject[][] board;
 
     /**
      * Constructs an empty board
@@ -17,7 +17,7 @@ public class Board {
     Board(int width, int height) {
         this.width = width;
         this.height = height;
-        board = new MapObject[width][height];
+        board = new IMapObject[width][height];
 
         this.addItem(new Robot(), 5, 5);
     }
@@ -29,7 +29,7 @@ public class Board {
      * @param x
      * @param y
      */
-    public void addItem(MapObject item, int x, int y) {
+    public void addItem(IMapObject item, int x, int y) {
         item.setX(x);
         item.setY(y);
         board[x][y] = item;
@@ -40,7 +40,7 @@ public class Board {
      * 
      * @param item
      */
-    public void removeItem(MapObject item) {
+    public void removeItem(IMapObject item) {
         board[item.getX()][item.getY()] = null;
     }
 
@@ -51,7 +51,7 @@ public class Board {
      * @param x
      * @param y
      */
-    public void moveItem(MapObject item, int x, int y) {
+    public void moveItem(IMapObject item, int x, int y) {
         removeItem(item);
         board[x][y] = item;
     }
@@ -62,7 +62,7 @@ public class Board {
      * @param item
      * @return MapObject item
      */
-    public MapObject getItem(MapObject item) {
+    public IMapObject getItem(IMapObject item) {
         return board[item.getX()][item.getY()];
     }
 
@@ -73,12 +73,12 @@ public class Board {
      * @param y
      * @return MapObject item
      */
-    public MapObject getItem(int x, int y) {
+    public IMapObject getItem(int x, int y) {
         return board[x][y];
     }
 
-    public ArrayList<MapObject> getObjects() {
-        ArrayList<MapObject> mapObjects = new ArrayList<>();
+    public ArrayList<IMapObject> getObjects() {
+        ArrayList<IMapObject> mapObjects = new ArrayList<>();
 
         for (int x = 0; x < this.board.length; x++) {
             for (int y = 0; y < this.board.length; y++) {

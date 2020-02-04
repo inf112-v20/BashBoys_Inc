@@ -40,6 +40,11 @@ public class TestRobot implements IDirectionalObject {
     }
 
     @Override
+    public String getName() {
+        return null;
+    }
+
+    @Override
     public Direction getDir() {
         return dir;
     }

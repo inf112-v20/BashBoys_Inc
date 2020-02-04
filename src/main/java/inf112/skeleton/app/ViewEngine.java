@@ -60,9 +60,9 @@ public class ViewEngine extends ApplicationAdapter {
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        ArrayList<MapObject> gameObjects = game.getObjects();
+        ArrayList<IMapObject> gameObjects = game.getObjects();
 
-        for (MapObject gameObject : gameObjects) {
+        for (IMapObject gameObject : gameObjects) {
             if (gameObject != null) {
                 int x = gameObject.getX();
                 int y = gameObject.getY();
