@@ -1,5 +1,7 @@
 package inf112.skeleton.app;
 
+import java.util.ArrayList;
+
 public class Board {
 
     public int width;
@@ -15,6 +17,8 @@ public class Board {
         this.width = width;
         this.height = height;
         board = new MapObject[width][height];
+
+        this.addItem(new Robot(), 5, 5);
     }
 
     /**
@@ -67,4 +71,17 @@ public class Board {
         return board[x][y];
     }
 
+    public ArrayList<MapObject> getObjects() {
+        ArrayList<MapObject> mapObjects = new ArrayList<>();
+
+        for (int x = 0; x < this.board.length; x++) {
+            for (int y = 0; y < this.board.length; y++) {
+                if (this.board[x][y] != null) {
+                    mapObjects.add(this.board[x][y]);
+                }
+            }
+        }
+
+        return mapObjects;
+    }
 }

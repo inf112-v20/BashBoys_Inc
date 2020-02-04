@@ -1,7 +1,6 @@
 package inf112.skeleton.app;
 
 public interface MapObject {
-
     /**
      * Get X coordinate
      */
@@ -26,4 +25,10 @@ public interface MapObject {
      * Remove object from map
      */
     public void remove();
+
+    /**
+     * Return texture
+     * @return
+     */
+    public String getName();
 }
