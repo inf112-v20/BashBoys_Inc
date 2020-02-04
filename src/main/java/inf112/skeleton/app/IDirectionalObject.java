@@ -5,10 +5,10 @@ public interface IDirectionalObject extends IMapObject {
     /**
      * Get direction
      */
-    public void getDir();
+    public Direction getDir();
 
     /**
      * Set direction
      */
-    public void setDir();
+    public void setDir(Direction dir);
 }
