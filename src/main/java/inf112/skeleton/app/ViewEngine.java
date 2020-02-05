@@ -6,7 +6,6 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.maps.tiled.*;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
-
 import inf112.skeleton.app.object.Robot;
 
 import java.util.ArrayList;
@@ -53,7 +52,7 @@ public class ViewEngine extends ApplicationAdapter {
 
         TiledMapTileSet robotTileSet = map.getTileSets().getTileSet("RobotTileSet");
         for (TiledMapTile tile : robotTileSet) {
-            Object property = tile.getProperties().get("name");
+            Object property = tile.getProperties().get("robot 1");
             if (property != null) {
                 robotTiles.put((String) property, tile);
             }
