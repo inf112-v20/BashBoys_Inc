@@ -69,5 +69,16 @@ public class AppTest {
         assertFalse(robot.getX()==3);
         assertEquals(robot.getY(), 3);
     }
+    
+    @Test
+    @DisplayName("Board Test")
+    public void boardTest() {
+        Board board = new Board(10,10);
+        TestRobot robot = new TestRobot();
+        board.addItem(robot, 5, 5);
+        assertEquals(board.getItem(5, 5),robot);
+        assertEquals(board.getObjects().size(),1);
+        assertFalse(board.getObjects().size() == 2);
+    }
 
 }

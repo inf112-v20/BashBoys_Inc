@@ -7,6 +7,8 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.maps.tiled.*;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 
+import inf112.skeleton.app.object.Robot;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -42,7 +44,7 @@ public class ViewEngine extends ApplicationAdapter {
 
         // Add textures
         TiledMapTileSet mapTileSet = map.getTileSets().getTileSet("MapTileSet");
-        for (TiledMapTile tile:mapTileSet) {
+        for (TiledMapTile tile : mapTileSet) {
             Object property = tile.getProperties().get("name");
             if (property != null) {
                 mapTiles.put((String) property, tile);
@@ -50,7 +52,7 @@ public class ViewEngine extends ApplicationAdapter {
         }
 
         TiledMapTileSet robotTileSet = map.getTileSets().getTileSet("RobotTileSet");
-        for (TiledMapTile tile:robotTileSet) {
+        for (TiledMapTile tile : robotTileSet) {
             Object property = tile.getProperties().get("name");
             if (property != null) {
                 robotTiles.put((String) property, tile);

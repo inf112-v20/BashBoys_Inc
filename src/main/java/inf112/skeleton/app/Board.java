@@ -2,6 +2,8 @@ package inf112.skeleton.app;
 
 import java.util.ArrayList;
 
+import inf112.skeleton.app.object.Robot;
+
 public class Board {
 
     public int width;
