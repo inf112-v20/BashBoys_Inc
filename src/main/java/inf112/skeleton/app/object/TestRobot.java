@@ -8,7 +8,7 @@ public class TestRobot implements IDirectionalObject {
 
     int xPos = 0;
     int yPos = 0;
-    Direction dir = Direction.NORTH;
+    Direction dir = Direction.SOUTH;
     
     
     @Override
@@ -57,16 +57,16 @@ public class TestRobot implements IDirectionalObject {
     public void move(int amount) {
         switch(dir) {
         case NORTH:
-            xPos+=amount;
-            break;
-        case SOUTH:
-            xPos-=amount;
-            break;
-        case EAST:
             yPos+=amount;
             break;
-        case WEST:
+        case SOUTH:
             yPos-=amount;
+            break;
+        case EAST:
+            xPos+=amount;
+            break;
+        case WEST:
+            xPos-=amount;
             break;
             
         }

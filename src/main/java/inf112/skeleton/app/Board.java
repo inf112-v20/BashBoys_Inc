@@ -3,6 +3,7 @@ package inf112.skeleton.app;
 import java.util.ArrayList;
 
 import inf112.skeleton.app.object.Robot;
+import inf112.skeleton.app.object.TestRobot;
 
 public class Board {
 
@@ -56,6 +57,50 @@ public class Board {
     public void moveItem(IMapObject item, int x, int y) {
         removeItem(item);
         board[x][y] = item;
+    }
+
+    public void moveItem(TestRobot item, int amount) {
+        if (!clearPath(item, amount))
+            throw new IllegalArgumentException("Path not clear");
+        removeItem(item);
+        item.move(amount);
+        board[item.getX()][item.getY()] = item;
+    }
+
+    private boolean clearPath(IDirectionalObject item, int amount) {
+        int p;
+        switch (item.getDir()) {
+        case NORTH:
+            p = item.getY();
+            while (++p <= item.getY() + amount) {
+                if (board[item.getX()][p] != null)
+                    return false;
+            }
+            break;
+        case SOUTH:
+            p = item.getY();
+            while (--p >= item.getY() - amount) {
+                if (board[item.getX()][p] != null)
+                    return false;
+            }
+            break;
+        case EAST:
+            p = item.getX();
+            while (++p <= item.getX() + amount) {
+                if (board[item.getX()][p] != null)
+                    return false;
+            }
+            break;
+        case WEST:
+            p = item.getX();
+            while (--p >= item.getX() - amount) {
+                if (board[item.getX()][p] != null)
+                    return false;
+            }
+            break;
+
+        }
+        return true;
     }
 
     /**
