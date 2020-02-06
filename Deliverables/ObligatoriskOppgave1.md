@@ -45,8 +45,17 @@ Prosjektorganisering:
 -   Møter hver tirsdag i gruppetime, eventuelt utenfor skoletid om nødvendig.
 -   Avtaler på møtene hva hver enkelt person skal gjøre hjemme til neste møte.
 
-IN PROGRESS
 ## Bruker Historier
+* Som spiller trenge jeg å se brettet for å spille spillet
+ * Arbeidsoppgaver:
+  * Brett grafikk
+  * Rendere brettet
+  
+* Som bruker trenger jeg å se en brikke på brettet for å vite hvor brikken min er
+ * Arbeidsoppgaver:
+  * Brikke grafikk
+  * Rendere brikken
+  * Rutenett på brettet til å plassere brikken
 
 ## Oppsummering 
 I retrospekt fant vi ut at vi samarbeidet bra sammen og alt fungerte som forventet. Kanban som en arbeidsmetode fungerte bra, men det er så tidlig i prosjektet og alle kan ikke jobbe på samme klasser/filer samtidig og noen får gjort litt mindre enn andre. Dette forandre seg senere i prosjektet når alle kan jobbe på separate klasser/filer. Alt i alt var alle fornøyde med hvordan ting fungerte og vi tenker å fortsette med samme arbeidsmetode.
