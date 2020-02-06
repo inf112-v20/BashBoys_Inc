@@ -4,17 +4,17 @@
 Hele laget har god kompetanse med Java. Dermed kan alle programmer litt hver og ingen spesiell tilrettelegging er nødvendig. Rollefordelingen ble basert på hva folk ønsker.
 
 ## Roller
-Erlend Dahl: COO - Chief Operations Officer - TeamLeader 
- * Erfaring som instruktør og holde styr på andre
-Egil Bru: CQO - Code Quality Officer - Programmerer
-* Lengre erfaring med programmering
-Elias Bendixen: CTO - Cheif Test Officer - Test ansvarlig
-* Kan UML of flink med tester
-Terje Baklund: CDO - Cheif Design Officer - Graphic Director
-* Gjekk media og har grunnleggende kompetanse i design og grafikk
-Mathias Haugsbø: CTO - Cheif Technical Officer - Teknisk ansvarlig
-* Lengre erfaring med programmering
-* Jobber som utvikler
+* Erlend Dahl: COO - Chief Operations Officer - TeamLeader 
+  * Erfaring som instruktør og holde styr på andre
+* Egil Bru: CQO - Code Quality Officer - Programmerer
+  * Lengre erfaring med programmering
+* Elias Bendixen: CTO - Cheif Test Officer - Test ansvarlig
+  * Kan UML of flink med tester
+* Terje Baklund: CDO - Cheif Design Officer - Graphic Director
+  * Gjekk media og har grunnleggende kompetanse i design og grafikk
+* Mathias Haugsbø: CTO - Cheif Technical Officer - Teknisk ansvarlig
+  * Lengre erfaring med programmering
+  * Jobber som utvikler
 
 # Spesifikasjoner 
 #### Det overordnede mål
