@@ -7,7 +7,6 @@ public class Main {
     public static void main(String[] args) {
         LwjglApplicationConfiguration cfg = new LwjglApplicationConfiguration();
 
-
         cfg.title = "Roborally";
         cfg.width = 768;
         cfg.height = 768;

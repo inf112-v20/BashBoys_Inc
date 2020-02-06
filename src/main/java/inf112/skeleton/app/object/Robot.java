@@ -1,7 +1,6 @@
 package inf112.skeleton.app.object;
 
 import inf112.skeleton.app.IDirectionalObject;
-import inf112.skeleton.app.IMapObject;
 import inf112.skeleton.app.enums.Direction;
 import inf112.skeleton.app.enums.LeftRight;
 
@@ -10,7 +9,6 @@ public class Robot implements IDirectionalObject {
     private int yPos = 5;
     private String name = "RobotFaceSouth";
     Direction dir = Direction.SOUTH;
-    
 
     public Robot() {
     }

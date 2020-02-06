@@ -126,6 +126,10 @@ public class Board {
         return board[x][y];
     }
 
+    /**
+     * Return all MapObjects on the board
+     * @return ArrayList<IMapObject>
+     */
     public ArrayList<IMapObject> getObjects() {
         ArrayList<IMapObject> mapObjects = new ArrayList<>();
 

@@ -4,7 +4,6 @@ import inf112.skeleton.app.IDirectionalObject;
 import inf112.skeleton.app.enums.Direction;
 import inf112.skeleton.app.enums.LeftRight;
 
-
 //Prototype robot used for testing
 public class TestRobot implements IDirectionalObject {
 

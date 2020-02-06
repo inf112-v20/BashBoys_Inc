@@ -1,5 +1,8 @@
 package inf112.skeleton.app.enums;
 
+/**
+ * Direction enums for MapObjects
+ */
 public enum Direction {
 
     NORTH,
@@ -7,6 +10,12 @@ public enum Direction {
     EAST,
     WEST;
 
+    /**
+     * Turn object in direction dir in either left or right
+     * @param lr
+     * @param dir
+     * @return New direction after turn
+     */
     public static Direction turn(LeftRight lr, Direction dir) {
         switch (dir) {
         case NORTH:
