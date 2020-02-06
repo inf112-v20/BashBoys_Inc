@@ -47,6 +47,9 @@ Prosjektorganisering:
 
 IN PROGRESS
 ## Bruker Historier
-!(
+
+## Oppsummering 
+I retrospekt fant vi ut at vi samarbeidet bra sammen og alt fungerte som forventet. Kanban som en arbeidsmetode fungerte bra, men det er så tidlig i prosjektet og alle kan ikke jobbe på samme klasser/filer samtidig og noen får gjort litt mindre enn andre. Dette forandre seg senere i prosjektet når alle kan jobbe på separate klasser/filer. Alt i alt var alle fornøyde med hvordan ting fungerte og vi tenker å fortsette med samme arbeidsmetode.
+
 ## UML
 ![UML](https://github.com/inf112-v20/BashBoys_Inc/blob/master/Deliverables/UMLs/oblig1UML.PNG)
