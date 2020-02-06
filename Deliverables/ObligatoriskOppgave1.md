@@ -49,4 +49,4 @@ IN PROGRESS
 ## Bruker Historier
 !(
 ## UML
-!(https://github.com/inf112-v20/BashBoys_Inc/blob/master/Deliverables/UMLs/oblig1UML.PNG)
+![UML](https://github.com/inf112-v20/BashBoys_Inc/blob/master/Deliverables/UMLs/oblig1UML.PNG)
