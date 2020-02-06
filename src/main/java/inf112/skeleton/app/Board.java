@@ -59,6 +59,7 @@ public class Board {
         board[x][y] = item;
     }
 
+    //Moves Robot relative to current position (Robot needs move function to use)
     public void moveItem(TestRobot item, int amount) {
         if (!clearPath(item, amount))
             throw new IllegalArgumentException("Path not clear");
@@ -67,7 +68,8 @@ public class Board {
         board[item.getX()][item.getY()] = item;
     }
 
-    private boolean clearPath(IDirectionalObject item, int amount) {
+    //Checks if path is clear (all tiles == null for now) in front of given robot
+    private boolean clearPath(TestRobot item, int amount) {
         int p;
         switch (item.getDir()) {
         case NORTH:

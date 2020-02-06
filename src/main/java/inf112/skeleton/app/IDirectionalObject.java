@@ -12,14 +12,15 @@ public interface IDirectionalObject extends IMapObject {
 
     /**
      * turn direction by 1
+     * @param lr direction to turn
      */
     public void turn(LeftRight lr);
     
     /**
      * 
      * @param lr LEFT or RIGHT
-     * @param turnss times to turn
+     * @param amount times to turn in lr direction
      */
-    public void turn(LeftRight lr, int turnss);
+    public void turn(LeftRight lr, int amount);
 }
 

@@ -4,6 +4,8 @@ import inf112.skeleton.app.IDirectionalObject;
 import inf112.skeleton.app.enums.Direction;
 import inf112.skeleton.app.enums.LeftRight;
 
+
+//Prototype robot used for testing
 public class TestRobot implements IDirectionalObject {
 
     int xPos = 0;
@@ -50,8 +52,8 @@ public class TestRobot implements IDirectionalObject {
     }
 
     /**
-     * Replace later, does not check collision, wall or valid move
-     * Game could move instead easier to check collisions and stuff
+     * Only changes x/y depending on direction
+     * does not check validity of move
      * @param amount - Amount to move in direction
      */
     public void move(int amount) {

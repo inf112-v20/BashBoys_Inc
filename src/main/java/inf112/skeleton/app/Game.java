@@ -33,6 +33,10 @@ public class Game {
         players.remove(player);
     }
 
+    /**
+     * returns all objects on game-board
+     * @return ArrayList with Map-objects
+     */
     public ArrayList<IMapObject> getObjects() {
         return this.board.getObjects();
     }

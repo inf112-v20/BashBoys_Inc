@@ -62,8 +62,8 @@ public class Robot implements IDirectionalObject {
     }
 
     @Override
-    public void turn(LeftRight lr, int turnss) {
-        for(int i = 0;++i<=turnss;) {
+    public void turn(LeftRight lr, int amount) {
+        for(int i = 0;++i<=amount;) {
             turn(lr);
         }
         

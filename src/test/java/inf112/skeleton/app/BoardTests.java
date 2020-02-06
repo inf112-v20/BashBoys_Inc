@@ -14,7 +14,7 @@ class BoardTests {
 
     @Test
     @DisplayName("Board move test")
-    public void boardMoveTest() {
+    public void moveRobotOnBoardTest() {
         TestRobot robot = new TestRobot(); // Faces SOUTH, (0,0)
         Board board = new Board(10, 10); // Has robot at (5,5)
         board.addItem(robot, 5, 4); // Robot now at (5,4)
@@ -28,7 +28,7 @@ class BoardTests {
 
     @Test
     @DisplayName("Board placment Test")
-    public void boardPlaceTest() {
+    public void placeRobotOnBoardTest() {
         Board board = new Board(10, 10); // 10x10 board with robot at (5,5)
         TestRobot robot = new TestRobot(); // SOUTH (0,0) (Not on board)
         board.addItem(robot, 5, 5); // Overwrites old robot
