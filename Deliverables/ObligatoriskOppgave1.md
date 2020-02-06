@@ -32,10 +32,10 @@ Det overordnede målet er å lage et fungerende digital versjon av RoboRally ute
 
 #### Prioritert liste over krav til første iterasjon:
 
-1.    Vise et brett på skjermen
+1.  Vise et brett på skjermen
 2.  Plassere en brikke på brettet 
 3.  Brikken vises på brettet
-4.   Grov skisse over visuell layout
+4.  Grov skisse over visuell layout
 
 
 ## Arbeidsmetode:
@@ -46,16 +46,16 @@ Prosjektorganisering:
 -   Avtaler på møtene hva hver enkelt person skal gjøre hjemme til neste møte.
 
 ## Bruker Historier
-* Som spiller trenge jeg å se brettet for å spille spillet
- * Arbeidsoppgaver:
+1. Som spiller trenger jeg å se brettet for å spille spillet
+* Arbeidoppgaver:
   * Brett grafikk
   * Rendere brettet
   
-* Som bruker trenger jeg å se en brikke på brettet for å vite hvor brikken min er
+2. Som bruker trenger jeg å se en brikke på brettet for å vite hvor brikken min er
  * Arbeidsoppgaver:
-  * Brikke grafikk
-  * Rendere brikken
-  * Rutenett på brettet til å plassere brikken
+   * Brikke grafikk
+   * Rendere brikken
+   * Rutenett på brettet til å plassere brikken
 
 ## Oppsummering 
 I retrospekt fant vi ut at vi samarbeidet bra sammen og alt fungerte som forventet. Kanban som en arbeidsmetode fungerte bra, men det er så tidlig i prosjektet og alle kan ikke jobbe på samme klasser/filer samtidig og noen får gjort litt mindre enn andre. Dette forandre seg senere i prosjektet når alle kan jobbe på separate klasser/filer. Alt i alt var alle fornøyde med hvordan ting fungerte og vi tenker å fortsette med samme arbeidsmetode.
