@@ -13,9 +13,9 @@
 - [ ] Work on all operating systems
 - [ ] Work on laptops with 1366x768px or larger resolution with screen size of 13" or larger.
 
-### Development goals:
+### Development goals for assignment 1:
 - [x] Display board on screen
-- [x] Place game pieces on the board
+- [x] Place game piece on the board
 
 ### How to run:
 
