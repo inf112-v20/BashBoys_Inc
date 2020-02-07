@@ -1,21 +1,9 @@
 package inf112.skeleton.app;
 
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertEquals;
+import org.junit.jupiter.api.*;
+
 import static org.junit.Assert.assertFalse;
-import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertThrows;
-
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.TestInfo;
-
-import inf112.skeleton.app.enums.Direction;
-import inf112.skeleton.app.enums.LeftRight;
-import inf112.skeleton.app.object.TestRobot;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Unit test for simple App.

@@ -19,12 +19,10 @@ public class ViewEngine extends ApplicationAdapter {
 
     private HashMap<String, TiledMapTile> mapTiles = new HashMap<>();
     private HashMap<String, TiledMapTile> robotTiles = new HashMap<>();
-    private TiledMapTileLayer.Cell playerNormalCell;
     private TiledMapTileLayer boardLayer;
     private TiledMapTileLayer objectLayer;
     private TiledMapTileLayer robotLayer;
 
-    private TiledMapTileSet tiledMapTileSet;
 
     public ViewEngine(Game game) {
         this.game = game;

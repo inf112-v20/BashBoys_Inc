@@ -2,9 +2,10 @@ package inf112.skeleton.app;
 
 import java.util.ArrayList;
 public class Game {
-    private ArrayList<Player> players = new ArrayList<>();
     private int numPlayers;
     private Board board;
+    private int width;
+    private int height;
 
     /**
      * Create a new game
@@ -14,23 +15,9 @@ public class Game {
      */
     public Game(int numPlayers, int width, int height) {
         this.numPlayers = numPlayers;
+        this.width = width;
+        this.height = height;
         this.board = new Board(12, 12);
-    }
-
-    /**
-     * Add player to game
-     * @param player
-     */
-    public void addPlayer(Player player) {
-        players.add(player);
-    }
-
-    /**
-     * Remove player from game
-     * @param player
-     */
-    public void removePlayer(Player player) {
-        players.remove(player);
     }
 
     /**
@@ -41,11 +28,4 @@ public class Game {
         return this.board.getObjects();
     }
 
-    public int getWidth() {
-        return this.board.width;
-    }
-
-    public int getHeight() {
-        return this.board.height;
-    }
 }

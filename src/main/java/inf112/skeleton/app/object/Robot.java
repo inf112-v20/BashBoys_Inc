@@ -8,7 +8,7 @@ public class Robot implements IDirectionalObject {
     private int xPos = 5;
     private int yPos = 5;
     private String name = "RobotFaceSouth";
-    Direction dir = Direction.SOUTH;
+    public Direction dir = Direction.SOUTH;
 
     public Robot() {
     }
@@ -39,11 +39,6 @@ public class Robot implements IDirectionalObject {
     }
 
     @Override
-    public void remove() {
-
-    }
-
-    @Override
     public String getName() {
         return this.name;
     }
@@ -53,10 +48,32 @@ public class Robot implements IDirectionalObject {
         return dir;
     }
 
+    /**
+     * Only changes x/y depending on direction
+     * does not check validity of move
+     * @param amount - Amount to move in direction
+     */
+    public void move(int amount) {
+        switch(dir) {
+        case NORTH:
+            yPos+=amount;
+            break;
+        case SOUTH:
+            yPos-=amount;
+            break;
+        case EAST:
+            xPos+=amount;
+            break;
+        case WEST:
+            xPos-=amount;
+            break;
+
+        }
+    }
+
     @Override
     public void turn(LeftRight lr) {
         dir = Direction.turn(lr,dir);
-
     }
 
     @Override

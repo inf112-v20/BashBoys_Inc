@@ -1,9 +1,8 @@
 package inf112.skeleton.app;
 
-import java.util.ArrayList;
-
 import inf112.skeleton.app.object.Robot;
-import inf112.skeleton.app.object.TestRobot;
+
+import java.util.ArrayList;
 
 public class Board {
 
@@ -48,19 +47,11 @@ public class Board {
     }
 
     /**
-     * Move item to (x,y)
-     * 
+     * Moves Robot relative to current position (Robot needs move function to use)
      * @param item
-     * @param x
-     * @param y
+     * @param amount
      */
-    public void moveItem(IMapObject item, int x, int y) {
-        removeItem(item);
-        board[x][y] = item;
-    }
-
-    //Moves Robot relative to current position (Robot needs move function to use)
-    public void moveItem(TestRobot item, int amount) {
+    public void moveItem(Robot item, int amount) {
         if (!clearPath(item, amount))
             throw new IllegalArgumentException("Path not clear");
         removeItem(item);
@@ -68,8 +59,13 @@ public class Board {
         board[item.getX()][item.getY()] = item;
     }
 
-    //Checks if path is clear (all tiles == null for now) in front of given robot
-    private boolean clearPath(TestRobot item, int amount) {
+    /**
+     * Checks if path is clear (all tiles == null for now) in front of given robot
+     * @param item
+     * @param amount
+     * @return boolean if path is clear
+     */
+    private boolean clearPath(Robot item, int amount) {
         int p;
         switch (item.getDir()) {
         case NORTH:
@@ -106,16 +102,6 @@ public class Board {
     }
 
     /**
-     * Get Item on board
-     * 
-     * @param item
-     * @return MapObject item
-     */
-    public IMapObject getItem(IMapObject item) {
-        return board[item.getX()][item.getY()];
-    }
-
-    /**
      * Get item at (x,y)
      * 
      * @param x
@@ -140,7 +126,6 @@ public class Board {
                 }
             }
         }
-
         return mapObjects;
     }
 }
