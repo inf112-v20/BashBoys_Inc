@@ -7,7 +7,7 @@ import inf112.skeleton.app.object.iCard;
 public class Player {
     private String name;
     private ArrayList<iCard> hand = new ArrayList<>();
-    private int handSize = 8;
+    private int handSize = 9;
 
     public Player(String name) {
         this.name = name;
