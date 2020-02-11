@@ -16,13 +16,13 @@ public class AppTest {
         // System.out.println("A");// Placeholder
     }
 
-    // Before each test
+// Before each test
     @BeforeEach
     public void init(TestInfo testInfo) {
         System.out.println("Start..." + testInfo.getDisplayName());
     }
 
-    // After tests are done
+// After tests are done
     @AfterEach
     public void tearDown(TestInfo testInfo) {
         System.out.println("Finished..." + testInfo.getDisplayName());
