@@ -2,13 +2,13 @@ package inf112.skeleton.app.object;
 
 import inf112.skeleton.app.Board;
 
-public class moveCard implements iCard {
+public class MoveCard implements iCard {
 
     int moves;
     int priority;
     String name;
     
-    public moveCard(int moves, int priority,String name) {
+    public MoveCard(int moves, int priority,String name) {
         this.moves = moves;
         this.priority = priority;
         this.name = name;

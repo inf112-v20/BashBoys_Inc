@@ -3,14 +3,14 @@ package inf112.skeleton.app.object;
 import inf112.skeleton.app.Board;
 import inf112.skeleton.app.enums.LeftRight;
 
-public class rotateCard implements iCard {
+public class RotateCard implements iCard {
 
     private String name;
     private int rotates;
     private int priority;
     private LeftRight direction;
 
-    public rotateCard(LeftRight lr, int priority, boolean uTurn, String name) {
+    public RotateCard(LeftRight lr, int priority, boolean uTurn, String name) {
         direction = lr;
         if (uTurn)
             this.rotates = 2;

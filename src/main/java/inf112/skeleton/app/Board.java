@@ -21,7 +21,7 @@ public class Board {
         this.height = height;
         board = new IMapObject[width][height];
 
-        this.addItem(new Robot(), 5, 5);
+        //this.addItem(new Robot(), 5, 5);
     }
 
     /**
@@ -85,14 +85,14 @@ public class Board {
         case EAST:
             p = item.getX();
             while (++p <= item.getX() + amount) {
-                if (board[item.getX()][p] != null)
+                if (board[p][item.getY()] != null)
                     return false;
             }
             break;
         case WEST:
             p = item.getX();
             while (--p >= item.getX() - amount) {
-                if (board[item.getX()][p] != null)
+                if (board[p][item.getY()] != null)
                     return false;
             }
             break;
