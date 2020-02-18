@@ -22,5 +22,7 @@ public interface IDirectionalObject extends IMapObject {
      * @param amount times to turn in lr direction
      */
     void turn(LeftRight lr, int amount);
+    
+    void setDir(Direction dir);
 }
 

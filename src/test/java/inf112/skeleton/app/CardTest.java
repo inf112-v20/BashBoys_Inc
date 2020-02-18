@@ -14,7 +14,7 @@ import inf112.skeleton.app.object.RotateCard;
 class CardTest {
 
     @Test
-    @DisplayName("Card Test")
+    @DisplayName("Using cards to turn the robot Test")
     void test() {
         //All the required objects
         Board board = new Board(12,12);
@@ -25,12 +25,15 @@ class CardTest {
         MoveCard mCard2 = new MoveCard(3,900,"Hmm");
         
         //Adds robot to board and uses cards on robot
-        //Also returns
+        //Also returns to original place
         board.addItem(robot, 5, 5);
+        
         rCard1.doStuff(robot, board);
         assertEquals(robot.getDir(),Direction.EAST);
+        
         mCard1.doStuff(robot, board);
         assertEquals(robot.getX(),8);
+        
         rCard2.doStuff(robot, board);
         mCard2.doStuff(robot, board);
         assertEquals(robot.getDir(),Direction.WEST);

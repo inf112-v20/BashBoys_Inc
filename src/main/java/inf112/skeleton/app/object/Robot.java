@@ -83,4 +83,8 @@ public class Robot implements IDirectionalObject {
         }
         
     }
+    
+    public void setDir(Direction dir) {
+        this.dir = dir;
+    }
 }
