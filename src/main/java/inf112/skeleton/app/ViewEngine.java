@@ -56,8 +56,8 @@ public class ViewEngine extends ApplicationAdapter {
 
         stage = new Stage(new ScreenViewport());
 
-        button.setWidth(200);
-        button.setHeight(200);
+        button.setWidth(150);
+        button.setHeight(150);
 
 
         button.addListener(new ClickListener() {
