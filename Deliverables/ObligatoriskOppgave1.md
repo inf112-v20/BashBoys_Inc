@@ -4,7 +4,7 @@
 Hele laget har god kompetanse med Java. Dermed kan alle programmer litt hver og ingen spesiell tilrettelegging er nødvendig. Rollefordelingen ble basert på hva folk ønsker.
 
 ## Roller
-* Erlend Dahl: COO - Chief Operations Officer - TeamLeader 
+* Erlend Dahl: COO - Chief Operations Officer - TeamLeader
   * Erfaring som instruktør og holde styr på andre
 * Egil Bru: CQO - Code Quality Officer - Programmerer
   * Lengre erfaring med programmering
@@ -16,7 +16,7 @@ Hele laget har god kompetanse med Java. Dermed kan alle programmer litt hver og 
   * Lengre erfaring med programmering
   * Jobber som utvikler
 
-# Spesifikasjoner 
+# Spesifikasjoner
 #### Det overordnede mål
 Det overordnede målet er å lage et fungerende digital versjon av RoboRally uten noen ødeleggende feil eller mangler. Spillet skal være kompatibel med alle operativsystemer og kunne spilles med flere spillere over LAN.
 
@@ -33,7 +33,7 @@ Det overordnede målet er å lage et fungerende digital versjon av RoboRally ute
 #### Prioritert liste over krav til første iterasjon:
 
 1.  Vise et brett på skjermen
-2.  Plassere en brikke på brettet 
+2.  Plassere en brikke på brettet
 3.  Brikken vises på brettet
 4.  Grov skisse over visuell layout
 
@@ -50,15 +50,17 @@ Prosjektorganisering:
 * Arbeidoppgaver:
   * Brett grafikk
   * Rendere brettet
-  
+
 2. Som bruker trenger jeg å se en brikke på brettet for å vite hvor brikken min er
  * Arbeidsoppgaver:
    * Brikke grafikk
    * Rendere brikken
    * Rutenett på brettet til å plassere brikken
 
-## Oppsummering 
+## Oppsummering
 I retrospekt fant vi ut at vi samarbeidet bra sammen og alt fungerte som forventet. Kanban som en arbeidsmetode fungerte bra, men det er så tidlig i prosjektet og alle kan ikke jobbe på samme klasser/filer samtidig og noen får gjort litt mindre enn andre. Dette forandre seg senere i prosjektet når alle kan jobbe på separate klasser/filer. Alt i alt var alle fornøyde med hvordan ting fungerte og vi tenker å fortsette med samme arbeidsmetode.
+
+Hey, terje var her.
 
 ## UML
 ![UML](https://github.com/inf112-v20/BashBoys_Inc/blob/master/Deliverables/UMLs/oblig1UML.PNG)
