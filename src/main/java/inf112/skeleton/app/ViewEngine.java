@@ -4,8 +4,17 @@ import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.tiled.*;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import inf112.skeleton.app.object.Robot;
 
 import java.util.ArrayList;
@@ -14,6 +23,15 @@ import java.util.HashMap;
 public class ViewEngine extends ApplicationAdapter {
     private Game game;
     private TiledMap map;
+
+    private Stage stage;
+    private Skin skin;
+
+    private Texture myTexture;
+    private TextureRegion myTextureRegion;
+    private TextureRegionDrawable myTexRegionDrawable;
+    private ImageButton button;
+
     private OrthogonalTiledMapRenderer renderer;
     private OrthographicCamera camera;
 
@@ -30,6 +48,28 @@ public class ViewEngine extends ApplicationAdapter {
 
     @Override
     public void create() {
+
+        myTexture = new Texture(Gdx.files.internal("assets/exampleCard.png"));
+        myTextureRegion = new TextureRegion(myTexture);
+        myTexRegionDrawable = new TextureRegionDrawable(myTextureRegion);
+        button = new ImageButton(myTexRegionDrawable);
+
+        stage = new Stage(new ScreenViewport());
+
+        button.setWidth(200);
+        button.setHeight(200);
+
+
+        button.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                stage.clear();
+            }
+        });
+
+        stage.addActor(button);
+        Gdx.input.setInputProcessor(stage);
+
         map = new TmxMapLoader().load("assets/maps/roborallyCleanBoard.tmx");
         boardLayer = (TiledMapTileLayer) map.getLayers().get("Board");
 
@@ -61,12 +101,16 @@ public class ViewEngine extends ApplicationAdapter {
     public void dispose() {
         map.dispose();
         renderer.dispose();
+        stage.dispose();
     }
 
     @Override
     public void render() {
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
+        stage.act(Gdx.graphics.getDeltaTime());
+
 
         ArrayList<IMapObject> gameObjects = game.getObjects();
 
@@ -101,6 +145,7 @@ public class ViewEngine extends ApplicationAdapter {
 
         renderer.setView(camera);
         renderer.render();
+        stage.draw();
     }
 
     @Override
