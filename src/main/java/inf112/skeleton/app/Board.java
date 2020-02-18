@@ -1,5 +1,7 @@
 package inf112.skeleton.app;
 
+import inf112.skeleton.app.enums.Direction;
+import inf112.skeleton.app.enums.LeftRight;
 import inf112.skeleton.app.object.Robot;
 
 import java.util.ArrayList;
@@ -66,40 +68,44 @@ public class Board {
      * @return boolean if path is clear
      */
     private boolean clearPath(Robot item, int amount) {
-        int p;
-        switch (item.getDir()) {
+        int x = item.getX();
+        int y = item.getY();
+        Direction dir = item.getDir();
+        if (amount == -1) {
+            dir = Direction.turn(LeftRight.LEFT, dir);
+            dir = Direction.turn(LeftRight.LEFT, dir);
+            amount = -amount;
+        }
+            
+        switch (dir) {
         case NORTH:
-            p = item.getY();
-            while (++p <= item.getY() + amount) {
-                if (board[item.getX()][p] != null)
+            while (++y <= item.getY() + amount) {
+                if (board[item.getX()][y] != null)
                     return false;
             }
             break;
         case SOUTH:
-            p = item.getY();
-            while (--p >= item.getY() - amount) {
-                if (board[item.getX()][p] != null)
+            while (--y >= item.getY() - amount) {
+                if (board[item.getX()][y] != null)
                     return false;
             }
             break;
         case EAST:
-            p = item.getX();
-            while (++p <= item.getX() + amount) {
-                if (board[p][item.getY()] != null)
+            while (++x <= item.getX() + amount) {
+                if (board[x][item.getY()] != null)
                     return false;
             }
             break;
         case WEST:
-            p = item.getX();
-            while (--p >= item.getX() - amount) {
-                if (board[p][item.getY()] != null)
+            while (--x >= item.getX() - amount) {
+                if (board[x][item.getY()] != null)
                     return false;
             }
             break;
-
         }
         return true;
     }
+    
 
     /**
      * Get item at (x,y)

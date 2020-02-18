@@ -5,7 +5,7 @@ import inf112.skeleton.app.enums.Direction;
 import inf112.skeleton.app.enums.LeftRight;
 
 public class Robot implements IDirectionalObject {
-    private int xPos = 5;
+    private int xPos = 5; //Base position
     private int yPos = 5;
     private String name = "RobotFaceSouth";
     public Direction dir = Direction.SOUTH;
@@ -71,16 +71,28 @@ public class Robot implements IDirectionalObject {
         }
     }
 
-    @Override
+    
+    /**
+     * turn direction by 1
+     * @param lr direction to turn
+     */    
     public void turn(LeftRight lr) {
         dir = Direction.turn(lr,dir);
     }
 
-    @Override
+    /**
+     * 
+     * @param lr LEFT or RIGHT
+     * @param amount times to turn in lr direction
+     */
     public void turn(LeftRight lr, int amount) {
         for(int i = 0;++i<=amount;) {
             turn(lr);
         }
         
+    }
+    
+    public void setDir(Direction dir) {
+        this.dir = dir;
     }
 }

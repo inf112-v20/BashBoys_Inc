@@ -12,8 +12,8 @@ import static org.junit.Assert.assertFalse;
 class RobotTests {
 
     @Test
-    @DisplayName("Direction test")
-    public void dirTest() {
+    @DisplayName("Robot turning test")
+    public void turnTest() {
         Robot robot = new Robot(); // SOUTH (0,0)
         assertEquals(robot.getDir(), Direction.SOUTH);
         robot.turn(LeftRight.LEFT); // EAST
@@ -24,7 +24,8 @@ class RobotTests {
     @Test
     @DisplayName("Robot move test")
     public void robotMoveTest() {
-        Robot robot = new Robot();// Faces SOUTH, (0,0)
+        Robot robot = new Robot();// New robot
+        robot.setDir(Direction.SOUTH);
         robot.setX(0);
         robot.setY(0);
         assertEquals(robot.getX(), 0);
@@ -32,5 +33,17 @@ class RobotTests {
         robot.move(3); // Now (3,0)
         assertFalse(robot.getY() == 3); // Not (0,3)
         assertEquals(robot.getX(), 3);
+    }
+    
+    @Test
+    @DisplayName("Robot reverse test")
+    public void robotBackTest() {
+        Robot robot = new Robot();// New robot
+        robot.setDir(Direction.SOUTH);
+        robot.setX(0);
+        robot.setY(0);
+        robot.move(-1); // Now (1,0)
+        assertFalse(robot.getY() == -1); // Not (0,3)
+        assertEquals(robot.getY(), 1);
     }
 }
