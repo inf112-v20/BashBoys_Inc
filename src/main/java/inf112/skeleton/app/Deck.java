@@ -3,14 +3,14 @@ package inf112.skeleton.app;
 import inf112.skeleton.app.enums.LeftRight;
 import inf112.skeleton.app.object.MoveCard;
 import inf112.skeleton.app.object.RotateCard;
-import inf112.skeleton.app.object.iCard;
+import inf112.skeleton.app.object.ICard;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
 
 public class Deck {
-    private LinkedList<iCard> cards = new LinkedList<>();
+    private LinkedList<ICard> cards = new LinkedList<>();
     public int DECK_SIZE = 84;
 
     public Deck(){
@@ -47,12 +47,14 @@ public class Deck {
         // Priority: 490 -> 660 | 18: Move 1
         // Priority: 670 -> 780 | 12: Move 2
         // Priority: 790 -> 840 | 6: Move 3
-        /* Option cards:
+        // TOTAL NORMAL CARDS = 84
+        /* Option cards: 26 cards
            Ablative Coat, Abort Switch, Brakes, Circuit Breaker, Conditional Program, Crab Legs
            Double-Barreled Laser, Dual Processor, Extra Memory, Fire Control, Flywheel, Fourth Gear
            Gyroscopic Stabilizer, High-Powered Laser, Mechanical Arm, Mini Howitzer, Power-Down Shield
            Pressor Beam, Radio Control, Ramming Gear, Rear-Firing Laser, Recompile, Reverse Gear
            Scrambler, Superior Archive, Tractor Beam
+           TOTAL CARDS = 110
          */
     }
 
@@ -76,12 +78,12 @@ public class Deck {
      * @param amount
      * @return ArrayList of all drawn cards
      */
-    public ArrayList<iCard> getCards(int amount){
+    public ArrayList<ICard> getCards(int amount){
         if(amount > cards.size()){
             amount = cards.size();
         }
 
-        ArrayList<iCard> temp = new ArrayList<>();
+        ArrayList<ICard> temp = new ArrayList<>();
         for(int i = 0; i < amount; i++){
             temp.add(cards.poll());
         }
@@ -89,10 +91,10 @@ public class Deck {
     }
 
     /**
-     * Look at all cards currently in the deck, don't delete them
+     * Look at all cards currently in the deck, but don't delete them
      * @return LinkedList of all cards
      */
-    public LinkedList<iCard> peekAllCards(){
+    public LinkedList<ICard> peekAllCards(){
         return cards;
     }
 
@@ -100,7 +102,7 @@ public class Deck {
      * Add a single card at the bottom of the deck
      * @param card
      */
-    public void addCard(iCard card){
+    public void addCard(ICard card){
         if(getCurrentDeckSize() < DECK_SIZE){
             cards.push(card);
         } else {
@@ -113,8 +115,8 @@ public class Deck {
      * Add a list of cards at the bottom of the deck
      * @param newCards
      */
-    public void addListOfCards(ArrayList<iCard> newCards){
-        for(iCard card : newCards){
+    public void addListOfCards(ArrayList<ICard> newCards){
+        for(ICard card : newCards){
             addCard(card);
         }
     }

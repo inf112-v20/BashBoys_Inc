@@ -1,7 +1,7 @@
 package inf112.skeleton.app;
 
 import inf112.skeleton.app.object.MoveCard;
-import inf112.skeleton.app.object.iCard;
+import inf112.skeleton.app.object.ICard;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -10,8 +10,8 @@ import static org.junit.Assert.*;
 public class PlayerTest {
 
     private Player player;
-    private iCard move1;
-    private iCard move2;
+    private ICard move1;
+    private ICard move2;
 
     @BeforeEach
     public void init() {
@@ -42,7 +42,7 @@ public class PlayerTest {
     @Test
     public void addOneCardFromHandToProgramSheetTest() {
         player.giveCard(move1);
-        iCard cardInHand = player.getHand().get(0);
+        ICard cardInHand = player.getHand().get(0);
         player.addCardToSheet(cardInHand, 1);
         assertEquals(player.getProgramSheet().get(0), move1);
         assertTrue(player.getHand().size() == 0);

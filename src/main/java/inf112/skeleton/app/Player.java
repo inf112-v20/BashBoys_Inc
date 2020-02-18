@@ -3,25 +3,25 @@ package inf112.skeleton.app;
 import java.util.ArrayList;
 import java.util.Collections;
 
-import inf112.skeleton.app.object.iCard;
+import inf112.skeleton.app.object.ICard;
 
 public class Player {
     private String name;
-    private ArrayList<iCard> hand = new ArrayList<>();
+    private ArrayList<ICard> hand = new ArrayList<>();
     private int handSize = 9;
-    private ArrayList<iCard> programSheet = new ArrayList<>();
+    private ArrayList<ICard> programSheet = new ArrayList<>();
 
     public Player(String name) {
         this.name = name;
     }
 
-    public void giveCard(iCard card) {
+    public void giveCard(ICard card) {
         if (hand.size() == handSize)
             return;
         hand.add(card);
     }
 
-    public void removeCardFromHand(iCard card) {
+    public void removeCardFromHand(ICard card) {
         if (hand.contains(card))
             hand.remove(card);
     }
@@ -30,20 +30,20 @@ public class Player {
         return name;
     }
     
-    public ArrayList<iCard> getHand(){
+    public ArrayList<ICard> getHand(){
         return hand;
     }
 
-    public ArrayList<iCard> getProgramSheet(){
+    public ArrayList<ICard> getProgramSheet(){
         return programSheet;
     }
 
-    public void addCardToSheet(iCard card, int index) {
+    public void addCardToSheet(ICard card, int index) {
         if(index > 4 || index < 0) {
             throw new IndexOutOfBoundsException("Index out of range");
         }
         if(programSheet.contains(card)) {
-            if(getCardFromSheet(index) instanceof iCard) {
+            if(getCardFromSheet(index) instanceof ICard) {
                 Collections.swap(programSheet, index, programSheet.indexOf(card));
             }
             else {
@@ -51,7 +51,7 @@ public class Player {
                 addCardToSheet(card, index);
             }
         }
-        else if(getCardFromSheet(index) instanceof iCard) {
+        else if(getCardFromSheet(index) instanceof ICard) {
             programSheet.add(index, card);
             giveCard(programSheet.get(index+1));
             programSheet.remove(index+1);
@@ -62,7 +62,7 @@ public class Player {
         removeCardFromHand(card);
     }
 
-    public iCard getCardFromSheet(int index) {
+    public ICard getCardFromSheet(int index) {
         try {
             programSheet.get(index);
         } catch ( IndexOutOfBoundsException e ) {
@@ -71,7 +71,7 @@ public class Player {
         return programSheet.get(index);
     }
 
-    public void moveCardFromSheetToHand(iCard card) {
+    public void moveCardFromSheetToHand(ICard card) {
         if (programSheet.contains(card)) {
             hand.add(card);
             programSheet.remove(card);

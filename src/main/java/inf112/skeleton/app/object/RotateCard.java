@@ -3,7 +3,7 @@ package inf112.skeleton.app.object;
 import inf112.skeleton.app.Board;
 import inf112.skeleton.app.enums.LeftRight;
 
-public class RotateCard implements iCard {
+public class RotateCard implements ICard {
 
     private String name;
     private int rotates;
