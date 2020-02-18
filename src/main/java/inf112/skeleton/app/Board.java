@@ -102,10 +102,10 @@ public class Board {
                     return false;
             }
             break;
-
         }
         return true;
     }
+    
 
     /**
      * Get item at (x,y)
