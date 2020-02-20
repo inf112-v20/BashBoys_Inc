@@ -13,9 +13,14 @@ public class Robot implements IDirectionalObject {
     public Robot() {
     }
     
-    public Robot(int x, int y) {
+    public Robot(String s) {
+        this.name = s;
+    }
+    
+    public Robot(int x, int y, String s) {
         this.xPos = x;
         this.yPos = y;
+        this.name = s;
     }
     
     @Override
@@ -54,6 +59,10 @@ public class Robot implements IDirectionalObject {
      * @param amount - Amount to move in direction
      */
     public void move(int amount) {
+        move(amount, dir);
+    }
+    
+    public void move(int amount, Direction dir) {
         switch(dir) {
         case NORTH:
             yPos+=amount;
@@ -67,7 +76,6 @@ public class Robot implements IDirectionalObject {
         case WEST:
             xPos-=amount;
             break;
-
         }
     }
 
@@ -92,6 +100,10 @@ public class Robot implements IDirectionalObject {
         
     }
     
+    /**
+     * 
+     * @param dir - Direction to set to
+     */
     public void setDir(Direction dir) {
         this.dir = dir;
     }
