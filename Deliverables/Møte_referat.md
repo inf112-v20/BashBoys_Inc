@@ -21,10 +21,13 @@ eller spørsmål på slack.
 11.02:  
 Oppmøte: Alle  
 Satt opp nye brukerhistorier for å finne ut hva vi skulle fokusere på videre. Satte også opp arbeidsoppgaver på
-workboardet i github. UML-en oppdatert i forhold til de nye brukerhistoriene/arbeidsoppgavene.
+workboardet i github. UML-en oppdatert i forhold til de nye brukerhistoriene/arbeidsoppgavene. Fordelte oppgavene
+som var satt opp på workboardet som skulle  gjøres til neste møte som vi ble enige om ikke trengte å være før neste
+gruppetime.
 
 18.02:  
 Oppmøte: Alle  
 Fikk tak i spillet så prøvde å spille det litt for å skjønne det bedre. Begynte på deloppgave 1 og 2 til oblig 2.
 Fant ut hva vi skulle fokusere på til neste møte og la dette til i project board. Mest fokus på å få viewengine til
-å fungere skikkelig.
+å fungere skikkelig, siden vi trenger det for å se om ting virker som det skal på skjermen. I tillegg til å se på
+viewengine, var fukuset på å bedre og rydde i den nåværende koden.
