@@ -1,6 +1,5 @@
 package inf112.skeleton.app;
 
-import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -8,11 +7,8 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.tiled.*;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import inf112.skeleton.app.object.Robot;
@@ -20,12 +16,11 @@ import inf112.skeleton.app.object.Robot;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class ViewEngine extends ApplicationAdapter {
+public class ViewEngine extends com.badlogic.gdx.Game {
     private Game game;
     private TiledMap map;
 
     private Stage stage;
-    private Skin skin;
 
     private Texture myTexture;
     private TextureRegion myTextureRegion;
@@ -49,25 +44,28 @@ public class ViewEngine extends ApplicationAdapter {
     @Override
     public void create() {
 
-        myTexture = new Texture(Gdx.files.internal("assets/exampleCard.png"));
-        myTextureRegion = new TextureRegion(myTexture);
-        myTexRegionDrawable = new TextureRegionDrawable(myTextureRegion);
-        button = new ImageButton(myTexRegionDrawable);
+        //myTexture = new Texture(Gdx.files.internal("assets/exampleCard.png"));
+        //myTextureRegion = new TextureRegion(myTexture);
+        //myTexRegionDrawable = new TextureRegionDrawable(myTextureRegion);
+        //button = new ImageButton(myTexRegionDrawable);
 
         stage = new Stage(new ScreenViewport());
 
-        button.setWidth(150);
-        button.setHeight(150);
+        //button.setWidth(150);
+        //button.setHeight(150);
+
+        Card card1 = new Card(150, 0);
+        Card card2 = new Card(300, 0);
+        Card card3 = new Card(0, 0);
+        Card card4 = new Card(450, 0);
+        Card card5 = new Card(600, 0);
 
 
-        button.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                stage.clear();
-            }
-        });
-
-        stage.addActor(button);
+        stage.addActor(card1.getActor());
+        stage.addActor(card2.getActor());
+        stage.addActor(card3.getActor());
+        stage.addActor(card4.getActor());
+        stage.addActor(card5.getActor());
         Gdx.input.setInputProcessor(stage);
 
         map = new TmxMapLoader().load("assets/maps/roborallyCleanBoard.tmx");
