@@ -9,18 +9,21 @@ import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
-public class Card {
+/**
+ * @class Card
+ * Creates a Actor (ImageButton) representing a Card.
+ */
+public class CardFactory {
 
-    private Texture myTexture;
-    private TextureRegion myTextureRegion;
-    private TextureRegionDrawable myTexRegionDrawable;
-    private ImageButton button;
-
-    public Card(int width, int height) {
-        myTexture = new Texture(Gdx.files.internal("assets/exampleCard.png"));
-        myTextureRegion = new TextureRegion(myTexture);
-        myTexRegionDrawable = new TextureRegionDrawable(myTextureRegion);
-        button = new ImageButton(myTexRegionDrawable);
+    /**
+     * @param width
+     * @param height
+     */
+    static public Actor create(int width, int height) {
+        Texture myTexture = new Texture(Gdx.files.internal("assets/exampleCard.png"));
+        TextureRegion myTextureRegion = new TextureRegion(myTexture);
+        TextureRegionDrawable myTexRegionDrawable = new TextureRegionDrawable(myTextureRegion);
+        final ImageButton button = new ImageButton(myTexRegionDrawable);
         button.setWidth(150);
         button.setHeight(150);
         button.setPosition(width, height);
@@ -30,11 +33,6 @@ public class Card {
                 button.remove();
             }
         });
+        return button;
     }
-
-    public Actor getActor() {
-        return this.button;
-    }
-
-
 }
