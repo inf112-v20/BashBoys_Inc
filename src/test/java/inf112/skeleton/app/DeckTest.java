@@ -2,7 +2,7 @@ package inf112.skeleton.app;
 
 import inf112.skeleton.app.object.MoveCard;
 import inf112.skeleton.app.object.RotateCard;
-import inf112.skeleton.app.object.iCard;
+import inf112.skeleton.app.object.ICard;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -25,7 +25,7 @@ class DeckTest {
     @Test
     @DisplayName("Get a cards from deck test")
     public void getCardsFromDeckTest(){
-        ArrayList<iCard> retrievedCards = testDeck.getCards(9);
+        ArrayList<ICard> retrievedCards = testDeck.getCards(9);
         assert !retrievedCards.isEmpty();
         assertEquals(9,retrievedCards.size());
     }
@@ -33,14 +33,14 @@ class DeckTest {
     @Test
     @DisplayName("Get all cards from deck")
     public void getAllCardsTest() {
-        LinkedList<iCard> retrievedCards = testDeck.peekAllCards();
+        LinkedList<ICard> retrievedCards = testDeck.peekAllCards();
         assertEquals(DECK_SIZE,retrievedCards.size());
     }
 
     @Test
     @DisplayName("Get more cards than deck size test")
     public void getMoreCardsThanDeckSizeTest(){
-        ArrayList<iCard> retrievedCards = testDeck.getCards(100);
+        ArrayList<ICard> retrievedCards = testDeck.getCards(100);
         assertEquals(DECK_SIZE,retrievedCards.size());
         assert testDeck.peekAllCards().isEmpty(); // Check if deck is empty after operation
     }
@@ -69,7 +69,7 @@ class DeckTest {
     public void testIfCorrectCardsAreInDeck(){
         int rotateCards = 0, TARGET_ROTATE_CARDS = 42;
         int moveCards = 0, TARGET_MOVE_CARDS = 42;
-        for(iCard card : testDeck.peekAllCards()){
+        for(ICard card : testDeck.peekAllCards()){
             if(card instanceof RotateCard){
                 rotateCards++;
             } else if (card instanceof MoveCard){

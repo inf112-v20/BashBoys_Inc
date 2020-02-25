@@ -10,17 +10,5 @@ public interface IDirectionalObject extends IMapObject {
      */
     Direction getDir();
 
-    /**
-     * turn direction by 1
-     * @param lr direction to turn
-     */
-    void turn(LeftRight lr);
-    
-    /**
-     * 
-     * @param lr LEFT or RIGHT
-     * @param amount times to turn in lr direction
-     */
-    void turn(LeftRight lr, int amount);
 }
 
