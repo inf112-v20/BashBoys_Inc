@@ -31,3 +31,8 @@ Fikk tak i spillet så prøvde å spille det litt for å skjønne det bedre. Beg
 Fant ut hva vi skulle fokusere på til neste møte og la dette til i project board. Mest fokus på å få viewengine til
 å fungere skikkelig, siden vi trenger det for å se om ting virker som det skal på skjermen. I tillegg til å se på
 viewengine, var fukuset på å bedre og rydde i den nåværende koden.
+
+25.02:  
+Oppmøte: Alle  
+Begynte å finpusse ting til innlevering 2. Noen begynte å skrive ferdig selve tekst delen av oppgaven mens resten
+fortsatte på å få til viewengine skikkelig og implementere det som ble gjort/funnet ut hjemme.

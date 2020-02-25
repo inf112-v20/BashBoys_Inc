@@ -110,7 +110,7 @@ public class Player {
      * Move a card from the sheet to the hand
      * @param card
      */
-    public void moveCardFromSheetToHand(ICard card) {
+    public void moveCardFromSheet(ICard card) {
         if (programSheet.contains(card)) {
             hand.add(card);
             programSheet.remove(card);
