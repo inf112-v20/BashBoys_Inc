@@ -87,9 +87,6 @@ public class ViewEngine extends com.badlogic.gdx.Game {
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        //uiStage.act(Gdx.graphics.getDeltaTime());
-
-
         ArrayList<IMapObject> gameObjects = game.getObjects();
 
         for (IMapObject gameObject : gameObjects) {
