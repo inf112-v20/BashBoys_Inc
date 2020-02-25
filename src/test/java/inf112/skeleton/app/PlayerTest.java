@@ -90,7 +90,7 @@ public class PlayerTest {
     @Test
     public void moveCardFromSheetToHandTest() {
         player.addCardToSheet(move1, 0);
-        player.moveCardFromSheetToHand(move1);
+        player.moveCardFromSheet(move1);
         assertEquals(0, player.getProgramSheet().size());
         assertEquals(1, player.getHand().size());
     }
