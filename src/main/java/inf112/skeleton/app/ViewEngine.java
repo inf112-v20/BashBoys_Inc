@@ -5,8 +5,8 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.maps.tiled.*;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import inf112.skeleton.app.object.Robot;
 
@@ -17,7 +17,7 @@ public class ViewEngine extends com.badlogic.gdx.Game {
     private Game game;
     private TiledMap map;
 
-    private Stage stage;
+    private Stage uiStage;
 
     private OrthogonalTiledMapRenderer renderer;
     private OrthographicCamera camera;
@@ -36,20 +36,16 @@ public class ViewEngine extends com.badlogic.gdx.Game {
     @Override
     public void create() {
 
-        stage = new Stage(new ScreenViewport());
+        uiStage = new Stage(new ScreenViewport());
 
-        Actor card1 = CardFactory.create(0, 0);
-        Actor card2 = CardFactory.create(150, 0);
-        Actor card3 = CardFactory.create(300, 0);
-        Actor card4 = CardFactory.create(450, 0);
-        Actor card5 = CardFactory.create(600, 0);
+        uiStage.addActor(CardFactory.create(0, 0));
+        uiStage.addActor(CardFactory.create(150, 0));
+        uiStage.addActor(CardFactory.create(300, 0));
+        uiStage.addActor(CardFactory.create(450, 0));
+        uiStage.addActor(CardFactory.create(600, 0));
 
-        stage.addActor(card1);
-        stage.addActor(card2);
-        stage.addActor(card3);
-        stage.addActor(card4);
-        stage.addActor(card5);
-        Gdx.input.setInputProcessor(stage);
+        Gdx.input.setInputProcessor(uiStage);
+
 
         map = new TmxMapLoader().load("assets/maps/roborallyCleanBoard.tmx");
         boardLayer = (TiledMapTileLayer) map.getLayers().get("Board");
@@ -82,7 +78,7 @@ public class ViewEngine extends com.badlogic.gdx.Game {
     public void dispose() {
         map.dispose();
         renderer.dispose();
-        stage.dispose();
+        uiStage.dispose();
     }
 
     @Override
@@ -90,7 +86,7 @@ public class ViewEngine extends com.badlogic.gdx.Game {
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        stage.act(Gdx.graphics.getDeltaTime());
+        //uiStage.act(Gdx.graphics.getDeltaTime());
 
 
         ArrayList<IMapObject> gameObjects = game.getObjects();
@@ -126,15 +122,15 @@ public class ViewEngine extends com.badlogic.gdx.Game {
 
         renderer.setView(camera);
         renderer.render();
-        stage.draw();
+        uiStage.draw();
     }
 
     @Override
     public void resize(int width, int height) {
-        camera.position.set((width / 2), (height / 2), 0);
-        camera.viewportWidth = width;
-        camera.viewportHeight = height;
-        camera.update();
+        uiStage.getViewport().update(width, height, false);
+        camera.position.set(384, 100, 0);
+        ExtendViewport cameraViewport = new ExtendViewport(width * 2, height * 2, camera);
+        cameraViewport.update(width, height, false);
     }
 
     @Override
