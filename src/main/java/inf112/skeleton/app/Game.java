@@ -62,7 +62,6 @@ public class Game {
             try{
                 TimeUnit.SECONDS.sleep(1);
             } catch (InterruptedException e){
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             }
             if(!board.moveItem(r, 1)) {

@@ -8,13 +8,14 @@ import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import inf112.skeleton.app.enums.Direction;
 import inf112.skeleton.app.object.Robot;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
 public class ViewEngine extends com.badlogic.gdx.Game {
-    private Game game;
+    private final Board board;
     private TiledMap map;
 
     private Stage uiStage;
@@ -29,8 +30,8 @@ public class ViewEngine extends com.badlogic.gdx.Game {
     private TiledMapTileLayer robotLayer;
 
 
-    public ViewEngine(Game game) {
-        this.game = game;
+    public ViewEngine(Board board) {
+        this.board = board;
     }
 
     @Override
@@ -90,7 +91,7 @@ public class ViewEngine extends com.badlogic.gdx.Game {
         //uiStage.act(Gdx.graphics.getDeltaTime());
 
 
-        ArrayList<IMapObject> gameObjects = game.getObjects();
+        ArrayList<IMapObject> gameObjects = board.getObjects();
 
         for (IMapObject gameObject : gameObjects) {
             if (gameObject != null) {
@@ -98,14 +99,13 @@ public class ViewEngine extends com.badlogic.gdx.Game {
                 int y = gameObject.getY();
 
                 if (gameObject instanceof Robot) {
+                    TiledMapTileLayer.Cell cell = robotLayer.getCell(x, y);
                     // GameObject is a robot, get tile from robotTileSet and add to robotLayer
                     TiledMapTile tile = getRobotTileByName(getStrRobot(((Robot) gameObject).getDir()));
                     if (cell == null) {
                         cell = new TiledMapTileLayer.Cell();
                         robotLayer.setCell(x, y, cell);
                     }
-
-                    TiledMapTile tile = getRobotTileByName(gameObject.getName());
                     cell.setTile(tile);
                 } else {
                     // GameObject is not a robot do something else
