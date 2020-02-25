@@ -154,10 +154,17 @@ public class ViewEngine extends com.badlogic.gdx.Game {
     public void clearLayer(TiledMapTileLayer layer) {
         int height = layer.getHeight();
         int width = layer.getWidth();
+        TiledMapTile clearTile = getMapTileByName("clear");
         for (int y = 0; y < height; y++) {
             for (int x = 0; x < width; x++) {
-                TiledMapTile clearTile = getMapTileByName("clear");
-                layer.getCell(x, y).setTile(clearTile);
+                // Not sure which method is best set cell to null or set Tile to clearTile:
+                //layer.setCell(x, y, null);
+                TiledMapTileLayer.Cell cell = layer.getCell(x, y);
+                if (cell == null) {
+                    layer.setCell(x,y, new TiledMapTileLayer.Cell());
+                    cell = layer.getCell(x, y);
+                }
+                cell.setTile(clearTile);
             }
         }
     }
