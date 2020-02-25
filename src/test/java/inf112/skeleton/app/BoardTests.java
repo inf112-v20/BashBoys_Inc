@@ -8,7 +8,6 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class BoardTests {
 
@@ -21,7 +20,7 @@ class BoardTests {
         robot.turn(LeftRight.LEFT, 2); // Turns NORTH
         board.addItem(new Robot(), 5, 5);//Crash To Do
         assertThrows(IllegalArgumentException.class, () -> board.moveItem(robot, 2));// Should crash with pre placed
-                                                                                     // robot
+                                                     
         robot.turn(LeftRight.LEFT, 2); // Turns SOUTH
         robot.move(2);// Moves down
         assertTrue(robot.getX() == 5 && robot.getY() == 2);

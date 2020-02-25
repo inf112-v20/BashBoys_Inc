@@ -1,19 +1,24 @@
 package inf112.skeleton.app;
 
-import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.maps.tiled.*;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.utils.viewport.ExtendViewport;
+import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import inf112.skeleton.app.object.Robot;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class ViewEngine extends ApplicationAdapter {
+public class ViewEngine extends com.badlogic.gdx.Game {
     private Game game;
     private TiledMap map;
+
+    private Stage uiStage;
+
     private OrthogonalTiledMapRenderer renderer;
     private OrthographicCamera camera;
 
@@ -30,6 +35,18 @@ public class ViewEngine extends ApplicationAdapter {
 
     @Override
     public void create() {
+
+        uiStage = new Stage(new ScreenViewport());
+
+        uiStage.addActor(CardFactory.create(0, 0));
+        uiStage.addActor(CardFactory.create(150, 0));
+        uiStage.addActor(CardFactory.create(300, 0));
+        uiStage.addActor(CardFactory.create(450, 0));
+        uiStage.addActor(CardFactory.create(600, 0));
+
+        Gdx.input.setInputProcessor(uiStage);
+
+
         map = new TmxMapLoader().load("assets/maps/roborallyCleanBoard.tmx");
         boardLayer = (TiledMapTileLayer) map.getLayers().get("Board");
 
@@ -61,12 +78,16 @@ public class ViewEngine extends ApplicationAdapter {
     public void dispose() {
         map.dispose();
         renderer.dispose();
+        uiStage.dispose();
     }
 
     @Override
     public void render() {
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
+        //uiStage.act(Gdx.graphics.getDeltaTime());
+
 
         ArrayList<IMapObject> gameObjects = game.getObjects();
 
@@ -101,14 +122,15 @@ public class ViewEngine extends ApplicationAdapter {
 
         renderer.setView(camera);
         renderer.render();
+        uiStage.draw();
     }
 
     @Override
     public void resize(int width, int height) {
-        camera.position.set((width / 2), (height / 2), 0);
-        camera.viewportWidth = width;
-        camera.viewportHeight = height;
-        camera.update();
+        uiStage.getViewport().update(width, height, false);
+        camera.position.set(384, 100, 0);
+        ExtendViewport cameraViewport = new ExtendViewport(width * 2, height * 2, camera);
+        cameraViewport.update(width, height, false);
     }
 
     @Override
