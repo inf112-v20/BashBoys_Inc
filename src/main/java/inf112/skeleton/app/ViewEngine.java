@@ -88,7 +88,7 @@ public class ViewEngine extends com.badlogic.gdx.Game {
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         
-        ArrayList<IMapObject> gameObjects = game.getObjects();
+        ArrayList<IMapObject> gameObjects = board.getObjects();
 
         for (IMapObject gameObject : gameObjects) {
             if (gameObject != null) {
