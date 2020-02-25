@@ -17,4 +17,9 @@
    <property name="name" value="Robot"/>
   </properties>
  </tile>
+ <tile id="15">
+  <properties>
+   <property name="name" value="clear"/>
+  </properties>
+ </tile>
 </tileset>
