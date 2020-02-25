@@ -6,13 +6,15 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.maps.tiled.*;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
+
+import inf112.skeleton.app.enums.Direction;
 import inf112.skeleton.app.object.Robot;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
 public class ViewEngine extends ApplicationAdapter {
-    private Game game;
+    private Board board;
     private TiledMap map;
     private OrthogonalTiledMapRenderer renderer;
     private OrthographicCamera camera;
@@ -24,8 +26,8 @@ public class ViewEngine extends ApplicationAdapter {
     private TiledMapTileLayer robotLayer;
 
 
-    public ViewEngine(Game game) {
-        this.game = game;
+    public ViewEngine(Board board) {
+        this.board = board;
     }
 
     @Override
@@ -68,7 +70,7 @@ public class ViewEngine extends ApplicationAdapter {
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        ArrayList<IMapObject> gameObjects = game.getObjects();
+        ArrayList<IMapObject> gameObjects = board.getObjects();
 
         for (IMapObject gameObject : gameObjects) {
             if (gameObject != null) {
@@ -83,7 +85,7 @@ public class ViewEngine extends ApplicationAdapter {
                         robotLayer.setCell(x, y, cell);
                     }
 
-                    TiledMapTile tile = getRobotTileByName(gameObject.getName());
+                    TiledMapTile tile = getRobotTileByName(getStrRobot(((Robot) gameObject).getDir()));
                     cell.setTile(tile);
                 } else {
                     // GameObject is not a robot do something else
@@ -125,5 +127,20 @@ public class ViewEngine extends ApplicationAdapter {
 
     private TiledMapTile getRobotTileByName(String name) {
         return robotTiles.get(name);
+    }
+    
+    private String getStrRobot(Direction dir) {
+        switch(dir) {
+        case NORTH:
+            return "RobotFaceNorth";
+        case SOUTH:
+            return "RobotFaceSouth";
+        case EAST:
+            return "RobotFaceEast";
+        case WEST:
+            return "RobotFaceWest";
+        default:
+            return "Error direction not found";
+        }
     }
 }

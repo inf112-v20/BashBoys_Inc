@@ -10,6 +10,11 @@ public class Wall implements IDirectionalObject {
     private int y = 0;
     private Direction dir = Direction.NORTH;
     private int laserDmg = 0;
+    private String name;
+    
+    public Wall(String s) {
+        name = s;
+    }
     
     public Wall(int x, int y, Direction dir ) {
         this.dir = dir;
