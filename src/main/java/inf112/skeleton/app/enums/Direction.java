@@ -35,18 +35,20 @@ public enum Direction {
             
         }
     }
-    public String toString(Direction dir) {
-        switch(dir) {
+    
+    public static Direction uTurn(Direction dir) {
+        switch (dir) {
         case NORTH:
-            return "North";
+            return SOUTH;
         case WEST:
-            return "West";
+            return EAST;
         case SOUTH:
-            return "South";
+            return NORTH;
         case EAST:
-            return "East";
+            return WEST;
         default:
             return null;
+            
         }
     }
 }

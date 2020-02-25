@@ -9,11 +9,28 @@ public class Wall implements IDirectionalObject {
     private int x = 0;
     private int y = 0;
     private Direction dir = Direction.NORTH;
+    private int laserDmg = 0;
+    private String name;
+    
+    public Wall(String s) {
+        name = s;
+    }
     
     public Wall(int x, int y, Direction dir ) {
         this.dir = dir;
         this.x = x;
         this.y = y;
+    }
+    
+    public Wall(int x, int y, Direction dir, int laserDmg) {
+        this.dir = dir;
+        this.x = x;
+        this.y = y;
+        this.laserDmg = laserDmg;
+    }
+    
+    public int getLaserDmg() {
+        return laserDmg;
     }
     
     @Override
@@ -38,11 +55,13 @@ public class Wall implements IDirectionalObject {
 
     @Override
     public String getName() {
-        return dir.toString() + " Wall";
+        return laserDmg == 0 ? dir.toString() + " Wall" : dir + " Wall with " + laserDmg + " lasers";
     }
 
     @Override
     public Direction getDir() {
         return dir;
     }
+    
+    
 }

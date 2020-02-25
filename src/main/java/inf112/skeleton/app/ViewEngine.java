@@ -8,13 +8,14 @@ import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import inf112.skeleton.app.enums.Direction;
 import inf112.skeleton.app.object.Robot;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
 public class ViewEngine extends com.badlogic.gdx.Game {
-    private Game game;
+    private final Board board;
     private TiledMap map;
 
     private Stage uiStage;
@@ -29,8 +30,8 @@ public class ViewEngine extends com.badlogic.gdx.Game {
     private TiledMapTileLayer robotLayer;
 
 
-    public ViewEngine(Game game) {
-        this.game = game;
+    public ViewEngine(Board board) {
+        this.board = board;
     }
 
     @Override
@@ -95,14 +96,13 @@ public class ViewEngine extends com.badlogic.gdx.Game {
                 int y = gameObject.getY();
 
                 if (gameObject instanceof Robot) {
-                    // GameObject is a robot, get tile from robotTileSet and add to robotLayer
                     TiledMapTileLayer.Cell cell = robotLayer.getCell(x, y);
+                    // GameObject is a robot, get tile from robotTileSet and add to robotLayer
+                    TiledMapTile tile = getRobotTileByName(getStrRobot(((Robot) gameObject).getDir()));
                     if (cell == null) {
                         cell = new TiledMapTileLayer.Cell();
                         robotLayer.setCell(x, y, cell);
                     }
-
-                    TiledMapTile tile = getRobotTileByName(gameObject.getName());
                     cell.setTile(tile);
                 } else {
                     // GameObject is not a robot do something else
@@ -151,12 +151,33 @@ public class ViewEngine extends com.badlogic.gdx.Game {
     public void clearLayer(TiledMapTileLayer layer) {
         int height = layer.getHeight();
         int width = layer.getWidth();
+        TiledMapTile clearTile = getMapTileByName("clear");
         for (int y = 0; y < height; y++) {
             for (int x = 0; x < width; x++) {
-                TiledMapTile clearTile = getMapTileByName("clear");
-                layer.getCell(x, y).setTile(clearTile);
+                // Not sure which method is best set cell to null or set Tile to clearTile:
+                //layer.setCell(x, y, null);
+                TiledMapTileLayer.Cell cell = layer.getCell(x, y);
+                if (cell == null) {
+                    layer.setCell(x,y, new TiledMapTileLayer.Cell());
+                    cell = layer.getCell(x, y);
+                }
+                cell.setTile(clearTile);
             }
         }
     }
-}
 
+    private String getStrRobot(Direction dir) {
+        switch(dir) {
+        case NORTH:
+            return "RobotFaceNorth";
+        case SOUTH:
+            return "RobotFaceSouth";
+        case EAST:
+            return "RobotFaceEast";
+        case WEST:
+            return "RobotFaceWest";
+        default:
+            return "Error direction not found";
+        }
+    }
+}
