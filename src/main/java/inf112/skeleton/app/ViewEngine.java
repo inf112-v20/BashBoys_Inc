@@ -99,7 +99,7 @@ public class ViewEngine extends com.badlogic.gdx.Game {
 
                 if (gameObject instanceof Robot) {
                     // GameObject is a robot, get tile from robotTileSet and add to robotLayer
-                    TiledMapTileLayer.Cell cell = robotLayer.getCell(x, y);
+                    TiledMapTile tile = getRobotTileByName(getStrRobot(((Robot) gameObject).getDir()));
                     if (cell == null) {
                         cell = new TiledMapTileLayer.Cell();
                         robotLayer.setCell(x, y, cell);
@@ -168,5 +168,19 @@ public class ViewEngine extends com.badlogic.gdx.Game {
             }
         }
     }
-}
 
+    private String getStrRobot(Direction dir) {
+        switch(dir) {
+        case NORTH:
+            return "RobotFaceNorth";
+        case SOUTH:
+            return "RobotFaceSouth";
+        case EAST:
+            return "RobotFaceEast";
+        case WEST:
+            return "RobotFaceWest";
+        default:
+            return "Error direction not found";
+        }
+    }
+}

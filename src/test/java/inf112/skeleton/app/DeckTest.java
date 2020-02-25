@@ -23,7 +23,7 @@ class DeckTest {
     }
 
     @Test
-    @DisplayName("Get a cards from deck test")
+    @DisplayName("Get 9 cards from deck test")
     public void getCardsFromDeckTest(){
         ArrayList<ICard> retrievedCards = testDeck.getCards(9);
         assert !retrievedCards.isEmpty();

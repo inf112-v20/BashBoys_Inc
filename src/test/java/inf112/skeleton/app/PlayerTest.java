@@ -30,7 +30,7 @@ public class PlayerTest {
     public void removeCardFromHandTest() {
         player.giveCard(move1);
         player.removeCardFromHand(move1);
-        assertTrue(player.getHand().size() == 0);
+        assertTrue(player.getHand().isEmpty());
     }
 
     @Test
