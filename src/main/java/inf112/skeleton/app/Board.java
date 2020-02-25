@@ -3,6 +3,7 @@ package inf112.skeleton.app;
 import inf112.skeleton.app.enums.Direction;
 import inf112.skeleton.app.enums.LeftRight;
 import inf112.skeleton.app.object.Robot;
+import inf112.skeleton.app.object.Wall;
 
 import java.util.ArrayList;
 
@@ -10,7 +11,7 @@ public class Board {
 
     public int width;
     public int height;
-    private IMapObject[][] board;
+    private ArrayList<IMapObject>[][] board;
 
     /**
      * Constructs an empty board
@@ -21,9 +22,15 @@ public class Board {
     Board(int width, int height) {
         this.width = width;
         this.height = height;
-        board = new IMapObject[width][height];
+        board = new ArrayList[width][height];
 
-        //this.addItem(new Robot(), 5, 5);
+        for (int j = 0; j < height; j++){
+            for (int i = 0; i < width; i++){
+                board[j][i] = new ArrayList<IMapObject>();
+            }
+        }
+
+        // this.addItem(new Robot(), 5, 5);
     }
 
     /**
@@ -36,99 +43,133 @@ public class Board {
     public void addItem(IMapObject item, int x, int y) {
         item.setX(x);
         item.setY(y);
-        board[x][y] = item;
+        board[x][y].add(item);
     }
 
     /**
-     * Remove item form board
+     * Remove item from board
      * 
      * @param item
      */
     public void removeItem(IMapObject item) {
-        board[item.getX()][item.getY()] = null;
+        board[item.getX()][item.getY()].remove(item);
     }
 
     /**
-     * Moves Robot relative to current position (Robot needs move function to use)
+     * Attempts to move robot in the robots direction
+     * 
      * @param item
      * @param amount
+     * @return true if move is completed
      */
-    public void moveItem(Robot item, int amount) {
-        if (!clearPath(item, amount))
-            throw new IllegalArgumentException("Path not clear");
-        removeItem(item);
-        item.move(amount);
-        board[item.getX()][item.getY()] = item;
+    public boolean moveItem(Robot item, int amount) {
+        return moveItem(item, amount, item.getDir());
     }
 
     /**
-     * Checks if path is clear (all tiles == null for now) in front of given robot
-     * @param item
-     * @param amount
-     * @return boolean if path is clear
+     * Attempts to move robot in given direction. Will move step by step till
+     * stopped or done
+     * 
+     * @param item   - robot to move
+     * @param amount - amount to move
+     * @param dir    - direction to move in
+     * @return true if move was completed till end
      */
-    private boolean clearPath(Robot item, int amount) {
-        int x = item.getX();
+    private boolean moveItem(Robot item, int amount, Direction dir) {
+        if (amount == 0)
+            return true;// moved all the way
+        int x = item.getX(); // Start X/Y
         int y = item.getY();
-        Direction dir = item.getDir();
-        if (amount == -1) {
-            dir = Direction.turn(LeftRight.LEFT, dir);
-            dir = Direction.turn(LeftRight.LEFT, dir);
+        if (amount < 0){ // If it's a "reverse"
+            dir = Direction.uTurn(dir); // Flip direction and make moves positive
             amount = -amount;
         }
-            
+
+        // Checks if there is a wall on current tile that blocks path
+        for (IMapObject obj : getItems(x, y)){
+            if (obj instanceof Wall){
+                if (((Wall) obj).getDir() == dir){
+                    return false;
+                }
+            }
+        }
+
+        // Changes X/Y to next position
         switch (dir) {
         case NORTH:
-            while (++y <= item.getY() + amount) {
-                if (board[item.getX()][y] != null)
-                    return false;
-            }
+            ++y;
             break;
         case SOUTH:
-            while (--y >= item.getY() - amount) {
-                if (board[item.getX()][y] != null)
-                    return false;
-            }
+            --y;
             break;
         case EAST:
-            while (++x <= item.getX() + amount) {
-                if (board[x][item.getY()] != null)
-                    return false;
-            }
+            ++x;
             break;
         case WEST:
-            while (--x >= item.getX() - amount) {
-                if (board[x][item.getY()] != null)
-                    return false;
-            }
+            --x;
             break;
         }
-        return true;
+
+        if (x < 0 || x >= width || y < 0 || y >= height)
+            return false;
+
+        Robot push = null;// To hold robot if there is a robot that needs to be pushed
+        // Checks stuff on next tile to see if it can move there
+        for (IMapObject obj : getItems(x, y)){
+            if (obj instanceof Wall){
+                // If there is wall there checks if it blocks entrance to tile
+                if (((Wall) obj).getDir() == Direction.uTurn(dir)){
+                    return false;
+                }
+            } else if (obj instanceof Robot){ // If there is a robot there try to push it
+                push = (Robot) obj; // This way to avoid ConcurrentModificationException
+            }
+        }
+
+        // If there was a robot to push
+        if (push != null){
+            // Tries to move robot, if it doesn't move it's blocked
+            if (!pushRobot((Robot) push, dir)){
+                return false;
+            }
+        }
+
+        // Nothing blocking and everything moved so we can move one step
+        removeItem(item);
+        item.move(1, dir);
+        addItem(item, item.getX(), item.getY());
+        // calls self till blocked or done
+        return moveItem(item, amount - 1, dir);
     }
-    
+
+    // Moves a robot one tile
+    private boolean pushRobot(Robot r, Direction d) {
+        return moveItem(r, 1, d);
+    }
 
     /**
      * Get item at (x,y)
      * 
      * @param x
      * @param y
-     * @return MapObject item
+     * @return ArrayList<MapObject> that contains all object on the tile
      */
-    public IMapObject getItem(int x, int y) {
+    public ArrayList<IMapObject> getItems(int x, int y) {
         return board[x][y];
     }
 
     /**
      * Return all MapObjects on the board
+     * 
      * @return ArrayList<IMapObject>
      */
     public ArrayList<IMapObject> getObjects() {
         ArrayList<IMapObject> mapObjects = new ArrayList<>();
 
-        for (int x = 0; x < this.board.length; x++) {
-            for (int y = 0; y < this.board.length; y++) {
-                if (this.board[x][y] != null) {
-                    mapObjects.add(this.board[x][y]);
+        for (int x = 0; x < this.board.length; x++){
+            for (int y = 0; y < this.board.length; y++){
+                if (this.board[x][y] != null){
+                    mapObjects.addAll(this.board[x][y]);
                 }
             }
         }
