@@ -83,6 +83,7 @@ public class ViewEngine extends com.badlogic.gdx.Game {
 
     @Override
     public void render() {
+        this.clearLayer(robotLayer);
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
@@ -133,6 +134,7 @@ public class ViewEngine extends com.badlogic.gdx.Game {
         cameraViewport.update(width, height, false);
     }
 
+
     @Override
     public void pause() {
     }
@@ -148,4 +150,16 @@ public class ViewEngine extends com.badlogic.gdx.Game {
     private TiledMapTile getRobotTileByName(String name) {
         return robotTiles.get(name);
     }
+
+    public void clearLayer(TiledMapTileLayer layer) {
+        int height = layer.getHeight();
+        int width = layer.getWidth();
+        for (int y = 0; y < height; y++) {
+            for (int x = 0; x < width; x++) {
+                TiledMapTile clearTile = getMapTileByName("clear");
+                layer.getCell(x, y).setTile(clearTile);
+            }
+        }
+    }
 }
+
