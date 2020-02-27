@@ -5,7 +5,6 @@ import inf112.skeleton.app.object.IMapObject;
 import inf112.skeleton.app.object.Robot;
 import inf112.skeleton.app.object.Wall;
 
-
 import java.util.ArrayList;
 
 public class Board {
@@ -128,7 +127,7 @@ public class Board {
         // If there was a robot to push
         if (push != null){
             // Tries to move robot, if it doesn't move it's blocked
-            if (!pushRobot((Robot) push, dir)){
+            if (!pushRobot(push, dir)){
                 return false;
             }
         }

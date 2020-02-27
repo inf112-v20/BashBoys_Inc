@@ -1,9 +1,9 @@
 package inf112.skeleton.app;
 
+import inf112.skeleton.app.cards.ICard;
+
 import java.util.ArrayList;
 import java.util.Collections;
-
-import inf112.skeleton.app.cards.ICard;
 
 public class Player {
     private String name;
@@ -34,8 +34,7 @@ public class Player {
      * @param card - card to remove from hand
      */
     public void removeCardFromHand(ICard card) {
-        if (hand.contains(card))
-            hand.remove(card);
+        hand.remove(card);
     }
 
     /**

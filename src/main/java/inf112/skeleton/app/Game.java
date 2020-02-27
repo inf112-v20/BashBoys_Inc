@@ -1,14 +1,13 @@
 package inf112.skeleton.app;
 
-import java.util.concurrent.TimeUnit;
-
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
-
 import inf112.skeleton.app.enums.Direction;
 import inf112.skeleton.app.enums.LeftRight;
 import inf112.skeleton.app.object.Robot;
 import inf112.skeleton.app.object.Wall;
+
+import java.util.concurrent.TimeUnit;
 public class Game {
 
     private Board board;
