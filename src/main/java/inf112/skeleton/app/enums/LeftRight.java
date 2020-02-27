@@ -1,10 +1,8 @@
 package inf112.skeleton.app.enums;
 
+/**
+ * Enum for left and right rotations
+ */
 public enum LeftRight {
     LEFT, RIGHT;
-    
-    public String toString(LeftRight lr){
-        if (lr == LEFT) return "LEFT";
-        else return "RIGHT";
-    }
 }
