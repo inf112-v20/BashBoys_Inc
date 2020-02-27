@@ -7,9 +7,9 @@ import org.junit.jupiter.api.Test;
 
 import inf112.skeleton.app.enums.Direction;
 import inf112.skeleton.app.enums.LeftRight;
-import inf112.skeleton.app.object.MoveCard;
+import inf112.skeleton.app.cards.MoveCard;
 import inf112.skeleton.app.object.Robot;
-import inf112.skeleton.app.object.RotateCard;
+import inf112.skeleton.app.cards.RotateCard;
 
 class CardEffectOnRobotOnEmptyBoardTest {
 

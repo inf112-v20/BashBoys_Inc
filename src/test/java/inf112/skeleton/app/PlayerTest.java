@@ -1,7 +1,7 @@
 package inf112.skeleton.app;
 
-import inf112.skeleton.app.object.MoveCard;
-import inf112.skeleton.app.object.ICard;
+import inf112.skeleton.app.cards.MoveCard;
+import inf112.skeleton.app.cards.ICard;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

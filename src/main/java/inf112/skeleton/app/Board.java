@@ -1,9 +1,10 @@
 package inf112.skeleton.app;
 
 import inf112.skeleton.app.enums.Direction;
-import inf112.skeleton.app.enums.LeftRight;
+import inf112.skeleton.app.object.IMapObject;
 import inf112.skeleton.app.object.Robot;
 import inf112.skeleton.app.object.Wall;
+
 
 import java.util.ArrayList;
 
@@ -16,8 +17,8 @@ public class Board {
     /**
      * Constructs an empty board
      * 
-     * @param width
-     * @param height
+     * @param width - width of board
+     * @param height - height of board
      */
     Board(int width, int height) {
         this.width = width;
@@ -29,16 +30,14 @@ public class Board {
                 board[j][i] = new ArrayList<IMapObject>();
             }
         }
-
-        // this.addItem(new Robot(), 5, 5);
     }
 
     /**
      * Add item to board at (x,y) and set item pos = (x,y)
      * 
-     * @param item
-     * @param x
-     * @param y
+     * @param item - item to add
+     * @param x - x position
+     * @param y - y position
      */
     public void addItem(IMapObject item, int x, int y) {
         item.setX(x);
@@ -49,7 +48,7 @@ public class Board {
     /**
      * Remove item from board
      * 
-     * @param item
+     * @param item - item to remove
      */
     public void removeItem(IMapObject item) {
         board[item.getX()][item.getY()].remove(item);
@@ -58,8 +57,8 @@ public class Board {
     /**
      * Attempts to move robot in the robots direction
      * 
-     * @param item
-     * @param amount
+     * @param item - robot to move
+     * @param amount - amount to move
      * @return true if move is completed
      */
     public boolean moveItem(Robot item, int amount) {
@@ -142,16 +141,22 @@ public class Board {
         return moveItem(item, amount - 1, dir);
     }
 
-    // Moves a robot one tile
-    private boolean pushRobot(Robot r, Direction d) {
-        return moveItem(r, 1, d);
+
+    /**
+     * Push a robot 1 tile in a direction
+     * @param robot - robot to push
+     * @param dir - direction to push
+     * @return boolean if move is done
+     */
+    private boolean pushRobot(Robot robot, Direction dir) {
+        return moveItem(robot, 1, dir);
     }
 
     /**
      * Get item at (x,y)
      * 
-     * @param x
-     * @param y
+     * @param x - x position
+     * @param y - y position
      * @return ArrayList<MapObject> that contains all object on the tile
      */
     public ArrayList<IMapObject> getItems(int x, int y) {
@@ -166,10 +171,10 @@ public class Board {
     public ArrayList<IMapObject> getObjects() {
         ArrayList<IMapObject> mapObjects = new ArrayList<>();
 
-        for (int x = 0; x < this.board.length; x++){
-            for (int y = 0; y < this.board.length; y++){
-                if (this.board[x][y] != null){
-                    mapObjects.addAll(this.board[x][y]);
+        for (ArrayList<IMapObject>[] arrayLists : this.board) {
+            for (int y = 0; y < this.board.length; y++) {
+                if (arrayLists[y] != null) {
+                    mapObjects.addAll(arrayLists[y]);
                 }
             }
         }

@@ -12,8 +12,8 @@ public enum Direction {
 
     /**
      * Turn object in direction dir in either left or right
-     * @param lr
-     * @param dir
+     * @param lr Direction of turn
+     * @param dir Current direction
      * @return New direction after turn
      */
     public static Direction turn(LeftRight lr, Direction dir) {
@@ -35,7 +35,12 @@ public enum Direction {
             
         }
     }
-    
+
+    /**
+     * Do a uTurn in given direction
+     * @param dir current direction
+     * @return new direction after turn
+     */
     public static Direction uTurn(Direction dir) {
         switch (dir) {
         case NORTH:

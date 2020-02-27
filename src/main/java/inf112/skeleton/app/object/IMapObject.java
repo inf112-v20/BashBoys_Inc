@@ -1,4 +1,4 @@
-package inf112.skeleton.app;
+package inf112.skeleton.app.object;
 
 public interface IMapObject {
 
@@ -25,7 +25,7 @@ public interface IMapObject {
 
     /**
      * Return name
-     * @return
+     * @return Name of object
      */
      String getName();
 }
