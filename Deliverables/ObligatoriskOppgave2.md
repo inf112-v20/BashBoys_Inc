@@ -11,3 +11,7 @@ Forbedringspunkter:
 2.  Vi er fornøyde med project board, men vi kan bli bedre på å close issues etter de er gjort
 
 ### Deloppgave 2: ??? IN PROGRESS ---
+
+
+### UML
+![UML](https://github.com/inf112-v20/BashBoys_Inc/blob/master/Deliverables/UMLs/oblig2UML.png)
