@@ -42,11 +42,16 @@ Vår hovedkrav for MVP er at spillet har en fungerende program sekvens som deler
 
 Vi har kommet relativt langt på den generelle programmeringsdelen, men det visuelle ligger litt bak og alt programmerings logikken blir ikke brukt ennå. Siden forrige oblig har vi implementert et fungerende bevegende robot, visuell visning av kort og litt basic spill logikk. Fremover blir det mest prioriterte kravene følgende for å prøve å oppnå et MVP.
 
-* Fungerende programmering sekvens
-* Dele ut korrekt antall kort 
-* Spiller kan bruke kortene til å bevege roboten
+1. Fungerende programmering sekvens
+2. Dele ut korrekt antall kort 
+3. Spiller kan bruke kortene til å bevege roboten
 
-
+Flere krav:
+* Flere spillere fra ulike maskiner over LAN
+* Fungerer på alle operativsystem
+* Skal gå ann å vinne spillet
+* Flagg på brettet
+* Fungerende RoboRally regler implementert
 
 ### UML
 ![UML](https://github.com/inf112-v20/BashBoys_Inc/blob/master/Deliverables/UMLs/oblig2UML.png)
