@@ -17,9 +17,8 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 public class CardFactory {
 
     /**
-     * Creates a card/button
-     * @param x - x position
-     * @param y - y position
+     * @param x
+     * @param y
      */
     static public Actor create(int x, int y) {
         FileHandle fileHandle = Gdx.files.internal("assets/exampleCard.png");

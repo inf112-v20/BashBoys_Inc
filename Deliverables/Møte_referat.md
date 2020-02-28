@@ -35,6 +35,4 @@ viewengine, var fukuset på å bedre og rydde i den nåværende koden.
 25.02:  
 Oppmøte: Alle  
 Begynte å finpusse ting til innlevering 2. Noen begynte å skrive ferdig selve tekst delen av oppgaven mens resten
-fortsatte på å få til viewengine skikkelig og implementere det som ble gjort/funnet ut hjemme. Til slutt fordelte vi
-oppgaver som skulle gjøres hjemme i løpet av uken, bl.a gjøre ferdig markdown til oblig 2, fikse på UML-en og å begynne
-på presentasjonen.
+fortsatte på å få til viewengine skikkelig og implementere det som ble gjort/funnet ut hjemme.

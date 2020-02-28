@@ -1,9 +1,9 @@
 package inf112.skeleton.app;
 
-import inf112.skeleton.app.cards.ICard;
-
 import java.util.ArrayList;
 import java.util.Collections;
+
+import inf112.skeleton.app.object.ICard;
 
 public class Player {
     private String name;
@@ -13,7 +13,7 @@ public class Player {
 
     /**
      * Create a new player
-     * @param name - name of player
+     * @param name
      */
     public Player(String name) {
         this.name = name;
@@ -21,7 +21,7 @@ public class Player {
 
     /**
      * Add card to hand
-     * @param card - card to add to hand
+     * @param card
      */
     public void giveCard(ICard card) {
         if (hand.size() == handSize)
@@ -31,10 +31,11 @@ public class Player {
 
     /**
      * Remove card from hand
-     * @param card - card to remove from hand
+     * @param card
      */
     public void removeCardFromHand(ICard card) {
-        hand.remove(card);
+        if (hand.contains(card))
+            hand.remove(card);
     }
 
     /**
@@ -64,8 +65,8 @@ public class Player {
     /**
      * Add a card to sheet at chosen index
      * If there already is a card there it gets moved to hand
-     * @param card - card to add
-     * @param index - chosen index for card
+     * @param card
+     * @param index
      */
     public void addCardToSheet(ICard card, int index) {
         if(index > 4 || index < 0) {
@@ -93,7 +94,7 @@ public class Player {
 
     /**
      * Get card from sheet at index or null if there is no card
-     * @param index - index of card
+     * @param index
      * @return Card from sheet at index
      */
     public ICard getCardFromSheet(int index) {
@@ -107,7 +108,7 @@ public class Player {
 
     /**
      * Move a card from the sheet to the hand
-     * @param card - card to move
+     * @param card
      */
     public void moveCardFromSheet(ICard card) {
         if (programSheet.contains(card)) {

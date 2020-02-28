@@ -1,6 +1,9 @@
-package inf112.skeleton.app.cards;
+package inf112.skeleton.app;
 
 import inf112.skeleton.app.enums.LeftRight;
+import inf112.skeleton.app.object.MoveCard;
+import inf112.skeleton.app.object.RotateCard;
+import inf112.skeleton.app.object.ICard;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -38,6 +41,21 @@ public class Deck {
                 cards.push(new MoveCard(3,i*10,"Move 3"));
             }
         }
+        // Priority: 10 -> 60 | 6: U turn cards
+        // Priority: 70 -> 420 | 18: Left turn | 18: Right turn
+        // Priority: 430 -> 480 | 6: Back up cards
+        // Priority: 490 -> 660 | 18: Move 1
+        // Priority: 670 -> 780 | 12: Move 2
+        // Priority: 790 -> 840 | 6: Move 3
+        // TOTAL NORMAL CARDS = 84
+        /* Option cards: 26 cards
+           Ablative Coat, Abort Switch, Brakes, Circuit Breaker, Conditional Program, Crab Legs
+           Double-Barreled Laser, Dual Processor, Extra Memory, Fire Control, Flywheel, Fourth Gear
+           Gyroscopic Stabilizer, High-Powered Laser, Mechanical Arm, Mini Howitzer, Power-Down Shield
+           Pressor Beam, Radio Control, Ramming Gear, Rear-Firing Laser, Recompile, Reverse Gear
+           Scrambler, Superior Archive, Tractor Beam
+           TOTAL CARDS = 110
+         */
     }
 
     /**
@@ -47,10 +65,17 @@ public class Deck {
         Collections.shuffle(cards);
     }
 
+    /**
+     * Resets the current deck into re-shuffled re-created deck
+     */
+    public void resetDeck(){
+        initializeDeck();
+        shuffleDeck();
+    }
 
     /**
      * Return the first "amount" cards in deck and remove it from deck
-     * @param amount - amount of cards to pull
+     * @param amount
      * @return ArrayList of all drawn cards
      */
     public ArrayList<ICard> getCards(int amount){
@@ -75,7 +100,7 @@ public class Deck {
 
     /**
      * Add a single card at the bottom of the deck
-     * @param card - card to add
+     * @param card
      */
     public void addCard(ICard card){
         if(getCurrentDeckSize() < DECK_SIZE){
@@ -86,10 +111,19 @@ public class Deck {
 
     }
 
+    /**
+     * Add a list of cards at the bottom of the deck
+     * @param newCards
+     */
+    public void addListOfCards(ArrayList<ICard> newCards){
+        for(ICard card : newCards){
+            addCard(card);
+        }
+    }
 
     /**
      * Return the current deck size
-     * @return current deck size
+     * @return int
      */
     public int getCurrentDeckSize(){
         return cards.size();
