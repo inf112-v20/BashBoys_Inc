@@ -17,6 +17,12 @@
 - [x] Display board on screen
 - [x] Place game piece on the board
 
+### Development goals for assignment 2:
+- [x] Moving robot
+  - [x] Robot can't move through walls
+  - [x] Robot pushes other robots
+- [x] Show cards on screen
+
 ### How to run:
 
 #### Requirements:
