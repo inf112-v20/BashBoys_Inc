@@ -2,7 +2,7 @@
 
 ### Participants:
 - Mathias Haugsbø
-- Egil Bru
+- Egil Bru 
 - Elias Bendixen
 - Erlend Dahl
 - Terje Baklund
