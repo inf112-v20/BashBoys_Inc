@@ -1,6 +1,7 @@
-package inf112.skeleton.app.object;
+package inf112.skeleton.app.cards;
 
 import inf112.skeleton.app.Board;
+import inf112.skeleton.app.object.Robot;
 
 public class MoveCard implements ICard {
 

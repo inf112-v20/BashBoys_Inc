@@ -9,6 +9,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import inf112.skeleton.app.enums.Direction;
+import inf112.skeleton.app.object.IMapObject;
 import inf112.skeleton.app.object.Robot;
 
 import java.util.ArrayList;
@@ -26,7 +27,6 @@ public class ViewEngine extends com.badlogic.gdx.Game {
     private HashMap<String, TiledMapTile> mapTiles = new HashMap<>();
     private HashMap<String, TiledMapTile> robotTiles = new HashMap<>();
     private TiledMapTileLayer boardLayer;
-    private TiledMapTileLayer objectLayer;
     private TiledMapTileLayer robotLayer;
 
 
@@ -51,7 +51,7 @@ public class ViewEngine extends com.badlogic.gdx.Game {
         map = new TmxMapLoader().load("assets/maps/roborallyCleanBoard.tmx");
         boardLayer = (TiledMapTileLayer) map.getLayers().get("Board");
 
-        objectLayer = (TiledMapTileLayer) map.getLayers().get("Objects");
+        TiledMapTileLayer objectLayer = (TiledMapTileLayer) map.getLayers().get("Objects");
         robotLayer = (TiledMapTileLayer) map.getLayers().get("Robots");
 
         renderer = new OrthogonalTiledMapRenderer(map);
@@ -134,20 +134,36 @@ public class ViewEngine extends com.badlogic.gdx.Game {
 
     @Override
     public void pause() {
+        // Implemented method
     }
 
     @Override
     public void resume() {
+        // Implemented method
     }
 
+    /**
+     * Get map tile
+     * @param name name of tile
+     * @return map tile
+     */
     private TiledMapTile getMapTileByName(String name) {
         return mapTiles.get(name);
     }
 
+    /**
+     * Get robot tile by name
+     * @param name - name of robot tile
+     * @return robot tile
+     */
     private TiledMapTile getRobotTileByName(String name) {
         return robotTiles.get(name);
     }
 
+    /**
+     * Clear layer
+     * @param layer - layer to clear
+     */
     public void clearLayer(TiledMapTileLayer layer) {
         int height = layer.getHeight();
         int width = layer.getWidth();
@@ -166,6 +182,11 @@ public class ViewEngine extends com.badlogic.gdx.Game {
         }
     }
 
+    /**
+     * Get string name of robot
+     * @param dir - direction of robot
+     * @return name of robot
+     */
     private String getStrRobot(Direction dir) {
         switch(dir) {
         case NORTH:
