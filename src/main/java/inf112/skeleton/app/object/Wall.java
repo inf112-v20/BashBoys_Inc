@@ -4,10 +4,21 @@ import inf112.skeleton.app.enums.Direction;
 
 public class Wall implements IDirectionalObject {
 
-    private int x;
-    private int y;
+    private int x = 0;
+    private int y = 0;
     private Direction dir;
-    private int laserDmg;
+    private int laserDmg = 0;
+    
+    public Wall(Direction dir, int dmg ) {
+        this.dir = dir;
+        laserDmg = 0;
+        this.laserDmg = dmg;
+    }
+    
+    public Wall(Direction dir ) {
+        this.dir = dir;
+        laserDmg = 0;
+    }
 
     public Wall(int x, int y, Direction dir ) {
         this.dir = dir;

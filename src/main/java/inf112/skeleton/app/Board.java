@@ -19,6 +19,7 @@ public class Board {
      * @param width  - width of board
      * @param height - height of board
      */
+    @SuppressWarnings("unchecked")
     Board(int width, int height) {
         this.width = width;
         this.height = height;
@@ -74,6 +75,8 @@ public class Board {
      * @return true if move was completed till end
      */
     private boolean moveItem(Robot item, int amount, Direction dir) {
+        if (!getObjects().contains(item))
+            return false;
         if (amount == 0)
             return true;// moved all the way
         int x = item.getX(); // Start X/Y
@@ -93,23 +96,13 @@ public class Board {
         }
 
         // Changes X/Y to next position
-        switch (dir) {
-        case NORTH:
-            ++y;
-            break;
-        case SOUTH:
-            --y;
-            break;
-        case EAST:
-            ++x;
-            break;
-        case WEST:
-            --x;
-            break;
-        }
+        x = nextPos(dir, x, y)[0];
+        y = nextPos(dir, x, y)[1];
 
-        if (x < 0 || x >= width || y < 0 || y >= height)
-            return false;
+        if (x < 0 || x >= width || y < 0 || y >= height) {
+            removeItem(item);
+            return true;
+        }
 
         Robot push = null;// To hold robot if there is a robot that needs to be pushed
         // Checks stuff on next tile to see if it can move there
@@ -182,7 +175,7 @@ public class Board {
     }
 
     /**
-     * Fires lasers from walls and robots
+     * Fires lasers from all walls and robots
      */
     public void fireLasers() {
         ArrayList<IMapObject> all = getObjects(); // All objects
@@ -196,20 +189,34 @@ public class Board {
                     shoot(dir, x, y, dmg); // Shoots from spot
                 }
             } else if (obj instanceof Robot) {
-                // To do
+                Direction dir = ((Robot) obj).getDir();
+                int[] n = nextPos(dir, x, y);
+                if (!(n[0] < 0 || n[0] >= width || n[1] < 0 || n[1] >= height)) {
+                    shoot(dir, n[0], n[1], 1);
+                }
+
             }
         }
     }
 
+    /**
+     * Shoots a laser in given direction from given point
+     * 
+     * @param dir - Direction laser fires
+     * @param x   - x position of laser
+     * @param y   - y position of laser
+     * @param dmg - damage laser deals to robots
+     */
     private void shoot(Direction dir, int x, int y, int dmg) {
         boolean wall = false; // Hits wall
         ArrayList<IMapObject> tile = getItems(x, y); // Items
 
+        ArrayList<IMapObject> ded = new ArrayList<>();
         for (IMapObject obj : tile) {
             if (obj instanceof Robot) { // Hits robot
                 ((Robot) obj).dmg(dmg); // Damages robot
                 if (((Robot) obj).getHp() == 0) { // Dead robot
-                    // To Do
+                    ded.add(obj);
                 }
             } else if (obj instanceof Wall) { // At wall
                 if (((Wall) obj).getDir() == dir) { // If it block from keeping going
@@ -217,36 +224,57 @@ public class Board {
                 }
             }
         }
-
-        switch (dir) {
-        case NORTH:
-            y += 1;
-            break;
-        case SOUTH:
-            y -= 1;
-            break;
-        case EAST:
-            x += 1;
-            break;
-        case WEST:
-            x -= 1;
-            break;
+        for (IMapObject obj : ded) {
+            System.out.println(obj.getName() + " is ded");
+            removeItem(obj);
         }
 
-        if (x < 0 || y < 0 || x >= width || y >= height) { //Out of board
+        x = nextPos(dir, x, y)[0];
+        y = nextPos(dir, x, y)[1];
+
+        if (x < 0 || y < 0 || x >= width || y >= height) { // Out of board
             return;
         } else {
-            for (IMapObject obj : getItems(x, y)) { //Items at next tile
+            for (IMapObject obj : getItems(x, y)) { // Items at next tile
                 if (obj instanceof Wall) {
-                    if (((Wall) obj).getDir() == Direction.uTurn(dir)) { //Checks if there is a wall blocking entrance
+                    if (((Wall) obj).getDir() == Direction.uTurn(dir)) { // Checks if there is a wall blocking entrance
                         wall = true;
                     }
                 }
             }
         }
 
-        if (!wall) //If not blocked
+        if (!wall) // If not blocked
             shoot(dir, x, y, dmg);
 
+    }
+
+    /**
+     * Returns next (x,y) in direction
+     * 
+     * @param dir - Direction of next coordinate
+     * @param x   - x coordinate
+     * @param y   - y coordinate
+     * @return Array with 2 integers index 0 is x and index 1 is y
+     */
+    private int[] nextPos(Direction dir, int x, int y) {
+        int[] ret = new int[2];
+        switch (dir) {
+        case NORTH:
+            y++;
+            break;
+        case SOUTH:
+            y--;
+            break;
+        case EAST:
+            x++;
+            break;
+        case WEST:
+            x--;
+            break;
+        }
+        ret[0] = x;
+        ret[1] = y;
+        return ret;
     }
 }
