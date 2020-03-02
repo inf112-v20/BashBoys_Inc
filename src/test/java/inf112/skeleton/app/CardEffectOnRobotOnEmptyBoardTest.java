@@ -14,7 +14,7 @@ class CardEffectOnRobotOnEmptyBoardTest {
 
     @Test
     @DisplayName("Using cards to move the robot Test")
-    void CardsEffectingRobotTest() {
+    void cardsEffectingRobotTest() {
         //All the required objects
         Board board = new Board(12,12);
         Robot robot = new Robot();

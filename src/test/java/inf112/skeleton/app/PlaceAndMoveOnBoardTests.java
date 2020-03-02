@@ -70,5 +70,19 @@ class PlaceAndMoveOnBoardTests {
         board.moveItem(robot, -2);// Moves back where it came from
         assertTrue(robot.getX() == 5 && robot.getY() == 3 && robot2.getY() == 6); //Everything's good
     }
+    
+    @Test
+    @DisplayName("Testting that moving of the board kills the robot")
+    /**
+     * Magnus is an idiot and moves his robot of the board and kills it
+     */
+    public void moveRobotOfTheBoardTest() {
+        Robot robot = new Robot("Main", Direction.NORTH); // Faces SOUTH
+        Board board = new Board(12, 12);
+        board.addItem(robot, 11, 11); // Robot at (5,4)
+        board.moveItem(robot, 1);// Should fall of
+        
+        assertTrue(!board.getObjects().contains(robot)); //Everything's good
+    }
 
 }

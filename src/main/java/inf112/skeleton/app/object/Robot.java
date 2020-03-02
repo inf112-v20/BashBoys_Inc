@@ -18,6 +18,11 @@ public class Robot implements IDirectionalObject {
         this.name = s;
     }
     
+    public Robot(String s, Direction dir) {
+        this.name = s;
+        this.dir = dir;
+    }
+    
     public Robot(int x, int y, String s) {
         this.xPos = x;
         this.yPos = y;
