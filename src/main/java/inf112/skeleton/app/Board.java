@@ -16,7 +16,7 @@ public class Board {
     /**
      * Constructs an empty board
      * 
-     * @param width - width of board
+     * @param width  - width of board
      * @param height - height of board
      */
     Board(int width, int height) {
@@ -24,8 +24,8 @@ public class Board {
         this.height = height;
         board = new ArrayList[width][height];
 
-        for (int j = 0; j < height; j++){
-            for (int i = 0; i < width; i++){
+        for (int j = 0; j < height; j++) {
+            for (int i = 0; i < width; i++) {
                 board[j][i] = new ArrayList<IMapObject>();
             }
         }
@@ -35,8 +35,8 @@ public class Board {
      * Add item to board at (x,y) and set item pos = (x,y)
      * 
      * @param item - item to add
-     * @param x - x position
-     * @param y - y position
+     * @param x    - x position
+     * @param y    - y position
      */
     public void addItem(IMapObject item, int x, int y) {
         item.setX(x);
@@ -56,7 +56,7 @@ public class Board {
     /**
      * Attempts to move robot in the robots direction
      * 
-     * @param item - robot to move
+     * @param item   - robot to move
      * @param amount - amount to move
      * @return true if move is completed
      */
@@ -78,15 +78,15 @@ public class Board {
             return true;// moved all the way
         int x = item.getX(); // Start X/Y
         int y = item.getY();
-        if (amount < 0){ // If it's a "reverse"
+        if (amount < 0) { // If it's a "reverse"
             dir = Direction.uTurn(dir); // Flip direction and make moves positive
             amount = -amount;
         }
 
         // Checks if there is a wall on current tile that blocks path
-        for (IMapObject obj : getItems(x, y)){
-            if (obj instanceof Wall){
-                if (((Wall) obj).getDir() == dir){
+        for (IMapObject obj : getItems(x, y)) {
+            if (obj instanceof Wall) {
+                if (((Wall) obj).getDir() == dir) {
                     return false;
                 }
             }
@@ -113,21 +113,21 @@ public class Board {
 
         Robot push = null;// To hold robot if there is a robot that needs to be pushed
         // Checks stuff on next tile to see if it can move there
-        for (IMapObject obj : getItems(x, y)){
-            if (obj instanceof Wall){
+        for (IMapObject obj : getItems(x, y)) {
+            if (obj instanceof Wall) {
                 // If there is wall there checks if it blocks entrance to tile
-                if (((Wall) obj).getDir() == Direction.uTurn(dir)){
+                if (((Wall) obj).getDir() == Direction.uTurn(dir)) {
                     return false;
                 }
-            } else if (obj instanceof Robot){ // If there is a robot there try to push it
+            } else if (obj instanceof Robot) { // If there is a robot there try to push it
                 push = (Robot) obj; // This way to avoid ConcurrentModificationException
             }
         }
 
         // If there was a robot to push
-        if (push != null){
+        if (push != null) {
             // Tries to move robot, if it doesn't move it's blocked
-            if (!pushRobot(push, dir)){
+            if (!pushRobot(push, dir)) {
                 return false;
             }
         }
@@ -137,14 +137,15 @@ public class Board {
         item.move(1, dir);
         addItem(item, item.getX(), item.getY());
         // calls self till blocked or done
-        return moveItem(item, amount - 1, dir);
+        moveItem(item, amount - 1, dir);
+        return true;
     }
-
 
     /**
      * Push a robot 1 tile in a direction
+     * 
      * @param robot - robot to push
-     * @param dir - direction to push
+     * @param dir   - direction to push
      * @return boolean if move is done
      */
     private boolean pushRobot(Robot robot, Direction dir) {
@@ -178,5 +179,74 @@ public class Board {
             }
         }
         return mapObjects;
+    }
+
+    /**
+     * Fires lasers from walls and robots
+     */
+    public void fireLasers() {
+        ArrayList<IMapObject> all = getObjects(); // All objects
+        for (IMapObject obj : all) {
+            int x = obj.getX(); // x
+            int y = obj.getY(); // x
+            if (obj instanceof Wall) {
+                int dmg = ((Wall) obj).getDmg(); // wall dmg
+                if (dmg > 0) { // If dmg
+                    Direction dir = Direction.uTurn(((Wall) obj).getDir()); // Walls fires reversed
+                    shoot(dir, x, y, dmg); // Shoots from spot
+                }
+            } else if (obj instanceof Robot) {
+                // To do
+            }
+        }
+    }
+
+    private void shoot(Direction dir, int x, int y, int dmg) {
+        boolean wall = false; // Hits wall
+        ArrayList<IMapObject> tile = getItems(x, y); // Items
+
+        for (IMapObject obj : tile) {
+            if (obj instanceof Robot) { // Hits robot
+                ((Robot) obj).dmg(dmg); // Damages robot
+                if (((Robot) obj).getHp() == 0) { // Dead robot
+                    // To Do
+                }
+            } else if (obj instanceof Wall) { // At wall
+                if (((Wall) obj).getDir() == dir) { // If it block from keeping going
+                    wall = true; // Stops after tile
+                }
+            }
+        }
+
+        switch (dir) {
+        case NORTH:
+            y += 1;
+            break;
+        case SOUTH:
+            y -= 1;
+            break;
+        case EAST:
+            x += 1;
+            break;
+        case WEST:
+            x -= 1;
+            break;
+        }
+
+        if (x < 0 || y < 0 || x >= width || y >= height) { //Out of board
+            return;
+        } else {
+            for (IMapObject obj : getItems(x, y)) { //Items at next tile
+                if (obj instanceof Wall) {
+                    if (((Wall) obj).getDir() == Direction.uTurn(dir)) { //Checks if there is a wall blocking entrance
+                        wall = true;
+                    }
+                }
+            }
+        }
+
+        if (!wall) //If not blocked
+            shoot(dir, x, y, dmg);
+
     }
 }

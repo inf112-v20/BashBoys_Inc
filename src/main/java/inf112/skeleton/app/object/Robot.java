@@ -7,7 +7,8 @@ public class Robot implements IDirectionalObject {
     private int xPos = 5; //Base position
     private int yPos = 5;
     private String name = "RobotFaceSouth";
-    public Direction dir = Direction.SOUTH;
+    private Direction dir = Direction.SOUTH;
+    private int hp = 9;
 
     public Robot() {
         // Robot with no name
@@ -106,5 +107,17 @@ public class Robot implements IDirectionalObject {
      */
     public void setDir(Direction dir) {
         this.dir = dir;
+    }
+    
+    public int getHp() {
+        return hp;
+    }
+    
+    public void dmg(int dmg) {
+        hp = hp-dmg > 0 ? hp-dmg : 0;
+    }
+    
+    public void setHp(int hp) {
+        this.hp = hp;
     }
 }

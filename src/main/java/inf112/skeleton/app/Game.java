@@ -31,9 +31,10 @@ public class Game {
         board.addItem(r2, 11, 5);
         LwjglApplication app = new LwjglApplication(new ViewEngine(board), cfg);
         
-        Wall w = new Wall(5,8,Direction.NORTH);
+        Wall w = new Wall(5,8,Direction.NORTH,1);
         
         board.addItem(w, 5, 8);
+        board.addItem(new Wall(11,3,Direction.EAST,1), 11, 3);
         
         r.turn(LeftRight.RIGHT, 2);
         r2.turn(LeftRight.LEFT);
@@ -46,10 +47,11 @@ public class Game {
             } catch (InterruptedException e){
                 e.printStackTrace();
             }
+            board.fireLasers();
+            System.out.println(r.getHp());
             if(!board.moveItem(r, 1)) {
                 r.turn(LeftRight.RIGHT);
             }
-            
         }
     }
 }
