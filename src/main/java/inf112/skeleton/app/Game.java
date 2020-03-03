@@ -29,8 +29,8 @@ public class Game {
     }
 
     public void play(LwjglApplicationConfiguration cfg) {
-        Robot r = new Robot("MainRobot");
-        Robot r2 = new Robot("PushedRobot");
+        Robot r = new Robot("robot 1");
+        Robot r2 = new Robot("robot 2");
         place(r);
         board.addItem(r2, 11, 5);
         LwjglApplication app = new LwjglApplication(new ViewEngine(board), cfg);
