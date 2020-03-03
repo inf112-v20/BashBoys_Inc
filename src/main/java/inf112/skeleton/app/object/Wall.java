@@ -1,6 +1,7 @@
 package inf112.skeleton.app.object;
 
 import inf112.skeleton.app.enums.Direction;
+import inf112.skeleton.app.interfaces.IDirectionalObject;
 
 public class Wall implements IDirectionalObject {
 

@@ -3,11 +3,8 @@ package inf112.skeleton.app;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import inf112.skeleton.app.enums.Direction;
-import inf112.skeleton.app.enums.LeftRight;
-import inf112.skeleton.app.object.Belt;
-import inf112.skeleton.app.object.IMapObject;
 import inf112.skeleton.app.object.Robot;
-import inf112.skeleton.app.object.Wall;
+import inf112.skeleton.app.object.belts.Belt;
 
 import java.util.concurrent.TimeUnit;
 
@@ -29,8 +26,8 @@ public class Game {
     }
 
     public void play(LwjglApplicationConfiguration cfg) {
-        Robot r = new Robot("robot 1");
-        Robot r2 = new Robot("robot 2");
+        Robot r = new Robot("robot 1",Direction.EAST);
+        Robot r2 = new Robot("robot 5");
         place(r);
         board.addItem(r2, 11, 5);
         LwjglApplication app = new LwjglApplication(new ViewEngine(board), cfg);
