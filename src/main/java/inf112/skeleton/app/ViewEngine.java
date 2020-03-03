@@ -29,7 +29,6 @@ public class ViewEngine extends com.badlogic.gdx.Game {
     private TiledMapTileLayer boardLayer;
     private TiledMapTileLayer robotLayer;
 
-
     public ViewEngine(Board board) {
         this.board = board;
     }
@@ -38,13 +37,8 @@ public class ViewEngine extends com.badlogic.gdx.Game {
     public void create() {
 
         uiStage = new Stage(new ScreenViewport());
-
-        uiStage.addActor(CardFactory.create(0, 0));
-        uiStage.addActor(CardFactory.create(150, 0));
-        uiStage.addActor(CardFactory.create(300, 0));
-        uiStage.addActor(CardFactory.create(450, 0));
-        uiStage.addActor(CardFactory.create(600, 0));
-
+        uiStage.addActor(CardFactory.addHolder(100,100));
+        DisplayHand.addCards(8,uiStage);
         Gdx.input.setInputProcessor(uiStage);
 
 
