@@ -3,6 +3,7 @@ package inf112.skeleton.app;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import inf112.skeleton.app.enums.Direction;
+import inf112.skeleton.app.object.Hole;
 import inf112.skeleton.app.object.Robot;
 import inf112.skeleton.app.object.belts.Belt;
 
@@ -36,27 +37,29 @@ public class Game {
         board.addItem(new Belt(Direction.NORTH,2), 5, 6);
         board.addItem(new Belt(Direction.NORTH,1), 5, 7);
         board.addItem(new Belt(Direction.EAST,1), 5, 8);
+        board.addItem(new Hole(), 6, 8);
         //board.addItem(new Belt(Direction.NORTH), 5, 6);
         
-        /*
-        board.addItem(new Wall(5Direction.NORTH, 1), 5, 8);
-        board.addItem(new Wall(Direction.EAST, 1), 11, 3);
-        board.addItem(new Wall(Direction.EAST), 11, 8);
-        board.addItem(new Wall(Direction.SOUTH, 1), 11, 0);
 
-        r.turn(LeftRight.RIGHT, 2);
-        r2.turn(LeftRight.LEFT);
-         */
+        //board.addItem(new Wall(5Direction.NORTH, 1), 5, 8);
+        //board.addItem(new Wall(Direction.EAST, 1), 11, 3);
+        //board.addItem(new Wall(Direction.EAST), 11, 8);
+        //board.addItem(new Wall(Direction.SOUTH, 1), 11, 0);
+
+        //r.turn(LeftRight.RIGHT, 2);
+        //r2.turn(LeftRight.LEFT);
+
         
         boolean t = true;
         while (t) {
 
             try {
-                TimeUnit.SECONDS.sleep(2);
+                TimeUnit.SECONDS.sleep(1);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
             
+            //board.moveItem(r, 1);
             board.moveBelts();
             
             /*

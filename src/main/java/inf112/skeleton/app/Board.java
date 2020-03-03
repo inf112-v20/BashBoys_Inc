@@ -3,6 +3,7 @@ package inf112.skeleton.app;
 import inf112.skeleton.app.enums.Direction;
 import inf112.skeleton.app.interfaces.IDirectionalObject;
 import inf112.skeleton.app.interfaces.IMapObject;
+import inf112.skeleton.app.object.Hole;
 import inf112.skeleton.app.object.Robot;
 import inf112.skeleton.app.object.Wall;
 import inf112.skeleton.app.object.belts.Belt;
@@ -102,7 +103,7 @@ public class Board {
         y = nextPos(dir, x, y)[1];
 
         if (x < 0 || x >= width || y < 0 || y >= height){
-            removeItem(item);
+            ded(item);
             return true;
         }
 
@@ -116,6 +117,9 @@ public class Board {
                 }
             } else if (obj instanceof Robot){ // If there is a robot there try to push it
                 push = (Robot) obj; // This way to avoid ConcurrentModificationException
+            } else if(obj instanceof Hole) {
+                ded(item);
+                return true;
             }
         }
 
@@ -227,8 +231,7 @@ public class Board {
             }
         }
         for (IMapObject obj : ded){
-            System.out.println(obj.getName() + " is ded");
-            removeItem(obj);
+            ded((Robot) obj);
         }
 
         x = nextPos(dir, x, y)[0];
@@ -384,5 +387,10 @@ public class Board {
                 return (Belt) ob;
         }
         return null;
+    }
+    
+    private void ded(Robot r) {
+        System.out.println(r.getName() + " is ded");
+        removeItem(r);
     }
 }
