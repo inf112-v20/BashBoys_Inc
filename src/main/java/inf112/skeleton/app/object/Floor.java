@@ -1,6 +1,10 @@
 package inf112.skeleton.app.object;
 
+import inf112.skeleton.app.interfaces.IMapObject;
+
 public class Floor implements IMapObject {
+    
+    //Can be replaced with holes if easier
 
     private int x = 0;
     private int y = 0;

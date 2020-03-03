@@ -1,11 +1,11 @@
 package inf112.skeleton.app;
 
 import inf112.skeleton.app.enums.Direction;
-import inf112.skeleton.app.object.Belt;
-import inf112.skeleton.app.object.IDirectionalObject;
-import inf112.skeleton.app.object.IMapObject;
+import inf112.skeleton.app.interfaces.IDirectionalObject;
+import inf112.skeleton.app.interfaces.IMapObject;
 import inf112.skeleton.app.object.Robot;
 import inf112.skeleton.app.object.Wall;
+import inf112.skeleton.app.object.belts.Belt;
 
 import java.util.ArrayList;
 
@@ -294,7 +294,6 @@ public class Board {
 
         robots = new ArrayList<>();
         for (Robot ob : getRobots()){
-            System.out.println(ob.getName());
             for (IMapObject obj : getItems(ob.getX(), ob.getY())){
                 if (obj instanceof Belt){
                     robots.add(ob);

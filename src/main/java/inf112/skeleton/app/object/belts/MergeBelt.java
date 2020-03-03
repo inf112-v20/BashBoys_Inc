@@ -1,4 +1,4 @@
-package inf112.skeleton.app.object;
+package inf112.skeleton.app.object.belts;
 
 import inf112.skeleton.app.enums.Direction;
 

@@ -1,7 +1,7 @@
-package inf112.skeleton.app.object;
+package inf112.skeleton.app.object.belts;
 
 import inf112.skeleton.app.enums.Direction;
-import inf112.skeleton.app.enums.LeftRight;
+import inf112.skeleton.app.interfaces.IDirectionalObject;
 
 public class Belt implements IDirectionalObject {
 
