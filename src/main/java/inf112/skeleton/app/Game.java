@@ -38,7 +38,7 @@ public class Game {
         board.addItem(new Belt(Direction.NORTH,2), 5, 5);
         board.addItem(new Belt(Direction.NORTH,2), 5, 6);
         board.addItem(new Belt(Direction.NORTH,1), 5, 7);
-        board.addItem(new Belt(Direction.EAST,1,LeftRight.RIGHT), 5, 8);
+        board.addItem(new Belt(Direction.EAST,1), 5, 8);
         //board.addItem(new Belt(Direction.NORTH), 5, 6);
         
         /*

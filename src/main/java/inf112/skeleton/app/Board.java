@@ -27,8 +27,8 @@ public class Board {
         this.height = height;
         board = new ArrayList[width][height];
 
-        for (int j = 0; j < height; j++) {
-            for (int i = 0; i < width; i++) {
+        for (int j = 0; j < height; j++){
+            for (int i = 0; i < width; i++){
                 board[j][i] = new ArrayList<IMapObject>();
             }
         }
@@ -83,15 +83,15 @@ public class Board {
             return true;// moved all the way
         int x = item.getX(); // Start X/Y
         int y = item.getY();
-        if (amount < 0) { // If it's a "reverse"
+        if (amount < 0){ // If it's a "reverse"
             dir = Direction.uTurn(dir); // Flip direction and make moves positive
             amount = -amount;
         }
 
         // Checks if there is a wall on current tile that blocks path
-        for (IMapObject obj : getItems(x, y)) {
-            if (obj instanceof Wall) {
-                if (((Wall) obj).getDir() == dir) {
+        for (IMapObject obj : getItems(x, y)){
+            if (obj instanceof Wall){
+                if (((Wall) obj).getDir() == dir){
                     return false;
                 }
             }
@@ -101,28 +101,28 @@ public class Board {
         x = nextPos(dir, x, y)[0];
         y = nextPos(dir, x, y)[1];
 
-        if (x < 0 || x >= width || y < 0 || y >= height) {
+        if (x < 0 || x >= width || y < 0 || y >= height){
             removeItem(item);
             return true;
         }
 
         Robot push = null;// To hold robot if there is a robot that needs to be pushed
         // Checks stuff on next tile to see if it can move there
-        for (IMapObject obj : getItems(x, y)) {
-            if (obj instanceof Wall) {
+        for (IMapObject obj : getItems(x, y)){
+            if (obj instanceof Wall){
                 // If there is wall there checks if it blocks entrance to tile
-                if (((Wall) obj).getDir() == Direction.uTurn(dir)) {
+                if (((Wall) obj).getDir() == Direction.uTurn(dir)){
                     return false;
                 }
-            } else if (obj instanceof Robot) { // If there is a robot there try to push it
+            } else if (obj instanceof Robot){ // If there is a robot there try to push it
                 push = (Robot) obj; // This way to avoid ConcurrentModificationException
             }
         }
 
         // If there was a robot to push
-        if (push != null) {
+        if (push != null){
             // Tries to move robot, if it doesn't move it's blocked
-            if (!pushRobot(push, dir)) {
+            if (!pushRobot(push, dir)){
                 return false;
             }
         }
@@ -166,9 +166,9 @@ public class Board {
     public ArrayList<IMapObject> getObjects() {
         ArrayList<IMapObject> mapObjects = new ArrayList<>();
 
-        for (ArrayList<IMapObject>[] arrayLists : this.board) {
-            for (int y = 0; y < this.board.length; y++) {
-                if (arrayLists[y] != null) {
+        for (ArrayList<IMapObject>[] arrayLists : this.board){
+            for (int y = 0; y < this.board.length; y++){
+                if (arrayLists[y] != null){
                     mapObjects.addAll(arrayLists[y]);
                 }
             }
@@ -181,19 +181,19 @@ public class Board {
      */
     public void fireLasers() {
         ArrayList<IDirectionalObject> all = getDirectionals(); // All objects
-        for (IDirectionalObject obj : all) {
+        for (IDirectionalObject obj : all){
             int x = obj.getX(); // x
             int y = obj.getY(); // x
-            if (obj instanceof Wall) {
+            if (obj instanceof Wall){
                 int dmg = ((Wall) obj).getDmg(); // wall dmg
-                if (dmg > 0) { // If dmg
+                if (dmg > 0){ // If dmg
                     Direction dir = Direction.uTurn(obj.getDir()); // Walls fires reversed
                     shoot(dir, x, y, dmg); // Shoots from spot
                 }
-            } else if (obj instanceof Robot) {
+            } else if (obj instanceof Robot){
                 Direction dir = obj.getDir();
                 int[] n = nextPos(dir, x, y);
-                if (!(n[0] < 0 || n[0] >= width || n[1] < 0 || n[1] >= height)) {
+                if (!(n[0] < 0 || n[0] >= width || n[1] < 0 || n[1] >= height)){
                     shoot(dir, n[0], n[1], 1);
                 }
 
@@ -214,19 +214,19 @@ public class Board {
         ArrayList<IMapObject> tile = getItems(x, y); // Items
 
         ArrayList<IMapObject> ded = new ArrayList<>();
-        for (IMapObject obj : tile) {
-            if (obj instanceof Robot) { // Hits robot
+        for (IMapObject obj : tile){
+            if (obj instanceof Robot){ // Hits robot
                 ((Robot) obj).dmg(dmg); // Damages robot
-                if (((Robot) obj).getHp() == 0) { // Dead robot
+                if (((Robot) obj).getHp() == 0){ // Dead robot
                     ded.add(obj);
                 }
-            } else if (obj instanceof Wall) { // At wall
-                if (((Wall) obj).getDir() == dir) { // If it block from keeping going
+            } else if (obj instanceof Wall){ // At wall
+                if (((Wall) obj).getDir() == dir){ // If it block from keeping going
                     wall = true; // Stops after tile
                 }
             }
         }
-        for (IMapObject obj : ded) {
+        for (IMapObject obj : ded){
             System.out.println(obj.getName() + " is ded");
             removeItem(obj);
         }
@@ -234,12 +234,12 @@ public class Board {
         x = nextPos(dir, x, y)[0];
         y = nextPos(dir, x, y)[1];
 
-        if (x < 0 || y < 0 || x >= width || y >= height) { // Out of board
+        if (x < 0 || y < 0 || x >= width || y >= height){ // Out of board
             return;
-        } else {
-            for (IMapObject obj : getItems(x, y)) { // Items at next tile
-                if (obj instanceof Wall) {
-                    if (((Wall) obj).getDir() == Direction.uTurn(dir)) { // Checks if there is a wall blocking entrance
+        } else{
+            for (IMapObject obj : getItems(x, y)){ // Items at next tile
+                if (obj instanceof Wall){
+                    if (((Wall) obj).getDir() == Direction.uTurn(dir)){ // Checks if there is a wall blocking entrance
                         wall = true;
                     }
                 }
@@ -283,39 +283,73 @@ public class Board {
     public void moveBelts() {
 
         ArrayList<Robot> robots = new ArrayList<>();
-        for (Robot ob : getRobots()) {
-            for (IMapObject obj : getItems(ob.getX(), ob.getY())) {
-                if (obj instanceof Belt) {
+        for (Robot ob : getRobots()){
+            for (IMapObject obj : getItems(ob.getX(), ob.getY())){
+                if (obj instanceof Belt){
                     robots.add(ob);
                 }
             }
         }
-        for (Robot r : robots) {
-            onBelt(r);
+        moveBelt(robots, 1);
+
+        robots = new ArrayList<>();
+        for (Robot ob : getRobots()){
+            System.out.println(ob.getName());
+            for (IMapObject obj : getItems(ob.getX(), ob.getY())){
+                if (obj instanceof Belt){
+                    robots.add(ob);
+                }
+            }
+        }
+        moveBelt(robots, 2);
+
+    }
+
+    private void moveBelt(ArrayList<Robot> arr, int i) {
+        for (Robot r : arr){
+            int x = r.getX();
+            int y = r.getY();
+            Belt curBelt = getBelt(x, y);
+            int[] next = nextPos(curBelt.getDir(), x, y);
+            Belt nextBelt = getBelt(next[0], next[1]);
+            if (i == 1){
+                if (curBelt.getStrength() != 2)
+                    continue;
+                doubleBelt(curBelt, nextBelt, r);
+            } else{
+                doubleBelt(curBelt, nextBelt, r);
+            }
         }
     }
 
-    private void onBelt(Robot r) {
-        onBelt(r, getBelt(r.getX(), r.getY()).getStrength());
+    private void doubleBelt(Belt oldBelt, Belt newBelt, Robot r) {
+        Direction oldDir = oldBelt.getDir();
+
+        if (newBelt == null){
+            pushRobot(r, oldDir);
+            return;
+        }
+
+        Direction newDir = newBelt.getDir();
+
+        pushRobot(r, oldDir);
+        if (oldDir == newDir || Direction.uTurn(oldDir) == newDir)
+            return;
+        else if (oldDir != newDir){
+            r.turn(Direction.relation(oldDir, newDir));
+        }
+
     }
 
-    private void onBelt(Robot r, int moves) {
-        if (moves == 0)
-            return;
-        Belt b = getBelt(r.getX(), r.getY());
-        if (b == null)
-            return;
-        pushRobot(r, b.getDir());
-        if (b.corner() != null)
-            r.turn(b.corner());
-        onBelt(r, --moves);
-    }
-
+    /**
+     * 
+     * @return - all directionals (Robots, Walls, Belts)
+     */
     public ArrayList<IDirectionalObject> getDirectionals() {
         ArrayList<IDirectionalObject> ret = new ArrayList<>();
 
-        for (IMapObject obj : getObjects()) {
-            if (obj instanceof IDirectionalObject) {
+        for (IMapObject obj : getObjects()){
+            if (obj instanceof IDirectionalObject){
                 ret.add((IDirectionalObject) obj);
             }
         }
@@ -323,11 +357,15 @@ public class Board {
         return ret;
     }
 
+    /**
+     * 
+     * @return - All robots on board
+     */
     public ArrayList<Robot> getRobots() {
         ArrayList<Robot> ret = new ArrayList<>();
 
-        for (IMapObject obj : getObjects()) {
-            if (obj instanceof Robot) {
+        for (IMapObject obj : getObjects()){
+            if (obj instanceof Robot){
                 ret.add((Robot) obj);
             }
         }
@@ -335,8 +373,14 @@ public class Board {
         return ret;
     }
 
+    /**
+     * 
+     * @param x - x to get belt at
+     * @param y - y to get belt at
+     * @return - Belt or null if no belt
+     */
     private Belt getBelt(int x, int y) {
-        for (IMapObject ob : getItems(x, y)) {
+        for (IMapObject ob : getItems(x, y)){
             if (ob instanceof Belt)
                 return (Belt) ob;
         }

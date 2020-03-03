@@ -9,6 +9,8 @@ import org.junit.jupiter.api.Test;
 import inf112.skeleton.app.enums.Direction;
 import inf112.skeleton.app.enums.LeftRight;
 import inf112.skeleton.app.object.Belt;
+import inf112.skeleton.app.object.CornerBelt;
+import inf112.skeleton.app.object.MergeBelt;
 import inf112.skeleton.app.object.Robot;
 
 class BeltPushingTests {
@@ -30,7 +32,7 @@ class BeltPushingTests {
         Board board = new Board(12, 12);
         board.addItem(new Belt(Direction.NORTH,2), 5, 5);
         board.addItem(new Belt(Direction.NORTH,2), 5, 6);
-        Robot r = new Robot("JLoh");
+        Robot r = new Robot("JLoh1");
         board.addItem(r, 5, 5);
         board.moveBelts();
         assertEquals(r.getY(),7);
@@ -40,10 +42,11 @@ class BeltPushingTests {
     @DisplayName("Single belt pushing robot onto double belt but not more")
     void singleThenDoubleBelt() {
         Board board = new Board(12, 12);
-        board.addItem(new Belt(Direction.NORTH), 5, 5);
+        board.addItem(new CornerBelt(Direction.NORTH), 5, 5);
         board.addItem(new Belt(Direction.NORTH,2), 5, 6);
-        Robot r = new Robot("JLoh");
+        Robot r = new Robot("JLoh2");
         board.addItem(r, 5, 5);
+        
         board.moveBelts();
         assertEquals(r.getY(),6);
     }
@@ -53,8 +56,8 @@ class BeltPushingTests {
     void cornerBeltTurningRobot() {
         Board board = new Board(12, 12);
         board.addItem(new Belt(Direction.NORTH,2), 5, 5);
-        board.addItem(new Belt(Direction.EAST,2,LeftRight.RIGHT), 5, 6);
-        Robot r = new Robot("JLoh");
+        board.addItem(new CornerBelt(Direction.EAST,2), 5, 6);
+        Robot r = new Robot("JLoh3");
         board.addItem(r, 5, 5);
         board.moveBelts();
         assertEquals(r.getY(),6);
