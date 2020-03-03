@@ -56,4 +56,25 @@ public enum Direction {
             
         }
     }
+    public static LeftRight relation(Direction oldD, Direction newD) {
+        if(oldD == NORTH && newD == EAST) {
+            return LeftRight.RIGHT;
+        } else if(oldD == NORTH && newD == WEST) {
+            return LeftRight.LEFT;
+        } else if(oldD == SOUTH && newD == EAST) {
+            return LeftRight.LEFT;
+        } else if(oldD == NORTH && newD == WEST) {
+            return LeftRight.RIGHT;
+        } else if(oldD == EAST && newD == NORTH) {
+            return LeftRight.LEFT;
+        } else if(oldD == EAST && newD == SOUTH) {
+            return LeftRight.RIGHT;
+        } else if(oldD == WEST && newD == NORTH) {
+            return LeftRight.RIGHT;
+        } else if(oldD == WEST && newD == SOUTH) {
+            return LeftRight.LEFT;
+        } else {
+            throw new IllegalArgumentException("Directions not next too each other");
+        }
+    }
 }

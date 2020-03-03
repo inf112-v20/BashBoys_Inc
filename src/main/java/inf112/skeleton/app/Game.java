@@ -29,8 +29,8 @@ public class Game {
     }
 
     public void play(LwjglApplicationConfiguration cfg) {
-        Robot r = new Robot("MainRobot");
-        Robot r2 = new Robot("PushedRobot");
+        Robot r = new Robot("robot 1");
+        Robot r2 = new Robot("robot 2");
         place(r);
         board.addItem(r2, 11, 5);
         LwjglApplication app = new LwjglApplication(new ViewEngine(board), cfg);
@@ -38,7 +38,7 @@ public class Game {
         board.addItem(new Belt(Direction.NORTH,2), 5, 5);
         board.addItem(new Belt(Direction.NORTH,2), 5, 6);
         board.addItem(new Belt(Direction.NORTH,1), 5, 7);
-        board.addItem(new Belt(Direction.EAST,1,LeftRight.RIGHT), 5, 8);
+        board.addItem(new Belt(Direction.EAST,1), 5, 8);
         //board.addItem(new Belt(Direction.NORTH), 5, 6);
         
         /*

@@ -5,32 +5,22 @@ import inf112.skeleton.app.enums.LeftRight;
 
 public class Belt implements IDirectionalObject {
 
-    private int x = 0;
-    private int y = 0;
-    private int strength = 1;
-    private Direction dir;
-    private LeftRight corner;
+    protected int x = 0;
+    protected int y = 0;
+    protected int strength = 1;
+    protected Direction dir;
     
     
     public Belt(Direction dir) {
         this.dir = dir;
     }
     
-    public Belt(Direction dir, LeftRight corner) {
-        this.dir = dir;
-        this.corner = corner;
-    }
     
     public Belt(Direction dir, int strength) {
         this.dir = dir;
         this.strength = strength;
     }
     
-    public Belt(Direction dir, int strength, LeftRight corner) {
-        this.dir = dir;
-        this.strength = strength;
-        this.corner = corner;
-    }
     
     @Override
     public int getX() {
@@ -66,9 +56,4 @@ public class Belt implements IDirectionalObject {
     public int getStrength() {
         return strength;
     }
-    
-    public LeftRight corner() {
-        return corner;
-    }
-
 }
