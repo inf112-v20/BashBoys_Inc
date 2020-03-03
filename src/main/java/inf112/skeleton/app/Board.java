@@ -1,6 +1,8 @@
 package inf112.skeleton.app;
 
 import inf112.skeleton.app.enums.Direction;
+import inf112.skeleton.app.object.Belt;
+import inf112.skeleton.app.object.IDirectionalObject;
 import inf112.skeleton.app.object.IMapObject;
 import inf112.skeleton.app.object.Robot;
 import inf112.skeleton.app.object.Wall;
@@ -178,18 +180,18 @@ public class Board {
      * Fires lasers from all walls and robots
      */
     public void fireLasers() {
-        ArrayList<IMapObject> all = getObjects(); // All objects
-        for (IMapObject obj : all) {
+        ArrayList<IDirectionalObject> all = getDirectionals(); // All objects
+        for (IDirectionalObject obj : all) {
             int x = obj.getX(); // x
             int y = obj.getY(); // x
             if (obj instanceof Wall) {
                 int dmg = ((Wall) obj).getDmg(); // wall dmg
                 if (dmg > 0) { // If dmg
-                    Direction dir = Direction.uTurn(((Wall) obj).getDir()); // Walls fires reversed
+                    Direction dir = Direction.uTurn(obj.getDir()); // Walls fires reversed
                     shoot(dir, x, y, dmg); // Shoots from spot
                 }
             } else if (obj instanceof Robot) {
-                Direction dir = ((Robot) obj).getDir();
+                Direction dir = obj.getDir();
                 int[] n = nextPos(dir, x, y);
                 if (!(n[0] < 0 || n[0] >= width || n[1] < 0 || n[1] >= height)) {
                     shoot(dir, n[0], n[1], 1);
@@ -276,5 +278,68 @@ public class Board {
         ret[0] = x;
         ret[1] = y;
         return ret;
+    }
+
+    public void moveBelts() {
+
+        ArrayList<Robot> robots = new ArrayList<>();
+        for (Robot ob : getRobots()) {
+            for (IMapObject obj : getItems(ob.getX(), ob.getY())) {
+                if (obj instanceof Belt) {
+                    robots.add(ob);
+                }
+            }
+        }
+        for (Robot r : robots) {
+            onBelt(r);
+        }
+    }
+
+    private void onBelt(Robot r) {
+        onBelt(r, getBelt(r.getX(), r.getY()).getStrength());
+    }
+
+    private void onBelt(Robot r, int moves) {
+        if (moves == 0)
+            return;
+        Belt b = getBelt(r.getX(), r.getY());
+        if (b == null)
+            return;
+        pushRobot(r, b.getDir());
+        if (b.corner() != null)
+            r.turn(b.corner());
+        onBelt(r, --moves);
+    }
+
+    public ArrayList<IDirectionalObject> getDirectionals() {
+        ArrayList<IDirectionalObject> ret = new ArrayList<>();
+
+        for (IMapObject obj : getObjects()) {
+            if (obj instanceof IDirectionalObject) {
+                ret.add((IDirectionalObject) obj);
+            }
+        }
+
+        return ret;
+    }
+
+    public ArrayList<Robot> getRobots() {
+        ArrayList<Robot> ret = new ArrayList<>();
+
+        for (IMapObject obj : getObjects()) {
+            if (obj instanceof Robot) {
+                ret.add((Robot) obj);
+            }
+        }
+
+        return ret;
+    }
+
+    private Belt getBelt(int x, int y) {
+        for (IMapObject ob : getItems(x, y)) {
+            if (ob instanceof Belt)
+                return (Belt) ob;
+        }
+        return null;
     }
 }
