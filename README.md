@@ -1,5 +1,8 @@
 # INF112 - Group Project V2020 - RoboRally
 
+##Travis
+[![Build Status](https://travis-ci.com/inf112-v20/BashBoys_Inc.svg?branch=master)](https://travis-ci.com/inf112-v20/BashBoys_Inc)
+
 ### Participants:
 - Mathias Haugsbø
 - Egil Bru 
