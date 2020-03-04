@@ -1,6 +1,7 @@
 # INF112 - Group Project V2020 - RoboRally
 
 ##Travis
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/2f558cb07fbf480480dbf5a9286d5362)](https://app.codacy.com/gh/inf112-v20/BashBoys_Inc?utm_source=github.com&utm_medium=referral&utm_content=inf112-v20/BashBoys_Inc&utm_campaign=Badge_Grade_Dashboard)
 [![Build Status](https://travis-ci.com/inf112-v20/BashBoys_Inc.svg?branch=master)](https://travis-ci.com/inf112-v20/BashBoys_Inc)
 
 ### Participants:
