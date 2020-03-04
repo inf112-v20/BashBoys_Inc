@@ -4,6 +4,7 @@ import inf112.skeleton.app.enums.Direction;
 import inf112.skeleton.app.interfaces.IDirectionalObject;
 import inf112.skeleton.app.interfaces.IMapObject;
 import inf112.skeleton.app.object.Hole;
+import inf112.skeleton.app.object.Pusher;
 import inf112.skeleton.app.object.Robot;
 import inf112.skeleton.app.object.Wall;
 import inf112.skeleton.app.object.belts.Belt;
@@ -418,5 +419,55 @@ public class Board {
      */
     public ArrayList<IMapObject> getItems(int x, int y) {
         return board[x][y];
+    }
+    
+    public void pushAll(int i) {
+        
+        ArrayList<Pusher> pushers = new ArrayList<>();
+        
+        for(IDirectionalObject o : getDirectionals()) {
+            if (o instanceof Pusher) {
+                Pusher p = (Pusher) o;
+                switch(i) {
+                case 1:
+                    if(p.getPhase()) {
+                        pushers.add(p);
+                    }break;
+                case 3:
+                    if(p.getPhase()) {
+                        pushers.add(p);
+                    }break;
+                case 5:
+                    if(p.getPhase()) {
+                        pushers.add(p);
+                    }break;
+                case 2:
+                    if(!p.getPhase()) {
+                        pushers.add(p);
+                    }break;
+                case 4:
+                    if(!p.getPhase()) {
+                        pushers.add(p);
+                    }break;
+                }
+            }
+        }
+        
+        ArrayList<Robot> rs = new ArrayList<>();
+        ArrayList<Direction> dirs = new ArrayList<>();
+        
+        for(Pusher push : pushers) {
+            int[] next = nextPos(push.getDir(),push.getX(),push.getY());
+            for(IMapObject obj : getItems(next[0],next[1])) {
+                if(obj instanceof Robot) {
+                    rs.add((Robot)obj);
+                    dirs.add(push.getDir());
+                }
+            }
+        }
+        
+        for(int j = 0; j < rs.size();j++) {
+            pushRobot(rs.get(j),dirs.get(j));
+        }
     }
 }

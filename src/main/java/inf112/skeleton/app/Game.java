@@ -5,6 +5,7 @@ import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import inf112.skeleton.app.enums.Direction;
 import inf112.skeleton.app.enums.LeftRight;
 import inf112.skeleton.app.object.Hole;
+import inf112.skeleton.app.object.Pusher;
 import inf112.skeleton.app.object.Robot;
 import inf112.skeleton.app.object.Wall;
 import inf112.skeleton.app.object.belts.Belt;
@@ -93,7 +94,7 @@ public class Game {
         board.addItem(new MergeBelt(west,1), 5, 7);
         
         //Real tings
-        board.addItem(new Belt(north,2), 7, 5);
+        //board.addItem(new Belt(north,2), 7, 5);
         board.addItem(new Belt(north,2), 7, 6);
         board.addItem(new Belt(north,1), 7, 7);
         board.addItem(new CornerBelt(east,2,LeftRight.RIGHT), 7, 8);
@@ -112,6 +113,11 @@ public class Game {
         board.addItem(new Wall(south), 11, 9);
         board.addItem(new Wall(south), 10, 9);
         
+        board.addItem(new Pusher(west,true), 8, 5);
+        //board.addItem(new Wall(west), 7, 5);
+        //board.addItem(new Wall(east), 6, 5);
+        
+        
         boolean t = true;
         while (t) {
 
@@ -123,6 +129,7 @@ public class Game {
             
             board.moveBelts();
             board.fireLasers();
+            board.pushAll(1);
             
         }
     }
