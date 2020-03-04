@@ -4,6 +4,7 @@ import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import inf112.skeleton.app.enums.Direction;
 import inf112.skeleton.app.enums.LeftRight;
+import inf112.skeleton.app.object.Gear;
 import inf112.skeleton.app.object.Hole;
 import inf112.skeleton.app.object.Pusher;
 import inf112.skeleton.app.object.Robot;
@@ -114,10 +115,12 @@ public class Game {
         board.addItem(new Wall(south), 10, 9);
         
         board.addItem(new Pusher(west,true), 8, 5);
+        board.addItem(new Pusher(east,false), 5, 5);
+        board.addItem(new Gear(LeftRight.RIGHT), 7, 5);
         //board.addItem(new Wall(west), 7, 5);
         //board.addItem(new Wall(east), 6, 5);
         
-        
+        int phase = 0;
         boolean t = true;
         while (t) {
 
@@ -126,11 +129,28 @@ public class Game {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            
-            board.moveBelts();
-            board.fireLasers();
-            board.pushAll(1);
+            board.turnStuff((phase++%5)+1);
             
         }
+    }
+    
+    public void gameLoop(){
+        boolean gameWon = false;
+        Player winner = null;
+        while(!gameWon) {
+            
+            //Upgrade phase
+            
+            //Program phase
+            
+            for(int i = 1; i < 6;i++) {
+                //Cards in phase i
+                
+                board.turnStuff(i);
+                
+            }
+            
+        }
+        System.out.println(winner.getName() + " won the game");
     }
 }

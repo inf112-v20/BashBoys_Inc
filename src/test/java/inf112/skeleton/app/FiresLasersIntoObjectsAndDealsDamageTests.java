@@ -53,16 +53,15 @@ class FiresLasersIntoObjectsAndDealsDamageTests {
     @Test
     @DisplayName("Only one robot takes dmg")
     void onlyOneRobotTakesDamage() {
-        b.addItem(new Wall(Direction.NORTH,2), 5,11);
-        Robot petter = new Robot("Petter",Direction.NORTH);
-        petter.dmg(8);
         Robot tobias = new Robot("Tobias");
+        b.addItem(new Wall(Direction.NORTH,2), 5,11);
+        Robot petter = new Robot("Petter");
+        petter.dmg(8);
         
         b.addItem(petter, 5, 5);
         b.addItem(tobias, 5, 4);
         
         b.fireLasers();
-        System.out.println(tobias.getHp());
         assertEquals(tobias.getHp(),9);
     }
 
