@@ -9,6 +9,7 @@ public class Hole implements IMapObject {
     private String name;
     
     public Hole() {
+        name = "hole";
     }
     
     public Hole(String s) {

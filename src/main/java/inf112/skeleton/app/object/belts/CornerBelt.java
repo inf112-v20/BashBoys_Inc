@@ -22,4 +22,8 @@ public class CornerBelt extends Belt {
         return lr;
     }
     
+    @Override
+    public String getName() {
+        return strength+""+lr+"corner"+dir;
+    }
 }

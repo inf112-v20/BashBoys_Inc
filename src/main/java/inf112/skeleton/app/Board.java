@@ -152,35 +152,6 @@ public class Board {
     }
 
     /**
-     * Get item at (x,y)
-     * 
-     * @param x - x position
-     * @param y - y position
-     * @return ArrayList<MapObject> that contains all object on the tile
-     */
-    public ArrayList<IMapObject> getItems(int x, int y) {
-        return board[x][y];
-    }
-
-    /**
-     * Return all MapObjects on the board
-     * 
-     * @return ArrayList<IMapObject>
-     */
-    public ArrayList<IMapObject> getObjects() {
-        ArrayList<IMapObject> mapObjects = new ArrayList<>();
-
-        for (ArrayList<IMapObject>[] arrayLists : this.board){
-            for (int y = 0; y < this.board.length; y++){
-                if (arrayLists[y] != null){
-                    mapObjects.addAll(arrayLists[y]);
-                }
-            }
-        }
-        return mapObjects;
-    }
-
-    /**
      * Fires lasers from all walls and robots
      */
     public void fireLasers() {
@@ -282,6 +253,32 @@ public class Board {
         ret[1] = y;
         return ret;
     }
+    
+    public boolean posibleMove(int x, int y, Direction dir) {
+        for (IMapObject obj : getItems(x, y)){
+            if (obj instanceof Wall){
+                if (((Wall) obj).getDir() == dir){
+                    return false;
+                }
+            }
+        }
+        
+        int[] nX = nextPos(dir,x,y);
+        for (IMapObject obj : getItems(nX[0], nX[1])){
+            if (obj instanceof Wall){
+                // If there is wall there checks if it blocks entrance to tile
+                if (((Wall) obj).getDir() == Direction.uTurn(dir)){
+                    return false;
+                }
+            }else if(obj instanceof Robot) {
+                if (!posibleMove(nX[0],nX[1],dir)) {
+                    return false;
+                }
+            }
+        }
+        
+        return true;
+    }
 
     public void moveBelts() {
 
@@ -331,6 +328,8 @@ public class Board {
             pushRobot(r, oldDir);
             return;
         }
+        
+        if(!posibleMove(r.getX(),r.getY(),oldDir))return;
 
         Direction newDir = newBelt.getDir();
 
@@ -392,5 +391,34 @@ public class Board {
     private void ded(Robot r) {
         System.out.println(r.getName() + " is ded");
         removeItem(r);
+    }
+    
+    /**
+     * Return all MapObjects on the board
+     * 
+     * @return ArrayList<IMapObject>
+     */
+    public ArrayList<IMapObject> getObjects() {
+        ArrayList<IMapObject> mapObjects = new ArrayList<>();
+
+        for (ArrayList<IMapObject>[] arrayLists : this.board){
+            for (int y = 0; y < this.board.length; y++){
+                if (arrayLists[y] != null){
+                    mapObjects.addAll(arrayLists[y]);
+                }
+            }
+        }
+        return mapObjects;
+    }
+    
+    /**
+     * Get item at (x,y)
+     * 
+     * @param x - x position
+     * @param y - y position
+     * @return ArrayList<MapObject> that contains all object on the tile
+     */
+    public ArrayList<IMapObject> getItems(int x, int y) {
+        return board[x][y];
     }
 }

@@ -14,6 +14,8 @@ import inf112.skeleton.app.cards.CardFactory;
 import inf112.skeleton.app.enums.Direction;
 import inf112.skeleton.app.interfaces.IMapObject;
 import inf112.skeleton.app.object.Robot;
+import inf112.skeleton.app.object.Wall;
+
 import javax.naming.NameNotFoundException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -30,6 +32,8 @@ public class ViewEngine extends com.badlogic.gdx.Game {
 
     private HashMap<String, TiledMapTile> mapTiles = new HashMap<>();
     private HashMap<String, HashMap<String, TiledMapTile>> robotTiles = new HashMap<>();
+    
+    private TiledMapTileLayer wallLayer;
     private TiledMapTileLayer boardLayer;
     private TiledMapTileLayer robotLayer;
 
@@ -57,6 +61,7 @@ public class ViewEngine extends com.badlogic.gdx.Game {
 
         TiledMapTileLayer objectLayer = (TiledMapTileLayer) map.getLayers().get("Objects");
         robotLayer = (TiledMapTileLayer) map.getLayers().get("Robots");
+        wallLayer = (TiledMapTileLayer) map.getLayers().get("Wall");
 
         renderer = new OrthogonalTiledMapRenderer(map);
         camera = new OrthographicCamera();
@@ -64,12 +69,19 @@ public class ViewEngine extends com.badlogic.gdx.Game {
         // Add textures
         TiledMapTileSet mapTileSet = map.getTileSets().getTileSet("MapTileSet");
         for (TiledMapTile tile : mapTileSet) {
-            Object property = tile.getProperties().get("name");
-            if (property != null) {
-                mapTiles.put((String) property, tile);
+            MapProperties properties = tile.getProperties();
+            
+            Iterator<String> keys = tile.getProperties().getKeys();
+            if (keys.hasNext()) {
+                String name = keys.next();
+                Object val = properties.get(name);
+                mapTiles.put((String) val, tile);
+            }
+            if (properties != null) {
+                mapTiles.put((String) "wall", tile);
             }
         }
-
+        
         TiledMapTileSet robotTileSet = map.getTileSets().getTileSet("RobotTileSet");
         for (TiledMapTile tile : robotTileSet) {
             MapProperties properties = tile.getProperties();
@@ -120,12 +132,27 @@ public class ViewEngine extends com.badlogic.gdx.Game {
                         // Name or direction of robot was not found
                         System.out.println("Name or direction of robot was not found. " + gameObject.getName() + " - " + ((Robot) gameObject).getDir());
                     }
+                } else if(gameObject instanceof Wall) {
+                    // GameObject is not a robot do something else
+                    TiledMapTileLayer.Cell cell = wallLayer.getCell(x, y);
+                    if (cell == null) {
+                        cell = new TiledMapTileLayer.Cell();
+                        wallLayer.setCell(x, y, cell);
+                        
+                    }
+                    try {
+                        TiledMapTile tile = getMapTileByName(gameObject.getName());
+                        cell.setTile(tile);
+                    } catch (NameNotFoundException error) {
+                        System.out.println("Could not find the mapTile with name " + gameObject.getName());
+                    }
                 } else {
                     // GameObject is not a robot do something else
                     TiledMapTileLayer.Cell cell = boardLayer.getCell(x, y);
                     if (cell == null) {
                         cell = new TiledMapTileLayer.Cell();
                         boardLayer.setCell(x, y, cell);
+                        
                     }
                     try {
                         TiledMapTile tile = getMapTileByName(gameObject.getName());

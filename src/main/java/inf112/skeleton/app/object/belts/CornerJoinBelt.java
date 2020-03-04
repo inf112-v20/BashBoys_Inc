@@ -21,4 +21,9 @@ public class CornerJoinBelt extends Belt {
     public LeftRight getTurn() {
         return lr;
     }
+    
+    @Override
+    public String getName() {
+        return strength+""+lr+"join"+dir;
+    }
 }

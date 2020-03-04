@@ -45,7 +45,7 @@ public class Belt implements IDirectionalObject {
 
     @Override
     public String getName() {
-        return strength == 1 ? "Single belt" : "Double belt";
+        return strength+""+dir+"belt";
     }
 
     @Override

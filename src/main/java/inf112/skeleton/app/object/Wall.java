@@ -57,9 +57,9 @@ public class Wall implements IDirectionalObject {
 
     @Override
     public String getName() {
-        if (laserDmg == 0)return dir + "Wall";
-        else if (laserDmg == 1) return dir + "Wall \\w laser";
-        else return dir + "Wall \\w double laser";
+        if (laserDmg == 0)return "wall"+dir;
+        else if (laserDmg == 1) return dir + "wall \\w laser";
+        else return dir + "wall \\w double laser";
     }
 
     @Override

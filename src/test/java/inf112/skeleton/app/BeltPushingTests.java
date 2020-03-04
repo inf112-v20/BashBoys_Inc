@@ -39,8 +39,8 @@ class BeltPushingTests {
     @DisplayName("Single belt pushing robot onto double belt but not more")
     void singleThenDoubleBelt() {
         Board board = new Board(12, 12);
-        board.addItem(new CornerBelt(Direction.NORTH,LeftRight.RIGHT), 5, 6);
-        board.addItem(new Belt(Direction.NORTH,2), 5, 5);
+        board.addItem(new Belt(Direction.NORTH), 5, 5);
+        board.addItem(new CornerBelt(Direction.NORTH, 2, LeftRight.RIGHT), 5, 6);
         Robot r = new Robot("JLoh2");
         board.addItem(r, 5, 5);
         

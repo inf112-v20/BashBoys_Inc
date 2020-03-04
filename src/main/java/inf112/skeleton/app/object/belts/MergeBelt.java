@@ -12,4 +12,8 @@ public class MergeBelt extends Belt {
         super(dir,strength);
     }
 
+    @Override
+    public String getName() {
+        return strength+"merge"+dir;
+    }
 }
