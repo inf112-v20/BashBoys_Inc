@@ -49,5 +49,21 @@ class FiresLasersIntoObjectsAndDealsDamageTests {
         assertEquals(hans.getHp(),8);
         assertEquals(grete.getHp(),8);
     }
+    
+    @Test
+    @DisplayName("Only one robot takes dmg")
+    void onlyOneRobotTakesDamage() {
+        b.addItem(new Wall(Direction.NORTH,2), 5,11);
+        Robot petter = new Robot("Petter",Direction.NORTH);
+        petter.dmg(8);
+        Robot tobias = new Robot("Tobias");
+        
+        b.addItem(petter, 5, 5);
+        b.addItem(tobias, 5, 4);
+        
+        b.fireLasers();
+        System.out.println(tobias.getHp());
+        assertEquals(tobias.getHp(),9);
+    }
 
 }

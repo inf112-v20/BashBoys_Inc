@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import inf112.skeleton.app.enums.Direction;
 import inf112.skeleton.app.enums.LeftRight;
 import inf112.skeleton.app.object.Robot;
+import inf112.skeleton.app.object.Wall;
 import inf112.skeleton.app.object.belts.Belt;
 import inf112.skeleton.app.object.belts.CornerBelt;
 
@@ -62,4 +63,17 @@ class BeltPushingTests {
         assertEquals(r.getDir(),Direction.WEST);
     }
 
+    @Test
+    @DisplayName("Testing wall blocking belt")
+    void wallBlockBeltTest() {
+        Board board = new Board(12, 12);
+        board.addItem(new Belt(Direction.NORTH,2), 5, 5);
+        board.addItem(new Belt(Direction.EAST,2), 5, 6);
+        board.addItem(new Wall(Direction.SOUTH), 5, 6);
+        Robot r = new Robot("JLoh3");
+        board.addItem(r, 5, 5);
+        board.moveBelts();
+        assertEquals(r.getY(),5);
+        assertEquals(r.getX(),5);
+    }
 }

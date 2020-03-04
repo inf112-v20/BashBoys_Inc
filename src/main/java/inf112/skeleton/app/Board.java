@@ -193,16 +193,14 @@ public class Board {
             if (obj instanceof Robot){ // Hits robot
                 ((Robot) obj).dmg(dmg); // Damages robot
                 if (((Robot) obj).getHp() == 0){ // Dead robot
-                    ded.add(obj);
+                    ded((Robot) obj);
                 }
+                return;
             } else if (obj instanceof Wall){ // At wall
                 if (((Wall) obj).getDir() == dir){ // If it block from keeping going
                     wall = true; // Stops after tile
                 }
             }
-        }
-        for (IMapObject obj : ded){
-            ded((Robot) obj);
         }
 
         x = nextPos(dir, x, y)[0];
