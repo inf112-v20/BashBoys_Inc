@@ -9,9 +9,8 @@ import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
-
-import inf112.skeleton.app.cards.CardFactory;
 import inf112.skeleton.app.enums.Direction;
+import inf112.skeleton.app.gui.GuiCards;
 import inf112.skeleton.app.interfaces.IMapObject;
 import inf112.skeleton.app.object.Robot;
 import inf112.skeleton.app.object.Wall;
@@ -36,7 +35,7 @@ public class ViewEngine extends com.badlogic.gdx.Game {
     private TiledMapTileLayer wallLayer;
     private TiledMapTileLayer boardLayer;
     private TiledMapTileLayer robotLayer;
-
+    private GuiCards guiCards = new GuiCards();
 
     public ViewEngine(Board board) {
         this.board = board;
@@ -46,13 +45,7 @@ public class ViewEngine extends com.badlogic.gdx.Game {
     public void create() {
 
         uiStage = new Stage(new ScreenViewport());
-
-        uiStage.addActor(CardFactory.create(0, 0));
-        uiStage.addActor(CardFactory.create(150, 0));
-        uiStage.addActor(CardFactory.create(300, 0));
-        uiStage.addActor(CardFactory.create(450, 0));
-        uiStage.addActor(CardFactory.create(600, 0));
-
+        guiCards.startCardGui(uiStage,8);
         Gdx.input.setInputProcessor(uiStage);
 
 
