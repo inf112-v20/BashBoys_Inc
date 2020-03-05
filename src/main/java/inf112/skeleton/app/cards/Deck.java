@@ -65,10 +65,6 @@ public class Deck {
         return temp;
     }
 
-    public ICard getCard(){
-        return cards.poll();
-    }
-
     /**
      * Look at all cards currently in the deck, but don't delete them
      * @return LinkedList of all cards
