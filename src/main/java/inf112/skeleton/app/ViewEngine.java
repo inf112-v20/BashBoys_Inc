@@ -9,11 +9,8 @@ import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
-
-import inf112.skeleton.app.cards.CardFactory;
 import inf112.skeleton.app.enums.Direction;
 import inf112.skeleton.app.gui.GuiCards;
-import inf112.skeleton.app.object.IMapObject;
 import inf112.skeleton.app.interfaces.IMapObject;
 import inf112.skeleton.app.object.Robot;
 import inf112.skeleton.app.object.Wall;
