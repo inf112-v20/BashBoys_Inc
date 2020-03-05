@@ -38,3 +38,8 @@ Begynte å finpusse ting til innlevering 2. Noen begynte å skrive ferdig selve 
 fortsatte på å få til viewengine skikkelig og implementere det som ble gjort/funnet ut hjemme. Til slutt fordelte vi
 oppgaver som skulle gjøres hjemme i løpet av uken, bl.a gjøre ferdig markdown til oblig 2, fikse på UML-en og å begynne
 på presentasjonen.
+
+03.03:  
+Oppmøte: Alle
+Diskuterte kjapt hva vi skulle gjøre videre. Så satte vi i gang og jobbe. På slutten tok vi en kjapp oppsumering om
+hva som skal gjøres til neste møte.

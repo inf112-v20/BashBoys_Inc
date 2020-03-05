@@ -1,34 +1,280 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<tileset version="1.2" tiledversion="1.3.2" name="TileSet1" tilewidth="64" tileheight="64" tilecount="16" columns="4">
- <image source="Floor/TileSet1.png" width="256" height="256"/>
- <tile id="0">
-   <properties>
-    <property name="clear tile" value="clear tile"/>
-   </properties>
-  </tile>
- <tile id="1">
-   <properties>
-    <property name="floor" value="floor"/>
-   </properties>
-  </tile>
- <tile id="2">
-   <properties>
-    <property name="wall" value="wallNorth"/>
-   </properties>
-  </tile>
- <tile id="3">
-    <properties>
-     <property name="wall" value="wallSouth"/>
-    </properties>
-   </tile>
-<tile id="4">
-   <properties>
-    <property name="wall" value="wallEast"/>
-   </properties>
-  </tile>
-<tile id="5">
-   <properties>
-    <property name="wall" value="wallWest"/>
-   </properties>
-  </tile>
-</tileset>
+<? xml version = "1.0" encoding = "UTF-8" ?>
+    <tileset version="1.2" tiledversion="1.3.2" name="MapTileSet" tilewidth="64" tileheight="64" tilecount="120" columns="8">
+        <image source="TileSet1.png" width="512" height="960" />
+        <tile id="0">
+            <properties>
+                <property name="clear tile" value="clear tile" />
+            </properties>
+        </tile>
+        <tile id="1">
+            <properties>
+                <property name="floor" value="floor" />
+            </properties>
+        </tile>
+        <tile id="2">
+            <properties>
+                <property name="wall" value="wallNORTH" />
+            </properties>
+        </tile>
+        <tile id="3">
+            <properties>
+                <property name="wall" value="wallSOUTH" />
+            </properties>
+        </tile>
+        <tile id="4">
+            <properties>
+                <property name="wall" value="wallWEST" />
+            </properties>
+        </tile>
+        <tile id="5">
+            <properties>
+                <property name="wall" value="wallEAST" />
+            </properties>
+        </tile>
+        <tile id="6">
+            <properties>
+                <property name="hole" value="hole" />
+            </properties>
+        </tile>
+        <tile id="7">
+            <properties>
+                <property name="corner" value="2RIGHTcornerEAST" />
+            </properties>
+        </tile>
+        <tile id="8">
+            <properties>
+                <property name="corner" value="2RIGHTcornerWEST" />
+            </properties>
+        </tile>
+        <tile id="9">
+            <properties>
+                <property name="corner" value="2RIGHTcornerSOUTH" />
+            </properties>
+        </tile>
+        <tile id="10">
+            <properties>
+                <property name="corner" value="2RIGHTcornerNORTH" />
+            </properties>
+        </tile>
+        <tile id="11">
+            <properties>
+                <property name="corner" value="2LEFTcornerWEST" />
+            </properties>
+        </tile>
+        <tile id="12">
+            <properties>
+                <property name="corner" value="2LEFTcornerNORTH" />
+            </properties>
+        </tile>
+        <tile id="13">
+            <properties>
+                <property name="corner" value="2LEFTcornerEAST" />
+            </properties>
+        </tile>
+        <tile id="14">
+            <properties>
+                <property name="corner" value="2LEFTcornerSOUTH" />
+            </properties>
+        </tile>
+        <tile id="15">
+            <properties>
+                <property name="belt" value="2NORTHbelt" />
+            </properties>
+        </tile>
+        <tile id="16">
+            <properties>
+                <property name="belt" value="2SOUTHbelt" />
+            </properties>
+        </tile>
+        <tile id="17">
+            <properties>
+                <property name="belt" value="2WESTbelt" />
+            </properties>
+        </tile>
+        <tile id="18">
+            <properties>
+                <property name="belt" value="2EASTbelt" />
+            </properties>
+        </tile>
+        <tile id="19">
+            <properties>
+                <property name="cornerjoin" value="2LEFTjoinNORTH" />
+            </properties>
+        </tile>
+        <tile id="20">
+            <properties>
+                <property name="cornerjoin" value="2LEFTjoinSOUTH" />
+            </properties>
+        </tile>
+        <tile id="21">
+            <properties>
+                <property name="cornerjoin" value="2LEFTjoinWEST" />
+            </properties>
+        </tile>
+        <tile id="22">
+            <properties>
+                <property name="cornerjoin" value="2LEFTjoinEAST" />
+            </properties>
+        </tile>
+        <tile id="23">
+            <properties>
+                <property name="cornerjoin" value="2RIGHTjoinNORTH" />
+            </properties>
+        </tile>
+        <tile id="24">
+            <properties>
+                <property name="cornerjoin" value="2RIGHTjoinSOUTH" />
+            </properties>
+        </tile>
+        <tile id="25">
+            <properties>
+                <property name="cornerjoin" value="2RIGHTjoinWEST" />
+            </properties>
+        </tile>
+        <tile id="26">
+            <properties>
+                <property name="cornerjoin" value="2RIGHTjoinEAST" />
+            </properties>
+        </tile>
+        <tile id="27">
+            <properties>
+                <property name="mergebelt" value="2mergeNORTH" />
+            </properties>
+        </tile>
+        <tile id="28">
+            <properties>
+                <property name="mergebelt" value="2mergeSOUTH" />
+            </properties>
+        </tile>
+        <tile id="29">
+            <properties>
+                <property name="mergebelt" value="2mergeWEST" />
+            </properties>
+        </tile>
+        <tile id="30">
+            <properties>
+                <property name="mergebelt" value="2mergeEAST" />
+            </properties>
+        </tile>
+        <tile id="31">
+            <properties>
+                <property name="corner" value="1RIGHTcornerEAST" />
+            </properties>
+        </tile>
+        <tile id="32">
+            <properties>
+                <property name="corner" value="1RIGHTcornerWEST" />
+            </properties>
+        </tile>
+        <tile id="33">
+            <properties>
+                <property name="corner" value="1RIGHTcornerSOUTH" />
+            </properties>
+        </tile>
+        <tile id="34">
+            <properties>
+                <property name="corner" value="1RIGHTcornerNORTH" />
+            </properties>
+        </tile>
+        <tile id="35">
+            <properties>
+                <property name="corner" value="1LEFTcornerWEST" />
+            </properties>
+        </tile>
+        <tile id="36">
+            <properties>
+                <property name="corner" value="1LEFTcornerNORTH" />
+            </properties>
+        </tile>
+        <tile id="37">
+            <properties>
+                <property name="corner" value="1LEFTcornerEAST" />
+            </properties>
+        </tile>
+        <tile id="38">
+            <properties>
+                <property name="corner" value="1LEFTcornerSOUTH" />
+            </properties>
+        </tile>
+        <tile id="39">
+            <properties>
+                <property name="belt" value="1NORTHbelt" />
+            </properties>
+        </tile>
+        <tile id="40">
+            <properties>
+                <property name="belt" value="1SOUTHbelt" />
+            </properties>
+        </tile>
+        <tile id="41">
+            <properties>
+                <property name="belt" value="1WESTbelt" />
+            </properties>
+        </tile>
+        <tile id="42">
+            <properties>
+                <property name="belt" value="1EASTbelt" />
+            </properties>
+        </tile>
+        <tile id="43">
+            <properties>
+                <property name="cornerjoin" value="1LEFTjoinNORTH" />
+            </properties>
+        </tile>
+        <tile id="44">
+            <properties>
+                <property name="cornerjoin" value="1LEFTjoinSOUTH" />
+            </properties>
+        </tile>
+        <tile id="45">
+            <properties>
+                <property name="cornerjoin" value="1LEFTjoinWEST" />
+            </properties>
+        </tile>
+        <tile id="46">
+            <properties>
+                <property name="cornerjoin" value="1LEFTjoinEAST" />
+            </properties>
+        </tile>
+        <tile id="47">
+            <properties>
+                <property name="cornerjoin" value="1RIGHTjoinNORTH" />
+            </properties>
+        </tile>
+        <tile id="48">
+            <properties>
+                <property name="cornerjoin" value="1RIGHTjoinSOUTH" />
+            </properties>
+        </tile>
+        <tile id="49">
+            <properties>
+                <property name="cornerjoin" value="1RIGHTjoinWEST" />
+            </properties>
+        </tile>
+        <tile id="50">
+            <properties>
+                <property name="cornerjoin" value="1RIGHTjoinEAST" />
+            </properties>
+        </tile>
+        <tile id="51">
+            <properties>
+                <property name="mergebelt" value="1mergeNORTH" />
+            </properties>
+        </tile>
+        <tile id="52">
+            <properties>
+                <property name="mergebelt" value="1mergeSOUTH" />
+            </properties>
+        </tile>
+        <tile id="53">
+            <properties>
+                <property name="mergebelt" value="1mergeWEST" />
+            </properties>
+        </tile>
+        <tile id="54">
+            <properties>
+                <property name="mergebelt" value="1mergeEAST" />
+            </properties>
+        </tile>
+
+    </tileset>
