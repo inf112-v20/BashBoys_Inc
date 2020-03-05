@@ -9,6 +9,7 @@ public class Player {
     private String name;
     private ArrayList<ICard> hand = new ArrayList<>();
     private int handSize = 9;
+    private int robotID = 1;
     private ArrayList<ICard> programSheet = new ArrayList<>();
 
     /**

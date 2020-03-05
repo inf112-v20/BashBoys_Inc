@@ -9,6 +9,7 @@ import inf112.skeleton.app.object.IMapObject;
 import inf112.skeleton.app.object.Robot;
 import inf112.skeleton.app.object.Wall;
 
+import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 public class Game {
@@ -28,7 +29,8 @@ public class Game {
         board.addItem(robot, 5, 5);
     }
 
-    public void play(LwjglApplicationConfiguration cfg) {
+    public void play(LwjglApplicationConfiguration cfg){
+
         Robot r = new Robot("MainRobot");
         Robot r2 = new Robot("PushedRobot");
         place(r);
@@ -39,17 +41,7 @@ public class Game {
         board.addItem(new Belt(Direction.NORTH,2), 5, 6);
         board.addItem(new Belt(Direction.NORTH,1), 5, 7);
         board.addItem(new Belt(Direction.EAST,1,LeftRight.RIGHT), 5, 8);
-        //board.addItem(new Belt(Direction.NORTH), 5, 6);
-        
-        /*
-        board.addItem(new Wall(5Direction.NORTH, 1), 5, 8);
-        board.addItem(new Wall(Direction.EAST, 1), 11, 3);
-        board.addItem(new Wall(Direction.EAST), 11, 8);
-        board.addItem(new Wall(Direction.SOUTH, 1), 11, 0);
 
-        r.turn(LeftRight.RIGHT, 2);
-        r2.turn(LeftRight.LEFT);
-         */
         
         boolean t = true;
         while (t) {
@@ -59,7 +51,7 @@ public class Game {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            
+
             board.moveBelts();
             
             /*
