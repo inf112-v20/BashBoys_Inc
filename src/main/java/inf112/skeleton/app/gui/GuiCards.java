@@ -114,8 +114,13 @@ public class GuiCards {
                                         break;
                                     }
                                 } else if(temp.register != null) { // Register is not empty, then swap registers and card
-                                    swapRegister(temp,temp.register,register);
-                                    break;
+                                    if (temp.register == register){
+                                        unRegisterCard(temp,register);
+                                        break;
+                                    } else {
+                                        swapRegister(temp, temp.register, register);
+                                        break;
+                                    }
                                 } else { // // Reset to origin point
                                     temp.setPosition(temp.getOriginX(),temp.getOriginY());
                                 }
