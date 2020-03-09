@@ -11,8 +11,10 @@ import inf112.skeleton.app.object.Belt;
 import inf112.skeleton.app.object.IMapObject;
 import inf112.skeleton.app.object.Robot;
 import inf112.skeleton.app.object.Wall;
+import sun.plugin.javascript.navig.Array;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.concurrent.TimeUnit;
 
 public class Game {
@@ -113,15 +115,29 @@ public class Game {
 
     public void programmingPhase() {
         for(int cardnr = 0; cardnr < 5; cardnr++){
-            for(Player player : players) {
-                player.getCardFromSheet(cardnr).getPriority();
-                player.getCardFromSheet(cardnr).doStuff(player.getRobot(), board);
-            }
 
-            try {
-                TimeUnit.SECONDS.sleep(2);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+            ArrayList<Player> players_left = (ArrayList<Player>) players.clone();
+
+            for(Player player : players) {
+
+                Player top_priority = players_left.get(0);
+
+                for(Player playerleft : players_left) {
+                    if(playerleft.getCardFromSheet(cardnr).getPriority() <= top_priority.getCardFromSheet(cardnr).getPriority()) {
+                        top_priority = playerleft;
+                    }
+                }
+
+                top_priority.getCardFromSheet(cardnr).doStuff(top_priority.getRobot(), board);
+
+                players_left.remove(top_priority);
+
+
+                try {
+                    TimeUnit.SECONDS.sleep(1);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
 
             board.moveBelts();
