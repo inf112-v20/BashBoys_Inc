@@ -288,95 +288,90 @@
         </tile>
         <tile id="57">
             <properties>
-                <property name="gear" value="gearLEFT" />
+                <property name="emitter" value="1emitterNORTH" />
                </properties>
         </tile>
         <tile id="58">
             <properties>
-                <property name="emitter" value="1emitterNORTH" />
+                <property name="emitter" value="1emitterSOUTH" />
                </properties>
         </tile>
         <tile id="59">
             <properties>
-                <property name="emitter" value="1emitterSOUTH" />
+                <property name="emitter" value="1emitterWEST" />
                </properties>
         </tile>
         <tile id="60">
             <properties>
-                <property name="emitter" value="1emitterWEST" />
+                <property name="emitter" value="1emitterEAST" />
                </properties>
         </tile>
         <tile id="61">
             <properties>
-                <property name="emitter" value="1emitterEAST" />
+                <property name="emitter" value="2emitterNORTH" />
                </properties>
         </tile>
         <tile id="62">
             <properties>
-                <property name="emitter" value="2emitterNORTH" />
+                <property name="emitter" value="2emitterSOUTH" />
                </properties>
         </tile>
         <tile id="63">
             <properties>
-                <property name="emitter" value="2emitterSOUTH" />
+                <property name="emitter" value="2emitterWEST" />
                </properties>
         </tile>
         <tile id="64">
             <properties>
-                <property name="emitter" value="2emitterWEST" />
+                <property name="emitter" value="2emitterEAST" />
                </properties>
         </tile>
         <tile id="65">
             <properties>
-                <property name="emitter" value="2emitterEAST" />
+                <property name="emitter" value="3emitterNORTH" />
                </properties>
         </tile>
         <tile id="66">
             <properties>
-                <property name="emitter" value="3emitterNORTH" />
+                <property name="emitter" value="3emitterSOUTH" />
                </properties>
         </tile>
         <tile id="67">
             <properties>
-                <property name="emitter" value="3emitterSOUTH" />
+                <property name="emitter" value="3emitterWEST" />
                </properties>
         </tile>
         <tile id="68">
             <properties>
-                <property name="emitter" value="3emitterWEST" />
+                <property name="emitter" value="3emitterEAST" />
                </properties>
         </tile>
         <tile id="69">
             <properties>
-                <property name="emitter" value="3emitterEAST" />
+                <property name="laserbeam" value="1VERTICAL" />
                </properties>
         </tile>
         <tile id="70">
             <properties>
-                <property name="laserbeam" value="1laserVERTICAL" />
+                <property name="laserbeam" value="1HORIZONTAL" />
                </properties>
         </tile>
         <tile id="71">
             <properties>
-                <property name="laserbeam" value="1HORIZONTAL" />
+                <property name="laserbeam" value="2VERTICAL" />
                </properties>
         </tile>
         <tile id="72">
             <properties>
-                <property name="laserbeam" value="2VERTICAL" />
+                <property name="laserbeam" value="2HORIZONTAL" />
                </properties>
         </tile>
         <tile id="73">
             <properties>
-                <property name="laserbeam" value="2HORIZONTAL" />
-               </properties>
-        </tile>
-        <tile id="74">
-            <properties>
                 <property name="laserbeam" value="3VERTICAL" />
                </properties>
         </tile>
-        <tile id="75">
+        <tile id="74">
             <properties>
                 <property name="laserbeam" value="3HORIZONTAL" />
                </properties>

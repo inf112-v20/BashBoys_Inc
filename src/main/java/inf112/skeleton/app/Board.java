@@ -6,6 +6,7 @@ import inf112.skeleton.app.interfaces.IMapObject;
 import inf112.skeleton.app.object.Gear;
 import inf112.skeleton.app.object.HealDraw;
 import inf112.skeleton.app.object.Hole;
+import inf112.skeleton.app.object.Laser;
 import inf112.skeleton.app.object.Pusher;
 import inf112.skeleton.app.object.Robot;
 import inf112.skeleton.app.object.Wall;
@@ -123,7 +124,7 @@ public class Board {
             } else if (obj instanceof Hole) {
                 ded(item);
                 return true;
-            }else if (obj instanceof Pusher) {
+            } else if (obj instanceof Pusher) {
                 return false;
             }
         }
@@ -167,7 +168,8 @@ public class Board {
     /**
      * Fires lasers from all walls inwards
      */
-    public void fireWalls(){
+    public ArrayList<Laser> fireWalls(){
+        ArrayList<Laser> arr = new ArrayList<>();
         ArrayList<IDirectionalObject> all = getDirectionals(); // All objects
         for (IDirectionalObject obj : all) {
             int x = obj.getX(); // x
@@ -176,15 +178,17 @@ public class Board {
                 int dmg = ((Wall) obj).getDmg(); // wall dmg
                 if (dmg > 0) { // If dmg
                     Direction dir = Direction.uTurn(obj.getDir()); // Walls fires reversed
-                    shoot(dir, x, y, dmg); // Shoots from spot
+                    for (int[] ar : shoot(dir, x, y, dmg)) {
+                        arr.add(new Laser(ar[0], ar[1], dir, ((Wall) obj).getDmg()));
+                    }
                 }
             }
         }
+        return arr;
     }
 
     /**
-     * Fires lasers from all robot
-     * lasers move forward from the front
+     * Fires lasers from all robot lasers move forward from the front
      */
     public void fireRobots(){
         for (Robot obj : getRobots()) {
@@ -207,22 +211,23 @@ public class Board {
      * @param y   - y position of laser
      * @param dmg - damage laser deals to robots
      */
-    private void shoot(Direction dir, int x, int y, int dmg){
+    private ArrayList<int[]> shoot(Direction dir, int x, int y, int dmg){
+        ArrayList<int[]> ar = new ArrayList<>();
         boolean wall = false; // Hits wall
         ArrayList<IMapObject> tile = getItems(x, y); // Items
-
+        ar.add(new int[] { x, y });
         for (IMapObject obj : tile) {
             if (obj instanceof Robot) { // Hits robot
                 ((Robot) obj).dmg(dmg); // Damages robot
                 if (((Robot) obj).getHp() == 0) { // Dead robot
                     ded((Robot) obj);
                 }
-                return;
+                return ar;
             } else if (obj instanceof Wall) { // At wall
                 if (((Wall) obj).getDir() == dir) { // If it block from keeping going
                     wall = true; // Stops after tile
                 }
-            }else if(obj instanceof Pusher) {
+            } else if (obj instanceof Pusher) {
                 wall = true;
             }
         }
@@ -231,7 +236,7 @@ public class Board {
         y = nextPos(dir, x, y)[1];
 
         if (x < 0 || y < 0 || x >= width || y >= height) { // Out of board
-            return;
+            return ar;
         } else {
             for (IMapObject obj : getItems(x, y)) { // Items at next tile
                 if (obj instanceof Wall) {
@@ -243,8 +248,8 @@ public class Board {
         }
 
         if (!wall) // If not blocked
-            shoot(dir, x, y, dmg);
-
+            ar.addAll(shoot(dir, x, y, dmg));
+        return ar;
     }
 
     /**
@@ -278,8 +283,8 @@ public class Board {
 
     /**
      * 
-     * @param x - x position from
-     * @param y - y position from
+     * @param x   - x position from
+     * @param y   - y position from
      * @param dir - the direction too check in
      * @return false if way is blocked
      */
@@ -303,7 +308,7 @@ public class Board {
                 if (!posibleMove(nX[0], nX[1], dir)) {
                     return false;
                 }
-            }else if (obj instanceof Pusher) {
+            } else if (obj instanceof Pusher) {
                 return false;
             }
         }
@@ -312,9 +317,8 @@ public class Board {
     }
 
     /**
-     * Moves all robots on belts
-     * First all robots on double belts
-     * Then all robots on any belt
+     * Moves all robots on belts First all robots on double belts Then all robots on
+     * any belt
      */
     public void moveBelts(){
         moveBelt(1);
@@ -323,6 +327,7 @@ public class Board {
 
     /**
      * Calls the moving of robots
+     * 
      * @param i - 1 if only double should push 2 else 1
      */
     private void moveBelt(int i){
@@ -331,14 +336,14 @@ public class Board {
             int y = ob.getY();
             for (IMapObject obj : getItems(x, y)) {
                 if (obj instanceof Belt) {
-                    int[] next = nextPos(((Belt)obj).getDir(), x, y);
+                    int[] next = nextPos(((Belt) obj).getDir(), x, y);
                     Belt nextBelt = getBelt(next[0], next[1]);
                     if (i == 1) {
-                        if (((Belt)obj).getStrength() != 2)
+                        if (((Belt) obj).getStrength() != 2)
                             continue;
-                        beltMove(((Belt)obj), nextBelt, ob);
+                        beltMove(((Belt) obj), nextBelt, ob);
                     } else {
-                        beltMove(((Belt)obj), nextBelt, ob);
+                        beltMove(((Belt) obj), nextBelt, ob);
                     }
                 }
             }
@@ -349,7 +354,7 @@ public class Board {
      * 
      * @param oldBelt - Belt robot stood on
      * @param newBelt - Belt robot gets pushed on or null
-     * @param r - Robot to be pushed
+     * @param r       - Robot to be pushed
      */
     private void beltMove(Belt oldBelt, Belt newBelt, Robot r){
         Direction oldDir = oldBelt.getDir();
@@ -505,33 +510,34 @@ public class Board {
             pushRobot(rs.get(j), dirs.get(j));
         }
     }
-    
+
     /**
      * Turns all robots on gears
      */
-    public void gearsDo() {
-        for(IMapObject obj : getObjects()) {
-            if(obj instanceof Gear) {
-                for(IMapObject ob : getItems(obj.getX(),obj.getY())) {
-                    if(ob instanceof Robot) {
-                        ((Robot)ob).turn(((Gear)obj).getLR());
+    public void gearsDo(){
+        for (IMapObject obj : getObjects()) {
+            if (obj instanceof Gear) {
+                for (IMapObject ob : getItems(obj.getX(), obj.getY())) {
+                    if (ob instanceof Robot) {
+                        ((Robot) ob).turn(((Gear) obj).getLR());
                     }
                 }
             }
         }
     }
-    
+
     /**
      * Heals all robots on wrenches
      */
-    public void healDo() {
-        for(IMapObject obj : getObjects()) {
-            if(obj instanceof HealDraw) {
-                for(IMapObject ob : getItems(obj.getX(),obj.getY())) {
-                    if(ob instanceof Robot) {
-                        if(((HealDraw)obj).draw()) {
-                            //draw card
-                        }((Robot)ob).heal(1);
+    public void healDo(){
+        for (IMapObject obj : getObjects()) {
+            if (obj instanceof HealDraw) {
+                for (IMapObject ob : getItems(obj.getX(), obj.getY())) {
+                    if (ob instanceof Robot) {
+                        if (((HealDraw) obj).draw()) {
+                            // draw card
+                        }
+                        ((Robot) ob).heal(1);
                     }
                 }
             }
@@ -540,16 +546,65 @@ public class Board {
 
     /**
      * All automated turn events in order
+     * 
      * @param i - What phase we are on
      */
-    public void turnStuff(int i) {
+    public void turnStuff(int i){
         moveBelts();
         pushAll(i);
         gearsDo();
         fireLasers();
         healDo();
-        //energy();
-        //checkpoint();
+        // energy();
+        // checkpoint();
     }
-    
+
+    public ArrayList<Laser> getLasers(){
+        ArrayList<Laser> arr = new ArrayList<>();
+        ArrayList<IDirectionalObject> all = getDirectionals(); // All objects
+        for (IDirectionalObject obj : all) {
+
+            if (obj instanceof Wall) {
+                int dmg = ((Wall) obj).getDmg(); // wall dmg
+                if (dmg > 0) { // If dmg
+                    int x = obj.getX(); // x
+                    int y = obj.getY(); // y
+                    Direction dir = Direction.uTurn(((Wall) obj).getDir());
+                    boolean stop = false;
+                    boolean add = true;
+                    while (x < width && x >= 0 && y >= 0 && y < height && !stop) {
+                        for (IMapObject item : getItems(x, y)) {
+                            System.out.println(item);
+                            if (item instanceof Wall) {
+                                if (((Wall) item).getDir() == dir) {
+                                    stop = true;
+                                    break;
+                                }
+                            }else if(item instanceof Pusher) {
+                                stop = true;
+                                add = false;
+                                break;
+                            }
+                        }
+                        if(add)arr.add(new Laser(x,y,dir,dmg));
+                        x = nextPos(dir,x,y)[0];
+                        y = nextPos(dir,x,y)[1];
+                        if(x < width && x >= 0 && y >= 0 && y < height) {
+                            for (IMapObject item : getItems(x, y)) {
+                                if (item instanceof Wall) {
+                                    if (Direction.uTurn(((Wall) item).getDir()) == dir) {
+                                        stop = true;
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+                        
+                    }
+                }
+            }
+        }
+        return arr;
+    }
+
 }
