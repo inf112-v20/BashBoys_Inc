@@ -33,19 +33,23 @@ public class ViewEngine extends com.badlogic.gdx.Game {
     private HashMap<String, HashMap<String, TiledMapTile>> robotTiles = new HashMap<>();
     
     private TiledMapTileLayer wallLayer;
+    private TiledMapTileLayer wallLayer2;
     private TiledMapTileLayer boardLayer;
     private TiledMapTileLayer robotLayer;
     private GuiCards guiCards = new GuiCards();
+    private Game g;
+    
 
-    public ViewEngine(Board board) {
-        this.board = board;
+    public ViewEngine(Game g) {
+        this.g = g;
+        this.board = g.getBoard();
     }
 
     @Override
     public void create() {
 
         uiStage = new Stage(new ScreenViewport());
-        guiCards.startCardGui(uiStage,8);
+        guiCards.startCardGui(uiStage,8,g,board);
         Gdx.input.setInputProcessor(uiStage);
 
 
@@ -55,6 +59,7 @@ public class ViewEngine extends com.badlogic.gdx.Game {
         TiledMapTileLayer objectLayer = (TiledMapTileLayer) map.getLayers().get("Objects");
         robotLayer = (TiledMapTileLayer) map.getLayers().get("Robots");
         wallLayer = (TiledMapTileLayer) map.getLayers().get("Wall");
+        wallLayer2 = (TiledMapTileLayer) map.getLayers().get("Wall2");
 
         renderer = new OrthogonalTiledMapRenderer(map);
         camera = new OrthographicCamera();
@@ -128,14 +133,34 @@ public class ViewEngine extends com.badlogic.gdx.Game {
                 } else if(gameObject instanceof Wall) {
                     // GameObject is not a robot do something else
                     TiledMapTileLayer.Cell cell = wallLayer.getCell(x, y);
+                    TiledMapTileLayer.Cell cell2 = wallLayer2.getCell(x, y);
                     if (cell == null) {
                         cell = new TiledMapTileLayer.Cell();
                         wallLayer.setCell(x, y, cell);
                         
                     }
+                    if (cell2 == null) {
+                        cell2 = new TiledMapTileLayer.Cell();
+                        wallLayer2.setCell(x, y, cell2);
+                    }
                     try {
                         TiledMapTile tile = getMapTileByName(gameObject.getName());
-                        cell.setTile(tile);
+                        TiledMapTile n = getMapTileByName(new Wall(Direction.NORTH).getName());
+                        TiledMapTile s = getMapTileByName(new Wall(Direction.SOUTH).getName());
+                        TiledMapTile e = getMapTileByName(new Wall(Direction.EAST).getName());
+                        TiledMapTile w = getMapTileByName(new Wall(Direction.WEST).getName());
+                        
+                        if(cell.getTile() == n || cell.getTile() == s || cell.getTile() == e || cell.getTile() == w){
+                            if(cell.getTile() != tile) {
+                                cell2.setTile(tile);
+                            }
+                            else {
+                                cell.setTile(tile);
+                            }
+                        }
+                        else {
+                            cell.setTile(tile);
+                        }
                     } catch (NameNotFoundException error) {
                         System.out.println("Could not find the mapTile with name " + gameObject.getName());
                     }

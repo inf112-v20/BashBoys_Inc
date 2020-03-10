@@ -1,6 +1,7 @@
 package inf112.skeleton.app;
 
 import inf112.skeleton.app.cards.ICard;
+import inf112.skeleton.app.object.Robot;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -9,7 +10,7 @@ public class Player {
     private String name;
     private ArrayList<ICard> hand = new ArrayList<>();
     private int handSize = 9;
-    private int robotID = 1;
+    private Robot robot;
     private ArrayList<ICard> programSheet = new ArrayList<>();
 
     /**
@@ -18,6 +19,11 @@ public class Player {
      */
     public Player(String name) {
         this.name = name;
+    }
+    
+    public Player(String name, Robot r) {
+        this.name = name;
+        robot = r;
     }
 
     /**
@@ -122,5 +128,9 @@ public class Player {
      */
     public void clearSheet() {
         programSheet.clear();
+    }
+    
+    public Robot getRobot() {
+        return robot;
     }
 }

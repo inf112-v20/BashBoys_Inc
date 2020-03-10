@@ -8,7 +8,6 @@ public class Gear implements IMapObject {
     private LeftRight lr;
     private int x = 0;
     private int y = 0;
-    private String name;
     
     public Gear(LeftRight lr) {
         this.lr = lr;

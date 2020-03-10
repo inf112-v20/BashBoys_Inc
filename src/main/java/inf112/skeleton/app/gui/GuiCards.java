@@ -6,6 +6,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.DragListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+
+import inf112.skeleton.app.Board;
+import inf112.skeleton.app.Game;
 import inf112.skeleton.app.cards.Deck;
 
 import java.awt.*;
@@ -24,10 +27,10 @@ public class GuiCards {
      * @param stage gui stage to be added to
      * @param cards amount of cards present
      */
-    public void startCardGui(Stage stage, int cards /* Change to player later*/){
+    public void startCardGui(Stage stage, int cards /* Change to player later*/,Game g,Board b){
         addRegisters(stage);
         addCards(cards,stage);
-        addEndTurn(stage);
+        addEndTurn(stage,g,b);
     }
 
     /**
@@ -202,7 +205,7 @@ public class GuiCards {
      * Adds a end-turn button to gui-stage
      * @param stage - Gui-stage to add to
      */
-    private void addEndTurn(Stage stage){
+    private void addEndTurn(Stage stage,Game g,Board b){
         TextureRegionDrawable texture = GuiFactory.getTexture("assets/gui/cards/move1.png");
         final ImageButton button = new ImageButton(texture);
         button.setWidth(100);
@@ -218,12 +221,14 @@ public class GuiCards {
                     for(Register register : registers){
                         if(register.getStatus()){
                             System.out.print(register.getCard().getType().getName()+" - ");
+                            register.getCard().getType().doStuff(g.getPlayer().getRobot(), b);
                         } else {
                             System.out.print("null"+" - ");
                         }
 
                     }
                     System.out.println("");
+                    g.nextPlayer();
                 }
             }
         });

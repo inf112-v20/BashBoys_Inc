@@ -19,14 +19,38 @@ import java.util.concurrent.TimeUnit;
 public class Game {
 
     private Board board;
+    private int curentPlayer;
+    private Player[] players;
 
     public Game() {
         this.board = new Board(12, 12);
+        players = new Player[8];
+    }
+    
+    public Player getPlayer(){
+        return players[curentPlayer%8];
+    }
+    
+    public void nextPlayer() {
+        int failSwitch = 0;
+        while(players[++curentPlayer%8] == null) {
+            if(++failSwitch > players.length)throw new IllegalArgumentException("No more players");
+        }
     }
 
     public void play(LwjglApplicationConfiguration cfg) {
-        LwjglApplication app = new LwjglApplication(new ViewEngine(board), cfg);
+        //Robots
+        Robot r = new Robot("robot 1",Direction.EAST);
+        Robot r2 = new Robot("robot 5");
+        Robot r3 = new Robot("robot 2");
         
+        //Players
+        players[0] = new Player("Bob",r3);
+        players[1] = new Player("Jon",r2);
+        
+        new LwjglApplication(new ViewEngine(this), cfg);
+        
+        //Shortcuts
         Direction west = Direction.WEST;
         Direction east = Direction.EAST;
         Direction north = Direction.NORTH;
@@ -35,11 +59,13 @@ public class Game {
         LeftRight left = LeftRight.LEFT;
         LeftRight right = LeftRight.RIGHT;
         
-        Robot r = new Robot("robot 1",Direction.EAST);
-        Robot r2 = new Robot("robot 5");
+        //Add robots
         board.addItem(r, 7, 5);
         board.addItem(r2, 11, 5);
-
+        board.addItem(r3, 10, 0);
+        
+        //For displaying that all tiles work
+        /*
         board.addItem(new CornerBelt(north,2,right), 0, 0);
         board.addItem(new CornerBelt(south,2,right), 0, 1);
         board.addItem(new CornerBelt(east,2,right), 0, 2);
@@ -93,6 +119,10 @@ public class Game {
         board.addItem(new MergeBelt(south,1), 5, 5);
         board.addItem(new MergeBelt(east,1), 5, 6);
         board.addItem(new MergeBelt(west,1), 5, 7);
+        */
+        
+        board.addItem(new Wall(north), 1, 1);
+        board.addItem(new Wall(south), 1, 1);
         
         //Real tings
         //board.addItem(new Belt(north,2), 7, 5);
@@ -134,7 +164,7 @@ public class Game {
         }
     }
     
-    public void gameLoop(){
+    private void gameLoop(){
         boolean gameWon = false;
         Player winner = null;
         while(!gameWon) {
@@ -152,5 +182,9 @@ public class Game {
             
         }
         System.out.println(winner.getName() + " won the game");
+    }
+    
+    public Board getBoard() {
+        return board;
     }
 }
