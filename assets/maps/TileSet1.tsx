@@ -276,5 +276,15 @@
                 <property name="mergebelt" value="1mergeEAST" />
             </properties>
         </tile>
+        <tile id="55">
+            <properties>
+                <property name="gear" value="gearRIGHT" />
+            </properties>
+        </tile>
+        <tile id="56">
+            <properties>
+                <property name="gear" value="gearLEFT" />
+            </properties>
+        </tile>
 
     </tileset>

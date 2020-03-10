@@ -121,7 +121,11 @@ public class Robot implements IDirectionalObject {
     }
     
     public void dmg(int dmg) {
-        hp = hp-dmg > 0 ? hp-dmg : 0;
+        hp = Integer.max(hp-dmg,0);
+    }
+    
+    public void heal(int heal) {
+        hp = Integer.min(hp+heal, 9);
     }
     
     public void setHp(int hp) {

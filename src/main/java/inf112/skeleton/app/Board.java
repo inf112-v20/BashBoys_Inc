@@ -4,6 +4,7 @@ import inf112.skeleton.app.enums.Direction;
 import inf112.skeleton.app.interfaces.IDirectionalObject;
 import inf112.skeleton.app.interfaces.IMapObject;
 import inf112.skeleton.app.object.Gear;
+import inf112.skeleton.app.object.HealDraw;
 import inf112.skeleton.app.object.Hole;
 import inf112.skeleton.app.object.Pusher;
 import inf112.skeleton.app.object.Robot;
@@ -509,6 +510,20 @@ public class Board {
                 for(IMapObject ob : getItems(obj.getX(),obj.getY())) {
                     if(ob instanceof Robot) {
                         ((Robot)ob).turn(((Gear)obj).getLR());
+                    }
+                }
+            }
+        }
+    }
+    
+    public void healDo() {
+        for(IMapObject obj : getObjects()) {
+            if(obj instanceof HealDraw) {
+                for(IMapObject ob : getItems(obj.getX(),obj.getY())) {
+                    if(ob instanceof Robot) {
+                        if(((HealDraw)obj).draw()) {
+                            //draw card
+                        }((Robot)ob).heal(1);
                     }
                 }
             }

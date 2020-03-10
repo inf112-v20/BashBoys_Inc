@@ -52,7 +52,8 @@ public class Pusher implements IDirectionalObject {
 
     @Override
     public String getName() {
-        return oneThreeFive ? "135pusher" : "24pusher";
+        //return oneThreeFive ? "135pusher"+dir : "24pusher"+dir;
+        return "2merge"+dir;
     }
 
     @Override

@@ -1,17 +1,21 @@
 package inf112.skeleton.app.object;
 
-import inf112.skeleton.app.enums.LeftRight;
 import inf112.skeleton.app.interfaces.IMapObject;
 
-public class Gear implements IMapObject {
+public class HealDraw implements IMapObject {
 
-    private LeftRight lr;
-    private int x = 0;
-    private int y = 0;
-    private String name;
+    private int x;
+    private int y;
+    private boolean draw;
     
-    public Gear(LeftRight lr) {
-        this.lr = lr;
+    public HealDraw(boolean draw) {
+        this.draw = draw;
+    }
+    
+    public HealDraw(int x, int y, boolean draw) {
+        this.x = x;
+        this.y = y;
+        this.draw = draw;
     }
     
     @Override
@@ -36,11 +40,10 @@ public class Gear implements IMapObject {
 
     @Override
     public String getName(){
-        return "gear"+lr;
-    }
-    
-    public LeftRight getLR() {
-        return lr;
+        return draw ? "heal" : "healDraw";
     }
 
+    public boolean draw() {
+        return draw;
+    }
 }
