@@ -48,7 +48,7 @@ public class Game {
         player2.addCardToSheet(move3, 1);
         player2.addCardToSheet(rotR, 2);
         player2.addCardToSheet(move2, 3);
-        player2.addCardToSheet(move1, 4);
+        //player2.addCardToSheet(move1, 4);
     }
 
     /**
@@ -117,14 +117,21 @@ public class Game {
         for(int card_nr = 0; card_nr < 5; card_nr++){
             ArrayList<Player> players_left = (ArrayList<Player>) players.clone();
             for(Player player : players) {
-                Player top_priority = players_left.get(0);
+                Player top_priority = null;
                 for(Player player_left : players_left) {
-                    if(player_left.getCardFromSheet(card_nr).getPriority() < top_priority.getCardFromSheet(card_nr).getPriority()) {
-                        top_priority = player_left;
+                    if(player_left.getCardFromSheet(card_nr) != null) {
+                        if(top_priority == null) {
+                            top_priority = player_left;
+                        }
+                        else if(player_left.getCardFromSheet(card_nr).getPriority() < top_priority.getCardFromSheet(card_nr).getPriority()) {
+                            top_priority = player_left;
+                        }
                     }
                 }
-                top_priority.getCardFromSheet(card_nr).doStuff(top_priority.getRobot(), board);
-                players_left.remove(top_priority);
+                if(top_priority != null) {
+                    top_priority.getCardFromSheet(card_nr).doStuff(top_priority.getRobot(), board);
+                    players_left.remove(top_priority);
+                }
                 try {
                     TimeUnit.SECONDS.sleep(1);
                 } catch (InterruptedException e) {
