@@ -308,7 +308,7 @@
         </tile>
         <tile id="61">
             <properties>
-                <property name="emitter" value="emitterEAST" />
+                <property name="emitter" value="1emitterEAST" />
                </properties>
         </tile>
         <tile id="62">
@@ -349,6 +349,36 @@
         <tile id="69">
             <properties>
                 <property name="emitter" value="3emitterEAST" />
+               </properties>
+        </tile>
+        <tile id="70">
+            <properties>
+                <property name="laserbeam" value="1laserVERTICAL" />
+               </properties>
+        </tile>
+        <tile id="71">
+            <properties>
+                <property name="laserbeam" value="1HORIZONTAL" />
+               </properties>
+        </tile>
+        <tile id="72">
+            <properties>
+                <property name="laserbeam" value="2VERTICAL" />
+               </properties>
+        </tile>
+        <tile id="73">
+            <properties>
+                <property name="laserbeam" value="2HORIZONTAL" />
+               </properties>
+        </tile>
+        <tile id="74">
+            <properties>
+                <property name="laserbeam" value="3VERTICAL" />
+               </properties>
+        </tile>
+        <tile id="75">
+            <properties>
+                <property name="laserbeam" value="3HORIZONTAL" />
                </properties>
         </tile>
     </tileset>
