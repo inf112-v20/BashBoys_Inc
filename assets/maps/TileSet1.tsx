@@ -381,4 +381,44 @@
                 <property name="laserbeam" value="3laserHORIZONTAL" />
                </properties>
         </tile>
+        <tile id="76">
+            <properties>
+                <property name="pusher" value="2-4pusherNORTH" />
+               </properties>
+        </tile>
+        <tile id="77">
+            <properties>
+                <property name="pusher" value="2-4pusherSOUTH" />
+               </properties>
+        </tile>
+        <tile id="78">
+            <properties>
+                <property name="pusher" value="2-4pusherWEST" />
+               </properties>
+        </tile>
+        <tile id="79">
+            <properties>
+                <property name="pusher" value="2-4pusherEAST" />
+               </properties>
+        </tile>
+        <tile id="80">
+            <properties>
+                <property name="pusher" value="1-3-5pusherNORTH" />
+               </properties>
+        </tile>
+        <tile id="81">
+            <properties>
+                <property name="pusher" value="1-3-5pusherSOUTH" />
+               </properties>
+        </tile>
+        <tile id="82">
+            <properties>
+                <property name="pusher" value="1-3-5pusherWEST" />
+               </properties>
+        </tile>
+        <tile id="83">
+            <properties>
+                <property name="pusher" value="1-3-5pusherEAST" />
+               </properties>
+        </tile>
     </tileset>
