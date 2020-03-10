@@ -14,6 +14,7 @@ import inf112.skeleton.app.object.belts.CornerBelt;
 import inf112.skeleton.app.object.belts.CornerJoinBelt;
 import inf112.skeleton.app.object.belts.MergeBelt;
 
+import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
 public class Game {
@@ -28,14 +29,15 @@ public class Game {
     }
     
     public Player getPlayer(){
-        return players[curentPlayer%8];
+        return players[curentPlayer];
     }
     
     public void nextPlayer() {
         int failSwitch = 0;
-        while(players[++curentPlayer%8] == null) {
-            if(++failSwitch > players.length)throw new IllegalArgumentException("No more players");
-        }
+        do {
+            curentPlayer = ++curentPlayer < players.length ? curentPlayer : 0;
+        } while(players[curentPlayer] == null && failSwitch < players.length);
+        
     }
 
     public void play(LwjglApplicationConfiguration cfg) {
@@ -64,62 +66,6 @@ public class Game {
         board.addItem(r2, 11, 5);
         board.addItem(r3, 10, 0);
         
-        //For displaying that all tiles work
-        /*
-        board.addItem(new CornerBelt(north,2,right), 0, 0);
-        board.addItem(new CornerBelt(south,2,right), 0, 1);
-        board.addItem(new CornerBelt(east,2,right), 0, 2);
-        board.addItem(new CornerBelt(west,2,right), 0, 3);
-        board.addItem(new CornerBelt(north,2,left), 0, 4);
-        board.addItem(new CornerBelt(south,2,left), 0, 5);
-        board.addItem(new CornerBelt(east,2,left), 0, 6);
-        board.addItem(new CornerBelt(west,2,left), 0, 7);
-        
-        board.addItem(new CornerJoinBelt(north,2,right), 1, 0);
-        board.addItem(new CornerJoinBelt(south,2,right), 1, 1);
-        board.addItem(new CornerJoinBelt(east,2,right), 1, 2);
-        board.addItem(new CornerJoinBelt(west,2,right), 1, 3);
-        board.addItem(new CornerJoinBelt(north,2,left), 1, 4);
-        board.addItem(new CornerJoinBelt(south,2,left), 1, 5);
-        board.addItem(new CornerJoinBelt(east,2,left), 1, 6);
-        board.addItem(new CornerJoinBelt(west,2,left), 1, 7);
-        
-        board.addItem(new Belt(north,2), 2, 0);
-        board.addItem(new Belt(south,2), 2, 1);
-        board.addItem(new Belt(east,2), 2, 2);
-        board.addItem(new Belt(west,2), 2, 3);
-        board.addItem(new MergeBelt(north,2), 2, 4);
-        board.addItem(new MergeBelt(south,2), 2, 5);
-        board.addItem(new MergeBelt(east,2), 2, 6);
-        board.addItem(new MergeBelt(west,2), 2, 7);
-        
-        board.addItem(new CornerBelt(north,1,right), 3, 0);
-        board.addItem(new CornerBelt(south,1,right), 3, 1);
-        board.addItem(new CornerBelt(east,1,right), 3, 2);
-        board.addItem(new CornerBelt(west,1,right), 3, 3);
-        board.addItem(new CornerBelt(north,1,left), 3, 4);
-        board.addItem(new CornerBelt(south,1,left), 3, 5);
-        board.addItem(new CornerBelt(east,1,left), 3, 6);
-        board.addItem(new CornerBelt(west,1,left), 3, 7);
-        
-        board.addItem(new CornerJoinBelt(north,1,right), 4, 0);
-        board.addItem(new CornerJoinBelt(south,1,right), 4, 1);
-        board.addItem(new CornerJoinBelt(east,1,right), 4, 2);
-        board.addItem(new CornerJoinBelt(west,1,right), 4, 3);
-        board.addItem(new CornerJoinBelt(north,1,left), 4, 4);
-        board.addItem(new CornerJoinBelt(south,1,left), 4, 5);
-        board.addItem(new CornerJoinBelt(east,1,left), 4, 6);
-        board.addItem(new CornerJoinBelt(west,1,left), 4, 7);
-        
-        board.addItem(new Belt(north,1), 5, 0);
-        board.addItem(new Belt(south,1), 5, 1);
-        board.addItem(new Belt(east,1), 5, 2);
-        board.addItem(new Belt(west,1), 5, 3);
-        board.addItem(new MergeBelt(north,1), 5, 4);
-        board.addItem(new MergeBelt(south,1), 5, 5);
-        board.addItem(new MergeBelt(east,1), 5, 6);
-        board.addItem(new MergeBelt(west,1), 5, 7);
-        */
         
         board.addItem(new Wall(north), 1, 1);
         board.addItem(new Wall(south), 1, 1);
@@ -147,21 +93,6 @@ public class Game {
         board.addItem(new Pusher(west,true), 8, 5);
         board.addItem(new Pusher(east,false), 5, 5);
         board.addItem(new Gear(LeftRight.RIGHT), 7, 5);
-        //board.addItem(new Wall(west), 7, 5);
-        //board.addItem(new Wall(east), 6, 5);
-        
-        int phase = 0;
-        boolean t = true;
-        while (t) {
-
-            try {
-                TimeUnit.SECONDS.sleep(1);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            board.turnStuff((phase++%5)+1);
-            
-        }
     }
     
     private void gameLoop(){
@@ -182,6 +113,10 @@ public class Game {
             
         }
         System.out.println(winner.getName() + " won the game");
+    }
+    
+    public Player[] players(){
+        return players;
     }
     
     public Board getBoard() {
