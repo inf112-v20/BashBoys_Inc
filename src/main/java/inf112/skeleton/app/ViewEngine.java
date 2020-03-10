@@ -12,6 +12,7 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import inf112.skeleton.app.enums.Direction;
 import inf112.skeleton.app.gui.GuiCards;
 import inf112.skeleton.app.interfaces.IMapObject;
+import inf112.skeleton.app.object.Gear;
 import inf112.skeleton.app.object.Robot;
 import inf112.skeleton.app.object.Wall;
 
@@ -32,10 +33,12 @@ public class ViewEngine extends com.badlogic.gdx.Game {
     private HashMap<String, TiledMapTile> mapTiles = new HashMap<>();
     private HashMap<String, HashMap<String, TiledMapTile>> robotTiles = new HashMap<>();
     
+    private TiledMapTileLayer boardLayer;
+    private TiledMapTileLayer objectLayer;
     private TiledMapTileLayer wallLayer;
     private TiledMapTileLayer wallLayer2;
-    private TiledMapTileLayer boardLayer;
     private TiledMapTileLayer robotLayer;
+    
     private GuiCards guiCards = new GuiCards();
     private Game g;
     
@@ -56,7 +59,7 @@ public class ViewEngine extends com.badlogic.gdx.Game {
         map = new TmxMapLoader().load("assets/maps/roborallyCleanBoard.tmx");
         boardLayer = (TiledMapTileLayer) map.getLayers().get("Board");
 
-        TiledMapTileLayer objectLayer = (TiledMapTileLayer) map.getLayers().get("Objects");
+        objectLayer = (TiledMapTileLayer) map.getLayers().get("Objects");
         robotLayer = (TiledMapTileLayer) map.getLayers().get("Robots");
         wallLayer = (TiledMapTileLayer) map.getLayers().get("Wall");
         wallLayer2 = (TiledMapTileLayer) map.getLayers().get("Wall2");
@@ -164,12 +167,12 @@ public class ViewEngine extends com.badlogic.gdx.Game {
                     } catch (NameNotFoundException error) {
                         System.out.println("Could not find the mapTile with name " + gameObject.getName());
                     }
-                } else {
+                }else {
                     // GameObject is not a robot do something else
-                    TiledMapTileLayer.Cell cell = boardLayer.getCell(x, y);
+                    TiledMapTileLayer.Cell cell = objectLayer.getCell(x, y);
                     if (cell == null) {
                         cell = new TiledMapTileLayer.Cell();
-                        boardLayer.setCell(x, y, cell);
+                        objectLayer.setCell(x, y, cell);
                         
                     }
                     try {
