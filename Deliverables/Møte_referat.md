@@ -43,3 +43,7 @@ på presentasjonen.
 Oppmøte: Alle
 Diskuterte kjapt hva vi skulle gjøre videre. Så satte vi i gang og jobbe. På slutten tok vi en kjapp oppsumering om
 hva som skal gjøres til neste møte.
+
+10.03:  
+Oppmøte: Alle  
+Begynte med å gå gjennom det som har hver enkelt har gjort hjemme.
