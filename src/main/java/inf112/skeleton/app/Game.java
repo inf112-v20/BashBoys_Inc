@@ -156,7 +156,7 @@ public class Game {
         int phase = 0;
         boolean t = true;
         while (t) {
-
+            programmingPhase();
             try {
                 TimeUnit.SECONDS.sleep(1);
             } catch (InterruptedException e) {

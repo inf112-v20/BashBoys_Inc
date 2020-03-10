@@ -72,10 +72,10 @@ public class Player {
      * Add a card to sheet at chosen index
      * If there already is a card there it gets moved to hand
      * @param card - card to add
-     * @param index - chosen index for card
      */
-    public void addCardToSheet(ICard card, int index) {
-        if(index > 4 || index < 0) {
+    public void addCardToSheet(ICard card) {
+        programSheet.add(card);
+        /*if(index > 4 || index < 0) {
             throw new IndexOutOfBoundsException("Index out of range");
         }
         if(programSheet.contains(card)) {
@@ -96,6 +96,8 @@ public class Player {
             programSheet.add(card);
         }
         removeCardFromHand(card);
+
+         */
     }
 
     /**
