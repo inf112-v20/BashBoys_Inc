@@ -358,27 +358,27 @@
         </tile>
         <tile id="71">
             <properties>
-                <property name="laserbeam" value="1HORIZONTAL" />
+                <property name="laserbeam" value="1laserHORIZONTAL" />
                </properties>
         </tile>
         <tile id="72">
             <properties>
-                <property name="laserbeam" value="2VERTICAL" />
+                <property name="laserbeam" value="2laserVERTICAL" />
                </properties>
         </tile>
         <tile id="73">
             <properties>
-                <property name="laserbeam" value="2HORIZONTAL" />
+                <property name="laserbeam" value="2laserHORIZONTAL" />
                </properties>
         </tile>
         <tile id="74">
             <properties>
-                <property name="laserbeam" value="3VERTICAL" />
+                <property name="laserbeam" value="3laserVERTICAL" />
                </properties>
         </tile>
         <tile id="75">
             <properties>
-                <property name="laserbeam" value="3HORIZONTAL" />
+                <property name="laserbeam" value="3laserHORIZONTAL" />
                </properties>
         </tile>
     </tileset>
