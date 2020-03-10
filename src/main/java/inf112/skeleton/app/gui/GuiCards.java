@@ -9,7 +9,9 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
 import inf112.skeleton.app.Board;
 import inf112.skeleton.app.Game;
+import inf112.skeleton.app.cards.CardFactory;
 import inf112.skeleton.app.cards.Deck;
+import inf112.skeleton.app.cards.MoveCard;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -27,7 +29,7 @@ public class GuiCards {
      * @param stage gui stage to be added to
      * @param cards amount of cards present
      */
-    public void startCardGui(Stage stage, int cards /* Change to player later*/,Game g,Board b){
+    public void startCardGui(Stage stage, int cards /* Change to player later*/,Game g , Board b){
         addRegisters(stage);
         addCards(cards,stage);
         addEndTurn(stage,g,b);
@@ -40,9 +42,12 @@ public class GuiCards {
      */
     private void addCards(int n, Stage stage){
         for(int i = 0; i < n; i++){
-
-            int x = i*Math.round(stage.getWidth()/n);
+            ButtonCard SpecCard = GuiFactory.createCard(0,0,new MoveCard(1,1,"Move 1"));
+            int x = (int) (i*SpecCard.getWidth() + stage.getWidth()/2 - SpecCard.getWidth()*(n/2)) ;
             int y = 0;
+            if(n % 2 != 0){
+                x = (int) (x - SpecCard.getWidth()/2);
+            }
 
 
             ButtonCard temp = GuiFactory.createCard(x,y,deck.getCard());
@@ -190,7 +195,8 @@ public class GuiCards {
      */
     private void addRegisters(Stage stage){
         for(int i = 0; i < 5;i++){
-            int x = i*Math.round(stage.getWidth()/5);
+            Register SpecRegister = GuiFactory.createRegister(0,0);
+            int x = (int) (i*SpecRegister.getWidth() + stage.getWidth()/2 - SpecRegister.getWidth()*2 - SpecRegister.getWidth()/2);
             int y = 100+margin;
 
             Register temp = GuiFactory.createRegister(x,y);
