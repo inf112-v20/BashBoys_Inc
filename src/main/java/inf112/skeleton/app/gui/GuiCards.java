@@ -227,7 +227,7 @@ public class GuiCards {
                     for(Register register : registers){
                         if(register.getStatus()){
                             System.out.print(register.getCard().getType().getName()+" - ");
-                            register.getCard().getType().doStuff(g.getPlayer().getRobot(), b);
+                            g.players().get(0).addCardToSheet(register.getCard().getType());
                         } else {
                             System.out.print("null"+" - ");
                         }
