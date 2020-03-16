@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class Player {
+    private Boolean ready = false;
     private String name;
     private ArrayList<ICard> hand = new ArrayList<>();
     private int handSize = 9;
@@ -134,5 +135,21 @@ public class Player {
     
     public Robot getRobot() {
         return robot;
+    }
+
+    /**
+     * Sets ready to false or true
+     * @param r
+     */
+    public void setReady(boolean r) {
+        ready = r;
+    }
+
+    /**
+     * Returns if the player is ready or not
+     * @return  ready
+     */
+    public boolean isReady() {
+        return ready;
     }
 }

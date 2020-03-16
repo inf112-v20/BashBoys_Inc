@@ -46,7 +46,7 @@ public class Game {
 
         // Players
         players.add(new Player("Bob", r3));
-        players.add(new Player("Jon", r2));
+        //players.add(new Player("Jon", r2));
 
         // Shortcuts
         Direction west = Direction.WEST;
@@ -104,7 +104,6 @@ public class Game {
                 e.printStackTrace();
             }
             board.turnStuff((phase++ % 5) + 1);
-
         }
     }
 
@@ -127,8 +126,30 @@ public class Game {
         }
         System.out.println(winner.getName() + " won the game");
     }
+    public void programmingPhase() {
+        boolean all_ready = false;
+        while(all_ready == false) {
+            all_ready = true;
+            for(Player player : players) {
+                if(player.isReady() == false) {
+                    all_ready = false;
+                }
+            }
+            try {
+                TimeUnit.SECONDS.sleep(1);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        programmingMove();
+        for(Player player : players) {
+            player.clearSheet();
+            player.setReady(false);
+        }
 
-    public void programmingPhase(){
+    }
+
+    public void programmingMove() {
         for (int card_nr = 0; card_nr < 5; card_nr++) {
             ArrayList<Player> players_left = (ArrayList<Player>) players.clone();
             for (Player player : players) {
@@ -153,9 +174,7 @@ public class Game {
                     e.printStackTrace();
                 }
             }
-            board.moveBelts();
         }
-
     }
 
     public ArrayList<Player> players(){
