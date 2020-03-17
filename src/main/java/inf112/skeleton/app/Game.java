@@ -45,7 +45,7 @@ public class Game {
         Robot r3 = new Robot("robot 2");
 
         // Players
-        players.add(new Player("Bob", r3));
+        players.add(new Player("Bob", r));
         players.add(new Player("Jon", r2));
 
         // Shortcuts

@@ -1,8 +1,13 @@
 package inf112.skeleton.app.gui;
 
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.DragListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
@@ -33,6 +38,7 @@ public class GuiCards {
         addRegisters(stage);
         addCards(cards,stage);
         addEndTurn(stage,g,b);
+        addPowerDownButton(stage,g,b);
     }
 
     /**
@@ -212,11 +218,26 @@ public class GuiCards {
      * @param stage - Gui-stage to add to
      */
     private void addEndTurn(Stage stage,Game g,Board b){
-        TextureRegionDrawable texture = GuiFactory.getTexture("assets/gui/cards/move1.png");
-        final ImageButton button = new ImageButton(texture);
+        BitmapFont font = new BitmapFont();
+        Skin skin = new Skin();
+        TextureAtlas atlas = new TextureAtlas("assets/gui/skin/uiskin.atlas");
+        skin.addRegions(atlas);
+        TextButton.TextButtonStyle style = new TextButton.TextButtonStyle();
+        style.font = font;
+
+        style.up = skin.getDrawable("apptheme_btn_radio_on_focused_holo_light");
+        style.down = skin.getDrawable("apptheme_btn_radio_on_holo_light");
+
+        TextButton button = new TextButton("Lock",style);
+
         button.setWidth(100);
-        button.setHeight(20);
-        button.setPosition((stage.getWidth()/2)-50,(stage.getHeight()/3));
+        button.setHeight(100);
+
+        Register tempRegister = registers.get(registers.size()-1);
+        float x = tempRegister.getX() + tempRegister.getWidth();
+        float y = tempRegister.getY() + tempRegister.getHeight()/2 - button.getHeight()/2;
+
+        button.setPosition(x,y);
 
         button.addListener(new ClickListener(){
             @Override
@@ -224,23 +245,56 @@ public class GuiCards {
                 if(event.getType() == InputEvent.Type.touchUp) {
                     finished = true;
                     System.out.println("");
+                    int i = 0;
                     for(Register register : registers){
                         if(register.getStatus()){
                             System.out.print(register.getCard().getType().getName()+" - ");
+
                             g.players().get(0).addCardToSheet(register.getCard().getType());
                         } else {
                             System.out.print("null"+" - ");
                         }
-
+                    i++;
                     }
                     System.out.println("");
                     g.nextPlayer();
                 }
             }
         });
-
         stage.addActor(button);
+    }
 
+
+    private void addPowerDownButton(Stage stage,Game g, Board b){
+        BitmapFont font = new BitmapFont();
+        Skin skin = new Skin();
+        TextureAtlas atlas = new TextureAtlas("assets/gui/skin/uiskin.atlas");
+        skin.addRegions(atlas);
+        TextButton.TextButtonStyle style = new TextButton.TextButtonStyle();
+        style.font = font;
+
+        style.up = skin.getDrawable("apptheme_btn_radio_on_holo_light");
+        style.down = skin.getDrawable("apptheme_btn_radio_on_focused_holo_light");
+
+        TextButton button = new TextButton("PowerDown",style);
+
+        button.setWidth(100);
+        button.setHeight(100);
+
+        Register tempRegister = registers.get(0);
+        float x = tempRegister.getX() - button.getWidth();
+        float y = tempRegister.getY() + tempRegister.getHeight()/2 - button.getHeight()/2;
+
+        button.setPosition(x,y);
+        button.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float xx, float yy){
+                if(event.getType() == InputEvent.Type.touchUp){
+                    System.out.println(g.players().get(0).getName()+": Shutdown");
+                }
+            }
+        });
+        stage.addActor(button);
     }
 
     /**
@@ -252,4 +306,3 @@ public class GuiCards {
     }
 
 }
-

@@ -3,7 +3,11 @@ package inf112.skeleton.app.gui;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import inf112.skeleton.app.cards.ICard;
 
@@ -89,4 +93,15 @@ public class GuiFactory {
 
         return location+fileFormat;
     }
+
+    static public TextButton.TextButtonStyle getTextStyle(String path){
+        BitmapFont font = new BitmapFont();
+        Skin skin = new Skin();
+        TextureAtlas atlas = new TextureAtlas("assets/gui/skin/uiskin.atlas");
+        skin.addRegions(atlas);
+        TextButton.TextButtonStyle style = new TextButton.TextButtonStyle();
+        style.font = font;
+        return style;
+    }
+
 }

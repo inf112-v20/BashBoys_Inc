@@ -11,6 +11,7 @@ import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import inf112.skeleton.app.enums.Direction;
 import inf112.skeleton.app.gui.GuiCards;
+import inf112.skeleton.app.gui.GuiHud;
 import inf112.skeleton.app.interfaces.IMapObject;
 import inf112.skeleton.app.object.Gear;
 import inf112.skeleton.app.object.Laser;
@@ -43,6 +44,7 @@ public class ViewEngine extends com.badlogic.gdx.Game {
     private TiledMapTileLayer emiterLayer;
 
     private GuiCards guiCards = new GuiCards();
+    private GuiHud guiHud = new GuiHud();
     private Game g;
 
     public ViewEngine(Game g) {
@@ -55,6 +57,7 @@ public class ViewEngine extends com.badlogic.gdx.Game {
 
         uiStage = new Stage(new ScreenViewport());
         guiCards.startCardGui(uiStage, 8, g, board);
+        guiHud.startHud(uiStage,g);
         Gdx.input.setInputProcessor(uiStage);
 
         map = new TmxMapLoader().load("assets/maps/roborallyCleanBoard.tmx");
@@ -214,6 +217,8 @@ public class ViewEngine extends com.badlogic.gdx.Game {
 
         renderer.setView(camera);
         renderer.render();
+        guiHud.updateHud(uiStage,g);
+        // Should update guiCards and guiHud later
         uiStage.draw();
     }
 
