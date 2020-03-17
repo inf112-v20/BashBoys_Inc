@@ -49,3 +49,9 @@ Oppmøte: Alle
 Begynte med å gå gjennom det som har hver enkelt har gjort hjemme. Så ble alt satt sammen og fikset slik at det virker
 sammen. Diskuterte så hva vi trengte å jobbe med videre og begynte på det. På slutten av møtet gikk vi gjennom hva som
 skulle gjøres hjemme til neste gang.
+
+17.03:
+Oppmøte: Alle  
+Satt opp en Discord kanal hvor vi begynte møte. Så gikk vi gjennom det som var gjort siden forrige møte. Fant ut at vi 
+skulle begynne å se litt på multiplayer nå sånn det det ikke kommer helt til slutt. Som vanlig gikk vi gjennom det som
+må gjøres til neste møte og fordelte de forskjellige oppgavene på project boardet. 
