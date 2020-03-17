@@ -249,13 +249,13 @@ public class GuiCards {
                     for(Register register : registers){
                         if(register.getStatus()){
                             System.out.print(register.getCard().getType().getName()+" - ");
-
-                            g.players().get(0).addCardToSheet(register.getCard().getType());
+                            g.players().get(0).addCardToSheet(register.getCard().getType()); //temp
                         } else {
                             System.out.print("null"+" - ");
                         }
                     i++;
                     }
+                    g.players().get(0).setReady(true); //temp
                     System.out.println("");
                     g.nextPlayer();
                 }
