@@ -70,35 +70,11 @@ public class Player {
     }
 
     /**
-     * Add a card to sheet at chosen index
-     * If there already is a card there it gets moved to hand
+     * Add a card to sheet
      * @param card - card to add
      */
     public void addCardToSheet(ICard card) {
         programSheet.add(card);
-        /*if(index > 4 || index < 0) {
-            throw new IndexOutOfBoundsException("Index out of range");
-        }
-        if(programSheet.contains(card)) {
-            if(getCardFromSheet(index) instanceof ICard) {
-                Collections.swap(programSheet, index, programSheet.indexOf(card));
-            }
-            else {
-                programSheet.remove(card);
-                addCardToSheet(card, index);
-            }
-        }
-        else if(getCardFromSheet(index) instanceof ICard) {
-            programSheet.add(index, card);
-            giveCard(programSheet.get(index+1));
-            programSheet.remove(index+1);
-        }
-        else{
-            programSheet.add(card);
-        }
-        removeCardFromHand(card);
-
-         */
     }
 
     /**
@@ -116,23 +92,16 @@ public class Player {
     }
 
     /**
-     * Move a card from the sheet to the hand
-     * @param card - card to move
-     */
-    public void moveCardFromSheet(ICard card) {
-        if (programSheet.contains(card)) {
-            hand.add(card);
-            programSheet.remove(card);
-        }
-    }
-
-    /**
      * Clear the sheet
      */
     public void clearSheet() {
         programSheet.clear();
     }
-    
+
+    /**
+     * Get robot assigned to player
+     * @return robot
+     */
     public Robot getRobot() {
         return robot;
     }

@@ -11,13 +11,11 @@ public class PlayerTest {
 
     private Player player;
     private ICard move1;
-    private ICard move2;
 
     @BeforeEach
     public void init() {
         player = new Player("one");
         move1 = new MoveCard(1, 1, "move1");
-        move2 = new MoveCard(2, 1, "move2");
     }
 
     @Test
@@ -40,59 +38,32 @@ public class PlayerTest {
     }
 
     @Test
-    public void addOneCardFromHandToProgramSheetTest() {
-        player.giveCard(move1);
-        ICard cardInHand = player.getHand().get(0);
-        player.addCardToSheet(cardInHand);
-        assertEquals(player.getProgramSheet().get(0), move1);
-        assertTrue(player.getHand().size() == 0);
-    }
-
-    @Test
     public void getCardFromEmptyProgramSheetTest() {
         assertNull(player.getCardFromSheet(1));
     }
 
     @Test
-    public void addCardToExistingProgramSheetIndexTest() {
+    public void getOneCardFromSheetTest() {
+        player.addCardToSheet(move1);
+        assertEquals(move1, player.getCardFromSheet(0));
+    }
+
+    @Test
+    public void getAllCardsFromFullSheetTest() {
+        ICard move2 = new MoveCard(2, 1, "move2");
+        ICard move3 = new MoveCard(2, 1, "move3");
+        ICard move4 = new MoveCard(2, 1, "move4");
+        ICard move5 = new MoveCard(2, 1, "move5");
         player.addCardToSheet(move1);
         player.addCardToSheet(move2);
-        assertEquals(1, player.getProgramSheet().size());
-        assertEquals(move2, player.getCardFromSheet(0));
-    }
-
-    @Test
-    public void addCardToProgramSheetWithIndexOutOfRangeThrowsExceptionTest() {
-        boolean thrown = false;
-
-        try {
-            player.addCardToSheet(move1);
-        } catch (IndexOutOfBoundsException e) {
-            thrown = true;
-        }
-
-        assertTrue(thrown);
-    }
-
-    @Test
-    public void swapCardFromSheetToHandTest() {
-        player.giveCard(move1);
-        player.giveCard(move2);
-        player.addCardToSheet(player.getHand().get(0));
-        player.addCardToSheet(player.getHand().get(0));
-        assertEquals(1, player.getHand().size());
-        assertEquals(1, player.getProgramSheet().size());
-        assertEquals(move1, player.getHand().get(0));
-        assertEquals(move2, player.getProgramSheet().get(0));
-
-    }
-
-    @Test
-    public void moveCardFromSheetToHandTest() {
-        player.addCardToSheet(move1);
-        player.moveCardFromSheet(move1);
-        assertEquals(0, player.getProgramSheet().size());
-        assertEquals(1, player.getHand().size());
+        player.addCardToSheet(move3);
+        player.addCardToSheet(move4);
+        player.addCardToSheet(move5);
+        assertEquals(move1, player.getCardFromSheet(0));
+        assertEquals(move2, player.getCardFromSheet(1));
+        assertEquals(move3, player.getCardFromSheet(2));
+        assertEquals(move4, player.getCardFromSheet(3));
+        assertEquals(move5, player.getCardFromSheet(4));
     }
 
     @Test
@@ -100,22 +71,5 @@ public class PlayerTest {
         player.addCardToSheet(move1);
         player.clearSheet();
         assertEquals(0, player.getProgramSheet().size());
-    }
-
-    @Test
-    public void moveCardFromSheetToEmptySheetSpotTest() {
-        player.addCardToSheet(move1);
-        player.addCardToSheet(move1);
-        assertEquals(1, player.getProgramSheet().size());
-    }
-
-    @Test
-    public void moveCardFromSheetToOccupiedSheetSpotTest() {
-        player.addCardToSheet(move1);
-        player.addCardToSheet(move2);
-        player.addCardToSheet(move1);
-        assertEquals(2, player.getProgramSheet().size());
-        assertEquals(move1, player.getCardFromSheet(1));
-        assertEquals(move2, player.getCardFromSheet(0));
     }
 }
