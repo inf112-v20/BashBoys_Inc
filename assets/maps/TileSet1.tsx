@@ -376,44 +376,54 @@
                 <property name="laserbeam" value="3HORIZONTAL" />
                </properties>
         </tile>
+        <tile id="75">
+            <properties>
+                <property name="pusher" value="24pusherSOUTH" />
+               </properties>
+        </tile>
         <tile id="76">
             <properties>
-                <property name="pusher" value="2-4pusherNORTH" />
+                <property name="pusher" value="24pusherNORTH" />
                </properties>
         </tile>
         <tile id="77">
             <properties>
-                <property name="pusher" value="2-4pusherSOUTH" />
+                <property name="pusher" value="24pusherEAST" />
                </properties>
         </tile>
         <tile id="78">
             <properties>
-                <property name="pusher" value="2-4pusherWEST" />
+                <property name="pusher" value="24pusherWEST" />
                </properties>
         </tile>
         <tile id="79">
             <properties>
-                <property name="pusher" value="2-4pusherEAST" />
+                <property name="pusher" value="135pusherSOUTH" />
                </properties>
         </tile>
         <tile id="80">
             <properties>
-                <property name="pusher" value="1-3-5pusherNORTH" />
+                <property name="pusher" value="135pusherNORTH" />
                </properties>
         </tile>
         <tile id="81">
             <properties>
-                <property name="pusher" value="1-3-5pusherSOUTH" />
+                <property name="pusher" value="135pusherEAST" />
                </properties>
         </tile>
         <tile id="82">
             <properties>
-                <property name="pusher" value="1-3-5pusherWEST" />
+                <property name="pusher" value="135pusherWEST" />
                </properties>
         </tile>
         <tile id="83">
             <properties>
-                <property name="pusher" value="1-3-5pusherEAST" />
-               </properties>
+                <property name="heal" value="healDraw" />
+            </properties>
+        </tile>
+        <tile id="84">
+            <properties>
+                <property name="heal" value="heal" />
+            </properties>
         </tile>
     </tileset>

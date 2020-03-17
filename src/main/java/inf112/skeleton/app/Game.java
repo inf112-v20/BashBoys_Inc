@@ -5,6 +5,7 @@ import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import inf112.skeleton.app.enums.Direction;
 import inf112.skeleton.app.enums.LeftRight;
 import inf112.skeleton.app.object.Gear;
+import inf112.skeleton.app.object.HealDraw;
 import inf112.skeleton.app.object.Hole;
 import inf112.skeleton.app.object.Pusher;
 import inf112.skeleton.app.object.Robot;
@@ -91,8 +92,9 @@ public class Game {
         board.addItem(new Pusher(west, true), 8, 5);
         board.addItem(new Pusher(east, false), 5, 5);
         board.addItem(new Gear(LeftRight.RIGHT), 7, 5);
-        // board.addItem(new Wall(west), 7, 5);
-        // board.addItem(new Wall(east), 6, 5);
+        
+        board.addItem(new HealDraw(false), 0, 0);
+        board.addItem(new HealDraw(true), 0, 1);
 
         //test items
         board.addItem(new Belt(south, 1), 3, 8);
