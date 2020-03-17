@@ -191,7 +191,7 @@ public class ViewEngine extends com.badlogic.gdx.Game {
                         }
                         if(((Wall)gameObject).getDmg() > 0) {
                             int dmg =((Wall)gameObject).getDmg();
-                            TiledMapTile etile = getMapTileByName("2emitterNORTH");
+                            TiledMapTile etile = getMapTileByName(dmg+"emitterNORTH");
                             ecell.setTile(etile);
                         }
                     } catch (NameNotFoundException error) {
