@@ -98,11 +98,7 @@ public class Game {
         boolean t = true;
         while (t) {
             programmingPhase();
-            try {
-                TimeUnit.SECONDS.sleep(1);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+            sleep(1);
             board.turnStuff((phase++ % 5) + 1);
         }
     }
@@ -135,11 +131,7 @@ public class Game {
                     all_ready = false;
                 }
             }
-            try {
-                TimeUnit.SECONDS.sleep(1);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+            sleep(1);
         }
         programmingMove();
         for(Player player : players) {
@@ -168,11 +160,7 @@ public class Game {
                     top_priority.getCardFromSheet(card_nr).doStuff(top_priority.getRobot(), board);
                     players_left.remove(top_priority);
                 }
-                try {
-                    TimeUnit.SECONDS.sleep(1);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+                sleep(1);
             }
         }
     }
@@ -183,5 +171,13 @@ public class Game {
 
     public Board getBoard(){
         return board;
+    }
+
+    public void sleep(int seconds) {
+        try {
+            TimeUnit.SECONDS.sleep(seconds);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 }
