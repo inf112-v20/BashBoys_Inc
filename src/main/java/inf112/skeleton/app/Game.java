@@ -197,7 +197,7 @@ public class Game {
         }
     }
 
-    private void respawn(){
+    public void respawn(){
         for (Player p : players) {
             if (p.getRobot().isDead() && p.getSpawn() != null) {
                 if (board.getRobots().contains(p.getRobot()))
