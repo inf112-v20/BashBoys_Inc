@@ -115,19 +115,43 @@ public class Robot implements IDirectionalObject {
         this.dir = dir;
     }
     
+    /**
+     * returns hp
+     * @return int for hp
+     */
     public int getHp() {
         return hp;
     }
     
+    /**
+     * Decreases hp
+     * @param dmg - amount of hp to remove
+     */
     public void dmg(int dmg) {
         hp = Integer.max(hp-dmg,0);
     }
     
+    /**
+     * Increases hp
+     * @param heal - amount to add
+     */
     public void heal(int heal) {
         hp = Integer.min(hp+heal, 9);
     }
     
+    /**
+     * Sets hp to given
+     * @param hp - hp to set to
+     */
     public void setHp(int hp) {
         this.hp = hp;
+    }
+    
+    /**
+     * Is hp 0
+     * @return boolean telling if hp is 0
+     */
+    public boolean isDead() {
+        return hp==0;
     }
 }

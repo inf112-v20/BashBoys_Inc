@@ -422,6 +422,11 @@ public class Board {
         return null;
     }
 
+    /**
+     * kills robot
+     * sets robot hp to 0 and removes from board
+     * @param r - robot to kill
+     */
     private void ded(Robot r){
         System.out.println(r.getName() + " is ded");
         r.setHp(0); // For the HUD to update
@@ -457,6 +462,10 @@ public class Board {
         return board[x][y];
     }
 
+    /**
+     * Aktivates all pusher in current phase
+     * @param i - phase currently in
+     */
     public void pushAll(int i){
 
         ArrayList<Pusher> pushers = new ArrayList<>();
@@ -560,6 +569,11 @@ public class Board {
         // checkpoint();
     }
 
+    /**
+     * gets laser objects containing position and direction of all tiles lasers shoot over
+     * for displaying mostly
+     * @return ArrayList with laser objects
+     */
     public ArrayList<Laser> getLasers(){
         ArrayList<Laser> arr = new ArrayList<>();
         ArrayList<IDirectionalObject> all = getDirectionals(); // All objects

@@ -5,6 +5,7 @@ import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import inf112.skeleton.app.enums.Direction;
 import inf112.skeleton.app.enums.LeftRight;
+import inf112.skeleton.app.object.Flag;
 import inf112.skeleton.app.object.Gear;
 import inf112.skeleton.app.object.HealDraw;
 import inf112.skeleton.app.object.Hole;
@@ -33,12 +34,19 @@ public class Game {
         players = new ArrayList<Player>();
     }
 
+    /**
+     * Returns currentPlayer
+     * @return currentPlayer as player
+     */
     public Player getPlayer(){
         return players.get(currentPlayer);
     }
 
+    /**
+     * Makes currentPlayer too the next player on the player list
+     */
     public void nextPlayer(){
-        currentPlayer = ++currentPlayer%players.size();
+        currentPlayer = ++currentPlayer % players.size();
     }
 
     public void play(LwjglApplicationConfiguration cfg){
@@ -49,8 +57,11 @@ public class Game {
         Robot r2 = new Robot("robot 5");
         Robot r3 = new Robot("robot 2");
 
+        Flag flag1 = new Flag(0, 0, "flag1");
         // Players
-        players.add(new Player("Bob", r));
+        Player bob = new Player("Bob", r);
+        bob.setSpawn(flag1);
+        players.add(bob);
         // players.add(new Player("Jon", r2));
 
         // Shortcuts
@@ -67,7 +78,7 @@ public class Game {
         board.addItem(r2, 11, 5);
         board.addItem(r3, 10, 0);
 
-        board.addItem(new Wall(north,2), 1, 1);
+        board.addItem(new Wall(north, 2), 1, 1);
         board.addItem(new Wall(south), 1, 1);
 
         // Real tings
@@ -76,7 +87,7 @@ public class Game {
         board.addItem(new Belt(north, 1), 7, 7);
         board.addItem(new CornerBelt(east, 2, LeftRight.RIGHT), 7, 8);
         board.addItem(new Hole(), 8, 8);
-        board.addItem(new Wall(north,3), 7, 7);
+        board.addItem(new Wall(north, 3), 7, 7);
         board.addItem(new Pusher(west, true), 7, 4);
         board.addItem(new Wall(south), 7, 3);
 
@@ -96,11 +107,12 @@ public class Game {
         board.addItem(new Pusher(west, true), 8, 5);
         board.addItem(new Pusher(east, false), 5, 5);
         board.addItem(new Gear(LeftRight.RIGHT), 7, 5);
-        
+
         board.addItem(new HealDraw(false), 0, 0);
         board.addItem(new HealDraw(true), 0, 1);
+        board.addItem(flag1, 0, 11);
 
-        //test items
+        // test items
         board.addItem(new Belt(south, 1), 3, 8);
         board.addItem(new Belt(south, 1), 3, 7);
         board.addItem(new Belt(south, 1), 3, 6);
@@ -109,7 +121,10 @@ public class Game {
         boolean t = true;
         while (t) {
             programmingPhase();
-            //board.turnStuff((phase++ % 5) + 1);
+            sleep(1);
+            board.turnStuff((phase++ % 5) + 1);
+            System.out.println(bob.getRobot().isDead());
+            respawn();
         }
     }
 
@@ -135,23 +150,23 @@ public class Game {
 
     public void programmingPhase() {
         boolean all_ready = false;
-        while(all_ready == false) {
+        while (all_ready == false) {
             all_ready = true;
-            for(Player player : players) {
-                if(player.isReady() == false) {
+            for (Player player : players) {
+                if (player.isReady() == false) {
                     all_ready = false;
                 }
             }
             sleep(1);
         }
         programmingMove();
-        for(Player player : players) {
+        for (Player player : players) {
             player.clearSheet();
             player.setReady(false);
         }
     }
 
-    public void programmingMove() {
+    public void programmingMove(){
         for (int card_nr = 0; card_nr < 5; card_nr++) {
             ArrayList<Player> players_left = (ArrayList<Player>) players.clone();
             for (Player player : players) {
@@ -177,15 +192,27 @@ public class Game {
         }
     }
 
+    /**
+     * returns list of all players in game
+     * @return list of players in game
+     */
     public ArrayList<Player> players(){
         return players;
     }
 
+    /**
+     * Board that is played on
+     * @return the board being played on
+     */
     public Board getBoard(){
         return board;
     }
 
-    public void sleep(int seconds) {
+    /**
+     * Pauses program for given time
+     * @param seconds - Time too pause for in second
+     */
+    public void sleep(int seconds){
         try {
             TimeUnit.SECONDS.sleep(seconds);
         } catch (InterruptedException e) {
@@ -193,4 +220,38 @@ public class Game {
         }
     }
 
+    /**
+     * Respawns all player robots that are dead
+     */
+    public void respawn(){
+        for (Player p : players) {
+            if (p.getRobot().isDead() && p.getSpawn() != null) {
+                if (board.getRobots().contains(p.getRobot()))
+                    board.removeItem(p.getRobot());
+                p.getRobot().setHp(9);
+                int x = p.getSpawn().getX();
+                int y = p.getSpawn().getY();
+                p.getRobot().setX(x);
+                p.getRobot().setY(y);
+                board.addItem(p.getRobot(), x, y);
+            }
+        }
+    }
+
+    /**
+     * Respawns given players robot if dead
+     * @param p - player too revive robot
+     */
+    public void respawn(Player p){
+        if (p.getRobot().isDead() && p.getSpawn() != null) {
+            if (board.getRobots().contains(p.getRobot()))
+                board.removeItem(p.getRobot());
+            p.getRobot().setHp(9);
+            int x = p.getSpawn().getX();
+            int y = p.getSpawn().getY();
+            p.getRobot().setX(x);
+            p.getRobot().setY(y);
+            board.addItem(p.getRobot(), x, y);
+        }
+    }
 }

@@ -55,3 +55,10 @@ Oppmøte: Alle
 Satt opp en Discord kanal hvor vi begynte møte. Så gikk vi gjennom det som var gjort siden forrige møte. Fant ut at vi 
 skulle begynne å se litt på multiplayer nå sånn det det ikke kommer helt til slutt. Som vanlig gikk vi gjennom det som
 må gjøres til neste møte og fordelte de forskjellige oppgavene på project boardet. 
+
+24.03:  
+Oppmøte: Elias, Terje, Erlend, Egil  
+Hadde møtet på Discord denne gangen også. Gikk kjapt gjennom det som var gjort siden forrige gang. Begynte så å skrive
+dokumentasjon til innleveringen og bli enige om svar til oppgavene. Så ble det jobbet videre med noen ting som måtte
+bli lagt til. Til slutt gikk vi gjennom hva som måtte gjøres klart til innleveringen og fordelte oppgaver i hendold til
+det.
