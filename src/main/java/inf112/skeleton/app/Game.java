@@ -155,8 +155,7 @@ public class Game {
                     if (player_left.getCardFromSheet(card_nr) != null) {
                         if (top_priority == null) {
                             top_priority = player_left;
-                        } else if (player_left.getCardFromSheet(card_nr).getPriority() < top_priority
-                                .getCardFromSheet(card_nr).getPriority()) {
+                        } else if (player_left.getCardFromSheet(card_nr).getPriority() < top_priority.getCardFromSheet(card_nr).getPriority()) {
                             top_priority = player_left;
                         }
                     }
