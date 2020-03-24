@@ -124,9 +124,18 @@ public class Player {
         return ready;
     }
     
+    /**
+     * gets spawnpoint
+     * @return current spawnpoint
+     */
     public ICheckPoint getSpawn() {
         return spawn;
     }
+    
+    /**
+     * sets new spawn point for player
+     * @param nSpawn - new valid spawn point
+     */
     public void setSpawn(ICheckPoint nSpawn) {
         spawn = nSpawn;
     }

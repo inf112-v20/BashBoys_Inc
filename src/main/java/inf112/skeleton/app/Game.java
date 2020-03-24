@@ -30,10 +30,17 @@ public class Game {
         players = new ArrayList<Player>();
     }
 
+    /**
+     * Returns currentPlayer
+     * @return currentPlayer as player
+     */
     public Player getPlayer(){
         return players.get(currentPlayer);
     }
 
+    /**
+     * Makes currentPlayer too the next player on the player list
+     */
     public void nextPlayer(){
         currentPlayer = ++currentPlayer % players.size();
     }
@@ -181,14 +188,26 @@ public class Game {
         }
     }
 
+    /**
+     * returns list of all players in game
+     * @return list of players in game
+     */
     public ArrayList<Player> players(){
         return players;
     }
 
+    /**
+     * Board that is played on
+     * @return the board being played on
+     */
     public Board getBoard(){
         return board;
     }
 
+    /**
+     * Pauses program for given time
+     * @param seconds - Time too pause for in second
+     */
     public void sleep(int seconds){
         try {
             TimeUnit.SECONDS.sleep(seconds);
@@ -197,6 +216,9 @@ public class Game {
         }
     }
 
+    /**
+     * Respawns all player robots that are dead
+     */
     public void respawn(){
         for (Player p : players) {
             if (p.getRobot().isDead() && p.getSpawn() != null) {
@@ -209,6 +231,23 @@ public class Game {
                 p.getRobot().setY(y);
                 board.addItem(p.getRobot(), x, y);
             }
+        }
+    }
+
+    /**
+     * Respawns given players robot if dead
+     * @param p - player too revive robot
+     */
+    public void respawn(Player p){
+        if (p.getRobot().isDead() && p.getSpawn() != null) {
+            if (board.getRobots().contains(p.getRobot()))
+                board.removeItem(p.getRobot());
+            p.getRobot().setHp(9);
+            int x = p.getSpawn().getX();
+            int y = p.getSpawn().getY();
+            p.getRobot().setX(x);
+            p.getRobot().setY(y);
+            board.addItem(p.getRobot(), x, y);
         }
     }
 }
