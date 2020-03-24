@@ -63,7 +63,7 @@ public class Game {
         LeftRight right = LeftRight.RIGHT;
 
         // Add robots
-        board.addItem(r, 7, 5);
+        board.addItem(r, 2, 8);
         board.addItem(r2, 11, 5);
         board.addItem(r3, 10, 0);
 
@@ -100,6 +100,11 @@ public class Game {
         board.addItem(new HealDraw(false), 0, 0);
         board.addItem(new HealDraw(true), 0, 1);
         board.addItem(flag1, 0, 11);
+
+        //test items
+        board.addItem(new Belt(south, 1), 3, 8);
+        board.addItem(new Belt(south, 1), 3, 7);
+        board.addItem(new Belt(south, 1), 3, 6);
 
         int phase = 0;
         boolean t = true;
@@ -148,7 +153,6 @@ public class Game {
             player.clearSheet();
             player.setReady(false);
         }
-
     }
 
     public void programmingMove(){
@@ -172,6 +176,8 @@ public class Game {
                 }
                 sleep(1);
             }
+            board.turnStuff(card_nr + 1);
+            sleep(1);
         }
     }
 
