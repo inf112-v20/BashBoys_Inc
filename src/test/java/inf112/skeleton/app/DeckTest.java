@@ -18,7 +18,7 @@ class DeckTest {
     private int DECK_SIZE;
 
     @BeforeEach
-    public void setup(){
+    public void intz(){
         this.testDeck = new Deck();
         this.DECK_SIZE = testDeck.DECK_SIZE;
     }

@@ -6,6 +6,8 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.maps.tiled.*;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
@@ -58,6 +60,16 @@ public class ViewEngine extends com.badlogic.gdx.Game {
         uiStage = new Stage(new ScreenViewport());
         guiCards.startCardGui(uiStage, 8, g, board);
         guiHud.startHud(uiStage,g);
+        // Temp InputListener
+        uiStage.addListener(new InputListener(){
+            public boolean keyUp(InputEvent event, int keycode){
+                System.out.print("CLICK"+keycode);
+                if(keycode == 131){
+                    Gdx.app.exit();
+                }
+                return false;
+            }
+        });
         Gdx.input.setInputProcessor(uiStage);
 
         map = new TmxMapLoader().load("assets/maps/roborallyCleanBoard.tmx");
@@ -225,8 +237,8 @@ public class ViewEngine extends com.badlogic.gdx.Game {
     @Override
     public void resize(int width, int height){
         uiStage.getViewport().update(width, height, false);
-        camera.position.set(384, 100, 0);
-        ExtendViewport cameraViewport = new ExtendViewport(width * 2, height * 2, camera);
+        camera.position.set(385, 120, 0);
+        ExtendViewport cameraViewport = new ExtendViewport(width*1.2f, height*1.2f, camera);
         cameraViewport.update(width, height, false);
     }
 

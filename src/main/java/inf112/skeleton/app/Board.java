@@ -429,7 +429,7 @@ public class Board {
      */
     private void ded(Robot r){
         System.out.println(r.getName() + " is ded");
-        r.setHp(0);
+        r.setHp(0); // For the HUD to update
         removeItem(r);
     }
 

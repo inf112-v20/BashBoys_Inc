@@ -1,5 +1,6 @@
 package inf112.skeleton.app;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import inf112.skeleton.app.enums.Direction;
@@ -16,7 +17,10 @@ import inf112.skeleton.app.object.belts.CornerBelt;
 import inf112.skeleton.app.object.belts.CornerJoinBelt;
 import inf112.skeleton.app.object.belts.MergeBelt;
 
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.ArrayList;
+import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
 public class Game {
@@ -144,7 +148,7 @@ public class Game {
         System.out.println(winner.getName() + " won the game");
     }
 
-    public void programmingPhase(){
+    public void programmingPhase() {
         boolean all_ready = false;
         while (all_ready == false) {
             all_ready = true;

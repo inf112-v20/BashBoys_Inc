@@ -12,15 +12,22 @@ public class GuiHud {
 
     private Player player;
     private Robot robot;
-    //private Stage stage;
 
-    public void startHud(Stage stage, Game g){
-        player = g.players().get(0);
+    /**
+     * Initialize Gui HUD
+     * @param stage - Stage to add HUD
+     * @param game - Current game
+     */
+    public void startHud(Stage stage, Game game){
+        player = game.players().get(0);
         robot = player.getRobot();
-        //this.stage = stage;
         addPlayerHud(stage);
     }
 
+    /**
+     * Add HUD for player
+     * @param stage - Stage to add HUD to
+     */
     private void addPlayerHud(Stage stage){
         float x = stage.getWidth()/10;
 
@@ -29,7 +36,7 @@ public class GuiHud {
 
         Text robotName = new Text(""+robot.getName());
         robotName.setPosition(x,name.getY()-name.getHeight());
-
+        
         Text hp = new Text(robot.getHp()+" hp");
         hp.setName("hp");
         hp.setPosition(x,robotName.getY()-robotName.getHeight());
@@ -44,14 +51,19 @@ public class GuiHud {
         stage.addActor(flags);
     }
 
-    public void updateHud(Stage stage,Game g){
+    /**
+     * Update HUD
+     * @param stage - Stage to Update
+     * @param game - Current Game
+     */
+    public void updateHud(Stage stage,Game game){
         for(Actor a : stage.getActors()){
             if(a.getName() != null){
                 if(a.getName().equals("hp")){
-                    if(g.players().get(0).getRobot().getHp()==0){
+                    if(game.players().get(0).getRobot().getHp()==0){
                         ((Text) a).setText("YOU DIED");
                     } else {
-                        ((Text) a).setText(g.players().get(0).getRobot().getHp()+" hp");
+                        ((Text) a).setText(game.players().get(0).getRobot().getHp()+" hp");
                     }
                 } else if(a.getName().equals("flags")){
                     // Not yet implemented

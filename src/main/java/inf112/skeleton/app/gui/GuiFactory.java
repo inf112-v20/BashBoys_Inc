@@ -17,12 +17,15 @@ import inf112.skeleton.app.cards.ICard;
  */
 public class GuiFactory {
 
+    private static float WIDTH = 389;
+    private static float HEIGHT = 596;
+
     /**
      * Get texture for param path
      * @param path - Path of img for texture
      * @return texture from img path
      */
-    static public TextureRegionDrawable getTexture(String path){
+    static TextureRegionDrawable getTexture(String path){
         FileHandle fileHandle = Gdx.files.internal(path);
         Texture tex = new Texture(fileHandle);
         TextureRegion texRegion = new TextureRegion(tex);
@@ -35,11 +38,11 @@ public class GuiFactory {
      * @param y - y position
      * @return ButtonCard
      */
-    static public ButtonCard createCard(int x, int y, ICard cardType) {
+    static ButtonCard createCard(int x, int y, ICard cardType) {
         final ButtonCard button = new ButtonCard(getTexture(GuiFactory.getCardPath(cardType.getName())),cardType);
 
-        button.setWidth(75);
-        button.setHeight(100);
+        button.setWidth(WIDTH/4);
+        button.setHeight(HEIGHT/4);
         button.setPosition(x, y);
         return button;
     }
@@ -50,10 +53,10 @@ public class GuiFactory {
      * @param y - y position
      * @return Register
      */
-    static public Register createRegister(int x, int y){
+    static Register createRegister(int x, int y){
         final Register button = new Register(getTexture("assets/gui/holder.png"));
-        button.setWidth(75);
-        button.setHeight(100);
+        button.setWidth(WIDTH/3);
+        button.setHeight(HEIGHT/3);
         button.setPosition(x,y);
 
         return button;
@@ -64,7 +67,7 @@ public class GuiFactory {
      * @param type - Type of card/Name
      * @return String path of img
      */
-    static public String getCardPath(String type){
+    private static String getCardPath(String type){
         String location = "assets/gui/cards/";
         String fileFormat = ".png";
         switch (type){
@@ -86,22 +89,34 @@ public class GuiFactory {
             case "Move 3":
                 location += "move3";
                 break;
-            case "Back Up":
+            default:
                 location += "backUp";
                 break;
         }
-
         return location+fileFormat;
     }
 
-    static public TextButton.TextButtonStyle getTextStyle(String path){
+    /**
+     * Get Text Style
+     * @param path - path of Text-style
+     * @return TextButton.TextButtonStyle Style
+     */
+     static TextButton.TextButtonStyle getTextStyle(String path){
         BitmapFont font = new BitmapFont();
         Skin skin = new Skin();
-        TextureAtlas atlas = new TextureAtlas("assets/gui/skin/uiskin.atlas");
+        TextureAtlas atlas = new TextureAtlas(path);
         skin.addRegions(atlas);
         TextButton.TextButtonStyle style = new TextButton.TextButtonStyle();
         style.font = font;
         return style;
+    }
+
+    static float getWidth(){
+        return WIDTH;
+    }
+
+    static float getHeight(){
+        return HEIGHT;
     }
 
 }
