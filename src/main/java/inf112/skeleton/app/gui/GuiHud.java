@@ -29,7 +29,7 @@ public class GuiHud {
 
         Text robotName = new Text(""+robot.getName());
         robotName.setPosition(x,name.getY()-name.getHeight());
-
+        
         Text hp = new Text(robot.getHp()+" hp");
         hp.setName("hp");
         hp.setPosition(x,robotName.getY()-robotName.getHeight());
