@@ -5,23 +5,44 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import inf112.skeleton.app.Game;
 import inf112.skeleton.app.Player;
+import inf112.skeleton.app.cards.ICard;
 import inf112.skeleton.app.object.Robot;
-import org.lwjgl.Sys;
 
-public class GuiHud {
+
+public class GuiHud implements IGuiElement{
 
     private Player player;
     private Robot robot;
 
-    /**
-     * Initialize Gui HUD
-     * @param stage - Stage to add HUD
-     * @param game - Current game
-     */
-    public void startHud(Stage stage, Game game){
+    @Override
+    public void initialize(Stage stage, Game game){
         player = game.players().get(0);
         robot = player.getRobot();
         addPlayerHud(stage);
+    }
+
+    @Override
+    public void update(Stage stage,Game game){
+        for(Actor a : stage.getActors()){
+            if(a.getName() != null){
+                if(a.getName().equals("hp")){
+                    if(game.players().get(0).getRobot().getHp()==0){
+                        ((Text) a).setText("YOU DIED");
+                    } else {
+                        ((Text) a).setText(game.players().get(0).getRobot().getHp()+" hp");
+                    }
+                } else if(a.getName().equals("flags")) {
+                    String str = "Doing: ";
+                    for (ICard card : game.players().get(0).getProgramSheet()) {
+                        str += "-" + card.getName();
+                    }
+                    if(game.players().get(0).getProgramSheet().isEmpty()){
+                        str = "Ready to play";
+                    }
+                    ((Text) a).setText(str);
+                }
+            }
+        }
     }
 
     /**
@@ -51,24 +72,4 @@ public class GuiHud {
         stage.addActor(flags);
     }
 
-    /**
-     * Update HUD
-     * @param stage - Stage to Update
-     * @param game - Current Game
-     */
-    public void updateHud(Stage stage,Game game){
-        for(Actor a : stage.getActors()){
-            if(a.getName() != null){
-                if(a.getName().equals("hp")){
-                    if(game.players().get(0).getRobot().getHp()==0){
-                        ((Text) a).setText("YOU DIED");
-                    } else {
-                        ((Text) a).setText(game.players().get(0).getRobot().getHp()+" hp");
-                    }
-                } else if(a.getName().equals("flags")){
-                    // Not yet implemented
-                }
-            }
-        }
-    }
 }

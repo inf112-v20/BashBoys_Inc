@@ -3,6 +3,7 @@ package inf112.skeleton.app;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
+import inf112.skeleton.app.cards.Deck;
 import inf112.skeleton.app.enums.Direction;
 import inf112.skeleton.app.enums.LeftRight;
 import inf112.skeleton.app.object.Flag;
@@ -28,6 +29,7 @@ public class Game {
     private Board board;
     private int currentPlayer;
     private ArrayList<Player> players;
+    public Deck deck = new Deck();
 
     public Game() {
         this.board = new Board(12, 12);
@@ -125,31 +127,14 @@ public class Game {
             board.turnStuff((phase++ % 5) + 1);
             System.out.println(bob.getRobot().isDead());
             respawn();
+
         }
     }
 
-    private void gameLoop(){
-        boolean gameWon = false;
-        Player winner = null;
-        while (!gameWon) {
-
-            // Upgrade phase
-
-            // Program phase
-
-            for (int i = 1; i < 6; i++) {
-                // Cards in phase i
-
-                board.turnStuff(i);
-
-            }
-
-        }
-        System.out.println(winner.getName() + " won the game");
-    }
-
+    public boolean all_moves_done = false;
     public void programmingPhase() {
         boolean all_ready = false;
+        all_moves_done = false;
         while (all_ready == false) {
             all_ready = true;
             for (Player player : players) {
@@ -159,11 +144,13 @@ public class Game {
             }
             sleep(1);
         }
+
         programmingMove();
         for (Player player : players) {
             player.clearSheet();
             player.setReady(false);
         }
+        all_moves_done = true;
     }
 
     public void programmingMove(){

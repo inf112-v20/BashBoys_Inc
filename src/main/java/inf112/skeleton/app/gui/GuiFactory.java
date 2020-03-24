@@ -55,8 +55,8 @@ public class GuiFactory {
      */
     static Register createRegister(int x, int y){
         final Register button = new Register(getTexture("assets/gui/holder.png"));
-        button.setWidth(WIDTH/3);
-        button.setHeight(HEIGHT/3);
+        button.setWidth(WIDTH/5);
+        button.setHeight(HEIGHT/5);
         button.setPosition(x,y);
 
         return button;

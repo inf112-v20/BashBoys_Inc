@@ -58,9 +58,10 @@ public class ViewEngine extends com.badlogic.gdx.Game {
     public void create(){
 
         uiStage = new Stage(new ScreenViewport());
-        guiCards.startCardGui(uiStage, 8, g, board);
-        guiHud.startHud(uiStage,g);
-        // Temp InputListener
+        guiCards.initialize(uiStage,g);
+        guiHud.initialize(uiStage,g);
+
+        // Temp InputListener --- Only adds ability to esc out of app
         uiStage.addListener(new InputListener(){
             public boolean keyUp(InputEvent event, int keycode){
                 System.out.print("CLICK"+keycode);
@@ -229,15 +230,15 @@ public class ViewEngine extends com.badlogic.gdx.Game {
 
         renderer.setView(camera);
         renderer.render();
-        guiHud.updateHud(uiStage,g);
-        // Should update guiCards and guiHud later
+        guiHud.update(uiStage,g);
+        if(guiCards.isFinished() && g.all_moves_done) { guiCards.update(uiStage,g); }
         uiStage.draw();
     }
 
     @Override
     public void resize(int width, int height){
         uiStage.getViewport().update(width, height, false);
-        camera.position.set(385, 120, 0);
+        camera.position.set(385, 130, 0);
         ExtendViewport cameraViewport = new ExtendViewport(width*1.2f, height*1.2f, camera);
         cameraViewport.update(width, height, false);
     }

@@ -1,5 +1,6 @@
 package inf112.skeleton.app.gui;
 
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
@@ -13,24 +14,37 @@ import inf112.skeleton.app.cards.MoveCard;
 import java.awt.*;
 import java.util.ArrayList;
 
-public class GuiCards {
+public class GuiCards implements IGuiElement {
 
+    private Game game;
     private ArrayList<Register> registers = new ArrayList<>();
     private ArrayList<ButtonCard> cards = new ArrayList<>();
-    private Deck deck = new Deck();
     private boolean finished = false;
 
 
-    /**
-     * Start the card gui, adds card and register and end Turn button
-     * @param stage gui stage to be added to
-     * @param cards amount of cards present
-     */
-    public void startCardGui(Stage stage, int cards,Game game , Board b){
+    @Override
+    public void initialize(Stage stage,Game game){
+        this.game = game;
         addRegisters(stage);
-        addCards(cards,stage);
+        addCards(game.players().get(0).getRobot().getHp(),stage);
         addEndTurn(stage,game);
         addPowerDownButton(stage,game);
+    }
+
+    @Override
+    public void update(Stage stage,Game game){
+        for(ButtonCard actor : cards){
+            if(actor.register != null){
+                unRegisterCard(actor,actor.register);
+            }
+            actor.remove();
+        }
+        cards.clear();
+
+        // Makes new deck each time, essentially reshuffling and re-adding, unsure of rules
+        game.deck = new Deck();
+        addCards(game.players().get(0).getRobot().getHp(),stage);
+        finished = false;
     }
 
     /**
@@ -42,13 +56,13 @@ public class GuiCards {
         for(int i = 0; i < n; i++){
             ButtonCard SpecCard = GuiFactory.createCard(0,0,new MoveCard(1,1,"Move 1"));
             int x = (int) (i*SpecCard.getWidth() + stage.getWidth()/2 - SpecCard.getWidth()*(n/2)) ;
-            int y = 0;
+            int y = 40;
 
             if(n % 2 != 0){
                 x = (int) (x - SpecCard.getWidth()/2);
             }
 
-            ButtonCard temp = GuiFactory.createCard(x,y,deck.getCard());
+            ButtonCard temp = GuiFactory.createCard(x,y,game.deck.getCard());
             temp.setOriginPoint(new Point(x,y)); // Set reset point for card
 
             // Adds a drag listener to actor
@@ -83,11 +97,11 @@ public class GuiCards {
                 public void drag(InputEvent event, float x, float y, int pointer) {
                     temp.moveBy(x-offsetX,y-offsetY);
                     Register specRegister = GuiFactory.createRegister(0,0);
-                    if(temp.getWidth() < specRegister.getWidth()){
-                        temp.setWidth(temp.getWidth()+10);
+                    if(temp.getWidth() > specRegister.getWidth()){
+                        temp.setWidth(temp.getWidth()-5);
                     }
-                    if(temp.getHeight() < specRegister.getHeight()){
-                        temp.setHeight(temp.getHeight()+10);
+                    if(temp.getHeight() > specRegister.getHeight()){
+                        temp.setHeight(temp.getHeight()-5);
                     }
                     click = false;
                     super.drag(event, x, y, pointer);
@@ -187,8 +201,8 @@ public class GuiCards {
         register.setCard(card);
         register.setStatus(true);
         card.setPosition(register.getX(),register.getY());
-        card.setWidth(GuiFactory.getWidth()/3);
-        card.setHeight(GuiFactory.getHeight()/3);
+        card.setWidth(GuiFactory.getWidth()/5);
+        card.setHeight(GuiFactory.getHeight()/5);
     }
 
     /**
@@ -224,7 +238,7 @@ public class GuiCards {
         for(int i = 0; i < 5;i++){
             Register SpecRegister = GuiFactory.createRegister(0,0);
             int x = (int) (i*SpecRegister.getWidth() + stage.getWidth()/2 - SpecRegister.getWidth()*2 - SpecRegister.getWidth()/2);
-            int y = 150;
+            int y = 250;
 
             Register temp = GuiFactory.createRegister(x,y);
             temp.setZIndex(1);
@@ -256,22 +270,19 @@ public class GuiCards {
         button.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float xx, float yy){
-                if(event.getType() == InputEvent.Type.touchUp) {
-                    finished = true;
+                if(event.getType() == InputEvent.Type.touchUp && !isFinished()) {
+
                     System.out.println("");
                     int i = 0;
                     for(Register register : registers){
                         if(register.getStatus()){
-                            System.out.print(register.getCard().getType().getName()+" - ");
                             game.players().get(0).addCardToSheet(register.getCard().getType()); //temp
-                        } else {
-                            System.out.print("null"+" - ");
                         }
                     i++;
                     }
                     game.players().get(0).setReady(true); //temp
-                    System.out.println("");
                     game.nextPlayer();
+                    finished = true;
                 }
             }
         });
@@ -307,6 +318,7 @@ public class GuiCards {
         });
         stage.addActor(button);
     }
+
 
     /**
      * Get if this gui-stage is finished
