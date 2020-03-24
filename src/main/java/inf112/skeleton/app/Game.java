@@ -127,7 +127,7 @@ public class Game {
             board.turnStuff((phase++ % 5) + 1);
             System.out.println(bob.getRobot().isDead());
             respawn();
-
+            all_moves_done = true;
         }
     }
 
@@ -150,8 +150,10 @@ public class Game {
             player.clearSheet();
             player.setReady(false);
         }
-        all_moves_done = true;
-    }
+        if(!players.get(0).getRobot().isDead()){
+            all_moves_done = true;
+        }
+}
 
     public void programmingMove(){
         for (int card_nr = 0; card_nr < 5; card_nr++) {

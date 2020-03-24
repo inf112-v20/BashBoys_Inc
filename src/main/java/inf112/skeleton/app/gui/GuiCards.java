@@ -19,6 +19,8 @@ public class GuiCards implements IGuiElement {
     private Game game;
     private ArrayList<Register> registers = new ArrayList<>();
     private ArrayList<ButtonCard> cards = new ArrayList<>();
+    private ImageButton shutdown;
+    private ImageButton lock_in;
     private boolean finished = false;
 
 
@@ -32,19 +34,31 @@ public class GuiCards implements IGuiElement {
     }
 
     @Override
-    public void update(Stage stage,Game game){
-        for(ButtonCard actor : cards){
-            if(actor.register != null){
-                unRegisterCard(actor,actor.register);
+    public void update(Stage stage,Game game) {
+        if (!game.all_moves_done) {
+            shutdown.setDisabled(true);
+            lock_in.setDisabled(true);
+            for(ButtonCard actor : cards){
+                if(actor.register == null){
+                    actor.remove();
+                }
             }
-            actor.remove();
-        }
-        cards.clear();
+        } else {
+            for (ButtonCard actor : cards) {
+                if (actor.register != null) {
+                    unRegisterCard(actor, actor.register);
+                }
+                actor.remove();
+            }
+            cards.clear();
 
-        // Makes new deck each time, essentially reshuffling and re-adding, unsure of rules
-        game.deck = new Deck();
-        addCards(game.players().get(0).getRobot().getHp(),stage);
-        finished = false;
+            // Makes new deck each time, essentially reshuffling and re-adding, unsure of rules
+            game.deck = new Deck();
+            addCards(game.players().get(0).getRobot().getHp(), stage);
+            finished = false;
+        }
+
+
     }
 
     /**
@@ -77,48 +91,53 @@ public class GuiCards implements IGuiElement {
 
                 @Override
                 public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                    // Changes Z-index so that dragged items are on the top of the stack
-                    int index = 0;
-                    for(ButtonCard c : cards){
-                        if(c.getZIndex()+2 > index){
-                            index = c.getZIndex();
+                    if(!isFinished()) {
+                        // Changes Z-index so that dragged items are on the top of the stack
+                        int index = 0;
+                        for (ButtonCard c : cards) {
+                            if (c.getZIndex() + 2 > index) {
+                                index = c.getZIndex();
+                            }
                         }
+                        temp.setZIndex(index + 1);
+
+                        offsetX = x;
+                        offsetY = y;
+                        click = true;
                     }
-                    temp.setZIndex(index+1);
-
-                    offsetX = x;
-                    offsetY = y;
-                    click = true;
-
                     return super.touchDown(event, x, y, pointer, button);
                 }
 
                 @Override
                 public void drag(InputEvent event, float x, float y, int pointer) {
-                    temp.moveBy(x-offsetX,y-offsetY);
-                    Register specRegister = GuiFactory.createRegister(0,0);
-                    if(temp.getWidth() > specRegister.getWidth()){
-                        temp.setWidth(temp.getWidth()-5);
+                    if(!isFinished()){
+                        temp.moveBy(x-offsetX,y-offsetY);
+                        Register specRegister = GuiFactory.createRegister(0,0);
+                        if(temp.getWidth() > specRegister.getWidth()){
+                            temp.setWidth(temp.getWidth()-5);
+                        }
+                        if(temp.getHeight() > specRegister.getHeight()){
+                            temp.setHeight(temp.getHeight()-5);
+                        }
+                        click = false;
+                        super.drag(event, x, y, pointer);
                     }
-                    if(temp.getHeight() > specRegister.getHeight()){
-                        temp.setHeight(temp.getHeight()-5);
-                    }
-                    click = false;
-                    super.drag(event, x, y, pointer);
                 }
 
                 @Override
                 public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                    offsetX = x;
-                    offsetY = y;
+                    if(!isFinished()) {
+                        offsetX = x;
+                        offsetY = y;
 
-                    // If it's a simple click
-                    if(click){
-                        doClick(temp);
-                    } else {
-                        doDrag(temp,offsetX,offsetY);
+                        // If it's a simple click
+                        if (click) {
+                            doClick(temp);
+                        } else {
+                            doDrag(temp, offsetX, offsetY);
+                        }
+                        click = false;
                     }
-                    click = false;
                     super.touchUp(event, x, y, pointer, button);
                 }
             });
@@ -286,6 +305,7 @@ public class GuiCards implements IGuiElement {
                 }
             }
         });
+        lock_in = button;
         stage.addActor(button);
     }
 
@@ -310,12 +330,13 @@ public class GuiCards implements IGuiElement {
         button.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float xx, float yy){
-                if(event.getType() == InputEvent.Type.touchUp){
+                if(event.getType() == InputEvent.Type.touchUp && !isFinished()){
                     button.setChecked(true);
                     System.out.println(game.players().get(0).getName()+": Shutdown");
                 }
             }
         });
+        shutdown = button;
         stage.addActor(button);
     }
 
