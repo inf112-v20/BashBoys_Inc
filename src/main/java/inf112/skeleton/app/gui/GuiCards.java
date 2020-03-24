@@ -1,21 +1,12 @@
 package inf112.skeleton.app.gui;
 
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.DragListener;
-import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
-
 import inf112.skeleton.app.Board;
 import inf112.skeleton.app.Game;
-import inf112.skeleton.app.cards.CardFactory;
 import inf112.skeleton.app.cards.Deck;
 import inf112.skeleton.app.cards.MoveCard;
 
@@ -24,7 +15,6 @@ import java.util.ArrayList;
 
 public class GuiCards {
 
-    private static int margin = 50;
     private ArrayList<Register> registers = new ArrayList<>();
     private ArrayList<ButtonCard> cards = new ArrayList<>();
     private Deck deck = new Deck();
@@ -36,11 +26,11 @@ public class GuiCards {
      * @param stage gui stage to be added to
      * @param cards amount of cards present
      */
-    public void startCardGui(Stage stage, int cards /* Change to player later*/,Game g , Board b){
+    public void startCardGui(Stage stage, int cards,Game game , Board b){
         addRegisters(stage);
         addCards(cards,stage);
-        addEndTurn(stage,g,b);
-        addPowerDownButton(stage,g,b);
+        addEndTurn(stage,game);
+        addPowerDownButton(stage,game);
     }
 
     /**
@@ -234,7 +224,7 @@ public class GuiCards {
         for(int i = 0; i < 5;i++){
             Register SpecRegister = GuiFactory.createRegister(0,0);
             int x = (int) (i*SpecRegister.getWidth() + stage.getWidth()/2 - SpecRegister.getWidth()*2 - SpecRegister.getWidth()/2);
-            int y = margin+100;
+            int y = 150;
 
             Register temp = GuiFactory.createRegister(x,y);
             temp.setZIndex(1);
@@ -247,19 +237,12 @@ public class GuiCards {
     /**
      * Adds a end-turn button to gui-stage
      * @param stage - Gui-stage to add to
+     * @param game - Current game
      */
-    private void addEndTurn(Stage stage,Game g,Board b){
-        BitmapFont font = new BitmapFont();
-        Skin skin = new Skin();
-        TextureAtlas atlas = new TextureAtlas("assets/gui/skin/uiskin.atlas");
-        skin.addRegions(atlas);
-        TextButton.TextButtonStyle style = new TextButton.TextButtonStyle();
-        style.font = font;
-
-        style.up = skin.getDrawable("apptheme_btn_radio_on_focused_holo_light");
-        style.down = skin.getDrawable("apptheme_btn_radio_on_holo_light");
-
-        TextButton button = new TextButton("Lock",style);
+    private void addEndTurn(Stage stage,Game game){
+        ImageButton button = new ImageButton(
+                GuiFactory.getTexture("assets/gui/Signs/LockIn.png"),
+                GuiFactory.getTexture("assets/gui/Signs/LockInPushed.png"));
 
         button.setWidth(100);
         button.setHeight(100);
@@ -280,34 +263,30 @@ public class GuiCards {
                     for(Register register : registers){
                         if(register.getStatus()){
                             System.out.print(register.getCard().getType().getName()+" - ");
-                            g.players().get(0).addCardToSheet(register.getCard().getType()); //temp
+                            game.players().get(0).addCardToSheet(register.getCard().getType()); //temp
                         } else {
                             System.out.print("null"+" - ");
                         }
                     i++;
                     }
-                    g.players().get(0).setReady(true); //temp
+                    game.players().get(0).setReady(true); //temp
                     System.out.println("");
-                    g.nextPlayer();
+                    game.nextPlayer();
                 }
             }
         });
         stage.addActor(button);
     }
 
-
-    private void addPowerDownButton(Stage stage,Game g, Board b){
-        BitmapFont font = new BitmapFont();
-        Skin skin = new Skin();
-        TextureAtlas atlas = new TextureAtlas("assets/gui/skin/uiskin.atlas");
-        skin.addRegions(atlas);
-        TextButton.TextButtonStyle style = new TextButton.TextButtonStyle();
-        style.font = font;
-
-        style.up = skin.getDrawable("apptheme_btn_radio_on_holo_light");
-        style.down = skin.getDrawable("apptheme_btn_radio_on_focused_holo_light");
-
-        TextButton button = new TextButton("PowerDown",style);
+    /**
+     * Adds a PowerDownButton to GUI
+     * @param stage - UI-stage to add button to
+     * @param game - Current game
+     */
+    private void addPowerDownButton(Stage stage,Game game){
+        ImageButton button = new ImageButton(
+                GuiFactory.getTexture("assets/gui/Signs/PowerDown.png"),
+                GuiFactory.getTexture("assets/gui/Signs/PowerDownPushed.png"));
 
         button.setWidth(100);
         button.setHeight(100);
@@ -321,14 +300,13 @@ public class GuiCards {
             @Override
             public void clicked(InputEvent event, float xx, float yy){
                 if(event.getType() == InputEvent.Type.touchUp){
-                    System.out.println(g.players().get(0).getName()+": Shutdown");
+                    button.setChecked(true);
+                    System.out.println(game.players().get(0).getName()+": Shutdown");
                 }
             }
         });
         stage.addActor(button);
     }
-
-
 
     /**
      * Get if this gui-stage is finished

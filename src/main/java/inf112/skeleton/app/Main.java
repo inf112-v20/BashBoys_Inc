@@ -10,7 +10,7 @@ public class Main {
         cfg.title = "RoboRally";
         cfg.width = 1920;
         cfg.height = 1080;
-        cfg.fullscreen = true;
+
 
         Game game = new Game();
         game.play(cfg);
