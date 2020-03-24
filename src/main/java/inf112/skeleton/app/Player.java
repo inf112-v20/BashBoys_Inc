@@ -1,6 +1,7 @@
 package inf112.skeleton.app;
 
 import inf112.skeleton.app.cards.ICard;
+import inf112.skeleton.app.interfaces.ICheckPoint;
 import inf112.skeleton.app.object.Robot;
 
 import java.util.ArrayList;
@@ -13,6 +14,7 @@ public class Player {
     private int handSize = 9;
     private Robot robot;
     private ArrayList<ICard> programSheet = new ArrayList<>();
+    private ICheckPoint spawn;
 
     /**
      * Create a new player
@@ -120,5 +122,12 @@ public class Player {
      */
     public boolean isReady() {
         return ready;
+    }
+    
+    public ICheckPoint getSpawn() {
+        return spawn;
+    }
+    public void setSpawn(ICheckPoint nSpawn) {
+        spawn = nSpawn;
     }
 }

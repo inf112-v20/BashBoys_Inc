@@ -426,4 +426,44 @@
                 <property name="heal" value="heal" />
             </properties>
         </tile>
+        <tile id="85">
+            <properties>
+                <property name="flag" value="flag1" />
+            </properties>
+        </tile>
+        <tile id="86">
+            <properties>
+                <property name="flag" value="flag2" />
+            </properties>
+        </tile>
+        <tile id="87">
+            <properties>
+            <   property name="flag" value="flag3" />
+            </properties>
+        </tile>
+        <tile id="88">
+            <properties>
+                <property name="flag" value="flag4" />
+            </properties>
+        </tile>
+        <tile id="89">
+            <properties>
+                <property name="flag" value="flag5" />
+            </properties>
+        </tile>
+        <tile id="90">
+            <properties>
+                <property name="flag" value="flag6" />
+            </properties>
+        </tile>
+        <tile id="91">
+            <properties>
+                <property name="flag" value="flag7" />
+            </properties>
+        </tile>
+        <tile id="92">
+            <properties>
+                <property name="flag" value="flag8" />
+            </properties>
+        </tile>
     </tileset>
