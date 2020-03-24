@@ -130,4 +130,8 @@ public class Robot implements IDirectionalObject {
     public void setHp(int hp) {
         this.hp = hp;
     }
+    
+    public boolean isDead() {
+        return hp==0;
+    }
 }
