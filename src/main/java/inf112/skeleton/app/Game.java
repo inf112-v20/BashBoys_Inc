@@ -46,7 +46,7 @@ public class Game {
         Robot r2 = new Robot("robot 5");
         Robot r3 = new Robot("robot 2");
 
-        Flag flag1 = new Flag(0,0,"flag1");
+        Flag flag1 = new Flag(0, 0, "flag1");
         // Players
         Player bob = new Player("Bob", r);
         bob.setSpawn(flag1);
@@ -101,7 +101,7 @@ public class Game {
         board.addItem(new HealDraw(true), 0, 1);
         board.addItem(flag1, 0, 11);
 
-        //test items
+        // test items
         board.addItem(new Belt(south, 1), 3, 8);
         board.addItem(new Belt(south, 1), 3, 7);
         board.addItem(new Belt(south, 1), 3, 6);
@@ -164,7 +164,8 @@ public class Game {
                     if (player_left.getCardFromSheet(card_nr) != null) {
                         if (top_priority == null) {
                             top_priority = player_left;
-                        } else if (player_left.getCardFromSheet(card_nr).getPriority() < top_priority.getCardFromSheet(card_nr).getPriority()) {
+                        } else if (player_left.getCardFromSheet(card_nr).getPriority() < top_priority
+                                .getCardFromSheet(card_nr).getPriority()) {
                             top_priority = player_left;
                         }
                     }
@@ -199,6 +200,8 @@ public class Game {
     private void respawn(){
         for (Player p : players) {
             if (p.getRobot().isDead() && p.getSpawn() != null) {
+                if (board.getRobots().contains(p.getRobot()))
+                    board.removeItem(p.getRobot());
                 p.getRobot().setHp(9);
                 int x = p.getSpawn().getX();
                 int y = p.getSpawn().getY();
