@@ -30,6 +30,7 @@ public class Game {
     private int currentPlayer;
     private ArrayList<Player> players;
     public Deck deck = new Deck();
+    public boolean all_moves_done = false;
 
     public Game() {
         this.board = new Board(12, 12);
@@ -131,7 +132,9 @@ public class Game {
         }
     }
 
-    public boolean all_moves_done = false;
+    /**
+     * Checks if all players are done with their programming and runs programmingMove
+     */
     public void programmingPhase() {
         boolean all_ready = false;
         all_moves_done = false;
@@ -155,6 +158,10 @@ public class Game {
         }
 }
 
+    /**
+     * Goes through all players card for each phase (card 1 through 5) and executes the card with
+     * highest priority first and so on until each robot has moved.
+     */
     public void programmingMove(){
         for (int card_nr = 0; card_nr < 5; card_nr++) {
             ArrayList<Player> players_left = (ArrayList<Player>) players.clone();
