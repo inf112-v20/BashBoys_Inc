@@ -23,7 +23,12 @@ public class Player {
     public Player(String name) {
         this.name = name;
     }
-    
+
+    /**
+     * Create a new player
+     * @param name - name of player
+     * @param r - robot assigned to player
+     */
     public Player(String name, Robot r) {
         this.name = name;
         robot = r;
