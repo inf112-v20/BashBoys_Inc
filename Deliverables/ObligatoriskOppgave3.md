@@ -55,6 +55,9 @@ Det vi har prioritert høyest og blitt ferdig med siden forrige gang er å få f
     * Oppgave: Robot beveger seg korrekt hvis den er stående på et belte i slutten av en fase
         * Robot beveger seg 1 felt hvis den står på et 1er belte
         * Robot beveger seg 1 felt hvis den står på et 2er belte
+                
+Våre hovedkrav for MVP er at spillet har en fungerende program sekvens som deler ut korrekt antall kort og en spiller kan bevege han sin robot ved bruk av de utdelte kortene. Dette er fordi for å spille spillet må man kunne bevege roboten sin. Man skal også kunne spille et komplett spill fra “start game” til spilleren har plukket om alle flaggene og vinner. Vi valgte dette som MVP, fordi vi mener at spiller er da spillbart og kanskje litt gøy. Som er definisjonen på et spill. Det er også det punktet hvor det det meste ekstra egenskaper bare gjør spille bedre, enn at de gjør det spillbart mener vi.
+
 
 ## WorkBoard
 ![WorkBoard](https://github.com/inf112-v20/BashBoys_Inc/blob/master/Deliverables/WordBoards/WorkBoardOblig3.PNG)
