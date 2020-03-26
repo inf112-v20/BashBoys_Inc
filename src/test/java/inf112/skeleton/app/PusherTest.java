@@ -1,15 +1,13 @@
 package inf112.skeleton.app;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.jupiter.api.Assertions.*;
-
+import inf112.skeleton.app.enums.Direction;
+import inf112.skeleton.app.object.Pusher;
+import inf112.skeleton.app.object.Robot;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import inf112.skeleton.app.enums.Direction;
-import inf112.skeleton.app.object.Pusher;
-import inf112.skeleton.app.object.Robot;
+import static org.junit.Assert.assertEquals;
 
 class PusherTest {
 

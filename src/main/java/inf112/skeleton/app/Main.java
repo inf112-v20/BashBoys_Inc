@@ -11,7 +11,6 @@ public class Main {
         cfg.width = 1920;
         cfg.height = 1080;
 
-
         Game game = new Game();
         game.play(cfg);
         

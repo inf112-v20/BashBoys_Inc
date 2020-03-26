@@ -5,7 +5,6 @@ import inf112.skeleton.app.interfaces.ICheckPoint;
 import inf112.skeleton.app.object.Robot;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
 public class Player {
     private Boolean ready = false;

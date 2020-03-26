@@ -3,9 +3,6 @@ package inf112.skeleton.app.gui;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import inf112.skeleton.app.cards.ICard;
-import inf112.skeleton.app.cards.MoveCard;
-import inf112.skeleton.app.cards.RotateCard;
-import inf112.skeleton.app.enums.LeftRight;
 
 import java.awt.*;
 

@@ -1,27 +1,17 @@
 package inf112.skeleton.app;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import inf112.skeleton.app.cards.Deck;
 import inf112.skeleton.app.enums.Direction;
 import inf112.skeleton.app.enums.LeftRight;
-import inf112.skeleton.app.object.Flag;
-import inf112.skeleton.app.object.Gear;
-import inf112.skeleton.app.object.HealDraw;
-import inf112.skeleton.app.object.Hole;
-import inf112.skeleton.app.object.Pusher;
-import inf112.skeleton.app.object.Robot;
-import inf112.skeleton.app.object.Wall;
+import inf112.skeleton.app.object.*;
 import inf112.skeleton.app.object.belts.Belt;
 import inf112.skeleton.app.object.belts.CornerBelt;
 import inf112.skeleton.app.object.belts.CornerJoinBelt;
 import inf112.skeleton.app.object.belts.MergeBelt;
 
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.util.ArrayList;
-import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
 public class Game {
@@ -65,16 +55,12 @@ public class Game {
         Player bob = new Player("Bob", r);
         bob.setSpawn(flag1);
         players.add(bob);
-        // players.add(new Player("Jon", r2));
 
         // Shortcuts
         Direction west = Direction.WEST;
         Direction east = Direction.EAST;
         Direction north = Direction.NORTH;
         Direction south = Direction.SOUTH;
-
-        LeftRight left = LeftRight.LEFT;
-        LeftRight right = LeftRight.RIGHT;
 
         // Add robots
         board.addItem(r, 2, 8);
@@ -84,8 +70,7 @@ public class Game {
         board.addItem(new Wall(north, 2), 1, 1);
         board.addItem(new Wall(south), 1, 1);
 
-        // Real tings
-        // board.addItem(new Belt(north,2), 7, 5);
+        // Real tings - Working on map designer for easier adding of elements
         board.addItem(new Belt(north, 2), 7, 6);
         board.addItem(new Belt(north, 1), 7, 7);
         board.addItem(new CornerBelt(east, 2, LeftRight.RIGHT), 7, 8);
@@ -115,14 +100,18 @@ public class Game {
         board.addItem(new HealDraw(true), 0, 1);
         board.addItem(flag1, 0, 11);
 
+
+
         // test items
         board.addItem(new Belt(south, 1), 3, 8);
         board.addItem(new Belt(south, 1), 3, 7);
         board.addItem(new Belt(south, 1), 3, 6);
+        board.addItem(new MergeBelt(north, 2),5,5);
+        board.addItem(new CornerJoinBelt(west, LeftRight.LEFT),5,6);
 
         int phase = 0;
-        boolean t = true;
-        while (t) {
+        boolean gameBool = true;
+        while (gameBool) {
             programmingPhase();
             sleep(1);
             board.turnStuff((phase++ % 5) + 1);
@@ -138,10 +127,10 @@ public class Game {
     public void programmingPhase() {
         boolean all_ready = false;
         all_moves_done = false;
-        while (all_ready == false) {
+        while (!all_ready) {
             all_ready = true;
             for (Player player : players) {
-                if (player.isReady() == false) {
+                if (!player.isReady()) {
                     all_ready = false;
                 }
             }
@@ -153,6 +142,7 @@ public class Game {
             player.clearSheet();
             player.setReady(false);
         }
+
         if(!players.get(0).getRobot().isDead()){
             all_moves_done = true;
         }
@@ -238,6 +228,7 @@ public class Game {
      * Respawns given players robot if dead
      * @param p - player too revive robot
      */
+    // Not being used yet, but is need in the future
     public void respawn(Player p){
         if (p.getRobot().isDead() && p.getSpawn() != null) {
             if (board.getRobots().contains(p.getRobot()))

@@ -15,7 +15,6 @@ import inf112.skeleton.app.enums.Direction;
 import inf112.skeleton.app.gui.GuiCards;
 import inf112.skeleton.app.gui.GuiHud;
 import inf112.skeleton.app.interfaces.IMapObject;
-import inf112.skeleton.app.object.Gear;
 import inf112.skeleton.app.object.Laser;
 import inf112.skeleton.app.object.Robot;
 import inf112.skeleton.app.object.Wall;

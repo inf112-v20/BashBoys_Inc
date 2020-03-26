@@ -1,12 +1,10 @@
 package inf112.skeleton.app.gui;
 
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.DragListener;
-import inf112.skeleton.app.Board;
 import inf112.skeleton.app.Game;
 import inf112.skeleton.app.cards.Deck;
 import inf112.skeleton.app.cards.MoveCard;
@@ -35,6 +33,7 @@ public class GuiCards implements IGuiElement {
 
     @Override
     public void update(Stage stage,Game game) {
+        // Disable all Gui Elements when waiting for all moves to be done
         if (!game.all_moves_done) {
             shutdown.setDisabled(true);
             lock_in.setDisabled(true);
@@ -52,13 +51,11 @@ public class GuiCards implements IGuiElement {
             }
             cards.clear();
 
-            // Makes new deck each time, essentially reshuffling and re-adding, unsure of rules
+            // Makes new deck each time, essentially reshuffling and re-adding, temp
             game.deck = new Deck();
             addCards(game.players().get(0).getRobot().getHp(), stage);
             finished = false;
         }
-
-
     }
 
     /**

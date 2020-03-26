@@ -7,8 +7,7 @@ import inf112.skeleton.app.object.Wall;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 class PlaceAndMoveOnBoardTests {
 
@@ -53,7 +52,7 @@ class PlaceAndMoveOnBoardTests {
     }
     
     @Test
-    @DisplayName("Testing that reversing works like normal movment")
+    @DisplayName("Testing that reversing works like normal movement")
     /**
      * Bob reverses into another players robot then takes a uTurn and reverses back twice
      */
@@ -72,7 +71,7 @@ class PlaceAndMoveOnBoardTests {
     }
     
     @Test
-    @DisplayName("Testting that moving of the board kills the robot")
+    @DisplayName("Testing that moving of the board kills the robot")
     /**
      * Magnus is an idiot and moves his robot of the board and kills it
      */
@@ -81,8 +80,8 @@ class PlaceAndMoveOnBoardTests {
         Board board = new Board(12, 12);
         board.addItem(robot, 11, 11); // Robot at (5,4)
         board.moveItem(robot, 1);// Should fall of
-        
-        assertTrue(!board.getObjects().contains(robot)); //Everything's good
+
+        assertFalse(board.getObjects().contains(robot)); //Everything's good
     }
 
 }

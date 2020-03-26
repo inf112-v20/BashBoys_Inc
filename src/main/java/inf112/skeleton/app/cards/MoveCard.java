@@ -5,9 +5,9 @@ import inf112.skeleton.app.object.Robot;
 
 public class MoveCard implements ICard {
 
-    int moves;
-    int priority;
-    String name;
+    private int moves;
+    private int priority;
+    private String name;
     
     public MoveCard(int moves, int priority, String name) {
         this.moves = moves;

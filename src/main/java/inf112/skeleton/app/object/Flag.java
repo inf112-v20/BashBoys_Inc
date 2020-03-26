@@ -1,16 +1,12 @@
 package inf112.skeleton.app.object;
 
 import inf112.skeleton.app.interfaces.ICheckPoint;
-import inf112.skeleton.app.interfaces.IMapObject;
 
 public class Flag implements ICheckPoint {
 
     private int x;
     private int y;
     String name;
-
-    public Flag() {
-    }
 
     public Flag(int x, int y, String name) {
         this.x = x;

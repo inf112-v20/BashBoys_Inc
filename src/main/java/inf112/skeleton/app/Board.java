@@ -3,13 +3,7 @@ package inf112.skeleton.app;
 import inf112.skeleton.app.enums.Direction;
 import inf112.skeleton.app.interfaces.IDirectionalObject;
 import inf112.skeleton.app.interfaces.IMapObject;
-import inf112.skeleton.app.object.Gear;
-import inf112.skeleton.app.object.HealDraw;
-import inf112.skeleton.app.object.Hole;
-import inf112.skeleton.app.object.Laser;
-import inf112.skeleton.app.object.Pusher;
-import inf112.skeleton.app.object.Robot;
-import inf112.skeleton.app.object.Wall;
+import inf112.skeleton.app.object.*;
 import inf112.skeleton.app.object.belts.Belt;
 
 import java.util.ArrayList;
@@ -130,12 +124,8 @@ public class Board {
         }
 
         // If there was a robot to push
-        if (push != null) {
-            // Tries to move robot, if it doesn't move it's blocked
-            if (!pushRobot(push, dir)) {
-                return false;
-            }
-        }
+        // Tries to move robot, if it doesn't move it's blocked
+        if (!pushRobot(push, dir) && push != null) { return false; }
 
         // Nothing blocking and everything moved so we can move one step
         removeItem(item);
@@ -239,10 +229,10 @@ public class Board {
             return ar;
         } else {
             for (IMapObject obj : getItems(x, y)) { // Items at next tile
-                if (obj instanceof Wall) {
-                    if (((Wall) obj).getDir() == Direction.uTurn(dir)) { // Checks if there is a wall blocking entrance
-                        wall = true;
-                    }
+                // Checks if there is a wall blocking entrance
+                if (obj instanceof Wall && ((Wall) obj).getDir() == Direction.uTurn(dir)) {
+                    wall = true;
+                    break;
                 }
             }
         }
@@ -288,7 +278,7 @@ public class Board {
      * @param dir - the direction too check in
      * @return false if way is blocked
      */
-    private boolean posibleMove(int x, int y, Direction dir){
+    private boolean possibleMove(int x, int y, Direction dir){
         for (IMapObject obj : getItems(x, y)) {
             if (obj instanceof Wall) {
                 if (((Wall) obj).getDir() == dir) {
@@ -299,13 +289,11 @@ public class Board {
 
         int[] nX = nextPos(dir, x, y);
         for (IMapObject obj : getItems(nX[0], nX[1])) {
-            if (obj instanceof Wall) {
-                // If there is wall there checks if it blocks entrance to tile
-                if (((Wall) obj).getDir() == Direction.uTurn(dir)) {
-                    return false;
-                }
+            // If there is wall there checks if it blocks entrance to tile
+            if (obj instanceof Wall && ((Wall) obj).getDir() == Direction.uTurn(dir)) {
+                return false;
             } else if (obj instanceof Robot) {
-                if (!posibleMove(nX[0], nX[1], dir)) {
+                if (!possibleMove(nX[0], nX[1], dir)) {
                     return false;
                 }
             } else if (obj instanceof Pusher) {
@@ -364,15 +352,15 @@ public class Board {
             return;
         }
 
-        if (!posibleMove(r.getX(), r.getY(), oldDir))
+        if (!possibleMove(r.getX(), r.getY(), oldDir))
             return;
 
         Direction newDir = newBelt.getDir();
 
         pushRobot(r, oldDir);
-        if (oldDir == newDir || Direction.uTurn(oldDir) == newDir)
+        if (oldDir.equals(newDir) || Direction.uTurn(oldDir) == newDir)
             return;
-        else if (oldDir != newDir) {
+        else {
             r.turn(Direction.relation(oldDir, newDir));
         }
 
@@ -565,8 +553,6 @@ public class Board {
         gearsDo();
         fireLasers();
         healDo();
-        // energy();
-        // checkpoint();
     }
 
     /**
@@ -606,11 +592,10 @@ public class Board {
                         y = nextPos(dir,x,y)[1];
                         if(x < width && x >= 0 && y >= 0 && y < height) {
                             for (IMapObject item : getItems(x, y)) {
-                                if (item instanceof Wall) {
-                                    if (Direction.uTurn(((Wall) item).getDir()) == dir) {
-                                        stop = true;
-                                        break;
-                                    }
+                                if (item instanceof Wall && Direction.uTurn(((Wall) item).getDir()) == dir) {
+                                    stop = true;
+                                    break;
+
                                 }
                             }
                         }

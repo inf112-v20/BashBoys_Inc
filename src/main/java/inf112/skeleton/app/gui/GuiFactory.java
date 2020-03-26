@@ -111,10 +111,18 @@ public class GuiFactory {
         return style;
     }
 
+    /**
+     * Get Base Width which each Gui element is based on
+     * @return Base Width
+     */
     static float getWidth(){
         return WIDTH;
     }
 
+    /**
+     * Get Base Height which each Gui element is based on
+     * @return Base Height
+     */
     static float getHeight(){
         return HEIGHT;
     }

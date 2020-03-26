@@ -1,11 +1,10 @@
 package inf112.skeleton.app;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-import org.junit.jupiter.api.Test;
-
 import inf112.skeleton.app.object.HealDraw;
 import inf112.skeleton.app.object.Robot;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class HealTest {
 

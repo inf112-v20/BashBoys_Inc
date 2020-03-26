@@ -19,7 +19,6 @@ public interface ICard {
      * Get the priority of the card
      * @return int priority of this card
      */
-    // Not being used, but is used by all ICard object so not removed
     int getPriority();
 
     /**
