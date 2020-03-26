@@ -41,3 +41,6 @@
     * Oppgave: Robot beveger seg korrekt hvis den er stående på et belte i slutten av en fase
         * Robot beveger seg 1 felt hvis den står på et 1er belte
         * Robot beveger seg 1 felt hvis den står på et 2er belte
+
+## WorkBoard
+![WorkBoard](https://github.com/inf112-v20/BashBoys_Inc/blob/master/Deliverables/WordBoards/WorkBoardOblig3.PNG)
