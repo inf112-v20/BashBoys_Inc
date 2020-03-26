@@ -1,5 +1,17 @@
 # BashBoys Inc
 
+###Deloppgave 1:
+Rollene i teamet fungerer fortsatt veldig bra og alle er fornøyde med rollene sine. Teamet er fortsatt veldig fornøyd med valget av prosjektmetodikk og det går for det meste helt problemfritt. Hvis vi har møtt på et lite problem har det raskt blitt fikset opp i og alle føler de får jobbet slik de føler er mest effektivt og ryddig.   
+
+Retrospektivt har vi klart å jobbe bra som et team fra starten av uten noe særlig problemer eller hindringer i veien. Alle jobber bra og er med og bidra. Det eneste som kunne ha forbedret seg litt er å få pushet ting litt mer jevnlig slik at det ikke blir noe kluss med for eksempel bruk av array aller arraylist osv. Dette har ikke vært noe veldig stort problem men kan alltid forbedres. I tillegg kan vi bli bedre på å skrive javadoc til metoder med en gang.
+ 
+Forbedringspunkter:
+* Kan fortsatt bli bedre på javadocs.
+* Mer jevnlige push på github
+
+Fremover har vi prioritert å få spill loopen til å gå skikkelig (runder og faser). I tillegg har vi begynt å se på multiplayer delen av spillet, nå som vi har kommet langt nok i programmeringen at det er viktig å få med slik det ikke blir noe kluss helt på slutten.
+
+
 ### Brukerhistorier:
 * Som spiller vil jeg kunne flytte kortene til registrene
     * Oppgave: Kan flytte kortene fra hånden til rett register 
