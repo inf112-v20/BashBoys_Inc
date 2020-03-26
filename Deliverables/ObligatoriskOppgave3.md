@@ -11,8 +11,10 @@ Forbedringspunkter:
 
 Fremover har vi prioritert å få spill loopen til å gå skikkelig (runder og faser). I tillegg har vi begynt å se på multiplayer delen av spillet, nå som vi har kommet langt nok i programmeringen at det er viktig å få med slik det ikke blir noe kluss helt på slutten.
 
+###Deloppgave 2:
+Det vi har prioritert høyest og blitt ferdig med siden forrige gang er å få ferdig en fungerende programmerings sekvens og at denne programmerings sekvensen beveger roboten riktig i forhold til kortene og prioriterings nummeret på kortene.
 
-### Brukerhistorier:
+#### Brukerhistorier:
 * Som spiller vil jeg kunne flytte kortene til registrene
     * Oppgave: Kan flytte kortene fra hånden til rett register 
         * Kortet fjernes fra hånden
