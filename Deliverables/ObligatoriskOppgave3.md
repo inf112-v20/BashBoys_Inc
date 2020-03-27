@@ -63,4 +63,4 @@ Våre hovedkrav for MVP er at spillet har en fungerende program sekvens som dele
 ![WorkBoard](https://github.com/inf112-v20/BashBoys_Inc/blob/master/Deliverables/WordBoards/WorkBoardOblig3.PNG)
 
 ## UML
-![Oblig3UML](https://github.com/inf112-v20/BashBoys_Inc/blob/master/Deliverables/UMLs/oblig3UML.png)
+![Oblig3UML](https://github.com/inf112-v20/BashBoys_Inc/blob/master/Deliverables/UMLs/Oblig3UML.png)
