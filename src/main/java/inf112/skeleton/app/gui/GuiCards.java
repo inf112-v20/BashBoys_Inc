@@ -2,6 +2,7 @@ package inf112.skeleton.app.gui;
 
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.DragListener;
@@ -37,6 +38,7 @@ public class GuiCards implements IGuiElement {
         if (!game.all_moves_done) {
             shutdown.setDisabled(true);
             lock_in.setDisabled(true);
+
             for(ButtonCard actor : cards){
                 if(actor.register == null){
                     actor.remove();
@@ -74,6 +76,7 @@ public class GuiCards implements IGuiElement {
             }
 
             ButtonCard temp = GuiFactory.createCard(x,y,game.deck.getCard());
+            temp.setPosition(x,y);
             temp.setOriginPoint(new Point(x,y)); // Set reset point for card
 
             // Adds a drag listener to actor
@@ -97,6 +100,7 @@ public class GuiCards implements IGuiElement {
                             }
                         }
                         temp.setZIndex(index + 1);
+                        temp.displayPriority().setZIndex(index+2);
 
                         offsetX = x;
                         offsetY = y;
@@ -109,13 +113,7 @@ public class GuiCards implements IGuiElement {
                 public void drag(InputEvent event, float x, float y, int pointer) {
                     if(!isFinished()){
                         temp.moveBy(x-offsetX,y-offsetY);
-                        Register specRegister = GuiFactory.createRegister(0,0);
-                        if(temp.getWidth() > specRegister.getWidth()){
-                            temp.setWidth(temp.getWidth()-5);
-                        }
-                        if(temp.getHeight() > specRegister.getHeight()){
-                            temp.setHeight(temp.getHeight()-5);
-                        }
+
                         click = false;
                         super.drag(event, x, y, pointer);
                     }
@@ -140,6 +138,7 @@ public class GuiCards implements IGuiElement {
             });
 
             stage.addActor(temp);
+            stage.addActor(temp.displayPriority());
             cards.add(temp);
         }
     }
@@ -193,14 +192,12 @@ public class GuiCards implements IGuiElement {
                     }
                 } else { // // Reset to origin point
                     card.setPosition(card.getOriginX(),card.getOriginY());
-                    card.resetSize();
                 }
             }
         }
         if(!hit){ // If dragging was a miss, then unregister/return to origin point
             if(card.register == null){
                 card.setPosition(card.getOriginX(),card.getOriginY());
-                card.resetSize();
             } else {
                 unRegisterCard(card,card.register);
             }
@@ -217,8 +214,6 @@ public class GuiCards implements IGuiElement {
         register.setCard(card);
         register.setStatus(true);
         card.setPosition(register.getX(),register.getY());
-        card.setWidth(GuiFactory.getWidth()/5);
-        card.setHeight(GuiFactory.getHeight()/5);
     }
 
     /**
@@ -240,7 +235,6 @@ public class GuiCards implements IGuiElement {
      */
     private void unRegisterCard(ButtonCard card, Register register){
         card.setPosition(card.getOriginX(),card.getOriginY());
-        card.resetSize();
         register.setStatus(false);
         card.register = null;
         register.setCard(null);

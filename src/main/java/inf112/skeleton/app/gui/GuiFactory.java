@@ -17,8 +17,8 @@ import inf112.skeleton.app.cards.ICard;
  */
 public class GuiFactory {
 
-    private static float WIDTH = 389;
-    private static float HEIGHT = 596;
+    private static float WIDTH = 389/4f;
+    private static float HEIGHT = 596/4f;
 
     /**
      * Get texture for param path
@@ -41,8 +41,8 @@ public class GuiFactory {
     static ButtonCard createCard(int x, int y, ICard cardType) {
         final ButtonCard button = new ButtonCard(getTexture(GuiFactory.getCardPath(cardType.getName())),cardType);
 
-        button.setWidth(WIDTH/4);
-        button.setHeight(HEIGHT/4);
+        button.setWidth(WIDTH);
+        button.setHeight(HEIGHT);
         button.setPosition(x, y);
         return button;
     }
@@ -55,8 +55,8 @@ public class GuiFactory {
      */
     static Register createRegister(int x, int y){
         final Register button = new Register(getTexture("assets/gui/holder.png"));
-        button.setWidth(WIDTH/5);
-        button.setHeight(HEIGHT/5);
+        button.setWidth(WIDTH);
+        button.setHeight(HEIGHT);
         button.setPosition(x,y);
 
         return button;

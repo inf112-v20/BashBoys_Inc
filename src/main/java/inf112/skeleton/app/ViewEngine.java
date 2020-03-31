@@ -230,7 +230,7 @@ public class ViewEngine extends com.badlogic.gdx.Game {
         renderer.setView(camera);
         renderer.render();
         guiHud.update(uiStage,g);
-        if(guiCards.isFinished()) { guiCards.update(uiStage,g); }
+        if(guiCards.isFinished() && !g.players().get(0).getRobot().isDead()) { guiCards.update(uiStage,g); }
         uiStage.draw();
     }
 

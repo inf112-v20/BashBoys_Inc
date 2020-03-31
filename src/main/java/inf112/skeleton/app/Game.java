@@ -2,9 +2,11 @@ package inf112.skeleton.app;
 
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
+import inf112.skeleton.app.ai.Ai;
 import inf112.skeleton.app.cards.Deck;
 import inf112.skeleton.app.enums.Direction;
 import inf112.skeleton.app.enums.LeftRight;
+import inf112.skeleton.app.interfaces.IPlayer;
 import inf112.skeleton.app.object.*;
 import inf112.skeleton.app.object.belts.Belt;
 import inf112.skeleton.app.object.belts.CornerBelt;
@@ -53,8 +55,13 @@ public class Game {
         Flag flag1 = new Flag(0, 0, "flag1");
         // Players
         Player bob = new Player("Bob", r);
+        Ai danny = new Ai("DannyDeVito",r2);
+        Ai karl = new Ai("lil curly",r3);
         bob.setSpawn(flag1);
         players.add(bob);
+        players.add(danny);
+        players.add(karl);
+
 
         // Shortcuts
         Direction west = Direction.WEST;
@@ -127,11 +134,18 @@ public class Game {
     public void programmingPhase() {
         boolean all_ready = false;
         all_moves_done = false;
+
         while (!all_ready) {
             all_ready = true;
-            for (Player player : players) {
+            for (IPlayer player : players) {
                 if (!player.isReady()) {
                     all_ready = false;
+                }
+                // Ai does move if any.
+                if(player instanceof Ai && !player.isReady()){
+                    player.giveCard(deck.getCards(9));
+                    ((Ai) player).setMoves();
+                    player.setReady(true);
                 }
             }
             sleep(1);
@@ -142,11 +156,9 @@ public class Game {
             player.clearSheet();
             player.setReady(false);
         }
+        all_moves_done = true;
 
-        if(!players.get(0).getRobot().isDead()){
-            all_moves_done = true;
-        }
-}
+    }
 
     /**
      * Goes through all players card for each phase (card 1 through 5) and executes the card with

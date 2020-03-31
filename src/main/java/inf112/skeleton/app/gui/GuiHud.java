@@ -16,7 +16,7 @@ public class GuiHud implements IGuiElement{
 
     @Override
     public void initialize(Stage stage, Game game){
-        player = game.players().get(0);
+        player = game.players().get(2);
         robot = player.getRobot();
         addPlayerHud(stage);
     }
@@ -26,17 +26,17 @@ public class GuiHud implements IGuiElement{
         for(Actor a : stage.getActors()){
             if(a.getName() != null){
                 if(a.getName().equals("hp")){
-                    if(game.players().get(0).getRobot().getHp()==0){
+                    if(robot.getHp()==0){
                         ((Text) a).setText("YOU DIED");
                     } else {
-                        ((Text) a).setText(game.players().get(0).getRobot().getHp()+" hp");
+                        ((Text) a).setText(robot.getHp()+" hp");
                     }
                 } else if(a.getName().equals("flags")) {
                     String str = "Doing: ";
-                    for (ICard card : game.players().get(0).getProgramSheet()) {
+                    for (ICard card : player.getProgramSheet()) {
                         str += "-" + card.getName();
                     }
-                    if(game.players().get(0).getProgramSheet().isEmpty()){
+                    if(player.getProgramSheet().isEmpty()){
                         str = "Ready to play";
                     }
                     ((Text) a).setText(str);
