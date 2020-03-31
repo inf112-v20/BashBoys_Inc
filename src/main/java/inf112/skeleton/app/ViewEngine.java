@@ -3,6 +3,7 @@ package inf112.skeleton.app;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.maps.tiled.*;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
@@ -12,12 +13,12 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import inf112.skeleton.app.enums.Direction;
+import inf112.skeleton.app.enums.LeftRight;
 import inf112.skeleton.app.gui.GuiCards;
 import inf112.skeleton.app.gui.GuiHud;
+import inf112.skeleton.app.interfaces.IDirectionalObject;
 import inf112.skeleton.app.interfaces.IMapObject;
-import inf112.skeleton.app.object.Laser;
-import inf112.skeleton.app.object.Robot;
-import inf112.skeleton.app.object.Wall;
+import inf112.skeleton.app.object.*;
 
 import javax.naming.NameNotFoundException;
 import java.util.ArrayList;
@@ -129,7 +130,12 @@ public class ViewEngine extends com.badlogic.gdx.Game {
             } catch (NameNotFoundException error) {
                 System.out.println("Could not find the mapTile with name " + l.getName());
             }
-        }System.out.println(board.getItems(11, 5));
+        }
+        System.out.println(board.getItems(11, 5));
+
+
+        // Generate game Board
+        this.tiledMapToGameBoard();
     }
 
     @Override
@@ -327,6 +333,85 @@ public class ViewEngine extends com.badlogic.gdx.Game {
             return "RobotFaceWest";
         default:
             return "Error direction not found";
+        }
+    }
+
+    /**
+     * Create a game object from the tiledMap made in tiled
+     */
+    private void tiledMapToGameBoard() {
+        for (MapLayer mapLayer: map.getLayers()) {
+            TiledMapTileLayer layer = (TiledMapTileLayer) mapLayer;
+            for (int y = 0; y < layer.getHeight(); y++) {
+                for (int x = 0; x < layer.getWidth(); x++) {
+                    TiledMapTileLayer.Cell cell = layer.getCell(x, y);
+                    if (cell != null) {
+                        TiledMapTile tile = cell.getTile();
+
+                        this.g.getBoard().addItem(gameObjectFactory(tile, x, y), x, y);
+                    }
+
+                }
+            }
+        }
+    }
+
+    /**
+     * Return an IDirectionalObject based on id
+     * @param tile
+     * @return
+     */
+    private IMapObject gameObjectFactory(TiledMapTile tile, int x, int y) {
+        // Gigantic switch to create object from id
+        int id = tile.getId();
+        MapProperties properties = tile.getProperties();
+        Iterator<String> keys = properties.getKeys();
+        if (keys.hasNext()) {
+            String keyName = keys.next();
+            String tileName = ((String) properties.get(keyName)).toLowerCase();
+
+            Direction dir = Direction.NORTH;
+            if (tileName.contains(Direction.SOUTH.toString().toLowerCase())) dir = Direction.SOUTH;
+            else if(tileName.contains(Direction.WEST.toString().toLowerCase())) dir = Direction.WEST;
+            else if(tileName.contains(Direction.NORTH.toString().toLowerCase())) dir = Direction.NORTH;
+            else if(tileName.contains(Direction.EAST.toString().toLowerCase())) dir = Direction.EAST;
+
+            String numbersInTileName = tileName.replaceAll("[^0-9]", "");
+            int integerInTileName = Integer.parseInt(numbersInTileName);
+
+            LeftRight leftRight = LeftRight.LEFT;
+            if (tileName.contains(LeftRight.RIGHT.toString().toLowerCase())) leftRight = LeftRight.RIGHT;
+
+            IMapObject object = null;
+            if (tileName.contains("hole")) {
+                object = new Hole();
+            }
+            else if (tileName.contains("wall")) {
+                object = new Wall(dir);
+            }
+            else if (tileName.contains("flag")) {
+                object = new Flag(x, y, tileName);
+            }
+            else if (tileName.contains("gear")) {
+                object = new Gear(leftRight);
+            }
+            else if (tileName.contains("heal")) {
+                // Draw property is not in use yet
+                object = new HealDraw(x, y, false);
+            }
+            else if (tileName.contains("laser")) {
+                object = new Laser(x, y, dir, integerInTileName);
+            }
+            else if (tileName.contains("pusher")) {
+                object = new Pusher();
+            }
+            else if (tileName.contains("robot")) {
+                object = new Robot();
+            }
+
+            return object;
+        } else {
+            return null;
         }
     }
 }
