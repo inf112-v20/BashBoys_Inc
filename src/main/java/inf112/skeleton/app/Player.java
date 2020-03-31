@@ -2,11 +2,12 @@ package inf112.skeleton.app;
 
 import inf112.skeleton.app.cards.ICard;
 import inf112.skeleton.app.interfaces.ICheckPoint;
+import inf112.skeleton.app.interfaces.IPlayer;
 import inf112.skeleton.app.object.Robot;
 
 import java.util.ArrayList;
 
-public class Player {
+public class Player implements IPlayer {
     private Boolean ready = false;
     private String name;
     private ArrayList<ICard> hand = new ArrayList<>();
@@ -33,61 +34,46 @@ public class Player {
         robot = r;
     }
 
-    /**
-     * Add card to hand
-     * @param card - card to add to hand
-     */
+    @Override
     public void giveCard(ICard card) {
         if (hand.size() == handSize)
             return;
         hand.add(card);
     }
 
-    /**
-     * Remove card from hand
-     * @param card - card to remove from hand
-     */
+    @Override
+    public void giveCard(ArrayList<ICard> cards) {
+        if (hand.size() >= handSize || cards.size() > handSize)
+            return;
+        hand.addAll(cards);
+    }
+
+    @Override
     public void removeCardFromHand(ICard card) {
         hand.remove(card);
     }
 
-    /**
-     * Returns name of the player
-     * @return Player name
-     */
+    @Override
     public String getName() {
         return name;
     }
 
-    /**
-     * Returns list with all cards in hand
-     * @return ArrayList with all cards in hand
-     */
+    @Override
     public ArrayList<ICard> getHand(){
         return hand;
     }
 
-    /**
-     * Returns list with all cards in program sheet
-     * @return ArrayList with all cards in program sheet
-     */
+    @Override
     public ArrayList<ICard> getProgramSheet(){
         return programSheet;
     }
 
-    /**
-     * Add a card to sheet
-     * @param card - card to add
-     */
+    @Override
     public void addCardToSheet(ICard card) {
         programSheet.add(card);
     }
 
-    /**
-     * Get card from sheet at index or null if there is no card
-     * @param index - index of card
-     * @return Card from sheet at index
-     */
+    @Override
     public ICard getCardFromSheet(int index) {
         try {
             programSheet.get(index);
@@ -97,49 +83,32 @@ public class Player {
         return programSheet.get(index);
     }
 
-    /**
-     * Clear the sheet
-     */
+    @Override
     public void clearSheet() {
         programSheet.clear();
     }
 
-    /**
-     * Get robot assigned to player
-     * @return robot
-     */
+    @Override
     public Robot getRobot() {
         return robot;
     }
 
-    /**
-     * Sets ready to false or true
-     * @param r
-     */
+    @Override
     public void setReady(boolean r) {
         ready = r;
     }
 
-    /**
-     * Returns if the player is ready or not
-     * @return  ready
-     */
+    @Override
     public boolean isReady() {
         return ready;
     }
-    
-    /**
-     * gets spawnpoint
-     * @return current spawnpoint
-     */
+
+    @Override
     public ICheckPoint getSpawn() {
         return spawn;
     }
-    
-    /**
-     * sets new spawn point for player
-     * @param nSpawn - new valid spawn point
-     */
+
+    @Override
     public void setSpawn(ICheckPoint nSpawn) {
         spawn = nSpawn;
     }

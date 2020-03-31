@@ -5,7 +5,7 @@ import inf112.skeleton.app.object.Robot;
 
 public class MoveCard implements ICard {
 
-    private int moves;
+    public int moves;
     private int priority;
     private String name;
     
