@@ -1,6 +1,7 @@
 package inf112.skeleton.app.cards;
 
 import inf112.skeleton.app.enums.LeftRight;
+import inf112.skeleton.app.interfaces.ICard;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -21,21 +22,21 @@ public class Deck {
     private void initializeDeck(){
         for(int i = 1; i <= DECK_SIZE; i++){
             if(i <= 6){
-                cards.push(new RotateCard(LeftRight.LEFT,i*10,true,"U-turn"));
+                cards.push(new RotateCard(LeftRight.LEFT,i*10,true,"U-turn",null));
             } else if (i <= 42){
                 if(i % 2 == 0) { // Right Rotation
-                    cards.push(new RotateCard(LeftRight.RIGHT,i*10,false,"Rotate Right"));
+                    cards.push(new RotateCard(LeftRight.RIGHT,i*10,false,"Rotate Right",null));
                 } else {        // Left Rotation
-                    cards.push(new RotateCard(LeftRight.LEFT,i*10,false,"Rotate Left"));
+                    cards.push(new RotateCard(LeftRight.LEFT,i*10,false,"Rotate Left",null));
                 }
             } else if (i <= 48) {
-                cards.push(new MoveCard(-1,i*10,"Back Up"));
+                cards.push(new MoveCard(-1,i*10,"Back Up",null));
             } else if (i <= 66) {
-                cards.push(new MoveCard(1,i*10,"Move 1"));
+                cards.push(new MoveCard(1,i*10,"Move 1",null));
             } else if (i <= 78) {
-                cards.push(new MoveCard(2,i*10,"Move 2"));
+                cards.push(new MoveCard(2,i*10,"Move 2",null));
             } else {
-                cards.push(new MoveCard(3,i*10,"Move 3"));
+                cards.push(new MoveCard(3,i*10,"Move 3",null));
             }
         }
     }
@@ -55,18 +56,27 @@ public class Deck {
      */
     public ArrayList<ICard> getCards(int amount){
         if(amount > cards.size()){
-            amount = cards.size();
+            refill();
         }
 
         ArrayList<ICard> temp = new ArrayList<>();
         for(int i = 0; i < amount; i++){
             temp.add(cards.poll());
+            if(cards.size()==0)refill();
         }
         return temp;
     }
 
+    private void refill(){
+        cards = new LinkedList<>();
+        initializeDeck();
+        shuffleDeck();
+    }
+
     public ICard getCard(){
-        return cards.poll();
+        ICard c = cards.poll();
+        if(cards.size()==0)refill();
+        return c;
     }
 
     /**

@@ -15,7 +15,7 @@ class BeltPushingTests {
 
     @Test
     @DisplayName("Belt pushing robot")
-    void singleBeltPushingSingleRobot() {
+    public void singleBeltPushingSingleRobot() {
         Board board = new Board(12, 12);
         board.addItem(new Belt(Direction.NORTH), 5, 5);
         Robot r = new Robot("Jorgen");
@@ -26,7 +26,7 @@ class BeltPushingTests {
     
     @Test
     @DisplayName("Double belts pushing a robots")
-    void twoDoubleBeltsPushingSingleRobot() {
+    public void twoDoubleBeltsPushingSingleRobot() {
         Board board = new Board(12, 12);
         board.addItem(new Belt(Direction.NORTH,2), 5, 5);
         board.addItem(new Belt(Direction.NORTH,2), 5, 6);
@@ -38,7 +38,7 @@ class BeltPushingTests {
     
     @Test
     @DisplayName("Single belt pushing robot onto double belt but not more")
-    void singleThenDoubleBelt() {
+    public void singleThenDoubleBelt() {
         Board board = new Board(12, 12);
         board.addItem(new Belt(Direction.NORTH), 5, 5);
         board.addItem(new CornerBelt(Direction.NORTH, 2, LeftRight.RIGHT), 5, 6);
@@ -51,7 +51,7 @@ class BeltPushingTests {
     
     @Test
     @DisplayName("Testing that corner turns robot")
-    void cornerBeltTurningRobot() {
+    public void cornerBeltTurningRobot() {
         Board board = new Board(12, 12);
         board.addItem(new Belt(Direction.NORTH,2), 5, 5);
         board.addItem(new CornerBelt(Direction.EAST,2,LeftRight.RIGHT), 5, 6);
@@ -65,7 +65,7 @@ class BeltPushingTests {
 
     @Test
     @DisplayName("Testing wall blocking belt")
-    void wallBlockBeltTest() {
+    public void wallBlockBeltTest() {
         Board board = new Board(12, 12);
         board.addItem(new Belt(Direction.NORTH,2), 5, 5);
         board.addItem(new Belt(Direction.EAST,2), 5, 6);

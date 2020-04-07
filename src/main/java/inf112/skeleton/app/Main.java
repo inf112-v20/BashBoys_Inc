@@ -7,6 +7,7 @@ public class Main {
     public static void main(String[] args) {
         LwjglApplicationConfiguration cfg = new LwjglApplicationConfiguration();
 
+
         // Min requirement res: 1366x768
         // Other: 1600×900, 2560×1440, 3840×2160
         // Default res: 1920x1080
@@ -17,6 +18,7 @@ public class Main {
         cfg.useHDPI = true;
 
         Game game = new Game();
+
         game.play(cfg);
         
     }

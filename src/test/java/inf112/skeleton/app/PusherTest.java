@@ -1,8 +1,6 @@
 package inf112.skeleton.app;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.jupiter.api.Assertions.*;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -13,18 +11,18 @@ import inf112.skeleton.app.object.Robot;
 
 class PusherTest {
 
-    Board b;
-    Robot r;
+    private Board b;
+    private Robot r;
     
     @BeforeEach
-    void init(){
+    public void init(){
         b = new Board(12,12);
         r = new Robot("Kåre");
     }
 
     @Test
     @DisplayName("135Pusher Pushing At Right Phase")
-    void pusher123PushingTest(){
+    public void pusher123PushingTest(){
         Pusher p = new Pusher(Direction.WEST, true);
         b.addItem(r, 5, 5);
         b.addItem(p, 6, 5);
@@ -34,7 +32,7 @@ class PusherTest {
     
     @Test
     @DisplayName("135Pusher Not Pushing At Phase")
-    void pusher123NotPushingTest(){
+    public void pusher123NotPushingTest(){
         Pusher p = new Pusher(Direction.WEST, true);
         b.addItem(r, 5, 5);
         b.addItem(p, 6, 5);
@@ -44,7 +42,7 @@ class PusherTest {
     
     @Test
     @DisplayName("24Pusher Pushing At Right Phase")
-    void pusher24PushingTest(){
+    public void pusher24PushingTest(){
         Pusher p = new Pusher(Direction.WEST, false);
         b.addItem(r, 5, 5);
         b.addItem(p, 6, 5);
@@ -54,7 +52,7 @@ class PusherTest {
     
     @Test
     @DisplayName("24Pusher Not Pushing At Phase")
-    void pusher24NotPushingTest(){
+    public void pusher24NotPushingTest(){
         Pusher p = new Pusher(Direction.WEST, false);
         b.addItem(r, 5, 5);
         b.addItem(p, 6, 5);

@@ -1,5 +1,6 @@
 package inf112.skeleton.app.object;
 
+import inf112.skeleton.app.Player;
 import inf112.skeleton.app.enums.Direction;
 import inf112.skeleton.app.enums.LeftRight;
 import inf112.skeleton.app.interfaces.IDirectionalObject;
@@ -10,6 +11,7 @@ public class Robot implements IDirectionalObject {
     private String name = "RobotFaceSouth";
     private Direction dir = Direction.SOUTH;
     private int hp = 9;
+    private Player player;
 
     public Robot() {
         // Robot with no name
@@ -153,5 +155,12 @@ public class Robot implements IDirectionalObject {
      */
     public boolean isDead() {
         return hp==0;
+    }
+    
+    public void setPlayer(Player p) {
+        player = p;
+    }
+    public Player getPlayer() {
+        return player;
     }
 }

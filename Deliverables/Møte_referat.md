@@ -62,3 +62,9 @@ Hadde møtet på Discord denne gangen også. Gikk kjapt gjennom det som var gjor
 dokumentasjon til innleveringen og bli enige om svar til oppgavene. Så ble det jobbet videre med noen ting som måtte
 bli lagt til. Til slutt gikk vi gjennom hva som måtte gjøres klart til innleveringen og fordelte oppgaver i hendold til
 det.
+
+31.03:  
+Oppmøte: Alle  
+Begynte møtet med å gå gjennom hvor langt vi hadde komt med de forskjellige tingene som skulle jobbes med hjemme. Så
+diskuterte vi hva som var viktigst å få til å funke først og hva som måtte fikses opp i. Avsluttet møte med å gå gjennom
+hva hver enkel skulle jobbe med videre.

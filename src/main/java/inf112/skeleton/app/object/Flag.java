@@ -1,21 +1,25 @@
 package inf112.skeleton.app.object;
 
 import inf112.skeleton.app.interfaces.ICheckPoint;
-import inf112.skeleton.app.interfaces.IMapObject;
 
 public class Flag implements ICheckPoint {
 
     private int x;
     private int y;
-    String name;
+    private String name;
+    private int value;
 
     public Flag() {
     }
-
-    public Flag(int x, int y, String name) {
+    public Flag(String name,int value) {
+        this.name = name;
+        this.value = value;
+    }
+    public Flag(int x, int y, String name,int value) {
         this.x = x;
         this.y = y;
         this.name = name;
+        this.value = value;
     }
 
     @Override
@@ -41,6 +45,10 @@ public class Flag implements ICheckPoint {
     @Override
     public String getName(){
         return name;
+    }
+    
+    public int getNr() {
+        return value;
     }
 
 }

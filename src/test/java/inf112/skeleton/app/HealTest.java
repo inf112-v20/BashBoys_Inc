@@ -10,7 +10,7 @@ import inf112.skeleton.app.object.Robot;
 class HealTest {
 
     @Test
-    void healHealngTest(){
+    public void healHealngTest(){
         Board board = new Board(12,12);
         Robot r = new Robot("Kåre");
         board.addItem(r, 5, 5);
@@ -21,7 +21,7 @@ class HealTest {
     }
     
     @Test
-    void noOverHealTest(){
+    public void noOverHealTest(){
         Board board = new Board(12,12);
         Robot r = new Robot("Karl");
         board.addItem(r, 5, 5);

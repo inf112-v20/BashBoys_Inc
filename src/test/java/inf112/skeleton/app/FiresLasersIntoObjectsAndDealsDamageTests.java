@@ -11,24 +11,25 @@ import inf112.skeleton.app.object.Wall;
 
 class FiresLasersIntoObjectsAndDealsDamageTests {
     
-    Board b;
+    private Board b;
     
     @BeforeEach
-    void init() {
+    public void init() {
         b = new Board(12, 12);
     }
 
     @Test
     @DisplayName("WallLaser and Robot fires on empty board and doesn't crash the game test")
-    void wallLaserAndRobotFiresOnEmptyBoadWithNoCrashTest() {
+    public void wallLaserAndRobotFiresOnEmptyBoadWithNoCrashTest() {
         b.addItem(new Wall(Direction.NORTH,1), 5,11);
         b.addItem(new Robot("Karl Erik", Direction.EAST), 0, 0);
         b.fireLasers(); //Should not return any error
+        assert(true);
     }
     
     @Test
     @DisplayName("Robot gets hit by double laser")
-    void robotGetsHitByWallLaserTest() {
+    public void robotGetsHitByWallLaserTest() {
         b.addItem(new Wall(Direction.NORTH,2), 5,11);
         Robot jens = new Robot("Jens");
         b.addItem(jens, 5, 5);
@@ -39,7 +40,7 @@ class FiresLasersIntoObjectsAndDealsDamageTests {
     
     @Test
     @DisplayName("Two Robots Hits Each Other With Laser Attacks Test")
-    void twoRobotsShootsEachOtherTest() {
+    public void twoRobotsShootsEachOtherTest() {
         Robot grete = new Robot("Grete",Direction.WEST);
         Robot hans = new Robot("Hans",Direction.EAST);
         b.addItem(hans, 0, 6);
@@ -52,7 +53,7 @@ class FiresLasersIntoObjectsAndDealsDamageTests {
     
     @Test
     @DisplayName("Only one robot takes dmg")
-    void onlyOneRobotTakesDamage() {
+    public void onlyOneRobotTakesDamage() {
         Robot tobias = new Robot("Tobias");
         b.addItem(new Wall(Direction.NORTH,2), 5,11);
         Robot petter = new Robot("Petter");

@@ -30,7 +30,7 @@ Det overordnede målet er å lage et fungerende digital versjon av RoboRally ute
 -   Flagg på brettet
 -   Fungerende RoboRally regler implementert
 
-#### Prioritert liste over krav til første iterasjon:
+#### Prioritert liste over krav til første iterasjon
 
 1.  Vise et brett på skjermen
 2.  Plassere en brikke på brettet

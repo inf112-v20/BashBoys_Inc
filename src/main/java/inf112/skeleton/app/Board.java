@@ -1,6 +1,7 @@
 package inf112.skeleton.app;
 
 import inf112.skeleton.app.enums.Direction;
+import inf112.skeleton.app.interfaces.ICheckPoint;
 import inf112.skeleton.app.interfaces.IDirectionalObject;
 import inf112.skeleton.app.interfaces.IMapObject;
 import inf112.skeleton.app.object.Gear;
@@ -30,7 +31,7 @@ public class Board {
     Board(int width, int height) {
         this.width = width;
         this.height = height;
-        board = new ArrayList[width][height];
+        board = new ArrayList[height][width];
 
         for (int j = 0; j < height; j++) {
             for (int i = 0; i < width; i++) {
@@ -49,7 +50,7 @@ public class Board {
     public void addItem(IMapObject item, int x, int y){
         item.setX(x);
         item.setY(y);
-        board[x][y].add(item);
+        board[y][x].add(item);
     }
 
     /**
@@ -58,7 +59,7 @@ public class Board {
      * @param item - item to remove
      */
     public void removeItem(IMapObject item){
-        board[item.getX()][item.getY()].remove(item);
+        board[item.getY()][item.getX()].remove(item);
     }
 
     /**
@@ -95,10 +96,8 @@ public class Board {
 
         // Checks if there is a wall on current tile that blocks path
         for (IMapObject obj : getItems(x, y)) {
-            if (obj instanceof Wall) {
-                if (((Wall) obj).getDir() == dir) {
-                    return false;
-                }
+            if (obj instanceof Wall && ((Wall) obj).getDir() == dir) {
+                return false;
             }
         }
 
@@ -130,11 +129,9 @@ public class Board {
         }
 
         // If there was a robot to push
-        if (push != null) {
+        if (push != null && !pushRobot(push, dir)) {
             // Tries to move robot, if it doesn't move it's blocked
-            if (!pushRobot(push, dir)) {
-                return false;
-            }
+            return false;
         }
 
         // Nothing blocking and everything moved so we can move one step
@@ -239,10 +236,8 @@ public class Board {
             return ar;
         } else {
             for (IMapObject obj : getItems(x, y)) { // Items at next tile
-                if (obj instanceof Wall) {
-                    if (((Wall) obj).getDir() == Direction.uTurn(dir)) { // Checks if there is a wall blocking entrance
-                        wall = true;
-                    }
+                if (obj instanceof Wall && ((Wall) obj).getDir() == Direction.uTurn(dir)) {
+                    wall = true;
                 }
             }
         }
@@ -275,6 +270,8 @@ public class Board {
         case WEST:
             x--;
             break;
+        default:
+            break;
         }
         ret[0] = x;
         ret[1] = y;
@@ -290,10 +287,8 @@ public class Board {
      */
     private boolean posibleMove(int x, int y, Direction dir){
         for (IMapObject obj : getItems(x, y)) {
-            if (obj instanceof Wall) {
-                if (((Wall) obj).getDir() == dir) {
-                    return false;
-                }
+            if (obj instanceof Wall && ((Wall) obj).getDir() == dir) {
+                return false;
             }
         }
 
@@ -337,7 +332,9 @@ public class Board {
             for (IMapObject obj : getItems(x, y)) {
                 if (obj instanceof Belt) {
                     int[] next = nextPos(((Belt) obj).getDir(), x, y);
+
                     Belt nextBelt = getBelt(next[0], next[1]);
+
                     if (i == 1) {
                         if (((Belt) obj).getStrength() != 2)
                             continue;
@@ -370,9 +367,9 @@ public class Board {
         Direction newDir = newBelt.getDir();
 
         pushRobot(r, oldDir);
-        if (oldDir == newDir || Direction.uTurn(oldDir) == newDir)
+        if (oldDir.equals(newDir) || Direction.uTurn(oldDir).equals(newDir))
             return;
-        else if (oldDir != newDir) {
+        else if (!oldDir.equals(newDir)) {
             r.turn(Direction.relation(oldDir, newDir));
         }
 
@@ -415,6 +412,8 @@ public class Board {
      * @return - Belt or null if no belt
      */
     private Belt getBelt(int x, int y){
+        if (getItems(x, y) == null)
+            return null;
         for (IMapObject ob : getItems(x, y)) {
             if (ob instanceof Belt)
                 return (Belt) ob;
@@ -423,13 +422,13 @@ public class Board {
     }
 
     /**
-     * kills robot
-     * sets robot hp to 0 and removes from board
+     * kills robot sets robot hp to 0 and removes from board
+     * 
      * @param r - robot to kill
      */
     private void ded(Robot r){
         System.out.println(r.getName() + " is ded");
-        r.setHp(0); // For the HUD to update
+        r.setHp(0);
         removeItem(r);
     }
 
@@ -442,7 +441,7 @@ public class Board {
         ArrayList<IMapObject> mapObjects = new ArrayList<>();
 
         for (ArrayList<IMapObject>[] arrayLists : this.board) {
-            for (int y = 0; y < this.board.length; y++) {
+            for (int y = 0; y < width; y++) {
                 if (arrayLists[y] != null) {
                     mapObjects.addAll(arrayLists[y]);
                 }
@@ -459,11 +458,14 @@ public class Board {
      * @return ArrayList<MapObject> that contains all object on the tile
      */
     public ArrayList<IMapObject> getItems(int x, int y){
-        return board[x][y];
+        if (x >= width || x < 0 || y < 0 || y >= height)
+            return null;
+        return board[y][x];
     }
 
     /**
      * Aktivates all pusher in current phase
+     * 
      * @param i - phase currently in
      */
     public void pushAll(int i){
@@ -498,6 +500,8 @@ public class Board {
                     if (!p.getPhase()) {
                         pushers.add(p);
                     }
+                    break;
+                default:
                     break;
                 }
             }
@@ -544,9 +548,11 @@ public class Board {
             if (obj instanceof HealDraw) {
                 for (IMapObject ob : getItems(obj.getX(), obj.getY())) {
                     if (ob instanceof Robot) {
+                        /*
                         if (((HealDraw) obj).draw()) {
                             // draw card
                         }
+                        */
                         ((Robot) ob).heal(1);
                     }
                 }
@@ -565,13 +571,15 @@ public class Board {
         gearsDo();
         fireLasers();
         healDo();
+        flagCheck();
         // energy();
         // checkpoint();
     }
 
     /**
-     * gets laser objects containing position and direction of all tiles lasers shoot over
-     * for displaying mostly
+     * gets laser objects containing position and direction of all tiles lasers
+     * shoot over for displaying mostly
+     * 
      * @return ArrayList with laser objects
      */
     public ArrayList<Laser> getLasers(){
@@ -589,37 +597,46 @@ public class Board {
                     boolean add = true;
                     while (x < width && x >= 0 && y >= 0 && y < height && !stop) {
                         for (IMapObject item : getItems(x, y)) {
-                            System.out.println(item);
                             if (item instanceof Wall) {
                                 if (((Wall) item).getDir() == dir) {
                                     stop = true;
                                     break;
                                 }
-                            }else if(item instanceof Pusher) {
+                            } else if (item instanceof Pusher) {
                                 stop = true;
                                 add = false;
                                 break;
                             }
                         }
-                        if(add)arr.add(new Laser(x,y,dir,dmg));
-                        x = nextPos(dir,x,y)[0];
-                        y = nextPos(dir,x,y)[1];
-                        if(x < width && x >= 0 && y >= 0 && y < height) {
+                        if (add)
+                            arr.add(new Laser(x, y, dir, dmg));
+                        x = nextPos(dir, x, y)[0];
+                        y = nextPos(dir, x, y)[1];
+                        if (x < width && x >= 0 && y >= 0 && y < height) {
                             for (IMapObject item : getItems(x, y)) {
-                                if (item instanceof Wall) {
-                                    if (Direction.uTurn(((Wall) item).getDir()) == dir) {
-                                        stop = true;
-                                        break;
-                                    }
+                                if (item instanceof Wall && Direction.uTurn(((Wall) item).getDir()) == dir) {
+                                    stop = true;
+                                    break;
                                 }
                             }
                         }
-                        
                     }
                 }
             }
         }
         return arr;
+    }
+
+    private void flagCheck(){
+        for (IMapObject itm : getObjects()) {
+            if (itm instanceof ICheckPoint) {
+                for (IMapObject obj : getItems(itm.getX(), itm.getY())) {
+                    if (obj instanceof Robot) {
+                        ((Robot) obj).getPlayer().setSpawn((ICheckPoint) itm);
+                    }
+                }
+            }
+        }
     }
 
 }

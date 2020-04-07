@@ -3,10 +3,8 @@ package inf112.skeleton.app.gui;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
-import inf112.skeleton.app.cards.ICard;
-import inf112.skeleton.app.cards.MoveCard;
-import inf112.skeleton.app.cards.RotateCard;
-import inf112.skeleton.app.enums.LeftRight;
+
+import inf112.skeleton.app.interfaces.ICard;
 
 import java.awt.*;
 
@@ -18,12 +16,38 @@ public class ButtonCard extends ImageButton {
     private Point originPoint = null;
     private ICard type;
     public Register register = null;
+    private Text priority;
 
     ButtonCard(TextureRegionDrawable texture, ICard type) {
         super(texture);
         this.type = type;
         priority = new Text(type.getPriority()+"");
     }
+
+    @Override
+    public void moveBy(float x, float y) {
+        priority.moveBy(x,y);
+        super.moveBy(x, y);
+    }
+
+    @Override
+    public boolean remove() {
+        priority.remove();
+        return super.remove();
+    }
+
+    @Override
+    public void setPosition(float x, float y) {
+        priority.setPosition(x+this.getWidth()-this.getWidth()/2.3f,y+this.getHeight()-this.getHeight()/5);
+        super.setPosition(x, y);
+    }
+
+    /**
+     * Get the Priority element of the card
+     * @return Text - Priority
+     */
+    public Text displayPriority(){
+        return priority;
     }
 
     /**
@@ -58,13 +82,7 @@ public class ButtonCard extends ImageButton {
         return type;
     }
 
-    /**
-     * Reset size of card to default size
-     */
-    public void resetSize(){
-        this.setWidth(GuiFactory.getWidth()/4);
-        this.setHeight(GuiFactory.getHeight()/4);
-    }
+
 
     public void reSize(float width, float height, Stage stage){
 

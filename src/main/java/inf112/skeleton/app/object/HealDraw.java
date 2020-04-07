@@ -40,7 +40,7 @@ public class HealDraw implements IMapObject {
 
     @Override
     public String getName(){
-        return draw ? "heal" : "healDraw";
+        return !draw ? "heal" : "healDraw";
     }
 
     public boolean draw() {
