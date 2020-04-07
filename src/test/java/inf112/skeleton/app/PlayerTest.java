@@ -3,10 +3,13 @@ package inf112.skeleton.app;
 import inf112.skeleton.app.cards.MoveCard;
 import inf112.skeleton.app.interfaces.ICard;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.*;
 
 public class PlayerTest {
 

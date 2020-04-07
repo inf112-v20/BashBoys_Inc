@@ -83,6 +83,7 @@ public class Board {
      * @return true if move was completed till end
      */
     private boolean moveItem(Robot item, int amount, Direction direction){
+        Direction dir = direction;
         if (!getObjects().contains(item))
             return false;
         if (amount == 0)
@@ -90,20 +91,20 @@ public class Board {
         int x = item.getX(); // Start X/Y
         int y = item.getY();
         if (amount < 0) { // If it's a "reverse"
-            direction = Direction.uTurn(direction); // Flip direction and make moves positive
+            dir = Direction.uTurn(dir); // Flip direction and make moves positive
             amount = -amount;
         }
 
         // Checks if there is a wall on current tile that blocks path
         for (IMapObject obj : getItems(x, y)) {
-            if (obj instanceof Wall && ((Wall) obj).getDir() == direction) {
+            if (obj instanceof Wall && ((Wall) obj).getDir() == dir) {
                 return false;
             }
         }
 
         // Changes X/Y to next position
-        x = nextPos(direction, x, y)[0];
-        y = nextPos(direction, x, y)[1];
+        x = nextPos(dir, x, y)[0];
+        y = nextPos(dir, x, y)[1];
 
         if (x < 0 || x >= width || y < 0 || y >= height) {
             ded(item);
@@ -115,7 +116,7 @@ public class Board {
         for (IMapObject obj : getItems(x, y)) {
             if (obj instanceof Wall) {
                 // If there is wall there checks if it blocks entrance to tile
-                if (((Wall) obj).getDir() == Direction.uTurn(direction)) {
+                if (((Wall) obj).getDir() == Direction.uTurn(dir)) {
                     return false;
                 }
             } else if (obj instanceof Robot) { // If there is a robot there try to push it
@@ -129,17 +130,17 @@ public class Board {
         }
 
         // If there was a robot to push
-        if (push != null && !pushRobot(push, direction)) {
+        if (push != null && !pushRobot(push, dir)) {
             // Tries to move robot, if it doesn't move it's blocked
             return false;
         }
 
         // Nothing blocking and everything moved so we can move one step
         removeItem(item);
-        item.move(1, direction);
+        item.move(1, dir);
         addItem(item, item.getX(), item.getY());
         // calls self till blocked or done
-        moveItem(item, amount - 1, direction);
+        moveItem(item, amount - 1, dir);
         return true;
     }
 
@@ -229,13 +230,13 @@ public class Board {
             }
         }
 
-        x = nextPos(dir, x, y)[0];
-        y = nextPos(dir, x, y)[1];
+        int newX = nextPos(dir, x, y)[0];
+        int newY = nextPos(dir, x, y)[1];
 
-        if (x < 0 || y < 0 || x >= width || y >= height) { // Out of board
+        if (newX < 0 || newY < 0 || newX >= width || newY >= height) { // Out of board
             return ar;
         } else {
-            for (IMapObject obj : getItems(x, y)) { // Items at next tile
+            for (IMapObject obj : getItems(newX, newY)) { // Items at next tile
                 if (obj instanceof Wall && ((Wall) obj).getDir() == Direction.uTurn(dir)) {
                     wall = true;
                 }
@@ -243,7 +244,7 @@ public class Board {
         }
 
         if (!wall) // If not blocked
-            ar.addAll(shoot(dir, x, y, dmg));
+            ar.addAll(shoot(dir, newX, newY, dmg));
         return ar;
     }
 
@@ -256,25 +257,27 @@ public class Board {
      * @return Array with 2 integers index 0 is x and index 1 is y
      */
     private int[] nextPos(Direction dir, int x, int y){
+        int newX = x;
+        int newY = y;
         int[] ret = new int[2];
         switch (dir) {
         case NORTH:
-            y++;
+            newY++;
             break;
         case SOUTH:
-            y--;
+            newY--;
             break;
         case EAST:
-            x++;
+            newX++;
             break;
         case WEST:
-            x--;
+            newX--;
             break;
         default:
             break;
         }
-        ret[0] = x;
-        ret[1] = y;
+        ret[0] = newX;
+        ret[1] = newY;
         return ret;
     }
 
