@@ -11,8 +11,8 @@ import inf112.skeleton.app.object.Robot;
 
 class PusherTest {
 
-    Board b;
-    Robot r;
+    private Board b;
+    private Robot r;
     
     @BeforeEach
     public void init(){

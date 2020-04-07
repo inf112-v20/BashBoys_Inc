@@ -43,7 +43,7 @@ public class GuiHud {
         stage.addActor(flags);
     }
 
-    public void updateHud(Stage stage,GameClass g){
+    public void updateHud(Stage stage){
         for(Actor a : stage.getActors()){
             if(a.getName() != null){
                 if(a.getName().equals("hp")){

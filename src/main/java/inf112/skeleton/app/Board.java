@@ -270,6 +270,8 @@ public class Board {
         case WEST:
             x--;
             break;
+        default:
+            break;
         }
         ret[0] = x;
         ret[1] = y;

@@ -65,7 +65,7 @@ class BeltPushingTests {
 
     @Test
     @DisplayName("Testing wall blocking belt")
-    void wallBlockBeltTest() {
+    public void wallBlockBeltTest() {
         Board board = new Board(12, 12);
         board.addItem(new Belt(Direction.NORTH,2), 5, 5);
         board.addItem(new Belt(Direction.EAST,2), 5, 6);

@@ -339,7 +339,7 @@ public class GameView implements Screen {
 
         renderer.setView(camera);
         renderer.render();
-        guiHud.updateHud(uiStage, g);
+        guiHud.updateHud(uiStage);
         guiCards.update(g.players().get(player), uiStage);
 
         // Should update guiCards and guiHud later
@@ -469,8 +469,9 @@ public class GameView implements Screen {
             return new ShutDown(p);
         case 4:
             return new Nothing(p);
+        default:
+            return null;
         }
-        return null;
     }
 
     public void ui(){

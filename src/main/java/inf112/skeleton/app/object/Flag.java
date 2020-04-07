@@ -11,15 +11,15 @@ public class Flag implements ICheckPoint {
 
     public Flag() {
     }
-    public Flag(String name,int val) {
+    public Flag(String name,int value) {
         this.name = name;
-        value = val;
+        this.value = value;
     }
-    public Flag(int x, int y, String name,int val) {
+    public Flag(int x, int y, String name,int value) {
         this.x = x;
         this.y = y;
         this.name = name;
-        value = val;
+        this.value = value;
     }
 
     @Override

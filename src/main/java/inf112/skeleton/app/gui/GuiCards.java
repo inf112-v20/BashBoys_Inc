@@ -32,11 +32,11 @@ public class GuiCards {
      * @param stage gui stage to be added to
      * @param cards amount of cards present
      */
-    public void startCardGui(Stage stage, GameClass g, Board b, int player){
+    public void startCardGui(Stage stage, GameClass game, Board board, int player){
         addRegisters(stage);
-        addCards(g.players().get(player), stage);
-        addEndTurn(stage, g, b, player);
-        addPowerDownButton(stage, g, b, player);
+        addCards(game.players().get(player), stage);
+        addEndTurn(stage, game, board, player);
+        addPowerDownButton(stage, game, board, player);
     }
 
     /**
@@ -45,9 +45,9 @@ public class GuiCards {
      * @param n     - Amount of cards
      * @param stage - Stage to change
      */
-    private void addCards(Player p, Stage stage){
-        int n = p.getHand().size();
-        hand = (ArrayList<ICard>) p.getHand().clone();
+    private void addCards(Player player, Stage stage){
+        int n = player.getHand().size();
+        hand = (ArrayList<ICard>) player.getHand().clone();
         for (int i = 0; i < n; i++) {
             ButtonCard SpecCard = GuiFactory.createCard(0, 0, new MoveCard(1, 1, "Move 1", null));
             int x = (int) (i * SpecCard.getWidth() + stage.getWidth() / 2 - SpecCard.getWidth() * (n / 2));
@@ -56,7 +56,7 @@ public class GuiCards {
                 x = (int) (x - SpecCard.getWidth() / 2);
             }
 
-            ButtonCard temp = GuiFactory.createCard(x, y, p.getHand().get(i));
+            ButtonCard temp = GuiFactory.createCard(x, y, player.getHand().get(i));
             temp.setOriginPoint(new Point(x, y)); // Set reset point for card
 
             addListener(temp);
@@ -141,7 +141,7 @@ public class GuiCards {
      * 
      * @param stage - Gui-stage to add to
      */
-    private void addEndTurn(Stage stage, GameClass g, Board b, int player){
+    private void addEndTurn(Stage stage, GameClass game, Board board, int player){
         lockIn = new ImageButton(GuiFactory.getTexture("assets/gui/Signs/LockIn.png"),
                 GuiFactory.getTexture("assets/gui/Signs/LockInPushed.png"));
 
@@ -165,24 +165,24 @@ public class GuiCards {
                     for (Register register : registers) {
                         if (register.getStatus()) {
                             System.out.print(register.getCard().getType().getName() + " - ");
-                            g.players().get(player).addCardToSheet(register.getCard().getType()); // temp
+                            game.players().get(player).addCardToSheet(register.getCard().getType()); // temp
                         } else {
-                            g.players().get(player).addCardToSheet(new Nothing(g.players().get(player)));
+                            game.players().get(player).addCardToSheet(new Nothing(game.players().get(player)));
                             System.out.print("null" + " - ");
                         }
                     }
-                    g.players().get(player).setReady(true); // temp
+                    game.players().get(player).setReady(true); // temp
                     System.out.println("");
                 }
                 if (player != 0) {
-                    g.sendHand();
+                    game.sendHand();
                 }
             }
         });
         stage.addActor(lockIn);
     }
 
-    private void addPowerDownButton(Stage stage, GameClass g, Board b, int player){
+    private void addPowerDownButton(Stage stage, GameClass game, Board board, int player){
         powerDown = new ImageButton(GuiFactory.getTexture("assets/gui/Signs/PowerDown.png"),
                 GuiFactory.getTexture("assets/gui/Signs/PowerDownPushed.png"));
 
@@ -198,14 +198,14 @@ public class GuiCards {
             @Override
             public void clicked(InputEvent event, float xx, float yy){
                 if (event.getType() == InputEvent.Type.touchUp) {
-                    g.players().get(player).setShutDow(2);
+                    game.players().get(player).setShutDow(2);
                     for (Register register : registers) {
-                        g.players().get(player).addCardToSheet(new ShutDown(g.players().get(player))); // temp
+                        game.players().get(player).addCardToSheet(new ShutDown(game.players().get(player))); // temp
                     }
-                    g.players().get(player).setReady(true);
-                    System.out.println(g.players().get(player).getName() + ": Shutdown");
+                    game.players().get(player).setReady(true);
+                    System.out.println(game.players().get(player).getName() + ": Shutdown");
                     if (player != 0) {
-                        g.sendHand();
+                        game.sendHand();
                     }
                 }
             }
@@ -222,15 +222,15 @@ public class GuiCards {
         return finished;
     }
 
-    public void update(Player p, Stage s){
-        if (!p.getHand().equals(hand)) {
+    public void update(Player player, Stage stage){
+        if (!player.getHand().equals(hand)) {
             for (ButtonCard bc : cards) {
                 bc.remove();
             }
             for (Register r : registers) {
                 unRegisterCard(r);
             }
-            addCards(p, s);
+            addCards(player, stage);
         }
     }
 

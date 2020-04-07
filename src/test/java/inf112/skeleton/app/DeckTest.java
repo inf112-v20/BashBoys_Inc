@@ -61,18 +61,22 @@ class DeckTest {
     @Test
     @DisplayName("Add card to full deck test")
     public void addCardToFullDeckTest(){
+        boolean error = false;
         try {
             testDeck.addCard(new MoveCard(1,100,"TestCard",null));
         } catch (IllegalArgumentException e){
-            assert true;
+            error = true;
         }
+        assert(error);
     }
 
     @Test
     @DisplayName("Test if the correct amount of each type of card")
     public void testIfCorrectCardsAreInDeck(){
-        int rotateCards = 0, TARGET_ROTATE_CARDS = 42;
-        int moveCards = 0, TARGET_MOVE_CARDS = 42;
+        int rotateCards = 0;
+        int TARGET_ROTATE_CARDS = 42;
+        int moveCards = 0;
+        int TARGET_MOVE_CARDS = 42;
         for(ICard card : testDeck.peekAllCards()){
             if(card instanceof RotateCard){
                 rotateCards++;

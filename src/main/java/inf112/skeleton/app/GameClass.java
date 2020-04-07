@@ -41,13 +41,6 @@ public class GameClass {
     private boolean won;
     private String winner;
 
-    Direction west = Direction.WEST;
-    Direction east = Direction.EAST;
-    Direction north = Direction.NORTH;
-    Direction south = Direction.SOUTH;
-    LeftRight left = LeftRight.LEFT;
-    LeftRight right = LeftRight.RIGHT;
-
     public GameClass() {
         this.board = new Board(12, 15);
         players = new ArrayList<Player>();
@@ -427,6 +420,9 @@ public class GameClass {
     public void getMap(){
         switch (map) {
         case "map1":
+            map1();
+            break;
+        default:
             map1();
             break;
         }

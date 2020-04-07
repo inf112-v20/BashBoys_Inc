@@ -11,10 +11,10 @@ import inf112.skeleton.app.object.Wall;
 
 class FiresLasersIntoObjectsAndDealsDamageTests {
     
-    Board b;
+    private Board b;
     
     @BeforeEach
-    void init() {
+    public void init() {
         b = new Board(12, 12);
     }
 
@@ -24,6 +24,7 @@ class FiresLasersIntoObjectsAndDealsDamageTests {
         b.addItem(new Wall(Direction.NORTH,1), 5,11);
         b.addItem(new Robot("Karl Erik", Direction.EAST), 0, 0);
         b.fireLasers(); //Should not return any error
+        assert(true);
     }
     
     @Test
