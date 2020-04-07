@@ -314,7 +314,7 @@ public class GameClass {
 
     private String str2(ICard c){
         String send = c.getPlayer().getID() + "," + c.getPriority() + "";
-        if (c.getName() == "Back Up") {
+        if (c.getName().equals("Back Up")) {
             send += "," + 1 + "," + 4 + ",";
         } else if (c instanceof ShutDown) {
             send += "," + 3 + "," + 0 + ",";
@@ -322,9 +322,9 @@ public class GameClass {
             send += "," + 1 + "," + c.getName().charAt(c.getName().length() - 1) + ",";
         } else if (c instanceof Nothing) {
             send += "," + 4 + "," + 0 + ",";
-        } else if (c.getName() == "Rotate Right") {
+        } else if (c.getName().equals("Rotate Right")) {
             send += "," + 2 + "," + "1,";
-        } else if (c.getName() == "Rotate Left") {
+        } else if (c.getName().equals("Rotate Left")) {
             send += "," + 2 + "," + "2,";
         } else {
             send += "," + 2 + "," + "3,";
