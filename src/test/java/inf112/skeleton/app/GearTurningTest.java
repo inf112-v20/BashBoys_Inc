@@ -1,12 +1,12 @@
 package inf112.skeleton.app;
 
+import static org.junit.Assert.assertEquals;
+import org.junit.jupiter.api.Test;
+
 import inf112.skeleton.app.enums.Direction;
 import inf112.skeleton.app.enums.LeftRight;
 import inf112.skeleton.app.object.Gear;
 import inf112.skeleton.app.object.Robot;
-import org.junit.jupiter.api.Test;
-
-import static org.junit.Assert.assertEquals;
 
 class GearTurningTest {
 

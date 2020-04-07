@@ -1,8 +1,9 @@
 package inf112.skeleton.app.cards;
 
 import inf112.skeleton.app.Board;
+import inf112.skeleton.app.Player;
 import inf112.skeleton.app.enums.LeftRight;
-import inf112.skeleton.app.object.Robot;
+import inf112.skeleton.app.interfaces.ICard;
 
 public class RotateCard implements ICard {
 
@@ -10,8 +11,9 @@ public class RotateCard implements ICard {
     private int rotates;
     private int priority;
     private LeftRight direction;
+    Player p;
 
-    public RotateCard(LeftRight lr, int priority, boolean uTurn, String name) {
+    public RotateCard(LeftRight lr, int priority, boolean uTurn, String name, Player p) {
         direction = lr;
         if (uTurn)
             this.rotates = 2;
@@ -19,11 +21,12 @@ public class RotateCard implements ICard {
             this.rotates = 1;
         this.priority = priority;
         this.name = name;
+        this.p = p;
     }
 
     @Override
-    public void doStuff(Robot robot, Board board) {
-        robot.turn(direction, rotates);
+    public void doStuff(Board board) {
+        p.getRobot().turn(direction, rotates);
     }
 
     @Override
@@ -50,4 +53,10 @@ public class RotateCard implements ICard {
         return "U-Turn";
     }
     
+    public Player getPlayer() {
+        return p;
+    }
+    public void setPlayer(Player p) {
+        this.p = p;
+    }
 }

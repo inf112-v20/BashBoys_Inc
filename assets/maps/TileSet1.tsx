@@ -168,12 +168,12 @@
         </tile>
         <tile id="33">
             <properties>
-                <property name="corner" value="1RIGHTcornerSOUTH" />
+                <property name="corner" value="1RIGHTcornerNORTH" />
             </properties>
         </tile>
         <tile id="34">
             <properties>
-                <property name="corner" value="1RIGHTcornerNORTH" />
+                <property name="corner" value="1RIGHTcornerSOUTH" />
             </properties>
         </tile>
         <tile id="35">

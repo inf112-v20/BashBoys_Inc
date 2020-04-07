@@ -1,20 +1,21 @@
 package inf112.skeleton.app;
 
-import inf112.skeleton.app.object.Flag;
-import inf112.skeleton.app.object.Robot;
+import static org.junit.jupiter.api.Assertions.*;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import inf112.skeleton.app.object.Flag;
+import inf112.skeleton.app.object.Robot;
 
 class RespawnTests {
 
     @Test
     @DisplayName("Respawn at flag test")
     void respawnAtFlagTest(){
-        Flag f1 = new Flag(1,1,"F1");
+        Flag f1 = new Flag(1,1,"F1",0);
         Robot r = new Robot("Rebo");
-        Game g = new Game();
+        GameClass g = new GameClass();
         Player p = new Player("Bab",r);
         p.setSpawn(f1);
         g.players().add(p);

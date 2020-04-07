@@ -2,62 +2,40 @@ package inf112.skeleton.app.gui;
 
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.DragListener;
-import inf112.skeleton.app.Game;
-import inf112.skeleton.app.cards.Deck;
+import inf112.skeleton.app.Board;
+import inf112.skeleton.app.GameClass;
+import inf112.skeleton.app.Player;
 import inf112.skeleton.app.cards.MoveCard;
+import inf112.skeleton.app.cards.Nothing;
+import inf112.skeleton.app.cards.ShutDown;
+import inf112.skeleton.app.interfaces.ICard;
 
 import java.awt.*;
 import java.util.ArrayList;
 
-public class GuiCards implements IGuiElement {
+public class GuiCards {
 
-    private Game game;
+    private static int margin = 50;
     private ArrayList<Register> registers = new ArrayList<>();
     private ArrayList<ButtonCard> cards = new ArrayList<>();
-    private ImageButton shutdown;
-    private ImageButton lock_in;
+    private ArrayList<ICard> hand;
+    ImageButton powerDown;
+    ImageButton lockIn;
     private boolean finished = false;
 
-
-    @Override
-    public void initialize(Stage stage,Game game){
-        this.game = game;
+    /**
+     * Start the card gui, adds card and register and end Turn button
+     * @param stage gui stage to be added to
+     * @param cards amount of cards present
+     */
+    public void startCardGui(Stage stage,GameClass g , Board b,int player){
         addRegisters(stage);
-        addCards(game.players().get(0).getRobot().getHp(),stage);
-        addEndTurn(stage,game);
-        addPowerDownButton(stage,game);
-    }
-
-    @Override
-    public void update(Stage stage,Game game) {
-        // Disable all Gui Elements when waiting for all moves to be done
-        if (!game.all_moves_done) {
-            shutdown.setDisabled(true);
-            lock_in.setDisabled(true);
-
-            for(ButtonCard actor : cards){
-                if(actor.register == null){
-                    actor.remove();
-                }
-            }
-        } else {
-            for (ButtonCard actor : cards) {
-                if (actor.register != null) {
-                    unRegisterCard(actor, actor.register);
-                }
-                actor.remove();
-            }
-            cards.clear();
-
-            // Makes new deck each time, essentially reshuffling and re-adding, temp
-            game.deck = new Deck();
-            addCards(game.players().get(0).getRobot().getHp(), stage);
-            finished = false;
-        }
+        addCards(g.players().get(player),stage);
+        addEndTurn(stage,g,b,player);
+        addPowerDownButton(stage,g,b,player);
     }
 
     /**
@@ -65,18 +43,19 @@ public class GuiCards implements IGuiElement {
      * @param n - Amount of cards
      * @param stage - Stage to change
      */
-    private void addCards(int n, Stage stage){
+    private void addCards(Player p, Stage stage){
+        int n = p.getHand().size();
+        hand = (ArrayList<ICard>) p.getHand().clone();
         for(int i = 0; i < n; i++){
-            ButtonCard SpecCard = GuiFactory.createCard(0,0,new MoveCard(1,1,"Move 1"));
+            ButtonCard SpecCard = GuiFactory.createCard(0,0,new MoveCard(1,1,"Move 1",null));
             int x = (int) (i*SpecCard.getWidth() + stage.getWidth()/2 - SpecCard.getWidth()*(n/2)) ;
-            int y = 40;
-
+            int y = 0;
             if(n % 2 != 0){
                 x = (int) (x - SpecCard.getWidth()/2);
             }
 
-            ButtonCard temp = GuiFactory.createCard(x,y,game.deck.getCard());
-            temp.setPosition(x,y);
+
+            ButtonCard temp = GuiFactory.createCard(x,y,p.getHand().get(i));
             temp.setOriginPoint(new Point(x,y)); // Set reset point for card
 
             // Adds a drag listener to actor
@@ -91,48 +70,87 @@ public class GuiCards implements IGuiElement {
 
                 @Override
                 public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                    if(!isFinished()) {
-                        // Changes Z-index so that dragged items are on the top of the stack
-                        int index = 0;
-                        for (ButtonCard c : cards) {
-                            if (c.getZIndex() + 2 > index) {
-                                index = c.getZIndex();
-                            }
+                    // Changes Z-index so that dragged items are on the top of the stack
+                    int index = 0;
+                    for(ButtonCard c : cards){
+                        if(c.getZIndex() > index){
+                            index = c.getZIndex();
                         }
-                        temp.setZIndex(index + 1);
-                        temp.displayPriority().setZIndex(index+2);
-
-                        offsetX = x;
-                        offsetY = y;
-                        click = true;
                     }
+                    temp.setZIndex(index+1);
+                    temp.displayPriority().setZIndex(index+2);
+
+                    offsetX = x;
+                    offsetY = y;
+                    click = true;
+
                     return super.touchDown(event, x, y, pointer, button);
                 }
 
                 @Override
                 public void drag(InputEvent event, float x, float y, int pointer) {
-                    if(!isFinished()){
-                        temp.moveBy(x-offsetX,y-offsetY);
-
-                        click = false;
-                        super.drag(event, x, y, pointer);
-                    }
+                    temp.moveBy(x-offsetX,y-offsetY);
+                    click = false;
+                    super.drag(event, x, y, pointer);
                 }
 
                 @Override
                 public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                    if(!isFinished()) {
-                        offsetX = x;
-                        offsetY = y;
+                    offsetX = x;
+                    offsetY = y;
+                    
 
-                        // If it's a simple click
-                        if (click) {
-                            doClick(temp);
+                    // If it's a simple click
+                    if(click){
+                        if(temp.register != null){
+                            unRegisterCard(temp,temp.register);
                         } else {
-                            doDrag(temp, offsetX, offsetY);
+                            // Find fist open register
+                            for(Register register : registers){
+                                if(!register.getStatus() && !register.disabled){
+                                    registerCard(temp,register);
+                                    break;
+                                }
+                            }
                         }
-                        click = false;
+                    } else {
+                        boolean hit = false;
+                        for(Register register : registers){
+                            // Register is hit by dragging motion
+                            if(register.contains(temp.getX()+offsetX,temp.getY()+offsetY)){
+                                hit = true;
+                                if(!register.getStatus()){ // Register is empty
+                                    if(temp.register == null){
+                                        registerCard(temp,register);
+                                        break;
+                                    } else {
+                                        unRegisterCard(temp,temp.register);
+                                        registerCard(temp,register);
+                                        break;
+                                    }
+                                } else if(temp.register != null) { // Register is not empty, then swap registers and card
+                                    if (temp.register == register){
+                                        unRegisterCard(temp,register);
+                                        break;
+                                    } else {
+                                        swapRegister(temp, temp.register, register);
+                                        break;
+                                    }
+                                } else { // // Reset to origin point
+                                    temp.setPosition(temp.getOriginX(),temp.getOriginY());
+                                }
+                            }
+                        }
+                        if(!hit){ // If dragging was a miss, then unregister/return to origin point
+                            if(temp.register == null){
+                                temp.setPosition(temp.getOriginX(),temp.getOriginY());
+                            } else {
+                                unRegisterCard(temp,temp.register);
+                            }
+                        }
                     }
+
+                    click = false;
                     super.touchUp(event, x, y, pointer, button);
                 }
             });
@@ -140,67 +158,6 @@ public class GuiCards implements IGuiElement {
             stage.addActor(temp);
             stage.addActor(temp.displayPriority());
             cards.add(temp);
-        }
-    }
-
-    /**
-     * Does click on card
-     * @param card - card to be clicked
-     */
-    private void doClick(ButtonCard card){
-        if(card.register != null){
-            unRegisterCard(card,card.register);
-        } else {
-            // Find fist open register
-            for(Register register : registers){
-                if(!register.getStatus() && !register.disabled){
-                    registerCard(card,register);
-                    break;
-                }
-            }
-        }
-    }
-
-    /**
-     * Does drag on card
-     * @param card - card to be dragged
-     * @param offsetX - offset x for dragging motion
-     * @param offsetY - offset y for dragging motion
-     */
-    private void doDrag(ButtonCard card, float offsetX, float offsetY){
-        boolean hit = false;
-        for(Register register : registers){
-            // Register is hit by dragging motion
-            if(register.contains(card.getX()+offsetX,card.getY()+offsetY)){
-                hit = true;
-                if(!register.getStatus()){ // Register is empty
-                    if(card.register == null){
-                        registerCard(card,register);
-                        break;
-                    } else {
-                        unRegisterCard(card,card.register);
-                        registerCard(card,register);
-                        break;
-                    }
-                } else if(card.register != null) { // Register is not empty, then swap registers and card
-                    if (card.register == register){
-                        unRegisterCard(card,register);
-                        break;
-                    } else {
-                        swapRegister(card, card.register, register);
-                        break;
-                    }
-                } else { // // Reset to origin point
-                    card.setPosition(card.getOriginX(),card.getOriginY());
-                }
-            }
-        }
-        if(!hit){ // If dragging was a miss, then unregister/return to origin point
-            if(card.register == null){
-                card.setPosition(card.getOriginX(),card.getOriginY());
-            } else {
-                unRegisterCard(card,card.register);
-            }
         }
     }
 
@@ -239,6 +196,15 @@ public class GuiCards implements IGuiElement {
         card.register = null;
         register.setCard(null);
     }
+    
+    private void unRegisterCard(Register register){
+        ButtonCard card = register.getCard();
+        if(card==null)return;
+        card.setPosition(card.getOriginX(),card.getOriginY());
+        register.setStatus(false);
+        card.register = null;
+        register.setCard(null);
+    }
 
     /**
      * Add registers to gui-stage, default is 5 registers
@@ -248,10 +214,10 @@ public class GuiCards implements IGuiElement {
         for(int i = 0; i < 5;i++){
             Register SpecRegister = GuiFactory.createRegister(0,0);
             int x = (int) (i*SpecRegister.getWidth() + stage.getWidth()/2 - SpecRegister.getWidth()*2 - SpecRegister.getWidth()/2);
-            int y = 250;
+            int y = 100+margin;
 
             Register temp = GuiFactory.createRegister(x,y);
-            temp.setZIndex(1);
+
             stage.addActor(temp);
             registers.add(temp);
         }
@@ -261,76 +227,81 @@ public class GuiCards implements IGuiElement {
     /**
      * Adds a end-turn button to gui-stage
      * @param stage - Gui-stage to add to
-     * @param game - Current game
      */
-    private void addEndTurn(Stage stage,Game game){
-        ImageButton button = new ImageButton(
+    private void addEndTurn(Stage stage,GameClass g,Board b,int player){
+        lockIn = new ImageButton(
                 GuiFactory.getTexture("assets/gui/Signs/LockIn.png"),
                 GuiFactory.getTexture("assets/gui/Signs/LockInPushed.png"));
 
-        button.setWidth(100);
-        button.setHeight(100);
+        lockIn.setWidth(100);
+        lockIn.setHeight(100);
 
         Register tempRegister = registers.get(registers.size()-1);
         float x = tempRegister.getX() + tempRegister.getWidth();
-        float y = tempRegister.getY() + tempRegister.getHeight()/2 - button.getHeight()/2;
+        float y = tempRegister.getY() + tempRegister.getHeight()/2 - lockIn.getHeight()/2;
 
-        button.setPosition(x,y);
+        lockIn.setPosition(x,y);
 
-        button.addListener(new ClickListener(){
+        lockIn.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float xx, float yy){
-                if(event.getType() == InputEvent.Type.touchUp && !isFinished()) {
-
+                if(event.getType() == InputEvent.Type.touchUp) {
+                    finished = true;
+                    powerDown.setDisabled(true);
+                    lockIn.setDisabled(true);
                     System.out.println("");
-                    int i = 0;
                     for(Register register : registers){
                         if(register.getStatus()){
-                            game.players().get(0).addCardToSheet(register.getCard().getType()); //temp
+                            System.out.print(register.getCard().getType().getName()+" - ");
+                            g.players().get(player).addCardToSheet(register.getCard().getType()); //temp
+                        } else {
+                            g.players().get(player).addCardToSheet(new Nothing(g.players().get(player)));
+                            System.out.print("null"+" - ");
                         }
-                    i++;
                     }
-                    game.players().get(0).setReady(true); //temp
-                    game.nextPlayer();
-                    finished = true;
+                    g.players().get(player).setReady(true); //temp
+                    System.out.println("");
+                }
+                if (player!=0) {
+                    g.sendHand();
                 }
             }
         });
-        lock_in = button;
-        stage.addActor(button);
+        stage.addActor(lockIn);
     }
 
-    /**
-     * Adds a PowerDownButton to GUI
-     * @param stage - UI-stage to add button to
-     * @param game - Current game
-     */
-    private void addPowerDownButton(Stage stage,Game game){
-        ImageButton button = new ImageButton(
+
+    private void addPowerDownButton(Stage stage,GameClass g, Board b,int player){
+        powerDown = new ImageButton(
                 GuiFactory.getTexture("assets/gui/Signs/PowerDown.png"),
                 GuiFactory.getTexture("assets/gui/Signs/PowerDownPushed.png"));
 
-        button.setWidth(100);
-        button.setHeight(100);
+        powerDown.setWidth(100);
+        powerDown.setHeight(100);
 
         Register tempRegister = registers.get(0);
-        float x = tempRegister.getX() - button.getWidth();
-        float y = tempRegister.getY() + tempRegister.getHeight()/2 - button.getHeight()/2;
+        float x = tempRegister.getX() - powerDown.getWidth();
+        float y = tempRegister.getY() + tempRegister.getHeight()/2 - powerDown.getHeight()/2;
 
-        button.setPosition(x,y);
-        button.addListener(new ClickListener(){
+        powerDown.setPosition(x,y);
+        powerDown.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float xx, float yy){
-                if(event.getType() == InputEvent.Type.touchUp && !isFinished()){
-                    button.setChecked(true);
-                    System.out.println(game.players().get(0).getName()+": Shutdown");
+                if(event.getType() == InputEvent.Type.touchUp){
+                    g.players().get(player).setShutDow(2);
+                    for(Register register : registers){
+                        g.players().get(player).addCardToSheet(new ShutDown(g.players().get(player))); //temp
+                    }
+                    g.players().get(player).setReady(true);
+                    System.out.println(g.players().get(player).getName()+": Shutdown");
+                    if (player!=0) {
+                        g.sendHand();
+                    }
                 }
             }
         });
-        shutdown = button;
-        stage.addActor(button);
+        stage.addActor(powerDown);
     }
-
 
     /**
      * Get if this gui-stage is finished
@@ -338,6 +309,18 @@ public class GuiCards implements IGuiElement {
      */
     public boolean isFinished(){
         return finished;
+    }
+    
+    public void update(Player p,Stage s) {
+        if(!p.getHand().equals(hand)) {
+            for(ButtonCard bc : cards) {
+                bc.remove();
+            }
+            for (Register r : registers) {
+                unRegisterCard(r);
+            }
+            addCards(p,s);
+        }
     }
 
 }

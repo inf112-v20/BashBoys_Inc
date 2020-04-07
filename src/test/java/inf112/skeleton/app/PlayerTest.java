@@ -1,7 +1,8 @@
 package inf112.skeleton.app;
 
-import inf112.skeleton.app.cards.ICard;
 import inf112.skeleton.app.cards.MoveCard;
+import inf112.skeleton.app.interfaces.ICard;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -15,7 +16,7 @@ public class PlayerTest {
     @BeforeEach
     public void init() {
         player = new Player("one");
-        move1 = new MoveCard(1, 1, "move1");
+        move1 = new MoveCard(1, 1, "move1",null);
     }
 
     @Test
@@ -50,10 +51,10 @@ public class PlayerTest {
 
     @Test
     public void getAllCardsFromFullSheetTest() {
-        ICard move2 = new MoveCard(2, 1, "move2");
-        ICard move3 = new MoveCard(2, 1, "move3");
-        ICard move4 = new MoveCard(2, 1, "move4");
-        ICard move5 = new MoveCard(2, 1, "move5");
+        ICard move2 = new MoveCard(2, 1, "move2",null);
+        ICard move3 = new MoveCard(2, 1, "move3",null);
+        ICard move4 = new MoveCard(2, 1, "move4",null);
+        ICard move5 = new MoveCard(2, 1, "move5",null);
         player.addCardToSheet(move1);
         player.addCardToSheet(move2);
         player.addCardToSheet(move3);

@@ -7,11 +7,19 @@ public class Flag implements ICheckPoint {
     private int x;
     private int y;
     String name;
+    int value;
 
-    public Flag(int x, int y, String name) {
+    public Flag() {
+    }
+    public Flag(String name,int val) {
+        this.name = name;
+        value = val;
+    }
+    public Flag(int x, int y, String name,int val) {
         this.x = x;
         this.y = y;
         this.name = name;
+        value = val;
     }
 
     @Override
@@ -37,6 +45,10 @@ public class Flag implements ICheckPoint {
     @Override
     public String getName(){
         return name;
+    }
+    
+    public int getNr() {
+        return value;
     }
 
 }

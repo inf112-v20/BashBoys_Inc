@@ -1,15 +1,15 @@
 package inf112.skeleton.app;
 
+import static org.junit.Assert.assertEquals;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+
 import inf112.skeleton.app.enums.Direction;
 import inf112.skeleton.app.enums.LeftRight;
 import inf112.skeleton.app.object.Robot;
 import inf112.skeleton.app.object.Wall;
 import inf112.skeleton.app.object.belts.Belt;
 import inf112.skeleton.app.object.belts.CornerBelt;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
-
-import static org.junit.Assert.assertEquals;
 
 class BeltPushingTests {
 

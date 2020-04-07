@@ -18,23 +18,24 @@ class CardEffectOnRobotOnEmptyBoardTest {
         //All the required objects
         Board board = new Board(12,12);
         Robot robot = new Robot();
-        RotateCard rCard1 = new RotateCard(LeftRight.LEFT,900,false,"Once Left");
-        RotateCard rCard2 = new RotateCard(LeftRight.RIGHT,900,true,"Once Right");
-        MoveCard mCard1 = new MoveCard(3,900,"Hmm");
-        MoveCard mCard2 = new MoveCard(3,900,"Hmm");
+        Player p = new Player("name","0",0,robot,0);
+        RotateCard rCard1 = new RotateCard(LeftRight.LEFT,900,false,"Once Left",p);
+        RotateCard rCard2 = new RotateCard(LeftRight.RIGHT,900,true,"Once Right",p);
+        MoveCard mCard1 = new MoveCard(3,900,"Hmm",p);
+        MoveCard mCard2 = new MoveCard(3,900,"Hmm",p);
         
         //Adds robot to board and uses cards on robot
         //Also returns to original place
         board.addItem(robot, 5, 5);
         
-        rCard1.doStuff(robot, board);
+        rCard1.doStuff(board);
         assertEquals(robot.getDir(),Direction.EAST);
         
-        mCard1.doStuff(robot, board);
+        mCard1.doStuff(board);
         assertEquals(robot.getX(),8);
         
-        rCard2.doStuff(robot, board);
-        mCard2.doStuff(robot, board);
+        rCard2.doStuff(board);
+        mCard2.doStuff(board);
         assertEquals(robot.getDir(),Direction.WEST);
         assertEquals(robot.getX(),5);
         

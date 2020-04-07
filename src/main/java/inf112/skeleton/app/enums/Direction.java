@@ -63,7 +63,7 @@ public enum Direction {
             return LeftRight.LEFT;
         } else if(oldD == SOUTH && newD == EAST) {
             return LeftRight.LEFT;
-        } else if(oldD == NORTH && newD == WEST) {
+        } else if(oldD == SOUTH && newD == WEST) {
             return LeftRight.RIGHT;
         } else if(oldD == EAST && newD == NORTH) {
             return LeftRight.LEFT;

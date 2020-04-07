@@ -1,23 +1,26 @@
 package inf112.skeleton.app.cards;
 
 import inf112.skeleton.app.Board;
-import inf112.skeleton.app.object.Robot;
+import inf112.skeleton.app.Player;
+import inf112.skeleton.app.interfaces.ICard;
 
 public class MoveCard implements ICard {
 
-    public int moves;
-    private int priority;
-    private String name;
+    int moves;
+    int priority;
+    String name;
+    Player p;
     
-    public MoveCard(int moves, int priority, String name) {
+    public MoveCard(int moves, int priority, String name, Player p) {
         this.moves = moves;
         this.priority = priority;
         this.name = name;
+        this.p = p;
     }
     
     @Override
-    public void doStuff(Robot robot, Board board) {
-        board.moveItem(robot, moves);
+    public void doStuff(Board board) {
+        board.moveItem(p.getRobot(), moves);
     }
 
     @Override
@@ -33,5 +36,12 @@ public class MoveCard implements ICard {
     @Override
     public String getExtra() {
         return ""+moves;
+    }
+    
+    public Player getPlayer() {
+        return p;
+    }
+    public void setPlayer(Player p) {
+        this.p = p;
     }
 }

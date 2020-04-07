@@ -1,6 +1,5 @@
 package inf112.skeleton.app.interfaces;
 
-import inf112.skeleton.app.cards.ICard;
 import inf112.skeleton.app.object.Robot;
 
 import java.util.ArrayList;

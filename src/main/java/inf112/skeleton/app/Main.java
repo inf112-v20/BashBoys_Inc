@@ -12,7 +12,7 @@ public class Main {
         cfg.height = 1080;
         cfg.useHDPI = true;
 
-        Game game = new Game();
+        GameClass game = new GameClass();
         game.play(cfg);
         
     }
