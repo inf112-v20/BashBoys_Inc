@@ -17,8 +17,9 @@ import inf112.skeleton.app.cards.ICard;
  */
 public class GuiFactory {
 
-    private static float WIDTH = 389;
-    private static float HEIGHT = 596;
+    public static float ratio = (389/4f)/(596/4f);
+    public static float HEIGHT = Gdx.graphics.getHeight()/5f;
+    public static float WIDTH = HEIGHT*ratio;
 
     /**
      * Get texture for param path
@@ -38,11 +39,11 @@ public class GuiFactory {
      * @param y - y position
      * @return ButtonCard
      */
-    static ButtonCard createCard(int x, int y, ICard cardType) {
+    static ButtonCard createCard(float x, float y, float width, float height, ICard cardType) {
         final ButtonCard button = new ButtonCard(getTexture(GuiFactory.getCardPath(cardType.getName())),cardType);
+        button.setWidth(width);
+        button.setHeight(height);
 
-        button.setWidth(WIDTH/4);
-        button.setHeight(HEIGHT/4);
         button.setPosition(x, y);
         return button;
     }
@@ -53,10 +54,10 @@ public class GuiFactory {
      * @param y - y position
      * @return Register
      */
-    static Register createRegister(int x, int y){
-        final Register button = new Register(getTexture("assets/gui/holder.png"));
-        button.setWidth(WIDTH/3);
-        button.setHeight(HEIGHT/3);
+    static Register createRegister(float x, float y, float width, float height){
+        final Register button = new Register(getTexture("assets/gui/invholder.png"));
+        button.setWidth(width);
+        button.setHeight(height);
         button.setPosition(x,y);
 
         return button;

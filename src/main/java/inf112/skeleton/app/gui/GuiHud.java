@@ -8,19 +8,16 @@ import inf112.skeleton.app.Player;
 import inf112.skeleton.app.object.Robot;
 import org.lwjgl.Sys;
 
-public class GuiHud {
+public class GuiHud implements IGuiElement {
 
     private Player player;
     private Robot robot;
 
-    /**
-     * Initialize Gui HUD
-     * @param stage - Stage to add HUD
-     * @param game - Current game
-     */
-    public void startHud(Stage stage, Game game){
-        player = game.players().get(0);
-        robot = player.getRobot();
+    @Override
+    public void initialize(Stage stage,GameClass game, int player){
+        this.player = game.players().get(player);
+        this.robot = this.player.getRobot();
+        //this.stage = stage;
         addPlayerHud(stage);
     }
 
@@ -51,12 +48,8 @@ public class GuiHud {
         stage.addActor(flags);
     }
 
-    /**
-     * Update HUD
-     * @param stage - Stage to Update
-     * @param game - Current Game
-     */
-    public void updateHud(Stage stage,Game game){
+    @Override
+    public void update(Stage stage,GameClass g){
         for(Actor a : stage.getActors()){
             if(a.getName() != null){
                 if(a.getName().equals("hp")){

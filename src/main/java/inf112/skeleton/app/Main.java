@@ -7,10 +7,14 @@ public class Main {
     public static void main(String[] args) {
         LwjglApplicationConfiguration cfg = new LwjglApplicationConfiguration();
 
-        cfg.title = "RoboRally";
-        cfg.width = 1920;
-        cfg.height = 1080;
+        // Min requirement res: 1366x768
+        // Other: 1600×900, 2560×1440, 3840×2160
+        // Default res: 1920x1080
 
+        cfg.title = "RoboRally";
+        cfg.width = 1366;
+        cfg.height = 768;
+        cfg.useHDPI = true;
 
         Game game = new Game();
         game.play(cfg);

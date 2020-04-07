@@ -13,43 +13,55 @@ import inf112.skeleton.app.cards.MoveCard;
 import java.awt.*;
 import java.util.ArrayList;
 
-public class GuiCards {
+public class GuiCards implements IGuiElement{
 
     private ArrayList<Register> registers = new ArrayList<>();
     private ArrayList<ButtonCard> cards = new ArrayList<>();
-    private Deck deck = new Deck();
+    private ArrayList<ICard> hand;
+    ImageButton powerDown;
+    Stage uiStage;
+    GameClass game;
+    Player player;
+    ImageButton panel;
     private boolean finished = false;
 
+    @Override
+    public void initialize(Stage stage,GameClass game, int player){
+        this.game = game;
 
     /**
      * Start the card gui, adds card and register and end Turn button
-     * @param stage gui stage to be added to
      * @param cards amount of cards present
      */
     public void startCardGui(Stage stage, int cards,Game game , Board b){
         addRegisters(stage);
         addCards(cards,stage);
         addEndTurn(stage,game);
-        addPowerDownButton(stage,game);
     }
 
     /**
      * Adds card to gui
-     * @param n - Amount of cards
+     * @param p - Amount of cards
      * @param stage - Stage to change
      */
     private void addCards(int n, Stage stage){
+    private void addCards(Player p, Stage stage){
+        int n = p.getHand().size();
+        hand = (ArrayList<ICard>) p.getHand().clone();
+
+
+        int ii = 0;
         for(int i = 0; i < n; i++){
-            ButtonCard SpecCard = GuiFactory.createCard(0,0,new MoveCard(1,1,"Move 1"));
-            int x = (int) (i*SpecCard.getWidth() + stage.getWidth()/2 - SpecCard.getWidth()*(n/2)) ;
-            int y = 0;
 
             if(n % 2 != 0){
                 x = (int) (x - SpecCard.getWidth()/2);
+            float width = (panel.getWidth()/9);
             }
 
             ButtonCard temp = GuiFactory.createCard(x,y,deck.getCard());
-            temp.setOriginPoint(new Point(x,y)); // Set reset point for card
+            float x = panel.getX() + i*width;
+
+            ButtonCard temp = GuiFactory.createCard(x,y,width,height,p.getHand().get(i));
 
             // Adds a drag listener to actor
             temp.addListener(new DragListener(){
@@ -187,8 +199,7 @@ public class GuiCards {
         register.setCard(card);
         register.setStatus(true);
         card.setPosition(register.getX(),register.getY());
-        card.setWidth(GuiFactory.getWidth()/3);
-        card.setHeight(GuiFactory.getHeight()/3);
+        card.reSize(register.getWidth(),register.getHeight(),this.uiStage);
     }
 
     /**
@@ -210,10 +221,17 @@ public class GuiCards {
      */
     private void unRegisterCard(ButtonCard card, Register register){
         card.setPosition(card.getOriginX(),card.getOriginY());
-        card.resetSize();
         register.setStatus(false);
         card.register = null;
         register.setCard(null);
+        card.reSize(card.start_width,card.start_height,this.uiStage);
+
+    }
+    
+        ButtonCard card = register.getCard();
+        card.setPosition(card.getOriginX(),card.getOriginY());
+        register.setStatus(false);
+        card.register = null;
     }
 
     /**
@@ -222,9 +240,12 @@ public class GuiCards {
      */
     private void addRegisters(Stage stage){
         for(int i = 0; i < 5;i++){
-            Register SpecRegister = GuiFactory.createRegister(0,0);
-            int x = (int) (i*SpecRegister.getWidth() + stage.getWidth()/2 - SpecRegister.getWidth()*2 - SpecRegister.getWidth()/2);
-            int y = 150;
+            float height = (panel.getHeight()/3)+((panel.getHeight()/3)/10*2);
+
+            float x = (panel.getX() + panel.getWidth()/47) + i*(width+(panel.getWidth()/50)*2);
+            float y = (panel.getY() + panel.getHeight()/25);
+
+            Register temp = GuiFactory.createRegister(x,y,width,height);
 
             Register temp = GuiFactory.createRegister(x,y);
             temp.setZIndex(1);
@@ -239,21 +260,19 @@ public class GuiCards {
      * @param stage - Gui-stage to add to
      * @param game - Current game
      */
-    private void addEndTurn(Stage stage,Game game){
-        ImageButton button = new ImageButton(
+    private void addEndTurn(Stage stage,GameClass g, int player){
                 GuiFactory.getTexture("assets/gui/Signs/LockIn.png"),
                 GuiFactory.getTexture("assets/gui/Signs/LockInPushed.png"));
 
-        button.setWidth(100);
-        button.setHeight(100);
+        lockIn.setWidth(panel.getHeight()/3.2f);
+        lockIn.setHeight(panel.getHeight()/3.2f);
 
-        Register tempRegister = registers.get(registers.size()-1);
-        float x = tempRegister.getX() + tempRegister.getWidth();
-        float y = tempRegister.getY() + tempRegister.getHeight()/2 - button.getHeight()/2;
 
-        button.setPosition(x,y);
+        float x = (panel.getX()+(panel.getWidth()/5)*4)+panel.getWidth()/200;
+        float y = (panel.getY() + panel.getHeight() - lockIn.getHeight())-panel.getWidth()/200;
 
-        button.addListener(new ClickListener(){
+        lockIn.setPosition(x,y);
+
             @Override
             public void clicked(InputEvent event, float xx, float yy){
                 if(event.getType() == InputEvent.Type.touchUp) {
@@ -275,37 +294,30 @@ public class GuiCards {
                 }
             }
         });
-        stage.addActor(button);
+        stage.addActor(lockIn);
     }
 
-    /**
-     * Adds a PowerDownButton to GUI
-     * @param stage - UI-stage to add button to
-     * @param game - Current game
-     */
-    private void addPowerDownButton(Stage stage,Game game){
-        ImageButton button = new ImageButton(
+
+        powerDown = new ImageButton(
                 GuiFactory.getTexture("assets/gui/Signs/PowerDown.png"),
                 GuiFactory.getTexture("assets/gui/Signs/PowerDownPushed.png"));
 
-        button.setWidth(100);
-        button.setHeight(100);
+        powerDown.setWidth(panel.getHeight()/3);
 
-        Register tempRegister = registers.get(0);
-        float x = tempRegister.getX() - button.getWidth();
-        float y = tempRegister.getY() + tempRegister.getHeight()/2 - button.getHeight()/2;
+        float x = panel.getX();
+        float y = panel.getY() + panel.getHeight() - powerDown.getHeight();
 
-        button.setPosition(x,y);
         button.addListener(new ClickListener(){
+        powerDown.setPosition(x,y);
             @Override
             public void clicked(InputEvent event, float xx, float yy){
                 if(event.getType() == InputEvent.Type.touchUp){
-                    button.setChecked(true);
+                    powerDown.setChecked(true);
                     System.out.println(game.players().get(0).getName()+": Shutdown");
                 }
             }
         });
-        stage.addActor(button);
+        stage.addActor(powerDown);
     }
 
     /**
@@ -314,6 +326,10 @@ public class GuiCards {
      */
     public boolean isFinished(){
         return finished;
+    }
+
+    public void setPanel(ImageButton panel){
+        this.panel = panel;
     }
 
 }

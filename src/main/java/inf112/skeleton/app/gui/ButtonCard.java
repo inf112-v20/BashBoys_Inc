@@ -1,5 +1,6 @@
 package inf112.skeleton.app.gui;
 
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import inf112.skeleton.app.cards.ICard;
@@ -21,6 +22,8 @@ public class ButtonCard extends ImageButton {
     ButtonCard(TextureRegionDrawable texture, ICard type) {
         super(texture);
         this.type = type;
+        priority = new Text(type.getPriority()+"");
+    }
     }
 
     /**
@@ -61,6 +64,26 @@ public class ButtonCard extends ImageButton {
     public void resetSize(){
         this.setWidth(GuiFactory.getWidth()/4);
         this.setHeight(GuiFactory.getHeight()/4);
+    }
+
+    public void reSize(float width, float height, Stage stage){
+
+        float reScale = (width/start_width);
+        System.out.println(reScale+"");
+        if(reScale==0){reScale=1;}
+        this.setFontScale(reScale,stage);
+
+        this.setWidth(width);
+        this.setHeight(height);
+        this.updatePriorityPos();
+    }
+
+    private void setFontScale(float scale, Stage stage){
+        displayPriority().remove();
+        this.priority = new Text(type.getPriority()+"");
+        this.updatePriorityPos();
+        this.priority.getStyle().font.getData().setScale(scale);
+        stage.addActor(priority);
     }
 
 }
