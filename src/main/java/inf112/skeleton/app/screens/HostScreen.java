@@ -36,10 +36,7 @@ public class HostScreen implements Screen {
     private Protocol protocol;
     private GameClass g;
     private String pl;
-    private Skin skin;
     private Text p;
-    private TextButton start;
-    private Thread t1;
     private int pp = 1;
     private ServerSocket server;
     private Setting set;
@@ -52,7 +49,7 @@ public class HostScreen implements Screen {
         stage = new Stage();
         Gdx.input.setInputProcessor(stage);
         BitmapFont font = new BitmapFont();
-        skin = new Skin(Gdx.files.internal("assets/gui/skin/uiskin.json"));
+        Skin skin = new Skin(Gdx.files.internal("assets/gui/skin/uiskin.json"));
         TextureAtlas atlas = new TextureAtlas("assets/gui/skin/uiskin.atlas");
         skin.addRegions(atlas);
         TextButton.TextButtonStyle style = new TextButton.TextButtonStyle();
@@ -64,7 +61,7 @@ public class HostScreen implements Screen {
         port = 25565;
         protocol = Protocol.TCP;
 
-        start = new TextButton("Play", style);
+        TextButton start = new TextButton("Play", style);
         start.setWidth(100);
         start.setHeight(100);
         start.setPosition(150, 100);
@@ -104,7 +101,7 @@ public class HostScreen implements Screen {
         });
         stage.addActor(start);
 
-        t1 = new Thread(new Runnable() {
+        Thread t1 = new Thread(new Runnable() {
             @Override
             public void run(){
                 ServerSocketHints ssh = new ServerSocketHints();

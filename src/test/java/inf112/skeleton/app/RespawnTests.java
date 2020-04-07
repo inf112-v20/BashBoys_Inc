@@ -12,7 +12,7 @@ class RespawnTests {
 
     @Test
     @DisplayName("Respawn at flag test")
-    void respawnAtFlagTest(){
+    public void respawnAtFlagTest(){
         Flag f1 = new Flag(1,1,"F1",0);
         Robot r = new Robot("Rebo");
         GameClass g = new GameClass();

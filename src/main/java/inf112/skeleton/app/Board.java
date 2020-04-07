@@ -96,10 +96,8 @@ public class Board {
 
         // Checks if there is a wall on current tile that blocks path
         for (IMapObject obj : getItems(x, y)) {
-            if (obj instanceof Wall) {
-                if (((Wall) obj).getDir() == dir) {
-                    return false;
-                }
+            if (obj instanceof Wall && ((Wall) obj).getDir() == dir) {
+                return false;
             }
         }
 
@@ -501,6 +499,8 @@ public class Board {
                         pushers.add(p);
                     }
                     break;
+                default:
+                    break;
                 }
             }
         }
@@ -546,9 +546,11 @@ public class Board {
             if (obj instanceof HealDraw) {
                 for (IMapObject ob : getItems(obj.getX(), obj.getY())) {
                     if (ob instanceof Robot) {
+                        /*
                         if (((HealDraw) obj).draw()) {
                             // draw card
                         }
+                        */
                         ((Robot) ob).heal(1);
                     }
                 }

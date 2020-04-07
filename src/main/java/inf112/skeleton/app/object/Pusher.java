@@ -9,7 +9,6 @@ public class Pusher implements IDirectionalObject {
     private int y;
     private Direction dir;
     private boolean oneThreeFive;
-    private String name;
 
     public Pusher() {
         x = 0;

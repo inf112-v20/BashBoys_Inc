@@ -36,12 +36,10 @@ public class GameClass {
     private ArrayList<SpawnPoint> spawns = new ArrayList<>();
 
     private ArrayList<ICard> turn;
-    private ViewEngine view;
 
     private String map = "map1";
     private boolean won;
     private String winner;
-    private LwjglApplicationConfiguration cfg;
 
     Direction west = Direction.WEST;
     Direction east = Direction.EAST;
@@ -65,9 +63,8 @@ public class GameClass {
     }
 
     public void play(LwjglApplicationConfiguration cfg){
-        this.cfg = cfg;
-        view = new ViewEngine(this);
-        new LwjglApplication(view, this.cfg);
+        ViewEngine view = new ViewEngine(this);
+        new LwjglApplication(view, cfg);
 
         while (!t) {
             sleep(1);

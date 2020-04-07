@@ -26,7 +26,7 @@ public class GuiFactory {
      * @param path - Path of img for texture
      * @return texture from img path
      */
-    static TextureRegionDrawable getTexture(String path){
+    public static TextureRegionDrawable getTexture(String path){
         FileHandle fileHandle = Gdx.files.internal(path);
         Texture tex = new Texture(fileHandle);
         TextureRegion texRegion = new TextureRegion(tex);
@@ -39,7 +39,7 @@ public class GuiFactory {
      * @param y - y position
      * @return ButtonCard
      */
-    static ButtonCard createCard(int x, int y, ICard cardType) {
+    public static ButtonCard createCard(int x, int y, ICard cardType) {
         final ButtonCard button = new ButtonCard(getTexture(GuiFactory.getCardPath(cardType.getName())),cardType);
 
         button.setWidth(WIDTH);
@@ -54,7 +54,7 @@ public class GuiFactory {
      * @param y - y position
      * @return Register
      */
-    static Register createRegister(int x, int y){
+    public static Register createRegister(int x, int y){
         final Register button = new Register(getTexture("assets/gui/holder.png"));
         button.setWidth(WIDTH);
         button.setHeight(HEIGHT);
@@ -102,7 +102,7 @@ public class GuiFactory {
      * @param path - path of Text-style
      * @return TextButton.TextButtonStyle Style
      */
-     static TextButton.TextButtonStyle getTextStyle(String path){
+    public static TextButton.TextButtonStyle getTextStyle(String path){
         BitmapFont font = new BitmapFont();
         Skin skin = new Skin();
         TextureAtlas atlas = new TextureAtlas(path);
@@ -116,7 +116,7 @@ public class GuiFactory {
      * Get Base Width which each Gui element is based on
      * @return Base Width
      */
-    static float getWidth(){
+    public static float getWidth(){
         return WIDTH;
     }
 
@@ -124,7 +124,7 @@ public class GuiFactory {
      * Get Base Height which each Gui element is based on
      * @return Base Height
      */
-    static float getHeight(){
+    public static float getHeight(){
         return HEIGHT;
     }
 

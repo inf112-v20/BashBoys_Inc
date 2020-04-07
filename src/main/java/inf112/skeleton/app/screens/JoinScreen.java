@@ -31,18 +31,13 @@ public class JoinScreen implements Screen{
     private Stage stage;
     private int port;
     private Protocol protocol;
-    private Socket socket;
     private TextArea name;
     private TextArea ip;
     private TextArea ownIp;
-    private TextButton button;
-    private Thread t1;
     private GameClass g;
-    private Skin skin;
     private boolean swap = false;
     private int pp = 0;
     private int player;
-    private ServerSocket server;
     private Setting set;
     private boolean t = true;
     
@@ -52,7 +47,7 @@ public class JoinScreen implements Screen{
         stage = new Stage();
         Gdx.input.setInputProcessor(stage);
         BitmapFont font = new BitmapFont();
-        skin = new Skin(Gdx.files.internal("assets/gui/skin/uiskin.json"));
+        Skin skin = new Skin(Gdx.files.internal("assets/gui/skin/uiskin.json"));
         TextureAtlas atlas = new TextureAtlas("assets/gui/skin/uiskin.atlas");
         skin.addRegions(atlas);
         TextButton.TextButtonStyle style = new TextButton.TextButtonStyle();
@@ -67,7 +62,7 @@ public class JoinScreen implements Screen{
         ip = new TextArea("84.215.102.111",skin);
         ownIp = new TextArea("192.168.0.13",skin);
         name = new TextArea("Name",skin);
-        button = new TextButton("Join",skin);
+        TextButton button = new TextButton("Join",skin);
         
         
         button.addListener(new ClickListener() {
@@ -76,7 +71,7 @@ public class JoinScreen implements Screen{
                 String send = "";
                 SocketHints sh = new SocketHints();
                 sh.connectTimeout = 10000;
-                socket = Gdx.net.newClientSocket(protocol, ip.getText(), 25565, sh);
+                Socket socket = Gdx.net.newClientSocket(protocol, ip.getText(), 25565, sh);
                 try {
                     send = name.getText()+","+ownIp.getText()+",7777\n";
                     socket.getOutputStream().write(send.getBytes());
@@ -94,12 +89,12 @@ public class JoinScreen implements Screen{
         stage.addActor(name);
         stage.addActor(button);
         
-        t1 = new Thread(new Runnable() {
+        Thread t1 = new Thread(new Runnable() {
             @Override
             public void run(){
                 ServerSocketHints ssh = new ServerSocketHints();
                 ssh.acceptTimeout = 0;
-                server = Gdx.net.newServerSocket(protocol, port, ssh);
+                ServerSocket server = Gdx.net.newServerSocket(protocol, port, ssh);
                 while (t) {
                     Socket s = server.accept(null);
                     BufferedReader buffer = new BufferedReader(new InputStreamReader(s.getInputStream()));
