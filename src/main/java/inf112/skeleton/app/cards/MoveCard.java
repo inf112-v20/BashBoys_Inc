@@ -6,10 +6,10 @@ import inf112.skeleton.app.interfaces.ICard;
 
 public class MoveCard implements ICard {
 
-    int moves;
-    int priority;
-    String name;
-    Player p;
+    private int moves;
+    private int priority;
+    private String name;
+    private Player p;
     
     public MoveCard(int moves, int priority, String name, Player p) {
         this.moves = moves;

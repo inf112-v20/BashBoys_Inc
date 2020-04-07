@@ -31,17 +31,17 @@ public class GameClass {
     private int player;
     private ArrayList<Player> players;
     private Deck deck = new Deck();
-    boolean t = false;
-    ArrayList<Flag> flags = new ArrayList<>();
-    ArrayList<SpawnPoint> spawns = new ArrayList<>();
+    private boolean t = false;
+    private ArrayList<Flag> flags = new ArrayList<>();
+    private ArrayList<SpawnPoint> spawns = new ArrayList<>();
 
-    ArrayList<ICard> turn;
-    ViewEngine view;
+    private ArrayList<ICard> turn;
+    private ViewEngine view;
 
     private String map = "map1";
     private boolean won;
-    String winner;
-    LwjglApplicationConfiguration cfg;
+    private String winner;
+    private LwjglApplicationConfiguration cfg;
 
     Direction west = Direction.WEST;
     Direction east = Direction.EAST;

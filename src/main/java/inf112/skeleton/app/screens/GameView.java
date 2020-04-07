@@ -73,13 +73,10 @@ public class GameView implements Screen {
     private GuiCards guiCards = new GuiCards();
     private GuiHud guiHud = new GuiHud();
     private GameClass g;
-    int player;
-    Thread t1;
-    int hmm = 0;
-    Group cg;
-    Group ug;
-    Music sound;
-    Setting set;
+    private int player;
+    private Thread t1;
+    private Music sound;
+    private Setting set;
 
     public GameView(GameClass g, int player, Setting set) {
         this.player = player;

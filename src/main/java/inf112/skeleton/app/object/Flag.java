@@ -6,8 +6,8 @@ public class Flag implements ICheckPoint {
 
     private int x;
     private int y;
-    String name;
-    int value;
+    private String name;
+    private int value;
 
     public Flag() {
     }

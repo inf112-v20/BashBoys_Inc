@@ -22,8 +22,8 @@ public class GuiCards {
     private ArrayList<Register> registers = new ArrayList<>();
     private ArrayList<ButtonCard> cards = new ArrayList<>();
     private ArrayList<ICard> hand;
-    ImageButton powerDown;
-    ImageButton lockIn;
+    private ImageButton powerDown;
+    private ImageButton lockIn;
     private boolean finished = false;
 
     /**

@@ -11,12 +11,12 @@ import inf112.skeleton.app.object.belts.CornerBelt;
 import inf112.skeleton.app.object.belts.CornerJoinBelt;
 
 public class Map1 {
-    Direction west = Direction.WEST;
-    Direction east = Direction.EAST;
-    Direction north = Direction.NORTH;
-    Direction south = Direction.SOUTH;
-    LeftRight left = LeftRight.LEFT;
-    LeftRight right = LeftRight.RIGHT;
+    private Direction west = Direction.WEST;
+    private Direction east = Direction.EAST;
+    private Direction north = Direction.NORTH;
+    private Direction south = Direction.SOUTH;
+    private LeftRight left = LeftRight.LEFT;
+    private LeftRight right = LeftRight.RIGHT;
     public Map1(Board board) {
         // y=0
         board.addItem(new Hole(), 0, 0);

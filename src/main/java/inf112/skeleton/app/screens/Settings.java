@@ -18,9 +18,9 @@ import inf112.skeleton.app.Setting;
 public class Settings implements Screen {
 
     private Stage stage;
-    Menu m;
-    Setting set;
-    CheckBox box;
+    private Menu m;
+    private Setting set;
+    private CheckBox box;
     
     public Settings(Menu m,Setting set) {
         this.m = m;

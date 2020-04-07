@@ -21,9 +21,9 @@ public class Menu implements Screen {
     private Stage stage;
     private TextField name;
 
-    GameClass g;
-    Menu m;
-    Setting set = new Setting();
+    private GameClass g;
+    private Menu m;
+    private Setting set = new Setting();
     
     public Menu(GameClass g) {
         this.g = g;

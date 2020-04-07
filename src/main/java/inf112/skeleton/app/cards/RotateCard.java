@@ -11,7 +11,7 @@ public class RotateCard implements ICard {
     private int rotates;
     private int priority;
     private LeftRight direction;
-    Player p;
+    private Player p;
 
     public RotateCard(LeftRight lr, int priority, boolean uTurn, String name, Player p) {
         direction = lr;

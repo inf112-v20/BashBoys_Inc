@@ -8,7 +8,7 @@ import inf112.skeleton.app.gui.Text;
 
 public class Win implements Screen {
     private Stage stage;
-    String winner;
+    private String winner;
 
     
     

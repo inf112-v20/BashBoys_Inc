@@ -6,7 +6,7 @@ import inf112.skeleton.app.interfaces.ICard;
 
 public class ShutDown implements ICard {
 
-    Player p;
+    private Player p;
     
     public ShutDown(Player p) {
         this.p = p;

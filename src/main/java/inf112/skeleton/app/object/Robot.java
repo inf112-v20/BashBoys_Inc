@@ -11,7 +11,7 @@ public class Robot implements IDirectionalObject {
     private String name = "RobotFaceSouth";
     private Direction dir = Direction.SOUTH;
     private int hp = 9;
-    Player player;
+    private Player player;
 
     public Robot() {
         // Robot with no name

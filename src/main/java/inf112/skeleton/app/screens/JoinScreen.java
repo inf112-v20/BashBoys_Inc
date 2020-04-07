@@ -28,23 +28,23 @@ import inf112.skeleton.app.object.Robot;
 
 public class JoinScreen implements Screen{
 
-    Stage stage;
-    int port;
-    Protocol protocol;
-    Socket socket;
-    TextArea name;
-    TextArea ip;
-    TextArea ownIp;
-    TextButton button;
-    Thread t1;
-    GameClass g;
-    Skin skin;
-    boolean swap = false;
-    int pp = 0;
-    int player;
-    ServerSocket server;
-    Setting set;
-    boolean t = true;
+    private Stage stage;
+    private int port;
+    private Protocol protocol;
+    private Socket socket;
+    private TextArea name;
+    private TextArea ip;
+    private TextArea ownIp;
+    private TextButton button;
+    private Thread t1;
+    private GameClass g;
+    private Skin skin;
+    private boolean swap = false;
+    private int pp = 0;
+    private int player;
+    private ServerSocket server;
+    private Setting set;
+    private boolean t = true;
     
     public JoinScreen(GameClass g,Setting set){
         this.set = set;

@@ -31,19 +31,19 @@ import inf112.skeleton.app.object.Robot;
 
 public class HostScreen implements Screen {
 
-    Stage stage;
-    int port;
-    Protocol protocol;
-    GameClass g;
-    String pl;
-    Skin skin;
-    Text p;
-    TextButton start;
-    Thread t1;
-    int pp = 1;
-    ServerSocket server;
-    Setting set;
-    boolean t = true;
+    private Stage stage;
+    private int port;
+    private Protocol protocol;
+    private GameClass g;
+    private String pl;
+    private Skin skin;
+    private Text p;
+    private TextButton start;
+    private Thread t1;
+    private int pp = 1;
+    private ServerSocket server;
+    private Setting set;
+    private boolean t = true;
 
     public HostScreen(GameClass g, Setting set) {
         this.set = set;
