@@ -18,7 +18,6 @@ import inf112.skeleton.app.Setting;
 public class Settings implements Screen {
 
     private Stage stage;
-    private TextButton button;
     Menu m;
     Setting set;
     CheckBox box;
@@ -41,7 +40,7 @@ public class Settings implements Screen {
         style.up = skin.getDrawable("apptheme_btn_radio_on_holo_light");
         style.down = skin.getDrawable("apptheme_btn_radio_on_focused_holo_light");
         
-        button = new TextButton("Tits", style);
+        TextButton button = new TextButton("Tits", style);
         button.addListener(new ClickListener() {
 
             @Override

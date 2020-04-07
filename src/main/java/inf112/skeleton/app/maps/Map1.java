@@ -138,7 +138,7 @@ public class Map1 {
         board.addItem(new Belt(east), 2, 10);
         board.addItem(new Belt(east), 3, 10);
         board.addItem(new Belt(east), 4, 10);
-        board.addItem(new Belt(south), 5, 10);
+        board.addItem(new CornerJoinBelt(south,right), 5, 10);
         board.addItem(new Belt(north), 6, 10);
         board.addItem(new Wall(east), 9, 10);
         board.addItem(new Wall(north), 9, 10);

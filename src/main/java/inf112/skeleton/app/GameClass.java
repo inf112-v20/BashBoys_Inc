@@ -334,7 +334,7 @@ public class GameClass {
 
     private String str(ICard c){
         String send = c.getPriority() + "";
-        if (c.getName() == "Back Up") {
+        if (c.getName().equals("Back Up")) {
             send += "," + 1 + "," + 4 + ",";
         } else if (c instanceof MoveCard) {
             send += "," + 1 + "," + c.getName().charAt(c.getName().length() - 1) + ",";
@@ -342,9 +342,9 @@ public class GameClass {
             send += "," + 3 + "," + 0 + ",";
         } else if (c instanceof Nothing) {
             send += "," + 4 + "," + 0 + ",";
-        } else if (c.getName() == "Rotate Right") {
+        } else if (c.getName().equals("Rotate Right")) {
             send += "," + 2 + "," + "1,";
-        } else if (c.getName() == "Rotate Left") {
+        } else if (c.getName().equals("Rotate Left")) {
             send += "," + 2 + "," + "2,";
         } else {
             send += "," + 2 + "," + "3,";
@@ -431,6 +431,7 @@ public class GameClass {
         switch (map) {
         case "map1":
             map1();
+            break;
         }
     }
 }

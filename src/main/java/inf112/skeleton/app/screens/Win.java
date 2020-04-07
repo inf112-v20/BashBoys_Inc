@@ -8,7 +8,6 @@ import inf112.skeleton.app.gui.Text;
 
 public class Win implements Screen {
     private Stage stage;
-    private Text name;
     String winner;
 
     
@@ -20,7 +19,7 @@ public class Win implements Screen {
     @Override
     public void show(){
         stage = new Stage();
-        name = new Text(winner+" won!!!");
+        Text name = new Text(winner+" won!!!");
         name.setPosition(500, 500);
         stage.addActor(name);
     }

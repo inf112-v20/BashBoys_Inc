@@ -131,11 +131,9 @@ public class Board {
         }
 
         // If there was a robot to push
-        if (push != null) {
+        if (push != null && !pushRobot(push, dir)) {
             // Tries to move robot, if it doesn't move it's blocked
-            if (!pushRobot(push, dir)) {
-                return false;
-            }
+            return false;
         }
 
         // Nothing blocking and everything moved so we can move one step
@@ -240,10 +238,8 @@ public class Board {
             return ar;
         } else {
             for (IMapObject obj : getItems(x, y)) { // Items at next tile
-                if (obj instanceof Wall) {
-                    if (((Wall) obj).getDir() == Direction.uTurn(dir)) { // Checks if there is a wall blocking entrance
-                        wall = true;
-                    }
+                if (obj instanceof Wall && ((Wall) obj).getDir() == Direction.uTurn(dir)) {
+                    wall = true;
                 }
             }
         }
@@ -291,10 +287,8 @@ public class Board {
      */
     private boolean posibleMove(int x, int y, Direction dir){
         for (IMapObject obj : getItems(x, y)) {
-            if (obj instanceof Wall) {
-                if (((Wall) obj).getDir() == dir) {
-                    return false;
-                }
+            if (obj instanceof Wall && ((Wall) obj).getDir() == dir) {
+                return false;
             }
         }
 
@@ -338,9 +332,9 @@ public class Board {
             for (IMapObject obj : getItems(x, y)) {
                 if (obj instanceof Belt) {
                     int[] next = nextPos(((Belt) obj).getDir(), x, y);
-                    
+
                     Belt nextBelt = getBelt(next[0], next[1]);
-                    
+
                     if (i == 1) {
                         if (((Belt) obj).getStrength() != 2)
                             continue;
@@ -373,9 +367,9 @@ public class Board {
         Direction newDir = newBelt.getDir();
 
         pushRobot(r, oldDir);
-        if (oldDir == newDir || Direction.uTurn(oldDir) == newDir)
+        if (oldDir.equals(newDir) || Direction.uTurn(oldDir).equals(newDir))
             return;
-        else if (oldDir != newDir) {
+        else if (!oldDir.equals(newDir)) {
             r.turn(Direction.relation(oldDir, newDir));
         }
 
@@ -616,15 +610,12 @@ public class Board {
                         y = nextPos(dir, x, y)[1];
                         if (x < width && x >= 0 && y >= 0 && y < height) {
                             for (IMapObject item : getItems(x, y)) {
-                                if (item instanceof Wall) {
-                                    if (Direction.uTurn(((Wall) item).getDir()) == dir) {
-                                        stop = true;
-                                        break;
-                                    }
+                                if (item instanceof Wall && Direction.uTurn(((Wall) item).getDir()) == dir) {
+                                    stop = true;
+                                    break;
                                 }
                             }
                         }
-
                     }
                 }
             }

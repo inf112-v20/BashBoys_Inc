@@ -8,6 +8,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 class PlaceAndMoveOnBoardTests {
@@ -82,7 +83,7 @@ class PlaceAndMoveOnBoardTests {
         board.addItem(robot, 11, 11); // Robot at (5,4)
         board.moveItem(robot, 1);// Should fall of
         
-        assertTrue(!board.getObjects().contains(robot)); //Everything's good
+        assertFalse(board.getObjects().contains(robot)); //Everything's good
     }
 
 }

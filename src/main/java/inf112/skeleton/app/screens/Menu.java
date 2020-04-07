@@ -19,7 +19,6 @@ import inf112.skeleton.app.object.Robot;
 
 public class Menu implements Screen {
     private Stage stage;
-    private TextButton playButton,settingsButton,hostButton,joinButton;
     private TextField name;
 
     GameClass g;
@@ -46,7 +45,7 @@ public class Menu implements Screen {
         style.up = skin.getDrawable("apptheme_btn_radio_on_holo_light");
         style.down = skin.getDrawable("apptheme_btn_radio_on_focused_holo_light");
 
-        playButton = new TextButton("Play",style);
+        TextButton playButton = new TextButton("Play",style);
         playButton.setWidth(100);
         playButton.setHeight(100);
         playButton.setPosition(150,100);
@@ -61,7 +60,7 @@ public class Menu implements Screen {
         });
         stage.addActor(playButton);
         
-        settingsButton = new TextButton("Settings",style);
+        TextButton settingsButton = new TextButton("Settings",style);
         settingsButton.setWidth(100);
         settingsButton.setHeight(100);
         settingsButton.setPosition(150,250);
@@ -73,7 +72,7 @@ public class Menu implements Screen {
         });
         stage.addActor(settingsButton);
         
-        hostButton = new TextButton("Host",style);
+        TextButton hostButton = new TextButton("Host",style);
         hostButton.setWidth(100);
         hostButton.setHeight(100);
         hostButton.setPosition(150,400);
@@ -86,7 +85,7 @@ public class Menu implements Screen {
         });
         stage.addActor(hostButton);
         
-        joinButton = new TextButton("Join",style);
+        TextButton joinButton = new TextButton("Join",style);
         joinButton.setWidth(100);
         joinButton.setHeight(100);
         joinButton.setPosition(150,550);
