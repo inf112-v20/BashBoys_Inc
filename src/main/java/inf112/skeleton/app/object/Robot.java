@@ -85,6 +85,8 @@ public class Robot implements IDirectionalObject {
         case WEST:
             xPos-=amount;
             break;
+        default:
+            break;
         }
     }
 

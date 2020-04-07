@@ -13,13 +13,14 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 class DeckTest {
     private Deck testDeck;
     private int DECK_SIZE;
 
     @BeforeEach
-    public void setup(){
+    public void initiate(){
         this.testDeck = new Deck();
         this.DECK_SIZE = testDeck.DECK_SIZE;
     }
@@ -67,7 +68,7 @@ class DeckTest {
         } catch (IllegalArgumentException e){
             error = true;
         }
-        assert(error);
+        assertTrue(error);
     }
 
     @Test

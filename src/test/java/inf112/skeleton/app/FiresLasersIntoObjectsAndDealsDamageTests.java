@@ -1,6 +1,8 @@
 package inf112.skeleton.app;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -24,7 +26,7 @@ class FiresLasersIntoObjectsAndDealsDamageTests {
         b.addItem(new Wall(Direction.NORTH,1), 5,11);
         b.addItem(new Robot("Karl Erik", Direction.EAST), 0, 0);
         b.fireLasers(); //Should not return any error
-        assert(true);
+        assertTrue(true);
     }
     
     @Test

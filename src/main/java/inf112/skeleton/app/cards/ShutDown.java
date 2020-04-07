@@ -13,7 +13,9 @@ public class ShutDown implements ICard {
     }
     
     @Override
-    public void doStuff(Board board){}
+    public void doStuff(Board board){
+        // Nothing
+    }
 
     @Override
     public int getPriority(){

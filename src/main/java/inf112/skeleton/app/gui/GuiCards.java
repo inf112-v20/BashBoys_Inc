@@ -35,8 +35,8 @@ public class GuiCards {
     public void startCardGui(Stage stage, GameClass game, Board board, int player){
         addRegisters(stage);
         addCards(game.players().get(player), stage);
-        addEndTurn(stage, game, board, player);
-        addPowerDownButton(stage, game, board, player);
+        addEndTurn(stage, game, player);
+        addPowerDownButton(stage, game, player);
     }
 
     /**
@@ -141,7 +141,7 @@ public class GuiCards {
      * 
      * @param stage - Gui-stage to add to
      */
-    private void addEndTurn(Stage stage, GameClass game, Board board, int player){
+    private void addEndTurn(Stage stage, GameClass game, int player){
         lockIn = new ImageButton(GuiFactory.getTexture("assets/gui/Signs/LockIn.png"),
                 GuiFactory.getTexture("assets/gui/Signs/LockInPushed.png"));
 
@@ -182,7 +182,7 @@ public class GuiCards {
         stage.addActor(lockIn);
     }
 
-    private void addPowerDownButton(Stage stage, GameClass game, Board board, int player){
+    private void addPowerDownButton(Stage stage, GameClass game, int player){
         powerDown = new ImageButton(GuiFactory.getTexture("assets/gui/Signs/PowerDown.png"),
                 GuiFactory.getTexture("assets/gui/Signs/PowerDownPushed.png"));
 
@@ -199,7 +199,7 @@ public class GuiCards {
             public void clicked(InputEvent event, float xx, float yy){
                 if (event.getType() == InputEvent.Type.touchUp) {
                     game.players().get(player).setShutDow(2);
-                    for (Register register : registers) {
+                    for (int i = 0; i < registers.size();i++) {
                         game.players().get(player).addCardToSheet(new ShutDown(game.players().get(player))); // temp
                     }
                     game.players().get(player).setReady(true);

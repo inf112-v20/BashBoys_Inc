@@ -13,6 +13,7 @@ public class Nothing implements ICard {
     }
     @Override
     public void doStuff(Board board){
+        // Nothing
     }
 
     @Override

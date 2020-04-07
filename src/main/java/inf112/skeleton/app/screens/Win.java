@@ -40,7 +40,7 @@ public class Win implements Screen {
 
     @Override
     public void resize(int width, int height){
-
+        // Nothing
     }
 
     @Override

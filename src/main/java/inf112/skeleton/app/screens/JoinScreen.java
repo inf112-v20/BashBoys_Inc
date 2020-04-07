@@ -129,7 +129,7 @@ public class JoinScreen implements Screen{
     
     @Override
     public void show(){
-        
+        // Nothing
     }
 
     @Override
