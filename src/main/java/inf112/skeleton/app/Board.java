@@ -83,7 +83,6 @@ public class Board {
      * @return true if move was completed till end
      */
     private boolean moveItem(Robot item, int amount, Direction direction){
-        Direction dir = direction;
         if (!getObjects().contains(item))
             return false;
         if (amount == 0)
@@ -91,20 +90,20 @@ public class Board {
         int x = item.getX(); // Start X/Y
         int y = item.getY();
         if (amount < 0) { // If it's a "reverse"
-            dir = Direction.uTurn(dir); // Flip direction and make moves positive
+            direction = Direction.uTurn(direction); // Flip direction and make moves positive
             amount = -amount;
         }
 
         // Checks if there is a wall on current tile that blocks path
         for (IMapObject obj : getItems(x, y)) {
-            if (obj instanceof Wall && ((Wall) obj).getDir() == dir) {
+            if (obj instanceof Wall && ((Wall) obj).getDir() == direction) {
                 return false;
             }
         }
 
         // Changes X/Y to next position
-        x = nextPos(dir, x, y)[0];
-        y = nextPos(dir, x, y)[1];
+        x = nextPos(direction, x, y)[0];
+        y = nextPos(direction, x, y)[1];
 
         if (x < 0 || x >= width || y < 0 || y >= height) {
             ded(item);
@@ -116,7 +115,7 @@ public class Board {
         for (IMapObject obj : getItems(x, y)) {
             if (obj instanceof Wall) {
                 // If there is wall there checks if it blocks entrance to tile
-                if (((Wall) obj).getDir() == Direction.uTurn(dir)) {
+                if (((Wall) obj).getDir() == Direction.uTurn(direction)) {
                     return false;
                 }
             } else if (obj instanceof Robot) { // If there is a robot there try to push it
@@ -130,17 +129,17 @@ public class Board {
         }
 
         // If there was a robot to push
-        if (push != null && !pushRobot(push, dir)) {
+        if (push != null && !pushRobot(push, direction)) {
             // Tries to move robot, if it doesn't move it's blocked
             return false;
         }
 
         // Nothing blocking and everything moved so we can move one step
         removeItem(item);
-        item.move(1, dir);
+        item.move(1, direction);
         addItem(item, item.getX(), item.getY());
         // calls self till blocked or done
-        moveItem(item, amount - 1, dir);
+        moveItem(item, amount - 1, direction);
         return true;
     }
 

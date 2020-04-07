@@ -16,7 +16,7 @@ import inf112.skeleton.app.interfaces.ICard;
  * @class Card
  * Creates a Actor (ImageButton) representing a Card.
  */
-public class GuiFactory {
+public class GuiFactoryUtil {
 
     private static float WIDTH = 389/4f;
     private static float HEIGHT = 596/4f;
@@ -40,7 +40,7 @@ public class GuiFactory {
      * @return ButtonCard
      */
     public static ButtonCard createCard(int x, int y, ICard cardType) {
-        final ButtonCard button = new ButtonCard(getTexture(GuiFactory.getCardPath(cardType.getName())),cardType);
+        final ButtonCard button = new ButtonCard(getTexture(GuiFactoryUtil.getCardPath(cardType.getName())),cardType);
 
         button.setWidth(WIDTH);
         button.setHeight(HEIGHT);

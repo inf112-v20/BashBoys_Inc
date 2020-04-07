@@ -23,10 +23,16 @@ class FiresLasersIntoObjectsAndDealsDamageTests {
     @Test
     @DisplayName("WallLaser and Robot fires on empty board and doesn't crash the game test")
     public void wallLaserAndRobotFiresOnEmptyBoadWithNoCrashTest() {
-        b.addItem(new Wall(Direction.NORTH,1), 5,11);
+        boolean clear = true;
+        try {
+            b.addItem(new Wall(Direction.NORTH,1), 5,11);
         b.addItem(new Robot("Karl Erik", Direction.EAST), 0, 0);
         b.fireLasers(); //Should not return any error
-        assertTrue(true);
+        }catch(Exception e) {
+            clear = false;
+        }
+        
+        assertTrue(clear);
     }
     
     @Test

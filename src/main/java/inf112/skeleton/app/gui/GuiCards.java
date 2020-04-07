@@ -49,14 +49,14 @@ public class GuiCards {
         int n = player.getHand().size();
         hand = (ArrayList<ICard>) player.getHand().clone();
         for (int i = 0; i < n; i++) {
-            ButtonCard SpecCard = GuiFactory.createCard(0, 0, new MoveCard(1, 1, "Move 1", null));
+            ButtonCard SpecCard = GuiFactoryUtil.createCard(0, 0, new MoveCard(1, 1, "Move 1", null));
             int x = (int) (i * SpecCard.getWidth() + stage.getWidth() / 2 - SpecCard.getWidth() * (n / 2));
             int y = 0;
             if (n % 2 != 0) {
                 x = (int) (x - SpecCard.getWidth() / 2);
             }
 
-            ButtonCard temp = GuiFactory.createCard(x, y, player.getHand().get(i));
+            ButtonCard temp = GuiFactoryUtil.createCard(x, y, player.getHand().get(i));
             temp.setOriginPoint(new Point(x, y)); // Set reset point for card
 
             addListener(temp);
@@ -123,12 +123,12 @@ public class GuiCards {
      */
     private void addRegisters(Stage stage){
         for (int i = 0; i < 5; i++) {
-            Register SpecRegister = GuiFactory.createRegister(0, 0);
+            Register SpecRegister = GuiFactoryUtil.createRegister(0, 0);
             int x = (int) (i * SpecRegister.getWidth() + stage.getWidth() / 2 - SpecRegister.getWidth() * 2
                     - SpecRegister.getWidth() / 2);
             int y = 100 + margin;
 
-            Register temp = GuiFactory.createRegister(x, y);
+            Register temp = GuiFactoryUtil.createRegister(x, y);
 
             stage.addActor(temp);
             registers.add(temp);
@@ -142,8 +142,8 @@ public class GuiCards {
      * @param stage - Gui-stage to add to
      */
     private void addEndTurn(Stage stage, GameClass game, int player){
-        lockIn = new ImageButton(GuiFactory.getTexture("assets/gui/Signs/LockIn.png"),
-                GuiFactory.getTexture("assets/gui/Signs/LockInPushed.png"));
+        lockIn = new ImageButton(GuiFactoryUtil.getTexture("assets/gui/Signs/LockIn.png"),
+                GuiFactoryUtil.getTexture("assets/gui/Signs/LockInPushed.png"));
 
         lockIn.setWidth(100);
         lockIn.setHeight(100);
@@ -183,8 +183,8 @@ public class GuiCards {
     }
 
     private void addPowerDownButton(Stage stage, GameClass game, int player){
-        powerDown = new ImageButton(GuiFactory.getTexture("assets/gui/Signs/PowerDown.png"),
-                GuiFactory.getTexture("assets/gui/Signs/PowerDownPushed.png"));
+        powerDown = new ImageButton(GuiFactoryUtil.getTexture("assets/gui/Signs/PowerDown.png"),
+                GuiFactoryUtil.getTexture("assets/gui/Signs/PowerDownPushed.png"));
 
         powerDown.setWidth(100);
         powerDown.setHeight(100);

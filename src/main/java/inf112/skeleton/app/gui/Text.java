@@ -7,7 +7,7 @@ public class Text extends TextButton {
 
 
     public Text(String text) {
-        super(text, GuiFactory.getTextStyle("assets/gui/skin/uiskin.atlas"));
+        super(text, GuiFactoryUtil.getTextStyle("assets/gui/skin/uiskin.atlas"));
         BitmapFont font = new BitmapFont();
         TextButtonStyle style = new TextButton.TextButtonStyle();
         style.font = font;
