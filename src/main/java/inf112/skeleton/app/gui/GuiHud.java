@@ -3,7 +3,6 @@ package inf112.skeleton.app.gui;
 
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import inf112.skeleton.app.GameClass;
 import inf112.skeleton.app.Player;
 import inf112.skeleton.app.object.Robot;
 

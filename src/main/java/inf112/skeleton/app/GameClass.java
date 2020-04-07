@@ -12,8 +12,6 @@ import inf112.skeleton.app.cards.Deck;
 import inf112.skeleton.app.cards.MoveCard;
 import inf112.skeleton.app.cards.Nothing;
 import inf112.skeleton.app.cards.ShutDown;
-import inf112.skeleton.app.enums.Direction;
-import inf112.skeleton.app.enums.LeftRight;
 import inf112.skeleton.app.interfaces.ICard;
 import inf112.skeleton.app.interfaces.IPlayer;
 import inf112.skeleton.app.maps.Map1;
