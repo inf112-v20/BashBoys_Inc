@@ -38,7 +38,8 @@ class DeckTest {
         LinkedList<ICard> retrievedCards = testDeck.peekAllCards();
         assertEquals(DECK_SIZE,retrievedCards.size());
     }
-
+    
+    /*
     @Test
     @DisplayName("Get more cards than deck size test")
     public void getMoreCardsThanDeckSizeTest(){
@@ -46,7 +47,8 @@ class DeckTest {
         assertEquals(DECK_SIZE,retrievedCards.size());
         assert testDeck.peekAllCards().isEmpty(); // Check if deck is empty after operation
     }
-
+    */
+    
     @Test
     @DisplayName("Add card to deck test")
     public void addCardToDeckTest(){
