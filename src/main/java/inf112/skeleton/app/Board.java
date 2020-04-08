@@ -629,6 +629,9 @@ public class Board {
         return arr;
     }
 
+    /**
+     * Checks if standing on flag
+     */
     private void flagCheck(){
         for (IMapObject itm : getObjects()) {
             if (itm instanceof ICheckPoint) {

@@ -97,6 +97,9 @@ public class GameClass {
         }
     }
 
+    /**
+     * Checks if someone has won
+     */
     private void winCheck(){
         boolean won = false;
         for (Player p : players) {
@@ -251,6 +254,9 @@ public class GameClass {
         }
     }
 
+    /**
+     * Does turn and if host sends turn too all players
+     */
     public void doStuf(){
         tDo();
         if (player == 0) {
@@ -281,6 +287,9 @@ public class GameClass {
 
     }
 
+    /**
+     * Sends your hand too the host
+     */
     public void sendHand(){
         String send = player + ",";
 
@@ -300,6 +309,12 @@ public class GameClass {
         }
     }
 
+    /**
+     * Converts card too string with player id
+     * 
+     * @param c - Card too turn too string
+     * @return
+     */
     private String str2(ICard c){
         String send = c.getPlayer().getID() + "," + c.getPriority() + "";
         if (c.getName().equals("Back Up")) {
@@ -320,6 +335,12 @@ public class GameClass {
         return send;
     }
 
+    /**
+     * Turns Card into string without playerID
+     * 
+     * @param c
+     * @return
+     */
     private String str(ICard c){
         String send = c.getPriority() + "";
         if (c.getName().equals("Back Up")) {
@@ -340,14 +361,25 @@ public class GameClass {
         return send;
     }
 
+    /**
+     * Sets the player of this game
+     * 
+     * @param i - id of player to set too
+     */
     public void setPlayer(int i){
         player = i;
     }
 
+    /**
+     * ready to play
+     */
     public void t(){
         t = true;
     }
 
+    /**
+     * does turn stuff
+     */
     public void tDo(){
         int a = 0;
         for (Player p : players)
@@ -364,14 +396,27 @@ public class GameClass {
 
     }
 
+    /**
+     * if someone has won yet
+     * 
+     * @return true if someone has won
+     */
     public boolean won(){
         return won;
     }
 
+    /**
+     * the name of the winner
+     * 
+     * @return
+     */
     public String winner(){
         return winner;
     }
 
+    /**
+     * initiate map1
+     */
     public void map1(){
         // Flags
         Flag flag1 = new Flag("flag1", 1);
@@ -411,10 +456,16 @@ public class GameClass {
         new Map1(board);
     }
 
+    /**
+     * sets map to play
+     */
     public void setMap(String s){
         map = s;
     }
 
+    /**
+     * gets map to play
+     */
     public void getMap(){
         switch (map) {
         case "map1":

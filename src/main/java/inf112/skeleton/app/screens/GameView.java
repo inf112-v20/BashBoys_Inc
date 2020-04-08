@@ -448,6 +448,14 @@ public class GameView implements Screen {
 
     }
 
+    /**
+     * generates new card from parameters
+     * @param priority - priority of card
+     * @param type - card type 
+     * @param amount - amount to do type for
+     * @param p - player card belongs to
+     * @return new Card with properties
+     */
     private ICard card(int priority, int type, int amount, Player p){
         switch (type) {
         case 1:
@@ -474,6 +482,9 @@ public class GameView implements Screen {
         }
     }
 
+    /**
+     * Sets ui stuff
+     */
     public void ui(){
         guiCards.startCardGui(uiStage, g, board, player);
         guiHud.startHud(uiStage, g.players().get(player));

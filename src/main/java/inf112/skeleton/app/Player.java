@@ -56,6 +56,9 @@ public class Player implements IPlayer {
         hand.add(card);
     }
     
+    /**
+     * Gives multiple cards
+     */
     public void giveCard(ArrayList<ICard> cards) {
         if (hand.size()+cards.size() > handSize)
             return;
@@ -174,21 +177,41 @@ public class Player implements IPlayer {
         }
     }
     
+    /**
+     * returns ip of player
+     * @return ip in string form
+     */
     public String getIP() {
         return ip;
     }
     
+    /**
+     * returns the port of the player
+     * @return the port of player in int
+     */
     public int getPort() {
         return port;
     }
     
+    /**
+     * gets ID of player
+     * @return ID in int form
+     */
     public int getID() {
         return id;
     }
     
+    /**
+     * player in string form
+     */
     public String toString() {
         return name+", player id: " +id+", Robot:"+robot.getName();
     }
+    
+    /**
+     * attempt too add flag to player
+     * @param f - flag to attempt to add
+     */
     public void addFlag(Flag f) {
         if(flags.contains(f)) {
             return;
@@ -199,12 +222,27 @@ public class Player implements IPlayer {
             flags.add(f);
         }
     }
+    
+    /**
+     * gets all flags visited
+     * @return ArrayList of falgs visited
+     */
     public ArrayList<Flag> getFlags(){
         return flags;
     }
+    
+    /**
+     * sets shutdown for rounds
+     * @param shutDown - rounds to shut down
+     */
     public void setShutDow(int shutDown) {
         this.shutDown = shutDown;
     }
+    
+    /**
+     * gets rounds left of shutdown
+     * @return int with rounds left of shutdown
+     */
     public int getShutdown() {
         return shutDown;
     }

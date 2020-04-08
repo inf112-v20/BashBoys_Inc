@@ -43,6 +43,7 @@ public class HostScreen implements Screen {
     private boolean t = true;
 
     public HostScreen(GameClass g, Setting set) {
+        //visual stuff
         this.set = set;
         this.g = g;
         g.setPlayer(0);
@@ -58,9 +59,11 @@ public class HostScreen implements Screen {
         style.up = skin.getDrawable("apptheme_btn_radio_on_holo_light");
         style.down = skin.getDrawable("apptheme_btn_radio_on_focused_holo_light");
 
+        //port to host on
         port = 25565;
         protocol = Protocol.TCP;
 
+        //Play solo button
         TextButton start = new TextButton("Play", style);
         start.setWidth(100);
         start.setHeight(100);
@@ -72,13 +75,13 @@ public class HostScreen implements Screen {
                 server.dispose();
                 g.setMap(set.map);
 
-                // Gdx.net.openURI("https://www.google.com");
+                //Sends player info to all players
                 String[] sends = new String[g.players().size() - 1];
                 String send = "";
                 for (Player p : g.players()) {
                     send += p.getName() + "," + p.getIP() + "," + p.getPort() + ",";
                 }
-                send = send.substring(0, send.length() - 1);
+                send = send.substring(0, send.length() - 1); //Removes last comma
                 send += "\n";
                 SocketHints sh = new SocketHints();
                 sh.connectTimeout = 10000;
