@@ -68,3 +68,9 @@ Oppmøte: Alle
 Begynte møtet med å gå gjennom hvor langt vi hadde komt med de forskjellige tingene som skulle jobbes med hjemme. Så
 diskuterte vi hva som var viktigst å få til å funke først og hva som måtte fikses opp i. Avsluttet møte med å gå gjennom
 hva hver enkel skulle jobbe med videre.
+
+14.04:  
+Oppmøte: Alle  
+Først gikk vi gjennom det som var gjort siden forrige gang og hva vi mangler å gjøre videre. Prøvde også å gå gjennom 
+spillet online (gjennom port forward). Gikk gjennom hva som var viktigs å fokusere på til neste gang og hva som må
+finpusses nå som spillet begynner å nærme seg ferdig.
