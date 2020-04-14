@@ -19,7 +19,7 @@ import inf112.skeleton.app.object.Robot;
 
 public class Menu implements Screen {
     private Stage stage;
-    private TextField name;
+    private TextField name,ipBox;
 
     private GameClass g;
     private Menu m;
@@ -79,7 +79,7 @@ public class Menu implements Screen {
         hostButton.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float xx, float yy){
-                g.players().add(new Player(name.getText(),"84.215.102.111",25565,new Robot(0,0,"robot 1"),0));
+                g.players().add(new Player(name.getText(),ipBox.getText(),25565,new Robot(0,0,"robot 1"),0));
                 ((Game) Gdx.app.getApplicationListener()).setScreen(new HostScreen(g,set));
             }
         });
@@ -101,6 +101,11 @@ public class Menu implements Screen {
         name.setPosition(400, 400);
         name.setSize(300,60);
         stage.addActor(name);
+        
+        ipBox = new TextField("own IP",skin);
+        ipBox.setPosition(400, 300);
+        ipBox.setSize(300,60);
+        stage.addActor(ipBox);
     }
 
     @Override
