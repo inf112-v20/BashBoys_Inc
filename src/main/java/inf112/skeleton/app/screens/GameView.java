@@ -343,6 +343,9 @@ public class GameView implements Screen {
 
         renderer.setView(camera);
         renderer.render();
+        guiHud.update(uiStage,g);
+        guiCards.update(uiStage,g);
+        guiPanel.update(uiStage,g);
 
         // Should update guiCards and guiHud later
         uiStage.draw();
