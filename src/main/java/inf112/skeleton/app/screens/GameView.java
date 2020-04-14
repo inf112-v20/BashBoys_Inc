@@ -132,7 +132,7 @@ public class GameView implements Screen {
                 public void run(){
                     ServerSocketHints ssh = new ServerSocketHints();
                     ssh.acceptTimeout = 0;
-                    ServerSocket server = Gdx.net.newServerSocket(Protocol.TCP, 7777, ssh);
+                    ServerSocket server = Gdx.net.newServerSocket(Protocol.TCP, 25565, ssh);
                     while (true) {
                         Socket s = server.accept(null);
                         BufferedReader buffer = new BufferedReader(new InputStreamReader(s.getInputStream()));

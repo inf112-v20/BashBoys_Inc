@@ -56,7 +56,7 @@ public class JoinScreen implements Screen{
         style.up = skin.getDrawable("apptheme_btn_radio_on_holo_light");
         style.down = skin.getDrawable("apptheme_btn_radio_on_focused_holo_light");
         
-        port = 7777;
+        port = 25565;
         protocol = Protocol.TCP;
         
         ip = new TextArea("84.215.102.111",skin);
@@ -71,9 +71,9 @@ public class JoinScreen implements Screen{
                 String send = "";
                 SocketHints sh = new SocketHints();
                 sh.connectTimeout = 10000;
-                Socket socket = Gdx.net.newClientSocket(protocol, ip.getText(), 25565, sh);
+                Socket socket = Gdx.net.newClientSocket(protocol, ip.getText(), port, sh);
                 try {
-                    send = name.getText()+","+ownIp.getText()+",7777\n";
+                    send = name.getText()+","+ownIp.getText()+",25565\n";
                     socket.getOutputStream().write(send.getBytes());
                 }catch(IOException e) {
                     e.printStackTrace();
