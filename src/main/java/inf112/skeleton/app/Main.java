@@ -13,8 +13,8 @@ public class Main {
         // Default res: 1920x1080
 
         cfg.title = "RoboRally";
-        cfg.width = 1366;
-        cfg.height = 768;
+        cfg.width = 1920;
+        cfg.height = 1080;
         cfg.useHDPI = true;
 
         GameClass game = new GameClass();
