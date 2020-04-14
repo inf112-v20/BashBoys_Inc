@@ -11,12 +11,13 @@ import inf112.skeleton.app.Player;
 import inf112.skeleton.app.cards.MoveCard;
 import inf112.skeleton.app.cards.Nothing;
 import inf112.skeleton.app.cards.ShutDown;
+import inf112.skeleton.app.enums.Metrics;
 import inf112.skeleton.app.interfaces.ICard;
 
 import java.awt.*;
 import java.util.ArrayList;
 
-public class GuiCards {
+public class GuiCards implements IGuiElement {
 
     private static int margin = 50;
     private ArrayList<Register> registers = new ArrayList<>();
@@ -24,40 +25,75 @@ public class GuiCards {
     private ArrayList<ICard> hand;
     private ImageButton powerDown;
     private ImageButton lockIn;
+    private Stage uiStage;
+    private GameClass game;
+    private Player player;
+    private ImageButton panel;
     private boolean finished = false;
 
-    /**
-     * Start the card gui, adds card and register and end Turn button
-     * 
-     * @param stage gui stage to be added to
-     * @param cards amount of cards present
-     */
-    public void startCardGui(Stage stage, GameClass game, Board board, int player){
+
+    @Override
+    public void initialize(Stage stage, GameClass game, int player){
+        this.game = game;
+        this.uiStage = stage;
+        this.player = game.players().get(player);
+
         addRegisters(stage);
         addCards(game.players().get(player), stage);
         addEndTurn(stage, game, player);
         addPowerDownButton(stage, game, player);
     }
 
+    @Override
+    public void update(Stage stage, GameClass game){
+        if(!player.getHand().equals(hand)) {
+            for(ButtonCard bc : cards) {
+                bc.remove();
+                bc.displayPriority().remove();
+            }
+            for (Register r : registers) {
+                unRegisterCard(r);
+            }
+            addCards(player,stage);
+        }
+    }
+
     /**
      * Adds card to gui
      * 
-     * @param n     - Amount of cards
+     * @param player - Amount of cards
      * @param stage - Stage to change
      */
     private void addCards(Player player, Stage stage){
         int n = player.getHand().size();
         hand = (ArrayList<ICard>) player.getHand().clone();
+
+        int ii = 0;
         for (int i = 0; i < n; i++) {
-            ButtonCard SpecCard = GuiFactoryUtil.createCard(0, 0, new MoveCard(1, 1, "Move 1", null));
-            int x = (int) (i * SpecCard.getWidth() + stage.getWidth() / 2 - SpecCard.getWidth() * (n / 2));
-            int y = 0;
-            if (n % 2 != 0) {
-                x = (int) (x - SpecCard.getWidth() / 2);
+
+            float width = (panel.getWidth()/9);
+            float height = (panel.getWidth()/9)/GuiFactoryUtil.ratio;
+
+            boolean small = false;
+            if(height < 2.8f*64 ){
+                height = 2.8f*64;
+                width = height*GuiFactoryUtil.ratio;
+                small = true;
             }
 
-            ButtonCard temp = GuiFactoryUtil.createCard(x, y, player.getHand().get(i));
-            temp.setOriginPoint(new Point(x, y)); // Set reset point for card
+            float x = panel.getX() + i*width;
+            float y = Metrics.SCREEN.height/24;
+
+            if(i > 4 && small){
+                y = Metrics.SCREEN.height/12*3.5f;
+                x = panel.getX()+width/2 + ii*width;
+                ii++;
+            }
+
+            ButtonCard temp = GuiFactoryUtil.createCard(x,y,width,height,player.getHand().get(i));
+            temp.start_height = height;
+            temp.start_width = width;
+            temp.setOriginPoint(new Point((int) x, (int) y)); // Set reset point for card
 
             addListener(temp);
 
@@ -78,6 +114,8 @@ public class GuiCards {
         register.setCard(card);
         register.setStatus(true);
         card.setPosition(register.getX(), register.getY());
+        card.reSize(register.getWidth(),register.getHeight(),this.uiStage);
+
     }
 
     /**
@@ -104,6 +142,7 @@ public class GuiCards {
         register.setStatus(false);
         card.register = null;
         register.setCard(null);
+        card.reSize(card.start_width,card.start_height,this.uiStage);
     }
 
     private void unRegisterCard(Register register){
@@ -114,6 +153,7 @@ public class GuiCards {
         register.setStatus(false);
         card.register = null;
         register.setCard(null);
+        card.reSize(card.start_width,card.start_height,this.uiStage);
     }
 
     /**
@@ -123,12 +163,14 @@ public class GuiCards {
      */
     private void addRegisters(Stage stage){
         for (int i = 0; i < 5; i++) {
-            Register SpecRegister = GuiFactoryUtil.createRegister(0, 0);
-            int x = (int) (i * SpecRegister.getWidth() + stage.getWidth() / 2 - SpecRegister.getWidth() * 2
-                    - SpecRegister.getWidth() / 2);
-            int y = 100 + margin;
+            float width = (panel.getWidth()/5)-(panel.getWidth()/50)*2;
+            float height = (panel.getHeight()/3)+((panel.getHeight()/3)/10*2);
 
-            Register temp = GuiFactoryUtil.createRegister(x, y);
+            float x = (panel.getX() + panel.getWidth()/47) + i*(width+(panel.getWidth()/50)*2);
+            float y = (panel.getY() + panel.getHeight()/25);
+
+            Register temp = GuiFactoryUtil.createRegister(x,y,width,height);
+
 
             stage.addActor(temp);
             registers.add(temp);
@@ -142,17 +184,18 @@ public class GuiCards {
      * @param stage - Gui-stage to add to
      */
     private void addEndTurn(Stage stage, GameClass game, int player){
-        lockIn = new ImageButton(GuiFactoryUtil.getTexture("assets/gui/Signs/LockIn.png"),
+        lockIn = new ImageButton(
+                GuiFactoryUtil.getTexture("assets/gui/Signs/LockIn.png"),
                 GuiFactoryUtil.getTexture("assets/gui/Signs/LockInPushed.png"));
 
-        lockIn.setWidth(100);
-        lockIn.setHeight(100);
+        lockIn.setWidth(panel.getHeight()/3.2f);
+        lockIn.setHeight(panel.getHeight()/3.2f);
 
-        Register tempRegister = registers.get(registers.size() - 1);
-        float x = tempRegister.getX() + tempRegister.getWidth();
-        float y = tempRegister.getY() + tempRegister.getHeight() / 2 - lockIn.getHeight() / 2;
 
-        lockIn.setPosition(x, y);
+        float x = (panel.getX()+(panel.getWidth()/5)*4)+panel.getWidth()/200;
+        float y = (panel.getY() + panel.getHeight() - lockIn.getHeight())-panel.getWidth()/200;
+
+        lockIn.setPosition(x,y);
 
         lockIn.addListener(new ClickListener() {
             @Override
@@ -183,15 +226,16 @@ public class GuiCards {
     }
 
     private void addPowerDownButton(Stage stage, GameClass game, int player){
-        powerDown = new ImageButton(GuiFactoryUtil.getTexture("assets/gui/Signs/PowerDown.png"),
+        powerDown = new ImageButton(
+                GuiFactoryUtil.getTexture("assets/gui/Signs/PowerDown.png"),
                 GuiFactoryUtil.getTexture("assets/gui/Signs/PowerDownPushed.png"));
 
-        powerDown.setWidth(100);
-        powerDown.setHeight(100);
 
-        Register tempRegister = registers.get(0);
-        float x = tempRegister.getX() - powerDown.getWidth();
-        float y = tempRegister.getY() + tempRegister.getHeight() / 2 - powerDown.getHeight() / 2;
+        powerDown.setWidth(panel.getHeight()/3);
+        powerDown.setHeight(panel.getHeight()/3);
+
+        float x = panel.getX();
+        float y = panel.getY() + panel.getHeight() - powerDown.getHeight();
 
         powerDown.setPosition(x, y);
         powerDown.addListener(new ClickListener() {
@@ -222,17 +266,10 @@ public class GuiCards {
         return finished;
     }
 
-    public void update(Player player, Stage stage){
-        if (!player.getHand().equals(hand)) {
-            for (ButtonCard bc : cards) {
-                bc.remove();
-            }
-            for (Register r : registers) {
-                unRegisterCard(r);
-            }
-            addCards(player, stage);
-        }
+    public void setPanel(ImageButton panel){
+        this.panel = panel;
     }
+
 
     private void addListener(ButtonCard temp){
         // Adds a drag listener to actor
@@ -304,7 +341,7 @@ public class GuiCards {
                                     registerCard(temp, register);
                                     break;
                                 }
-                            } else if (temp.register != null) { // Register is not empty, then swap registers and card
+                            } else if (temp.register != null) { // Register is not empty, then swap registers and temp
                                 if (temp.register == register) {
                                     unRegisterCard(temp, register);
                                     break;
@@ -314,12 +351,14 @@ public class GuiCards {
                                 }
                             } else { // // Reset to origin point
                                 temp.setPosition(temp.getOriginX(), temp.getOriginY());
+                                temp.reSize(temp.start_width,temp.start_height,uiStage);
                             }
                         }
                     }
                     if (!hit) { // If dragging was a miss, then unregister/return to origin point
                         if (temp.register == null) {
                             temp.setPosition(temp.getOriginX(), temp.getOriginY());
+                            temp.reSize(temp.start_width,temp.start_height,uiStage);
                         } else {
                             unRegisterCard(temp, temp.register);
                         }

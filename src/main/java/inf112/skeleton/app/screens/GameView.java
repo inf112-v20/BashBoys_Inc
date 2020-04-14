@@ -41,8 +41,11 @@ import inf112.skeleton.app.cards.RotateCard;
 import inf112.skeleton.app.cards.ShutDown;
 import inf112.skeleton.app.enums.Direction;
 import inf112.skeleton.app.enums.LeftRight;
+import inf112.skeleton.app.enums.Metrics;
 import inf112.skeleton.app.gui.GuiCards;
+import inf112.skeleton.app.gui.GuiFactoryUtil;
 import inf112.skeleton.app.gui.GuiHud;
+import inf112.skeleton.app.gui.GuiPanel;
 import inf112.skeleton.app.interfaces.ICard;
 import inf112.skeleton.app.interfaces.IMapObject;
 import inf112.skeleton.app.object.Laser;
@@ -71,6 +74,7 @@ public class GameView implements Screen {
 
     private GuiCards guiCards = new GuiCards();
     private GuiHud guiHud = new GuiHud();
+    private GuiPanel guiPanel = new GuiPanel();
     private GameClass g;
     private int player;
     private Thread t1;
@@ -339,8 +343,6 @@ public class GameView implements Screen {
 
         renderer.setView(camera);
         renderer.render();
-        guiHud.updateHud(uiStage);
-        guiCards.update(g.players().get(player), uiStage);
 
         // Should update guiCards and guiHud later
         uiStage.draw();
@@ -348,10 +350,14 @@ public class GameView implements Screen {
 
     @Override
     public void resize(int width, int height){
-        uiStage.getViewport().update(width, height, false);
-        camera.position.set(384, 100, 0);
-        ExtendViewport cameraViewport = new ExtendViewport(width * 2, height * 2, camera);
-        cameraViewport.update(width, height, false);
+        uiStage.getViewport().update(width, height, true);
+        camera.position.set((Metrics.TILE.width*board.width), (Metrics.TILE.height*board.height), 0);
+        // MIN = 1.3f
+        // MAX = 1f
+        ExtendViewport cameraViewport = new ExtendViewport(
+                width * 1,
+                height * 1, camera);
+        cameraViewport.update(width, height, true);
     }
 
     @Override
@@ -486,7 +492,10 @@ public class GameView implements Screen {
      * Sets ui stuff
      */
     public void ui(){
-        guiCards.startCardGui(uiStage, g, board, player);
-        guiHud.startHud(uiStage, g.players().get(player));
+        guiPanel.initialize(uiStage,g,player);
+        guiCards.setPanel(guiPanel.panel);
+        guiCards.initialize(uiStage, g,player);
+        guiHud.initialize(uiStage, g,player);
+
     }
 }

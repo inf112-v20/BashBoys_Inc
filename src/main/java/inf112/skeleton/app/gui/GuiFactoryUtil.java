@@ -10,6 +10,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
+import inf112.skeleton.app.Board;
+import inf112.skeleton.app.enums.Metrics;
 import inf112.skeleton.app.interfaces.ICard;
 
 /**
@@ -18,8 +20,10 @@ import inf112.skeleton.app.interfaces.ICard;
  */
 public class GuiFactoryUtil {
 
-    private static float WIDTH = 389/4f;
-    private static float HEIGHT = 596/4f;
+    public static float ratio = (389/4f)/(596/4f);
+    public static float HEIGHT = Gdx.graphics.getHeight()/5f;
+    public static float WIDTH = HEIGHT*ratio;
+
 
     /**
      * Get texture for param path
@@ -39,11 +43,11 @@ public class GuiFactoryUtil {
      * @param y - y position
      * @return ButtonCard
      */
-    public static ButtonCard createCard(int x, int y, ICard cardType) {
+    static ButtonCard createCard(float x, float y, float width, float height, ICard cardType) {
         final ButtonCard button = new ButtonCard(getTexture(GuiFactoryUtil.getCardPath(cardType.getName())),cardType);
+        button.setWidth(width);
+        button.setHeight(height);
 
-        button.setWidth(WIDTH);
-        button.setHeight(HEIGHT);
         button.setPosition(x, y);
         return button;
     }
@@ -54,10 +58,10 @@ public class GuiFactoryUtil {
      * @param y - y position
      * @return Register
      */
-    public static Register createRegister(int x, int y){
-        final Register button = new Register(getTexture("assets/gui/holder.png"));
-        button.setWidth(WIDTH);
-        button.setHeight(HEIGHT);
+    static Register createRegister(float x, float y, float width, float height){
+        final Register button = new Register(getTexture("assets/gui/invholder.png"));
+        button.setWidth(width);
+        button.setHeight(height);
         button.setPosition(x,y);
 
         return button;
@@ -126,6 +130,14 @@ public class GuiFactoryUtil {
      */
     public static float getHeight(){
         return HEIGHT;
+    }
+
+    public static float getScaleConstant(Board b){
+        float scale = 1f;
+        if(Gdx.graphics.getHeight()<(Metrics.TILE.height*b.height)){
+            scale = 1.3f;
+        }
+        return scale;
     }
 
 }

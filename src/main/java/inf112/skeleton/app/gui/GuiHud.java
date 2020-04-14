@@ -3,20 +3,39 @@ package inf112.skeleton.app.gui;
 
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import inf112.skeleton.app.GameClass;
 import inf112.skeleton.app.Player;
 import inf112.skeleton.app.object.Robot;
 
-public class GuiHud {
+public class GuiHud implements IGuiElement {
 
     private Player player;
     private Robot robot;
     //private Stage stage;
 
-    public void startHud(Stage stage, Player player){
-        this.player = player;
-        robot = player.getRobot();
+    @Override
+    public void initialize(Stage stage, GameClass game, int player){
+        this.player = game.players().get(player);
+        robot = this.player.getRobot();
         //this.stage = stage;
         addPlayerHud(stage);
+    }
+
+    @Override
+    public void update(Stage stage, GameClass game){
+        for(Actor a : stage.getActors()){
+            if(a.getName() != null){
+                if(a.getName().equals("hp")){
+                    if(player.getRobot().getHp()==0){
+                        ((Text) a).setText("YOU DIED");
+                    } else {
+                        ((Text) a).setText(player.getRobot().getHp()+" hp");
+                    }
+                } else if(a.getName().equals("flags")){
+                    ((Text)a).setText(player.getFlags().size() + " flags");
+                }
+            }
+        }
     }
 
     private void addPlayerHud(Stage stage){
@@ -42,19 +61,4 @@ public class GuiHud {
         stage.addActor(flags);
     }
 
-    public void updateHud(Stage stage){
-        for(Actor a : stage.getActors()){
-            if(a.getName() != null){
-                if(a.getName().equals("hp")){
-                    if(player.getRobot().getHp()==0){
-                        ((Text) a).setText("YOU DIED");
-                    } else {
-                        ((Text) a).setText(player.getRobot().getHp()+" hp");
-                    }
-                } else if(a.getName().equals("flags")){
-                    ((Text)a).setText(player.getFlags().size() + " flags");
-                }
-            }
-        }
-    }
 }
