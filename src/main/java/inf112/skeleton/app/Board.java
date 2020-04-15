@@ -428,7 +428,7 @@ public class Board {
      * 
      * @param r - robot to kill
      */
-    private void ded(Robot r){
+    public void ded(Robot r){
         System.out.println(r.getName() + " is ded");
         r.setHp(0);
         removeItem(r);

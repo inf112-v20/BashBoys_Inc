@@ -8,6 +8,7 @@ import java.util.Random;
 
 public class Ai extends Player {
 
+    private int lifes = 1;
     
     public Ai(String name) {
         super(name);
@@ -37,4 +38,19 @@ public class Ai extends Player {
     public int getPort() {return 0;}
     public String getIP() {return "0.0.0.0";}
 
+    public int getLifes() {
+        return lifes;
+    }
+    public int giveLife(int i) {
+        return lifes = Math.min(++lifes, 3);
+    }
+    public int giveLife() {
+        return giveLife(1);
+    }
+    public int takeLife(int i) {
+        return lifes = Math.max(--lifes, 0);
+    }
+    public int takeLife() {
+        return takeLife(1);
+    }
 }

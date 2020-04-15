@@ -211,7 +211,7 @@ public class GuiCards implements IGuiElement {
                             game.players().get(player).addCardToSheet(register.getCard().getType()); // temp
                         } else {
                             game.players().get(player).addCardToSheet(new Nothing(game.players().get(player)));
-                            System.out.print("null" + " - ");
+                            System.out.print("Nothing" + " - ");
                         }
                     }
                     game.players().get(player).setReady(true); // temp

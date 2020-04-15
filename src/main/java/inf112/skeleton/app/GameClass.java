@@ -40,6 +40,7 @@ public class GameClass {
     private boolean won;
     private String winner;
 
+    public int out = 0;
 
     public GameClass() {
         this.board = new Board(12, 15);
@@ -66,7 +67,7 @@ public class GameClass {
 
         getMap();
 
-        if (player == 9) {
+        if (player == 0) {
             Robot r2 = new Robot("robot 2");
             Robot r3 = new Robot("robot 3");
             board.addItem(r2, 10, 2);
@@ -119,23 +120,28 @@ public class GameClass {
     public void programmingPhase(){
         boolean all_ready = false;
 
+        outs();
         while (!all_ready) {
+            if (out == players.size())
+                continue;
             all_ready = true;
-            for (Player player : players) {
-                for (IPlayer p : players) {
-                    if (!p.isReady()) {
-                        all_ready = false;
-                    }
-                    // Ai does move if any.
-                    if (player instanceof Ai && !player.isReady()) {
-                        player.giveCard(deck.getCards(9));
-                        ((Ai) player).setMoves();
-                        player.setReady(true);
-                    }
+            for (Player p : players) {
+                if (!p.isReady() && p.getLifes() > 0) {
+                    all_ready = false;
+                }
+                // Ai does move if any.
+                if (p instanceof Ai && !p.isReady() && p.getLifes() > 0) {
+                    p.giveCard(deck.getCards(9));
+                    ((Ai) p).setMoves();
+                    p.setReady(true);
                 }
             }
+            System.out.println(all_ready);
         }
-        programmingMove();
+        outs();
+        System.out.println(out);
+        if (out != players.size())
+            programmingMove();
         for (Player pl : players) {
             if (pl.getShutdown() > 0) {
                 pl.setShutDow(pl.getShutdown() - 1);
@@ -155,8 +161,10 @@ public class GameClass {
         // for (Player p : players)
         // p.setSpawn(flag1);
         for (int card_nr = 0; card_nr < 5; card_nr++) {
-            ICard[] priority = new ICard[players.size()];
+            ICard[] priority = new ICard[players.size() - out];
             for (Player p : players) {
+                if (p.getLifes() == 0)
+                    continue;
                 int i = -1;
                 while (priority[++i] != null && p.getCardFromSheet(card_nr).getPriority() < priority[i].getPriority())
                     ;
@@ -175,10 +183,13 @@ public class GameClass {
                 }
             }
             for (ICard c : Arrays.asList(priority)) {
-                if (priority[0] != null)
+                if (priority.length != 0 && priority[0] != null) {
+                    System.out.println(c == null);
+                    System.out.println(c.getPlayer());
                     System.out.println(c.getName());
+                }
             }
-            if (priority[0] != null)
+            if (priority.length != 0 && priority[0] != null)
                 turn.addAll(Arrays.asList(priority));
             // sleep(1);
         }
@@ -220,12 +231,26 @@ public class GameClass {
         }
     }
 
+    private void outs(){
+        out = 0;
+        for (Player p : players) {
+            if (p.getLifes() == 0) {
+                out++;
+                p.addCardToSheet(new Nothing(p));
+                p.addCardToSheet(new Nothing(p));
+                p.addCardToSheet(new Nothing(p));
+                p.addCardToSheet(new Nothing(p));
+                p.addCardToSheet(new Nothing(p));
+            }
+        }
+    }
+
     /**
      * Respawns all player robots that are dead
      */
     public void respawn(){
         for (Player p : players) {
-            if (p.getRobot() != null && p.getRobot().isDead() && p.getSpawn() != null && p.getLifes() > 0) {
+            if (p.getRobot() != null && p.getRobot().isDead() && p.getSpawn() != null && p.takeLife() > 0) {
                 if (board.getRobots().contains(p.getRobot()))
                     board.removeItem(p.getRobot());
                 p.getRobot().setHp(9);
@@ -234,14 +259,15 @@ public class GameClass {
                 p.getRobot().setX(x);
                 p.getRobot().setY(y);
                 board.addItem(p.getRobot(), x, y);
-                p.takeLife();
             }
         }
+        System.out.println(out);
     }
 
     /**
-     * Respawns given players robot if dead
-     * Forces respawn (nor need to be dead or have life tokens)
+     * Respawns given players robot if dead Forces respawn (nor need to be dead or
+     * have life tokens)
+     * 
      * @param p - player too revive robot
      */
     public void respawn(Player p){
@@ -386,11 +412,11 @@ public class GameClass {
     public void tDo(){
         int a = 0;
         for (Player p : players)
-            if (p.getShutdown() > 0)
+            if (p.getShutdown() > 0 || p.getLifes() <= 0)
                 a++;
         for (int j = 0; j < 5; j++) {
             for (int i = 0; i < players.size() - a; i++) {
-                turn.get(j * (players.size()) + i).doStuff(board);
+                turn.get(j * ((players.size()) - out) + i).doStuff(board);
                 // System.out.println(turn.get(j*(players.size())+i).getName());
             }
             board.turnStuff(j + 1);
@@ -479,8 +505,8 @@ public class GameClass {
             break;
         }
     }
-    
-    public Deck getDeck() {
+
+    public Deck getDeck(){
         return deck;
     }
 }
