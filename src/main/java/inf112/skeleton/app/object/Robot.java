@@ -156,7 +156,7 @@ public class Robot implements IDirectionalObject {
      * @return boolean telling if hp is 0
      */
     public boolean isDead() {
-        return hp==0;
+        return hp<=0;
     }
     
     public void setPlayer(Player p) {

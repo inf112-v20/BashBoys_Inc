@@ -47,33 +47,18 @@ public class GuiPanel implements IGuiElement {
             }
             tokens.clear();
         } else {
-            if(default_hp > game.players().get(player).getRobot().getHp()){
-                int hp = game.players().get(player).getRobot().getHp();
-                int life_lost = default_hp-hp;
-                ArrayList<Image> toBeDeleted = new ArrayList<>();
-
-                for(int i = 0; i < life_lost; i++){
-                    toBeDeleted.add(tokens.get(tokens.size()-1-i));
-                }
-
-                tokens.removeAll(toBeDeleted);
-                for(Image i : toBeDeleted){
-                    i.remove();
-                }
-                this.default_hp = hp;
-                toBeDeleted.clear();
-            } else if (default_hp < game.players().get(player).getRobot().getHp()){
-                for(Image i : tokens){
-                    i.remove();
-                }
-                tokens.clear();
-                addDmgTokens(stage,game);
+            for(Image i : tokens){
+                i.remove();
             }
+            tokens.clear();
+            addDmgTokens(stage,game);
         }
-
-
-
-
+        
+        for(Image i : lifetokens) {
+            i.remove();
+        }
+        lifetokens.clear();
+        addLifeTokens(stage,game);
     }
 
     public void addDmgTokens(Stage stage, GameClass game){
@@ -105,7 +90,7 @@ public class GuiPanel implements IGuiElement {
     }
 
     public void addLifeTokens(Stage stage, GameClass game){
-        int life = 3; // Temp, lives not added yet
+        int life = game.getPlayer().getLifes(); // Temp, lives not added yet
         for(int i = 0; i < life; i++){
             Image token = new Image(GuiFactoryUtil.getTexture("assets/gui/Signs/LifeTokenOn.png"));
 

@@ -21,6 +21,7 @@ public class Player implements IPlayer {
     private int id;
     private ArrayList<Flag> flags = new ArrayList<>();
     private int shutDown;
+    private int lifes = 3;
 
     /**
      * Create a new player
@@ -245,5 +246,25 @@ public class Player implements IPlayer {
      */
     public int getShutdown() {
         return shutDown;
+    }
+    
+    /**
+     * 
+     * @return
+     */
+    public int getLifes() {
+        return lifes;
+    }
+    public void giveLife(int i) {
+        lifes = Math.min(++lifes, 3);
+    }
+    public void giveLife() {
+        giveLife(1);
+    }
+    public void takeLife(int i) {
+        lifes = Math.max(--lifes, 0);
+    }
+    public void takeLife() {
+        takeLife(1);
     }
 }

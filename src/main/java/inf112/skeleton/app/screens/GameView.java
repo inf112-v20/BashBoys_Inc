@@ -285,7 +285,13 @@ public class GameView implements Screen {
             } else if (Gdx.input.isKeyPressed(Input.Keys.R) && d > timer) {
                 g.respawn(g.getPlayer());
                 d = 0;
-            } else {
+            } else if (Gdx.input.isKeyPressed(Input.Keys.N) && d > timer) {
+                g.getPlayer().takeLife();
+                d = 0;
+            }else if (Gdx.input.isKeyPressed(Input.Keys.M) && d > timer) {
+                g.getPlayer().giveLife();
+                d = 0;
+            }else {
                 d += delta;
             }
         }
