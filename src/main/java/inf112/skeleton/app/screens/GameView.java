@@ -276,7 +276,8 @@ public class GameView implements Screen {
                 d = 0;
             } else if (Gdx.input.isKeyPressed(Input.Keys.J) && d > timer) {
                 ArrayList<ICard> hand = g.getPlayer().getHand();
-                g.getPlayer().removeCardFromHand(hand.get(hand.size()-1));
+                if(hand.size()-1 >= 0)
+                    g.getPlayer().removeCardFromHand(hand.get(hand.size()-1));
                 d = 0;
             } else if (Gdx.input.isKeyPressed(Input.Keys.K) && d > timer) {
                 g.getPlayer().giveCard(g.getDeck().getCard());
