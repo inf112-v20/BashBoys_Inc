@@ -20,7 +20,7 @@ public class Settings implements Screen {
     private Stage stage;
     private Menu m;
     private Setting set;
-    private CheckBox box;
+    private CheckBox devBox,musicBox;
     
     public Settings(Menu m,Setting set) {
         this.m = m;
@@ -40,24 +40,28 @@ public class Settings implements Screen {
         style.up = skin.getDrawable("apptheme_btn_radio_on_holo_light");
         style.down = skin.getDrawable("apptheme_btn_radio_on_focused_holo_light");
         
-        TextButton button = new TextButton("Tits", style);
+        TextButton button = new TextButton("Back", style);
         button.addListener(new ClickListener() {
 
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                set.music = box.isChecked();
-                System.out.println(box.isChecked());
-                System.out.println("tits");
+                set.music = musicBox.isChecked();
+                System.out.println(musicBox.isChecked());
+                set.devMode = devBox.isChecked();
+                System.out.println(musicBox.isChecked());
                 ((Game)Gdx.app.getApplicationListener()).setScreen(m);
             }
         });
         stage.addActor(button);
-        box = new CheckBox("Music",skin);
-        box.setPosition(400, 400);
-        stage.addActor(box);
+        musicBox = new CheckBox("Music",skin);
+        musicBox.setPosition(400, 400);
+        stage.addActor(musicBox);
+        
+        devBox = new CheckBox("Delevoper Mode",skin);
+        devBox.setPosition(400, 400);
+        stage.addActor(devBox);
+        
         Gdx.input.setInputProcessor(stage);
-        
-        
     }
 
     @Override

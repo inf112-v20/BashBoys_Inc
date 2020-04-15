@@ -12,6 +12,7 @@ import javax.naming.NameNotFoundException;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Net.Protocol;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
@@ -80,6 +81,7 @@ public class GameView implements Screen {
     private Thread t1;
     private Music sound;
     private Setting set;
+    private float d = 0;
 
     public GameView(GameClass g, int player, Setting set) {
         this.player = player;
@@ -254,6 +256,28 @@ public class GameView implements Screen {
         if (g.won()) {
             ((Game) Gdx.app.getApplicationListener()).setScreen(new Win(g.winner()));
         }
+        if (set.devMode) {
+            if (Gdx.input.isKeyPressed(Input.Keys.LEFT) && d > .5) {
+                new RotateCard(LeftRight.LEFT, 0, false, "", g.getPlayer()).doStuff(board);
+                d = 0;
+            } else if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) && d > .5) {
+                new RotateCard(LeftRight.RIGHT, 0, false, "", g.getPlayer()).doStuff(board);
+                d = 0;
+            }else if (Gdx.input.isKeyPressed(Input.Keys.UP) && d > .5) {
+                new MoveCard(1,0, "", g.getPlayer()).doStuff(board);
+                d = 0;
+            } else if (Gdx.input.isKeyPressed(Input.Keys.DOWN) && d > .5) {
+                new MoveCard(-1,0, "", g.getPlayer()).doStuff(board);
+                d = 0;
+            } else if (Gdx.input.isKeyPressed(Input.Keys.ENTER) && d > .5) {
+                board.turnStuff(1);
+                board.pushAll(2);
+                d = 0;
+            } else {
+                d += delta;
+            }
+        }
+
         this.clearLayer(robotLayer);
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
@@ -343,9 +367,9 @@ public class GameView implements Screen {
 
         renderer.setView(camera);
         renderer.render();
-        guiHud.update(uiStage,g);
-        guiCards.update(uiStage,g);
-        guiPanel.update(uiStage,g);
+        guiHud.update(uiStage, g);
+        guiCards.update(uiStage, g);
+        guiPanel.update(uiStage, g);
 
         // Should update guiCards and guiHud later
         uiStage.draw();
@@ -354,12 +378,10 @@ public class GameView implements Screen {
     @Override
     public void resize(int width, int height){
         uiStage.getViewport().update(width, height, true);
-        camera.position.set((Metrics.TILE.width*board.width), (Metrics.TILE.height*board.height), 0);
+        camera.position.set((Metrics.TILE.width * board.width), (Metrics.TILE.height * board.height), 0);
         // MIN = 1.3f
         // MAX = 1f
-        ExtendViewport cameraViewport = new ExtendViewport(
-                width * 1,
-                height * 1, camera);
+        ExtendViewport cameraViewport = new ExtendViewport(width * 1, height * 1, camera);
         cameraViewport.update(width, height, true);
     }
 
@@ -459,10 +481,11 @@ public class GameView implements Screen {
 
     /**
      * generates new card from parameters
+     * 
      * @param priority - priority of card
-     * @param type - card type 
-     * @param amount - amount to do type for
-     * @param p - player card belongs to
+     * @param type     - card type
+     * @param amount   - amount to do type for
+     * @param p        - player card belongs to
      * @return new Card with properties
      */
     private ICard card(int priority, int type, int amount, Player p){
@@ -482,7 +505,8 @@ public class GameView implements Screen {
                 return new RotateCard(LeftRight.LEFT, priority, true, "U-turn", p);
             }
         case 3:
-            if(p.getShutdown()==0)p.setShutDow(2);
+            if (p.getShutdown() == 0)
+                p.setShutDow(2);
             return new ShutDown(p);
         case 4:
             return new Nothing(p);
@@ -495,10 +519,10 @@ public class GameView implements Screen {
      * Sets ui stuff
      */
     public void ui(){
-        guiPanel.initialize(uiStage,g,player);
+        guiPanel.initialize(uiStage, g, player);
         guiCards.setPanel(guiPanel.panel);
-        guiCards.initialize(uiStage, g,player);
-        guiHud.initialize(uiStage, g,player);
+        guiCards.initialize(uiStage, g, player);
+        guiHud.initialize(uiStage, g, player);
 
     }
 }
