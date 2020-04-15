@@ -244,7 +244,7 @@ public class GameClass {
      * @param p - player too revive robot
      */
     public void respawn(Player p){
-        if (p.getRobot().isDead() && p.getSpawn() != null) {
+        if (p.getSpawn() != null) {
             if (board.getRobots().contains(p.getRobot()))
                 board.removeItem(p.getRobot());
             p.getRobot().setHp(9);
@@ -477,5 +477,9 @@ public class GameClass {
             map1();
             break;
         }
+    }
+    
+    public Deck getDeck() {
+        return deck;
     }
 }

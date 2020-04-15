@@ -257,21 +257,32 @@ public class GameView implements Screen {
             ((Game) Gdx.app.getApplicationListener()).setScreen(new Win(g.winner()));
         }
         if (set.devMode) {
-            if (Gdx.input.isKeyPressed(Input.Keys.LEFT) && d > .5) {
+            double timer = .25;
+            if (Gdx.input.isKeyPressed(Input.Keys.LEFT) && d > timer) {
                 new RotateCard(LeftRight.LEFT, 0, false, "", g.getPlayer()).doStuff(board);
                 d = 0;
-            } else if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) && d > .5) {
+            } else if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) && d > timer) {
                 new RotateCard(LeftRight.RIGHT, 0, false, "", g.getPlayer()).doStuff(board);
                 d = 0;
-            }else if (Gdx.input.isKeyPressed(Input.Keys.UP) && d > .5) {
+            }else if (Gdx.input.isKeyPressed(Input.Keys.UP) && d > timer) {
                 new MoveCard(1,0, "", g.getPlayer()).doStuff(board);
                 d = 0;
-            } else if (Gdx.input.isKeyPressed(Input.Keys.DOWN) && d > .5) {
+            } else if (Gdx.input.isKeyPressed(Input.Keys.DOWN) && d > timer) {
                 new MoveCard(-1,0, "", g.getPlayer()).doStuff(board);
                 d = 0;
-            } else if (Gdx.input.isKeyPressed(Input.Keys.ENTER) && d > .5) {
+            } else if (Gdx.input.isKeyPressed(Input.Keys.ENTER) && d > timer) {
                 board.turnStuff(1);
                 board.pushAll(2);
+                d = 0;
+            } else if (Gdx.input.isKeyPressed(Input.Keys.J) && d > timer) {
+                ArrayList<ICard> hand = g.getPlayer().getHand();
+                g.getPlayer().removeCardFromHand(hand.get(hand.size()-1));
+                d = 0;
+            } else if (Gdx.input.isKeyPressed(Input.Keys.K) && d > timer) {
+                g.getPlayer().giveCard(g.getDeck().getCard());
+                d = 0;
+            } else if (Gdx.input.isKeyPressed(Input.Keys.R) && d > timer) {
+                g.respawn(g.getPlayer());
                 d = 0;
             } else {
                 d += delta;
