@@ -44,7 +44,6 @@ import inf112.skeleton.app.enums.Direction;
 import inf112.skeleton.app.enums.LeftRight;
 import inf112.skeleton.app.enums.Metrics;
 import inf112.skeleton.app.gui.GuiCards;
-import inf112.skeleton.app.gui.GuiFactoryUtil;
 import inf112.skeleton.app.gui.GuiHud;
 import inf112.skeleton.app.gui.GuiPanel;
 import inf112.skeleton.app.interfaces.ICard;

@@ -12,9 +12,7 @@ import inf112.skeleton.app.cards.Deck;
 import inf112.skeleton.app.cards.MoveCard;
 import inf112.skeleton.app.cards.Nothing;
 import inf112.skeleton.app.cards.ShutDown;
-import inf112.skeleton.app.gui.GuiFactoryUtil;
 import inf112.skeleton.app.interfaces.ICard;
-import inf112.skeleton.app.interfaces.IPlayer;
 import inf112.skeleton.app.maps.Map1;
 import inf112.skeleton.app.object.Flag;
 import inf112.skeleton.app.object.Robot;
@@ -136,7 +134,6 @@ public class GameClass {
                     p.setReady(true);
                 }
             }
-            System.out.println(all_ready);
         }
         outs();
         System.out.println(out);

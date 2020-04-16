@@ -5,10 +5,8 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.DragListener;
-import inf112.skeleton.app.Board;
 import inf112.skeleton.app.GameClass;
 import inf112.skeleton.app.Player;
-import inf112.skeleton.app.cards.MoveCard;
 import inf112.skeleton.app.cards.Nothing;
 import inf112.skeleton.app.cards.ShutDown;
 import inf112.skeleton.app.enums.Metrics;
@@ -19,14 +17,13 @@ import java.util.ArrayList;
 
 public class GuiCards implements IGuiElement {
 
-    private static int margin = 50;
+    //private static int margin = 50;
     private ArrayList<Register> registers = new ArrayList<>();
     private ArrayList<ButtonCard> cards = new ArrayList<>();
     private ArrayList<ICard> hand;
     private ImageButton powerDown;
     private ImageButton lockIn;
     private Stage uiStage;
-    private GameClass game;
     private Player player;
     private ImageButton panel;
     private boolean finished = false;
@@ -34,7 +31,6 @@ public class GuiCards implements IGuiElement {
 
     @Override
     public void initialize(Stage stage, GameClass game, int player){
-        this.game = game;
         this.uiStage = stage;
         this.player = game.players().get(player);
 
