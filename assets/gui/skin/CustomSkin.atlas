@@ -1,0 +1,80 @@
+
+CustomSkin.png
+size: 2048,2048
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+ButtonFont
+  rotate: false
+  xy: 1, 789
+  size: 512, 512
+  orig: 512, 512
+  offset: 0, 0
+  index: -1
+Cursor
+  rotate: false
+  xy: 370, 259
+  size: 8, 14
+  orig: 8, 14
+  offset: 0, 0
+  index: -1
+CustomFont15
+  rotate: false
+  xy: 1, 275
+  size: 512, 512
+  orig: 512, 512
+  offset: 0, 0
+  index: -1
+LifeTokenOff-kopi
+  rotate: false
+  xy: 515, 461
+  size: 269, 269
+  orig: 269, 269
+  offset: 0, 0
+  index: -1
+LifeTokenOn-kopi
+  rotate: false
+  xy: 1029, 968
+  size: 269, 269
+  orig: 269, 269
+  offset: 0, 0
+  index: -1
+TextInputBox
+  rotate: false
+  xy: 1, 218
+  size: 367, 55
+  split: 18, 18, 30, 15
+  pad: 18, 18, 10, 12
+  orig: 367, 55
+  offset: 0, 0
+  index: -1
+TextInputBoxSelected
+  rotate: false
+  xy: 515, 732
+  size: 367, 55
+  split: 18, 18, 30, 15
+  pad: 18, 18, 10, 12
+  orig: 367, 55
+  offset: 0, 0
+  index: -1
+CustomFont20
+  rotate: false
+  xy: 515, 789
+  size: 512, 512
+  orig: 512, 512
+  offset: 0, 0
+  index: -1
+TextButton
+  rotate: false
+  xy: 1029, 1239
+  size: 274, 62
+  orig: 274, 62
+  offset: 0, 0
+  index: -1
+TextButtonPressed
+  rotate: false
+  xy: 1, 154
+  size: 270, 62
+  orig: 270, 62
+  offset: 0, 0
+  index: -1

@@ -1,0 +1,52 @@
+{
+"com.badlogic.gdx.graphics.g2d.BitmapFont": {
+	"ButtonFont": {
+		"file": "ButtonFont.fnt"
+	},
+	"CustomFont15": {
+		"file": "CustomFont15.fnt"
+	},
+	"CustomFont20": {
+		"file": "CustomFont20.fnt"
+	}
+},
+"com.badlogic.gdx.graphics.Color": {
+	"RGBA_181_196_117_255": {
+		"r": 0.70980394,
+		"g": 0.76862746,
+		"b": 0.45882353,
+		"a": 1
+	}
+},
+"com.badlogic.gdx.scenes.scene2d.ui.Button$ButtonStyle": {
+	"default": {
+		"up": "LifeTokenOn-kopi",
+		"down": "LifeTokenOff-kopi"
+	}
+},
+"com.badlogic.gdx.scenes.scene2d.ui.CheckBox$CheckBoxStyle": {
+	"default": {
+		"checkboxOn": "LifeTokenOn-kopi",
+		"checkboxOff": "LifeTokenOff-kopi",
+		"font": "CustomFont15"
+	}
+},
+"com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle": {
+	"default": {
+		"font": "ButtonFont",
+		"fontColor": "RGBA_181_196_117_255",
+		"up": "TextButton",
+		"down": "TextButtonPressed",
+		"unpressedOffsetX": 17
+	}
+},
+"com.badlogic.gdx.scenes.scene2d.ui.TextField$TextFieldStyle": {
+	"default": {
+		"font": "CustomFont20",
+		"fontColor": "RGBA_181_196_117_255",
+		"background": "TextInputBox",
+		"focusedBackground": "TextInputBoxSelected",
+		"cursor": "Cursor"
+	}
+}
+}
