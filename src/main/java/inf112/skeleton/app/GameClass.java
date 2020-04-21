@@ -247,7 +247,7 @@ public class GameClass {
             if (p.getRobot() != null && p.getRobot().isDead() && p.getSpawn() != null && p.takeLife() > 0) {
                 if (board.getRobots().contains(p.getRobot()))
                     board.removeItem(p.getRobot());
-                p.getRobot().setHp(9);
+                p.getRobot().setHp(7);
                 int x = p.getSpawn().getX();
                 int y = p.getSpawn().getY();
                 p.getRobot().setX(x);
