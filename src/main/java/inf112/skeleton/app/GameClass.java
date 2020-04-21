@@ -102,15 +102,12 @@ public class GameClass {
      * Checks if someone has won
      */
     private void winCheck(){
-        boolean won = false;
         for (Player p : players) {
             if (p.getFlags().size() == flags.size()) {
-                won = true;
-            }
-            if (won) {
                 System.out.println(p.getName() + " won!!!");
                 this.won = true;
                 this.winner = p.getName();
+                break;
             }
         }
     }

@@ -52,13 +52,18 @@ public class Settings implements Screen {
                 ((Game)Gdx.app.getApplicationListener()).setScreen(m);
             }
         });
+        
         stage.addActor(button);
         musicBox = new CheckBox("Music",skin);
         musicBox.setPosition(400, 400);
+        if(set.music)
+            musicBox.toggle();
         stage.addActor(musicBox);
         
         devBox = new CheckBox("Delevoper Mode",skin);
-        devBox.setPosition(400, 400);
+        if(set.devMode)
+            devBox.toggle();
+        devBox.setPosition(400, 500);
         stage.addActor(devBox);
         
         Gdx.input.setInputProcessor(stage);

@@ -32,7 +32,7 @@ public class GuiHud implements IGuiElement {
                         ((Text) a).setText(player.getRobot().getHp()+" hp");
                     }
                 } else if(a.getName().equals("flags")){
-                    ((Text)a).setText(player.getFlags().size() + " flags");
+                    ((Text)a).setText(player.getFlags().size() + "");
                 }
             }
         }
@@ -51,9 +51,9 @@ public class GuiHud implements IGuiElement {
         hp.setName("hp");
         hp.setPosition(x,robotName.getY()-robotName.getHeight());
 
-        Text flags = new Text(player.getFlags().size() + " flags");
+        Text flags = new Text(player.getFlags().size()+"");
         flags.setName("flags");
-        flags.setPosition(x,hp.getY()-hp.getHeight());
+        flags.setPosition(stage.getWidth()/1.16f,stage.getHeight()/1.16f);
 
         stage.addActor(name);
         stage.addActor(robotName);
