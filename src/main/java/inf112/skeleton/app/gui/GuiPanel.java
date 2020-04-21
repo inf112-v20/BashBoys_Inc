@@ -87,8 +87,12 @@ public class GuiPanel implements IGuiElement {
 
     public void addLifeTokens(Stage stage, GameClass game){
         life = game.getPlayer().getLifes();
-        for (int i = 0; i < life; i++) {
-            Image token = new Image(GuiFactoryUtil.getTexture("assets/gui/Signs/LifeTokenOn.png"));
+        for (int i = 0; i < 3; i++) {
+            Image token;
+            if(i<life)
+                token = new Image(GuiFactoryUtil.getTexture("assets/gui/Signs/LifeTokenOn.png"));
+            else
+                token = new Image(GuiFactoryUtil.getTexture("assets/gui/Signs/LifeTokenOff.png"));
 
             token.setWidth(panel.getWidth() / 10);
             token.setHeight(panel.getWidth() / 10);
