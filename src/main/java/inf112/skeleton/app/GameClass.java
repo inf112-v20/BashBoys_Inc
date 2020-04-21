@@ -245,8 +245,15 @@ public class GameClass {
     public void respawn(){
         for (Player p : players) {
             if (p.getRobot() != null && p.getRobot().isDead() && p.getSpawn() != null && p.takeLife() > 0) {
-                if (board.getRobots().contains(p.getRobot()))
+                if (board.contains(p.getRobot()))
                     board.removeItem(p.getRobot());
+                p.getRobot().setHp(7);
+                int x = p.getSpawn().getX();
+                int y = p.getSpawn().getY();
+                p.getRobot().setX(x);
+                p.getRobot().setY(y);
+                board.addItem(p.getRobot(), x, y);
+            }else if(p.getRobot() != null && p.getSpawn() != null && !board.contains(p.getRobot()) && p.takeLife() > 0) {
                 p.getRobot().setHp(7);
                 int x = p.getSpawn().getX();
                 int y = p.getSpawn().getY();
@@ -255,13 +262,12 @@ public class GameClass {
                 board.addItem(p.getRobot(), x, y);
             }
         }
-        System.out.println(out);
     }
 
     /**
      * Respawns given players robot if dead Forces respawn (nor need to be dead or
      * have life tokens)
-     * 
+     * Used for devmode mostly
      * @param p - player too revive robot
      */
     public void respawn(Player p){
