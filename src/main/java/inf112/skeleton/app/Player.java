@@ -235,9 +235,9 @@ public class Player implements IPlayer {
     public void addFlag(Flag f){
         if (flags.contains(f)) {
             return;
-        } else if (flags.isEmpty() || f.getNr() == 1) {
+        } else if (flags.isEmpty() && f.getNr() == 1) {
             flags.add(f);
-        } else if (flags.get(flags.size() - 1).getNr() == f.getNr() - 1) {
+        } else if (!flags.isEmpty() && flags.get(flags.size() - 1).getNr() == f.getNr() - 1) {
             flags.add(f);
         }
     }

@@ -46,9 +46,7 @@ public class Settings implements Screen {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 set.music = musicBox.isChecked();
-                System.out.println(musicBox.isChecked());
                 set.devMode = devBox.isChecked();
-                System.out.println(musicBox.isChecked());
                 ((Game)Gdx.app.getApplicationListener()).setScreen(m);
             }
         });

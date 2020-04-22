@@ -253,7 +253,8 @@ public class GameClass {
                 p.getRobot().setX(x);
                 p.getRobot().setY(y);
                 board.addItem(p.getRobot(), x, y);
-            }else if(p.getRobot() != null && p.getSpawn() != null && !board.contains(p.getRobot()) && p.takeLife() > 0) {
+            } else if (p.getRobot() != null && p.getSpawn() != null && !board.contains(p.getRobot())
+                    && p.takeLife() > 0) {
                 p.getRobot().setHp(7);
                 int x = p.getSpawn().getX();
                 int y = p.getSpawn().getY();
@@ -266,8 +267,8 @@ public class GameClass {
 
     /**
      * Respawns given players robot if dead Forces respawn (nor need to be dead or
-     * have life tokens)
-     * Used for devmode mostly
+     * have life tokens) Used for devmode mostly
+     * 
      * @param p - player too revive robot
      */
     public void respawn(Player p){

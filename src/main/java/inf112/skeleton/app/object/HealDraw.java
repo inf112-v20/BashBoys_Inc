@@ -1,8 +1,8 @@
 package inf112.skeleton.app.object;
 
-import inf112.skeleton.app.interfaces.IMapObject;
+import inf112.skeleton.app.interfaces.ICheckPoint;
 
-public class HealDraw implements IMapObject {
+public class HealDraw implements ICheckPoint {
 
     private int x;
     private int y;
