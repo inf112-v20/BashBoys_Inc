@@ -643,5 +643,8 @@ public class Board {
             }
         }
     }
-
+    
+    public boolean contains(IMapObject item) {
+        return getObjects().contains(item);
+    }
 }

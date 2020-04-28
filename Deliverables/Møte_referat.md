@@ -74,3 +74,10 @@ Oppmøte: Alle
 Først gikk vi gjennom det som var gjort siden forrige gang og hva vi mangler å gjøre videre. Prøvde også å gå gjennom 
 spillet online (gjennom port forward). Gikk gjennom hva som var viktigs å fokusere på til neste gang og hva som må
 finpusses nå som spillet begynner å nærme seg ferdig.
+
+21.04:  
+Oppmøte: Alle
+Begynte med å finne ut hvilke tidspunkt som passet best for alle på laget til å ha presentasjon (av de tidspunktene som
+var igjen) og satte oss opp. Så gikk vi gjennom og testet det som var gjort siden forrige gang og sjekket at det virket
+på alle sine datamaskiner siden det meste var visuelle endringer. Så gikk vi igjen gjennom hva som mangler og hva som
+kan forbedres. Avsluttet møtet med å finne ut hvem som skulle jobbe med hva.

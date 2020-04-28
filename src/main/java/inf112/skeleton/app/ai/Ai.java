@@ -42,7 +42,7 @@ public class Ai extends Player {
         return lifes;
     }
     public int giveLife(int i) {
-        return lifes = Math.min(++lifes, 3);
+        return lifes = Math.min(++lifes, 1);
     }
     public int giveLife() {
         return giveLife(1);

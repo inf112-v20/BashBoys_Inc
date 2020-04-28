@@ -53,19 +53,22 @@ public class Settings implements Screen {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 set.music = musicBox.isChecked();
-                System.out.println(musicBox.isChecked());
                 set.devMode = devBox.isChecked();
-                System.out.println(musicBox.isChecked());
-                ((Game) Gdx.app.getApplicationListener()).setScreen(m);
+                ((Game)Gdx.app.getApplicationListener()).setScreen(m);
             }
         });
+        
         stage.addActor(button);
-        musicBox = new CheckBox("Music", skin);
-        musicBox.setPosition(400, 200);
+        musicBox = new CheckBox("Music",skin);
+        musicBox.setPosition(400, 400);
+        if(set.music)
+            musicBox.toggle();
         stage.addActor(musicBox);
-
-        devBox = new CheckBox("Delevoper Mode", skin);
-        devBox.setPosition(400, 400);
+        
+        devBox = new CheckBox("Delevoper Mode",skin);
+        if(set.devMode)
+            devBox.toggle();
+        devBox.setPosition(400, 500);
         stage.addActor(devBox);
 
         Gdx.input.setInputProcessor(stage);

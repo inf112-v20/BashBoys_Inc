@@ -102,15 +102,12 @@ public class GameClass {
      * Checks if someone has won
      */
     private void winCheck(){
-        boolean won = false;
         for (Player p : players) {
             if (p.getFlags().size() == flags.size()) {
-                won = true;
-            }
-            if (won) {
                 System.out.println(p.getName() + " won!!!");
                 this.won = true;
                 this.winner = p.getName();
+                break;
             }
         }
     }
@@ -248,9 +245,17 @@ public class GameClass {
     public void respawn(){
         for (Player p : players) {
             if (p.getRobot() != null && p.getRobot().isDead() && p.getSpawn() != null && p.takeLife() > 0) {
-                if (board.getRobots().contains(p.getRobot()))
+                if (board.contains(p.getRobot()))
                     board.removeItem(p.getRobot());
-                p.getRobot().setHp(9);
+                p.getRobot().setHp(7);
+                int x = p.getSpawn().getX();
+                int y = p.getSpawn().getY();
+                p.getRobot().setX(x);
+                p.getRobot().setY(y);
+                board.addItem(p.getRobot(), x, y);
+            } else if (p.getRobot() != null && p.getSpawn() != null && !board.contains(p.getRobot())
+                    && p.takeLife() > 0) {
+                p.getRobot().setHp(7);
                 int x = p.getSpawn().getX();
                 int y = p.getSpawn().getY();
                 p.getRobot().setX(x);
@@ -258,12 +263,11 @@ public class GameClass {
                 board.addItem(p.getRobot(), x, y);
             }
         }
-        System.out.println(out);
     }
 
     /**
      * Respawns given players robot if dead Forces respawn (nor need to be dead or
-     * have life tokens)
+     * have life tokens) Used for devmode mostly
      * 
      * @param p - player too revive robot
      */
