@@ -19,11 +19,13 @@ public class ButtonCard extends ImageButton {
     private Text priority;
     public float start_width;
     public float start_height;
+    private float boost = 0;
 
     ButtonCard(TextureRegionDrawable texture, ICard type) {
         super(texture);
         this.type = type;
         priority = new Text(type.getPriority()+"");
+        this.updatePriorityPos();
     }
 
     @Override
@@ -40,14 +42,14 @@ public class ButtonCard extends ImageButton {
 
     @Override
     public void setPosition(float x, float y) {
-        priority.setPosition(x+this.getWidth()-this.getWidth()/2.3f,y+this.getHeight()-this.getHeight()/5);
         super.setPosition(x, y);
+        this.updatePriorityPos();
     }
 
     public void updatePriorityPos(){
         priority.setPosition(
                 this.getX() + (this.getWidth()/10)*6,
-                this.getY() + (this.getHeight()/12)*9.9f);
+                this.getY() + boost + (this.getHeight()/12)*10f);
     }
 
     /**
@@ -91,18 +93,24 @@ public class ButtonCard extends ImageButton {
     }
 
     public void reSize(float width, float height, Stage stage){
-        float reScale = (width/start_width);
-        System.out.println(reScale+"");
-        if(reScale==0){reScale=1;}
-        this.setFontScale(reScale,stage);
+        if(this.register==null){
+            this.setFontScale(1,stage);
+            //this.boost = 0;
+        } else {
+            float reScale = ((width+20)/start_width);
+            this.setFontScale(reScale,stage);
+            //this.boost = 2;
+        }
+
         this.updatePriorityPos();
         this.setWidth(width);
         this.setHeight(height);
         this.updatePriorityPos();
+
     }
 
     private void setFontScale(float scale, Stage stage){
-        displayPriority().remove();
+        this.priority.remove();
         this.priority = new Text(type.getPriority()+"");
         this.updatePriorityPos();
         this.priority.getStyle().font.getData().setScale(scale);

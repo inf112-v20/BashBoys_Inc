@@ -29,6 +29,8 @@ import com.badlogic.gdx.net.ServerSocket;
 import com.badlogic.gdx.net.ServerSocketHints;
 import com.badlogic.gdx.net.Socket;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.SelectBox;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
@@ -43,9 +45,7 @@ import inf112.skeleton.app.cards.ShutDown;
 import inf112.skeleton.app.enums.Direction;
 import inf112.skeleton.app.enums.LeftRight;
 import inf112.skeleton.app.enums.Metrics;
-import inf112.skeleton.app.gui.GuiCards;
-import inf112.skeleton.app.gui.GuiHud;
-import inf112.skeleton.app.gui.GuiPanel;
+import inf112.skeleton.app.gui.*;
 import inf112.skeleton.app.interfaces.ICard;
 import inf112.skeleton.app.interfaces.IMapObject;
 import inf112.skeleton.app.object.Laser;
@@ -75,6 +75,9 @@ public class GameView implements Screen {
     private GuiCards guiCards = new GuiCards();
     private GuiHud guiHud = new GuiHud();
     private GuiPanel guiPanel = new GuiPanel();
+    private float divRes = 1f;
+
+
     private GameClass g;
     private int player;
     private Thread t1;
@@ -394,7 +397,7 @@ public class GameView implements Screen {
             } else if (Gdx.input.isKeyPressed(Input.Keys.M) && d > timer) {
                 g.getPlayer().giveLife();
                 if(g.getPlayer().getLifes() == 1) {
-                    g.getPlayer().getRobot().setHp(9);
+                    g.getPlayer().getRobot().setHp(10);
                     board.addItem(g.getPlayer().getRobot(), g.getPlayer().getRobot().getX(), g.getPlayer().getRobot().getY());
                 }
                 d = 0;
@@ -408,9 +411,9 @@ public class GameView implements Screen {
     public void resize(int width, int height){
         uiStage.getViewport().update(width, height, true);
         camera.position.set((Metrics.TILE.width * board.width), (Metrics.TILE.height * board.height), 0);
-        // MIN = 1.3f
-        // MAX = 1f
-        ExtendViewport cameraViewport = new ExtendViewport(width * 1, height * 1, camera);
+
+        ExtendViewport cameraViewport = new ExtendViewport(width * divRes, height * divRes, camera);
+
         cameraViewport.update(width, height, true);
     }
 
@@ -548,10 +551,32 @@ public class GameView implements Screen {
      * Sets ui stuff
      */
     public void ui(){
+
+        // Finds the best res/size for the board
+        if ((64*15)<Gdx.graphics.getHeight()){
+            while(((64*15)/divRes)<=Gdx.graphics.getHeight()){
+                this.divRes -= 0.01f;
+            }
+        } else {
+            while(((64*15)/divRes)>Gdx.graphics.getHeight()){
+                this.divRes += 0.01f;
+            }
+        }
+
+        guiPanel.setDivRes(divRes);
         guiPanel.initialize(uiStage, g, player);
+
+        guiCards.setDivRes(divRes);
         guiCards.setPanel(guiPanel.panel);
         guiCards.initialize(uiStage, g, player);
+
+        guiHud.setDivRes(divRes);
+        guiHud.setPanel(guiPanel.panel);
         guiHud.initialize(uiStage, g, player);
+
+
+
+
 
     }
 }

@@ -107,7 +107,7 @@ public class GuiFactoryUtil {
      * @return TextButton.TextButtonStyle Style
      */
     public static TextButton.TextButtonStyle getTextStyle(String path){
-        BitmapFont font = new BitmapFont();
+        BitmapFont font = new BitmapFont(Gdx.files.internal("assets/Fonts/CustomFont15.fnt"));
         Skin skin = new Skin();
         TextureAtlas atlas = new TextureAtlas(path);
         skin.addRegions(atlas);

@@ -6,11 +6,12 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.EventListener;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.CheckBox;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.*;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 import inf112.skeleton.app.Setting;
@@ -50,7 +51,7 @@ public class Settings implements Screen {
                 ((Game)Gdx.app.getApplicationListener()).setScreen(m);
             }
         });
-        
+
         stage.addActor(button);
         musicBox = new CheckBox("Music",skin);
         musicBox.setPosition(400, 400);
@@ -63,7 +64,7 @@ public class Settings implements Screen {
             devBox.toggle();
         devBox.setPosition(400, 500);
         stage.addActor(devBox);
-        
+
         Gdx.input.setInputProcessor(stage);
     }
 

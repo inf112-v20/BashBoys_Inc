@@ -57,6 +57,7 @@ public class Register extends ImageButton {
     public boolean contains(float x, float y){
         // Buffer for how exact the check is
         float buffer = 0;
+        if(disabled) return false;
         return (x > this.getX()-buffer && y > this.getY()-buffer && x < this.getX()+this.getWidth()+buffer && y < this.getY()+this.getHeight()+buffer);
     }
 
