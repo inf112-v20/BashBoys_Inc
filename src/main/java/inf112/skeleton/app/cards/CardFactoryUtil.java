@@ -22,7 +22,7 @@ public class CardFactoryUtil {
      * @param y - y position
      */
     static public Actor create(int x, int y) {
-        FileHandle fileHandle = Gdx.files.internal("assets/exampleCard.png");
+        FileHandle fileHandle = Gdx.files.internal("assets/exampleCard.fnt");
         Texture myTexture = new Texture(fileHandle);
         TextureRegion myTextureRegion = new TextureRegion(myTexture);
         TextureRegionDrawable myTexRegionDrawable = new TextureRegionDrawable(myTextureRegion);

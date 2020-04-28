@@ -70,27 +70,17 @@ public class GuiCards implements IGuiElement {
         int n = player.getHand().size();
         hand = (ArrayList<ICard>) player.getHand().clone();
 
-        int ii = 0;
         for (int i = 0; i < n; i++) {
 
             float width = (panel.getWidth()/9);
             float height = (panel.getWidth()/9)/GuiFactoryUtil.ratio;
 
-            boolean small = false;
-            if(height < 2f*(64/divRes) ){
-                height = 2f*(64/divRes);
-                width = height*GuiFactoryUtil.ratio;
-                small = true;
-            }
+
 
             float x = panel.getX() + i*width;
             float y = ((Metrics.SCREEN.height)/divRes)/24;
 
-            if(i > 4 && small){
-                y = ((Metrics.SCREEN.height)/(divRes))/12*3.5f;
-                x = panel.getX()+width/2 + ii*width;
-                ii++;
-            }
+
 
             ButtonCard temp = GuiFactoryUtil.createCard(x,y,width,height,player.getHand().get(i));
             temp.start_height = height;
