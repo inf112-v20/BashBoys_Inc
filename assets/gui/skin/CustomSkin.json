@@ -1,55 +1,71 @@
 {
-"com.badlogic.gdx.graphics.g2d.BitmapFont": {
-	"ButtonFont": {
-		"file": "ButtonFont.fnt"
-	},
-	"CustomFont15": {
-		"file": "CustomFont15.fnt"
-	},
-	"CustomFont20": {
-		"file": "CustomFont20.fnt"
-	}
-},
-"com.badlogic.gdx.graphics.Color": {
-	"RGBA_181_196_117_255": {
-		"r": 0.70980394,
-		"g": 0.76862746,
-		"b": 0.45882353,
-		"a": 1
-	}
-},
-"com.badlogic.gdx.scenes.scene2d.ui.Button$ButtonStyle": {
-	"default": {
-		"up": "LifeTokenOn-kopi",
-		"down": "LifeTokenOff-kopi"
-	}
-},
-"com.badlogic.gdx.scenes.scene2d.ui.CheckBox$CheckBoxStyle": {
-	"default": {
-		"checkboxOn": "CheckBoxChecked",
-		"checkboxOff": "CheckBox",
-		"font": "ButtonFont"
-	}
-},
-"com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle": {
-	"default": {
-		"font": "ButtonFont",
-		"fontColor": "RGBA_181_196_117_255",
-		"up": "TextButton",
-		"down": "TextButtonPressed",
-		"pressedOffsetX": 17,
-		"unpressedOffsetX": 17,
-		"checkedOffsetX": 17
-	}
-},
-"com.badlogic.gdx.scenes.scene2d.ui.TextField$TextFieldStyle": {
-	"default": {
-		"font": "CustomFont20",
-		"fontColor": "RGBA_181_196_117_255",
-		"background": "TextInputBox",
-		"focusedBackground": "TextInputBoxSelected",
-		"cursor": "Cursor",
-		"selection": "Cursor"
-	}
-}
+  "com.badlogic.gdx.graphics.g2d.BitmapFont": {
+    "ButtonFont": {
+      "file": "ButtonFont.fnt"
+    },
+    "CustomFont15": {
+      "file": "CustomFont15.fnt"
+    },
+    "CustomFont20": {
+      "file": "CustomFont20.fnt"
+    }
+  },
+  "com.badlogic.gdx.graphics.Color": {
+    "RGBA_181_196_117_255": {
+      "r": 0.70980394,
+      "g": 0.76862746,
+      "b": 0.45882353,
+      "a": 1
+    },
+    "RGBA_200_59_39_255": {
+      "r": 0.78431374,
+      "g": 0.23137255,
+      "b": 0.15294118,
+      "a": 1
+    }
+  },
+  "com.badlogic.gdx.scenes.scene2d.ui.Button$ButtonStyle": {
+    "default": {
+      "up": "LifeTokenOn-kopi",
+      "down": "LifeTokenOff-kopi"
+    }
+  },
+  "com.badlogic.gdx.scenes.scene2d.ui.CheckBox$CheckBoxStyle": {
+    "default": {
+      "checkboxOn": "CheckBoxChecked",
+      "checkboxOff": "CheckBox",
+      "font": "ButtonFont"
+    }
+  },
+  "com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle": {
+    "default": {
+      "font": "ButtonFont"
+    }
+  },
+  "com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle": {
+    "default": {
+      "font": "ButtonFont",
+      "fontColor": "RGBA_181_196_117_255",
+      "up": "TextButton",
+      "down": "TextButtonPressed",
+      "pressedOffsetX": 17,
+      "unpressedOffsetX": 17,
+      "checkedOffsetX": 17
+    }
+  },
+  "com.badlogic.gdx.scenes.scene2d.ui.TextField$TextFieldStyle": {
+    "default": {
+      "font": "CustomFont20",
+      "fontColor": "RGBA_181_196_117_255",
+      "background": "TextInputBox",
+      "focusedBackground": "TextInputBoxSelected",
+      "cursor": "Cursor",
+      "selection": "Cursor"
+    }
+  },
+  "com.badlogic.gdx.scenes.scene2d.ui.TextTooltip$TextTooltipStyle": {
+    "default": {
+      "label": "default"
+    }
+  }
 }

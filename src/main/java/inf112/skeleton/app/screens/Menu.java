@@ -9,10 +9,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.scenes.scene2d.ui.TextField;
+import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import inf112.skeleton.app.GameClass;
 import inf112.skeleton.app.Player;
@@ -104,12 +101,20 @@ public class Menu implements Screen {
         });
         stage.addActor(joinButton);
 
-        name = new TextField("abc", skin);
-        name.setPosition(700, 400);
+        Label nameStr = new Label("Name", skin);
+        nameStr.setPosition(710, 510);
+        stage.addActor(nameStr);
+
+        name = new TextField("George", skin);
+        name.setPosition(700, 450);
         name.setSize(300, 60);
         stage.addActor(name);
 
-        ipBox = new TextField("own IP", skin);
+        Label ipStr = new Label("IP Address", skin);
+        ipStr.setPosition(710, 360);
+        stage.addActor(ipStr);
+
+        ipBox = new TextField("192.168", skin);
         ipBox.setPosition(700, 300);
         ipBox.setSize(300, 60);
         stage.addActor(ipBox);

@@ -37,6 +37,7 @@ public class Settings implements Screen {
         img.setPosition(0, Gdx.graphics.getHeight() - img.getHeight());
         stage.addActor(img);
 
+
         BitmapFont font = new BitmapFont(Gdx.files.internal("assets/Fonts/ButtonFont.fnt"), Gdx.files.internal("assets/Fonts/ButtonFont.png"), false);
         Skin skin = new Skin(Gdx.files.internal("assets/gui/skin/CustomSkin.json"));
         TextureAtlas atlas = new TextureAtlas("assets/gui/skin/CustomSkin.atlas");
