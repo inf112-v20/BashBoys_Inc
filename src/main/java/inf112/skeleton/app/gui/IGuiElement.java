@@ -14,4 +14,6 @@ public interface IGuiElement {
 
     void update(Stage stage, GameClass game);
 
+    void setDivRes(float div);
+
 }

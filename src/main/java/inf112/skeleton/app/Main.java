@@ -9,7 +9,7 @@ public class Main {
 
 
         // Min requirement res: 1366x768
-        // Other: 1600×900, 2560×1440, 3840×2160
+        // Other: 1400x1050, 1600×900, 2560×1440, 3840×2160
         // Default res: 1920x1080
 
         cfg.title = "RoboRally";

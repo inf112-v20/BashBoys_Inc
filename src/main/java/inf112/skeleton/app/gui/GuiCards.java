@@ -1,5 +1,6 @@
 package inf112.skeleton.app.gui;
 
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
@@ -17,7 +18,6 @@ import java.util.ArrayList;
 
 public class GuiCards implements IGuiElement {
 
-    //private static int margin = 50;
     private ArrayList<Register> registers = new ArrayList<>();
     private ArrayList<ButtonCard> cards = new ArrayList<>();
     private ArrayList<ICard> hand;
@@ -27,6 +27,7 @@ public class GuiCards implements IGuiElement {
     private Player player;
     private ImageButton panel;
     private boolean finished = false;
+    private float divRes;
 
 
     @Override
@@ -43,15 +44,20 @@ public class GuiCards implements IGuiElement {
     @Override
     public void update(Stage stage, GameClass game){
         if(!player.getHand().equals(hand)) {
-            for(ButtonCard bc : cards) {
-                bc.remove();
-                bc.displayPriority().remove();
-            }
             for (Register r : registers) {
                 unRegisterCard(r);
+                r.disabled = registers.indexOf(r) >= (player.getRobot().getHp() - 1);
+            }
+            for(ButtonCard bc : cards) {
+                bc.remove();
             }
             addCards(player,stage);
         }
+    }
+
+    @Override
+    public void setDivRes(float div) {
+        this.divRes = div;
     }
 
     /**
@@ -71,17 +77,17 @@ public class GuiCards implements IGuiElement {
             float height = (panel.getWidth()/9)/GuiFactoryUtil.ratio;
 
             boolean small = false;
-            if(height < 2.8f*64 ){
-                height = 2.8f*64;
+            if(height < 2f*(64/divRes) ){
+                height = 2f*(64/divRes);
                 width = height*GuiFactoryUtil.ratio;
                 small = true;
             }
 
             float x = panel.getX() + i*width;
-            float y = Metrics.SCREEN.height/24;
+            float y = ((Metrics.SCREEN.height)/divRes)/24;
 
             if(i > 4 && small){
-                y = Metrics.SCREEN.height/12*3.5f;
+                y = ((Metrics.SCREEN.height)/(divRes))/12*3.5f;
                 x = panel.getX()+width/2 + ii*width;
                 ii++;
             }
@@ -165,8 +171,11 @@ public class GuiCards implements IGuiElement {
             float x = (panel.getX() + panel.getWidth()/47) + i*(width+(panel.getWidth()/50)*2);
             float y = (panel.getY() + panel.getHeight()/25);
 
-            Register temp = GuiFactoryUtil.createRegister(x,y,width,height);
 
+            Register temp = GuiFactoryUtil.createRegister(x,y,width,height);
+            if(i >= player.getRobot().getHp()){
+                temp.disabled = true;
+            }
 
             stage.addActor(temp);
             registers.add(temp);
@@ -184,12 +193,12 @@ public class GuiCards implements IGuiElement {
                 GuiFactoryUtil.getTexture("assets/gui/Signs/LockIn.png"),
                 GuiFactoryUtil.getTexture("assets/gui/Signs/LockInPushed.png"));
 
-        lockIn.setWidth(panel.getHeight()/3.2f);
-        lockIn.setHeight(panel.getHeight()/3.2f);
+        lockIn.setWidth(panel.getHeight()/4);
+        lockIn.setHeight(panel.getHeight()/4);
 
 
-        float x = (panel.getX()+(panel.getWidth()/5)*4)+panel.getWidth()/200;
-        float y = (panel.getY() + panel.getHeight() - lockIn.getHeight())-panel.getWidth()/200;
+        float x = panel.getX() + (panel.getWidth()/40)*33f;
+        float y = panel.getY() + panel.getHeight() - lockIn.getHeight() - panel.getHeight()/24;
 
         lockIn.setPosition(x,y);
 
@@ -227,11 +236,11 @@ public class GuiCards implements IGuiElement {
                 GuiFactoryUtil.getTexture("assets/gui/Signs/PowerDownPushed.png"));
 
 
-        powerDown.setWidth(panel.getHeight()/3);
-        powerDown.setHeight(panel.getHeight()/3);
+        powerDown.setWidth(panel.getHeight()/4);
+        powerDown.setHeight(panel.getHeight()/4);
 
-        float x = panel.getX();
-        float y = panel.getY() + panel.getHeight() - powerDown.getHeight();
+        float x = panel.getX() + panel.getWidth()/40;
+        float y = panel.getY() + panel.getHeight() - powerDown.getHeight() - panel.getHeight()/24;
 
         powerDown.setPosition(x, y);
         powerDown.addListener(new ClickListener() {
@@ -347,16 +356,16 @@ public class GuiCards implements IGuiElement {
                                 }
                             } else { // // Reset to origin point
                                 temp.setPosition(temp.getOriginX(), temp.getOriginY());
-                                temp.reSize(temp.start_width,temp.start_height,uiStage);
                             }
                         }
                     }
                     if (!hit) { // If dragging was a miss, then unregister/return to origin point
                         if (temp.register == null) {
                             temp.setPosition(temp.getOriginX(), temp.getOriginY());
-                            temp.reSize(temp.start_width,temp.start_height,uiStage);
                         } else {
                             unRegisterCard(temp, temp.register);
+                            temp.reSize(temp.start_width,temp.start_height,uiStage);
+
                         }
                     }
                 }

@@ -10,7 +10,7 @@ public class Robot implements IDirectionalObject {
     private int yPos = 5;
     private String name = "RobotFaceSouth";
     private Direction dir = Direction.SOUTH;
-    private int hp = 9;
+    private int hp = 10;
     private Player player;
 
     public Robot() {
@@ -140,7 +140,7 @@ public class Robot implements IDirectionalObject {
      * @param heal - amount to add
      */
     public void heal(int heal) {
-        hp = Integer.min(hp+heal, 9);
+        hp = Integer.min(hp+heal, 10);
     }
     
     /**
