@@ -61,7 +61,7 @@ public class Settings implements Screen {
         });
         stage.addActor(button);
         musicBox = new CheckBox("Music", skin);
-        musicBox.setPosition(400, 400);
+        musicBox.setPosition(400, 200);
         stage.addActor(musicBox);
 
         devBox = new CheckBox("Delevoper Mode", skin);
