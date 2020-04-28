@@ -37,7 +37,9 @@
 		"fontColor": "RGBA_181_196_117_255",
 		"up": "TextButton",
 		"down": "TextButtonPressed",
-		"unpressedOffsetX": 17
+		"pressedOffsetX": 17,
+		"unpressedOffsetX": 17,
+		"checkedOffsetX": 17
 	}
 },
 "com.badlogic.gdx.scenes.scene2d.ui.TextField$TextFieldStyle": {
@@ -46,7 +48,8 @@
 		"fontColor": "RGBA_181_196_117_255",
 		"background": "TextInputBox",
 		"focusedBackground": "TextInputBoxSelected",
-		"cursor": "Cursor"
+		"cursor": "Cursor",
+		"selection": "Cursor"
 	}
 }
 }
