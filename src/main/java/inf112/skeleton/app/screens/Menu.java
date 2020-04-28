@@ -39,7 +39,7 @@ public class Menu implements Screen {
 
         Texture imgTexture = new Texture(Gdx.files.internal("assets/Background.png"));
         Image img = new Image(imgTexture);
-        img.setPosition(-50, Gdx.graphics.getHeight() - img.getHeight());
+        img.setPosition(0, Gdx.graphics.getHeight() - img.getHeight());
         stage.addActor(img);
 
         BitmapFont font = new BitmapFont(Gdx.files.internal("assets/Fonts/ButtonFont.fnt"), Gdx.files.internal("assets/Fonts/ButtonFont.png"), false);

@@ -6,42 +6,49 @@ filter: Linear,Linear
 repeat: none
 ButtonFont
   rotate: false
-  xy: 1, 789
+  xy: 1, 815
   size: 512, 512
   orig: 512, 512
   offset: 0, 0
   index: -1
 Cursor
   rotate: false
-  xy: 370, 259
+  xy: 370, 285
   size: 8, 14
   orig: 8, 14
   offset: 0, 0
   index: -1
 CustomFont15
   rotate: false
-  xy: 1, 275
+  xy: 1, 301
+  size: 512, 512
+  orig: 512, 512
+  offset: 0, 0
+  index: -1
+CustomFont20
+  rotate: false
+  xy: 515, 815
   size: 512, 512
   orig: 512, 512
   offset: 0, 0
   index: -1
 LifeTokenOff-kopi
   rotate: false
-  xy: 515, 461
+  xy: 515, 487
   size: 269, 269
   orig: 269, 269
   offset: 0, 0
   index: -1
 LifeTokenOn-kopi
   rotate: false
-  xy: 1029, 968
+  xy: 1029, 956
   size: 269, 269
   orig: 269, 269
   offset: 0, 0
   index: -1
 TextInputBox
   rotate: false
-  xy: 1, 218
+  xy: 1, 244
   size: 367, 55
   split: 18, 18, 30, 15
   pad: 18, 18, 10, 12
@@ -50,31 +57,38 @@ TextInputBox
   index: -1
 TextInputBoxSelected
   rotate: false
-  xy: 515, 732
+  xy: 515, 758
   size: 367, 55
   split: 18, 18, 30, 15
   pad: 18, 18, 10, 12
   orig: 367, 55
   offset: 0, 0
   index: -1
-CustomFont20
+CheckBox
   rotate: false
-  xy: 515, 789
-  size: 512, 512
-  orig: 512, 512
+  xy: 1, 12
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+CheckBoxChecked
+  rotate: false
+  xy: 515, 357
+  size: 128, 128
+  orig: 128, 128
   offset: 0, 0
   index: -1
 TextButton
   rotate: false
-  xy: 1029, 1239
-  size: 274, 62
-  orig: 274, 62
+  xy: 1, 142
+  size: 300, 100
+  orig: 300, 100
   offset: 0, 0
   index: -1
 TextButtonPressed
   rotate: false
-  xy: 1, 154
-  size: 270, 62
-  orig: 270, 62
+  xy: 1029, 1227
+  size: 300, 100
+  orig: 300, 100
   offset: 0, 0
   index: -1

@@ -26,9 +26,9 @@
 },
 "com.badlogic.gdx.scenes.scene2d.ui.CheckBox$CheckBoxStyle": {
 	"default": {
-		"checkboxOn": "LifeTokenOn-kopi",
-		"checkboxOff": "LifeTokenOff-kopi",
-		"font": "CustomFont15"
+		"checkboxOn": "CheckBoxChecked",
+		"checkboxOff": "CheckBox",
+		"font": "ButtonFont"
 	}
 },
 "com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle": {
