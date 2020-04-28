@@ -1,16 +1,11 @@
 package inf112.skeleton.app.screens;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.concurrent.TimeUnit;
-
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Net.Protocol;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.net.ServerSocket;
@@ -19,15 +14,21 @@ import com.badlogic.gdx.net.Socket;
 import com.badlogic.gdx.net.SocketHints;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-
 import inf112.skeleton.app.GameClass;
 import inf112.skeleton.app.Player;
 import inf112.skeleton.app.Setting;
-import inf112.skeleton.app.gui.Text;
 import inf112.skeleton.app.object.Robot;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 
 public class HostScreen implements Screen {
 
@@ -35,29 +36,47 @@ public class HostScreen implements Screen {
     private int port;
     private Protocol protocol;
     private GameClass g;
+    private Menu m;
     private String pl;
-    private Text p;
+    private Label p;
     private int pp = 1;
     private ServerSocket server;
     private Setting set;
     private boolean t = true;
 
-    public HostScreen(GameClass g, Setting set) {
+    public HostScreen(Menu m, GameClass g, Setting set) {
         //visual stuff
         this.set = set;
         this.g = g;
+        this.m = m;
         g.setPlayer(0);
         stage = new Stage();
+
+        Texture imgTexture = new Texture(Gdx.files.internal("assets/Background.png"));
+        Image img = new Image(imgTexture);
+        img.setPosition(0, Gdx.graphics.getHeight() - img.getHeight());
+        stage.addActor(img);
+
         Gdx.input.setInputProcessor(stage);
-        BitmapFont font = new BitmapFont();
-        Skin skin = new Skin(Gdx.files.internal("assets/gui/skin/uiskin.json"));
-        TextureAtlas atlas = new TextureAtlas("assets/gui/skin/uiskin.atlas");
+        BitmapFont font = new BitmapFont(Gdx.files.internal("assets/Fonts/ButtonFont.fnt"), Gdx.files.internal("assets/Fonts/ButtonFont.png"), false);
+        Skin skin = new Skin(Gdx.files.internal("assets/gui/skin/CustomSkin.json"));
+        TextureAtlas atlas = new TextureAtlas("assets/gui/skin/CustomSkin.atlas");
         skin.addRegions(atlas);
         TextButton.TextButtonStyle style = new TextButton.TextButtonStyle();
         style.font = font;
 
-        style.up = skin.getDrawable("apptheme_btn_radio_on_holo_light");
-        style.down = skin.getDrawable("apptheme_btn_radio_on_focused_holo_light");
+        style.up = skin.getDrawable("TextButton");
+        style.down = skin.getDrawable("TextButtonPressed");
+
+        TextButton backButton = new TextButton("Back", style);
+        backButton.addListener(new ClickListener() {
+
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                ((Game) Gdx.app.getApplicationListener()).setScreen(m);
+            }
+        });
+        stage.addActor(backButton);
 
         //port to host on
         port = 25565;
@@ -65,12 +84,10 @@ public class HostScreen implements Screen {
 
         //Play solo button
         TextButton start = new TextButton("Play", style);
-        start.setWidth(100);
-        start.setHeight(100);
-        start.setPosition(150, 100);
+        start.setPosition(150, 550);
         start.addListener(new ClickListener() {
             @Override
-            public void clicked(InputEvent event, float xx, float yy){
+            public void clicked(InputEvent event, float xx, float yy) {
                 t = false;
                 server.dispose();
                 g.setMap(set.map);
@@ -106,7 +123,7 @@ public class HostScreen implements Screen {
 
         Thread t1 = new Thread(new Runnable() {
             @Override
-            public void run(){
+            public void run() {
                 ServerSocketHints ssh = new ServerSocketHints();
                 ssh.acceptTimeout = 0;
                 server = Gdx.net.newServerSocket(protocol, port, ssh);
@@ -125,7 +142,7 @@ public class HostScreen implements Screen {
                         // TODO Auto-generated catch block
                         e.printStackTrace();
                     }
-                    
+
                     try {
                         TimeUnit.SECONDS.sleep(5);
                     } catch (InterruptedException e) {
@@ -139,18 +156,21 @@ public class HostScreen implements Screen {
     }
 
     @Override
-    public void show(){
+    public void show() {
+        Skin skin = new Skin(Gdx.files.internal("assets/gui/skin/CustomSkin.json"));
+        TextureAtlas atlas = new TextureAtlas("assets/gui/skin/CustomSkin.atlas");
+        skin.addRegions(atlas);
         pl = "";
         for (Player p : g.players()) {
             pl += p.getName() + "      ";
         }
-        p = new Text(pl);
-        p.left();
+        p = new Label(pl, skin);
+        p.setPosition(500, 575);
         stage.addActor(p);
     }
 
     @Override
-    public void render(float delta){
+    public void render(float delta) {
 
         if (g.players().size() == 8) {
             server.dispose();
@@ -169,31 +189,31 @@ public class HostScreen implements Screen {
     }
 
     @Override
-    public void resize(int width, int height){
+    public void resize(int width, int height) {
         // TODO Auto-generated method stub
 
     }
 
     @Override
-    public void pause(){
+    public void pause() {
         // TODO Auto-generated method stub
 
     }
 
     @Override
-    public void resume(){
+    public void resume() {
         // TODO Auto-generated method stub
 
     }
 
     @Override
-    public void hide(){
+    public void hide() {
         // TODO Auto-generated method stub
 
     }
 
     @Override
-    public void dispose(){
+    public void dispose() {
         // TODO Auto-generated method stub
 
     }
