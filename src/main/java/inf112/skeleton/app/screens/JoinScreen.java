@@ -1,8 +1,5 @@
 package inf112.skeleton.app.screens;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Net.Protocol;
@@ -20,14 +17,18 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextArea;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-
 import inf112.skeleton.app.GameClass;
 import inf112.skeleton.app.Player;
 import inf112.skeleton.app.Setting;
 import inf112.skeleton.app.object.Robot;
 
-public class JoinScreen implements Screen{
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
+public class JoinScreen implements Screen {
+
+    private Menu m;
     private Stage stage;
     private int port;
     private Protocol protocol;
@@ -40,10 +41,11 @@ public class JoinScreen implements Screen{
     private int player;
     private Setting set;
     private boolean t = true;
-    
-    public JoinScreen(GameClass g,Setting set){
+
+    public JoinScreen(Menu m, GameClass g, Setting set) {
         this.set = set;
         this.g = g;
+        this.m = m;
         stage = new Stage();
         Gdx.input.setInputProcessor(stage);
         BitmapFont font = new BitmapFont();
@@ -55,16 +57,25 @@ public class JoinScreen implements Screen{
 
         style.up = skin.getDrawable("apptheme_btn_radio_on_holo_light");
         style.down = skin.getDrawable("apptheme_btn_radio_on_focused_holo_light");
-        
+
+        TextButton backButton = new TextButton("Back", style);
+        backButton.addListener(new ClickListener() {
+
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                ((Game) Gdx.app.getApplicationListener()).setScreen(m);
+            }
+        });
+
         port = 25565;
         protocol = Protocol.TCP;
-        
-        ip = new TextArea("84.215.102.111",skin);
-        ownIp = new TextArea("192.168.0.13",skin);
-        name = new TextArea("Name",skin);
-        TextButton button = new TextButton("Join",skin);
-        
-        
+
+        ip = new TextArea("84.215.102.111", skin);
+        ownIp = new TextArea("192.168.0.13", skin);
+        name = new TextArea("Name", skin);
+        TextButton button = new TextButton("Join", skin);
+
+
         button.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -73,9 +84,9 @@ public class JoinScreen implements Screen{
                 sh.connectTimeout = 10000;
                 Socket socket = Gdx.net.newClientSocket(protocol, ip.getText(), port, sh);
                 try {
-                    send = name.getText()+","+ownIp.getText()+",25565\n";
+                    send = name.getText() + "," + ownIp.getText() + ",25565\n";
                     socket.getOutputStream().write(send.getBytes());
-                }catch(IOException e) {
+                } catch (IOException e) {
                     e.printStackTrace();
                 }
             }
@@ -88,10 +99,10 @@ public class JoinScreen implements Screen{
         stage.addActor(ownIp);
         stage.addActor(name);
         stage.addActor(button);
-        
+
         Thread t1 = new Thread(new Runnable() {
             @Override
-            public void run(){
+            public void run() {
                 ServerSocketHints ssh = new ServerSocketHints();
                 ssh.acceptTimeout = 0;
                 ServerSocket server = Gdx.net.newServerSocket(protocol, port, ssh);
@@ -104,17 +115,17 @@ public class JoinScreen implements Screen{
                         System.out.println(st);
                         String[] ss = st.split(",");
                         System.out.println(ss[0]);
-                        int ps = ss.length/3;
+                        int ps = ss.length / 3;
                         g.setPlayer(Integer.parseInt(ss[0]));
                         player = Integer.parseInt(ss[0]);
                         int id = 0;
-                        for(int i = 2; i <ps*3+2;i=i+3) {
-                            Robot r = new Robot(pp,pp++,"robot "+(id+1));
-                            g.players().add(new Player(ss[i],ss[i+1],Integer.parseInt(ss[i+2]),r,id++));
+                        for (int i = 2; i < ps * 3 + 2; i = i + 3) {
+                            Robot r = new Robot(pp, pp++, "robot " + (id + 1));
+                            g.players().add(new Player(ss[i], ss[i + 1], Integer.parseInt(ss[i + 2]), r, id++));
                             g.getBoard().addItem(r, r.getX(), r.getY());
                         }
                         g.setMap(ss[1]);
-                        t=false;
+                        t = false;
                         swap = true;
                         server.dispose();
                     } catch (IOException e) {
@@ -126,52 +137,52 @@ public class JoinScreen implements Screen{
         });
         t1.start();
     }
-    
+
     @Override
-    public void show(){
+    public void show() {
         // Nothing
     }
 
     @Override
-    public void render(float delta){
-        if(swap)swap();
+    public void render(float delta) {
+        if (swap) swap();
         Gdx.gl.glClearColor(1, 1, 1, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         stage.draw();
-        
+
     }
 
     @Override
-    public void resize(int width, int height){
+    public void resize(int width, int height) {
         // TODO Auto-generated method stub
-        
+
     }
 
     @Override
-    public void pause(){
+    public void pause() {
         // TODO Auto-generated method stub
-        
+
     }
 
     @Override
-    public void resume(){
+    public void resume() {
         // TODO Auto-generated method stub
-        
+
     }
 
     @Override
-    public void hide(){
+    public void hide() {
         // TODO Auto-generated method stub
-        
+
     }
 
     @Override
-    public void dispose(){
+    public void dispose() {
         // TODO Auto-generated method stub
-        
+
     }
 
     private void swap() {
-        ((Game) Gdx.app.getApplicationListener()).setScreen(new GameView(g,player,set));
+        ((Game) Gdx.app.getApplicationListener()).setScreen(new GameView(g, player, set));
     }
 }

@@ -84,7 +84,7 @@ public class Menu implements Screen {
             @Override
             public void clicked(InputEvent event, float xx, float yy) {
                 g.players().add(new Player(name.getText(), ipBox.getText(), 25565, new Robot(0, 0, "robot 1"), 0));
-                ((Game) Gdx.app.getApplicationListener()).setScreen(new HostScreen(g, set));
+                ((Game) Gdx.app.getApplicationListener()).setScreen(new HostScreen(m, g, set));
             }
         });
         stage.addActor(hostButton);
@@ -96,7 +96,7 @@ public class Menu implements Screen {
         joinButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float xx, float yy) {
-                ((Game) Gdx.app.getApplicationListener()).setScreen(new JoinScreen(g, set));
+                ((Game) Gdx.app.getApplicationListener()).setScreen(new JoinScreen(m, g, set));
             }
         });
         stage.addActor(joinButton);
