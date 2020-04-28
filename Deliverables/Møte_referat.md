@@ -81,3 +81,9 @@ Begynte med å finne ut hvilke tidspunkt som passet best for alle på laget til 
 var igjen) og satte oss opp. Så gikk vi gjennom og testet det som var gjort siden forrige gang og sjekket at det virket
 på alle sine datamaskiner siden det meste var visuelle endringer. Så gikk vi igjen gjennom hva som mangler og hva som
 kan forbedres. Avsluttet møtet med å finne ut hvem som skulle jobbe med hva.
+
+28.04:  
+Oppmøte: Mathias, Terje, Erlend, Egil    
+Begynte møtet med å gå gjennom og begynne på dokumentasjon til oblig 4 i tillegg til presentasjonen. Testet at spillet
+virket på linux (det gjorde det). Gikk gjennom hvem som skulle gjøre hva i forhold til presentasjon og dokumentasjon til
+innleveringen. Til slutt avtalte å ha et nytt møte søndag for å gå gjennom prentasjonen felles.
