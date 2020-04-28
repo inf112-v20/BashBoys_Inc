@@ -18,6 +18,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTile;
@@ -29,6 +30,7 @@ import com.badlogic.gdx.net.ServerSocket;
 import com.badlogic.gdx.net.ServerSocketHints;
 import com.badlogic.gdx.net.Socket;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.SelectBox;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
@@ -563,8 +565,16 @@ public class GameView implements Screen {
             }
         }
 
+        Texture imgTexture = new Texture(Gdx.files.internal("assets/Background.png"));
+        Image img = new Image(imgTexture);
+        img.setPosition((64*12)/divRes, Gdx.graphics.getHeight() - img.getHeight());
+        img.setZIndex(0);
+        uiStage.addActor(img);
+
         guiPanel.setDivRes(divRes);
         guiPanel.initialize(uiStage, g, player);
+
+
 
         guiCards.setDivRes(divRes);
         guiCards.setPanel(guiPanel.panel);
