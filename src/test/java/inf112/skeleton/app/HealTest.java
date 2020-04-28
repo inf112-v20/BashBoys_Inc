@@ -17,7 +17,7 @@ class HealTest {
         board.addItem(new HealDraw(false), 5, 5);
         r.dmg(5);//4HP left
         board.healDo();
-        assertEquals(r.getHp(),5);
+        assertEquals(r.getHp(),6);
     }
     
     @Test
@@ -27,7 +27,7 @@ class HealTest {
         board.addItem(r, 5, 5);
         board.addItem(new HealDraw(false), 5, 5);
         board.healDo();
-        assertEquals(r.getHp(),9);
+        assertEquals(r.getHp(),10);
     }
 
 }

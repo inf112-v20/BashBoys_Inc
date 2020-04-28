@@ -23,7 +23,7 @@ class RespawnTests {
         g.getBoard().addItem(f1, 1, 1);
         assertEquals(r.getX(), 5);
         assertEquals(r.getY(), 5);
-        r.dmg(9);
+        r.dmg(10);
         g.respawn();
         assertEquals(r.getX(), 1);
         assertEquals(r.getY(), 1);

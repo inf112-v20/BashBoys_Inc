@@ -43,7 +43,7 @@ class FiresLasersIntoObjectsAndDealsDamageTests {
         b.addItem(jens, 5, 5);
         b.fireLasers();
         
-        assertEquals(jens.getHp(),7);
+        assertEquals(jens.getHp(),8);
     }
     
     @Test
@@ -55,8 +55,8 @@ class FiresLasersIntoObjectsAndDealsDamageTests {
         b.addItem(grete, 11, 6);
         b.fireLasers();
         
-        assertEquals(hans.getHp(),8);
-        assertEquals(grete.getHp(),8);
+        assertEquals(hans.getHp(),9);
+        assertEquals(grete.getHp(),9);
     }
     
     @Test
@@ -71,7 +71,7 @@ class FiresLasersIntoObjectsAndDealsDamageTests {
         b.addItem(tobias, 5, 4);
         
         b.fireLasers();
-        assertEquals(tobias.getHp(),9);
+        assertEquals(tobias.getHp(),10);
     }
 
 }
