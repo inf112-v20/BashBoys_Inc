@@ -165,7 +165,7 @@ public class HostScreen implements Screen {
             pl += p.getName() + "      ";
         }
         p = new Label(pl, skin);
-        p.setPosition(480, 575);
+        p.setPosition(500, 575);
         stage.addActor(p);
     }
 
