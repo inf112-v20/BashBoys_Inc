@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import inf112.skeleton.app.Board;
@@ -105,6 +106,7 @@ public class GuiFactoryUtil {
      * @return TextButton.TextButtonStyle Style
      */
     public static TextButton.TextButtonStyle getTextStyle(String path) {
+        Skin skin = new Skin(Gdx.files.internal("assets/gui/skin/CustomSkin.json"));
         TextureAtlas atlas = new TextureAtlas("assets/gui/skin/CustomSkin.atlas");
         BitmapFont font = new BitmapFont(Gdx.files.internal("assets/gui/skin/CustomFont20.fnt"), atlas.findRegion("CustomFont20"));
         TextButton.TextButtonStyle style = new TextButton.TextButtonStyle();
