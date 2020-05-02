@@ -4,65 +4,58 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import inf112.skeleton.app.gui.Text;
 
 public class Win implements Screen {
     private Stage stage;
     private String winner;
 
-
+    
+    
     public Win(String s) {
         winner = s;
     }
-
+    
     @Override
-    public void show() {
+    public void show(){
         stage = new Stage();
-
-        Texture imgTexture = new Texture(Gdx.files.internal("assets/Background.png"));
-        Image img = new Image(imgTexture);
-        img.setPosition(0, Gdx.graphics.getHeight() - img.getHeight());
-        stage.addActor(img);
-
-        Text name = new Text(winner + " won!!!");
+        Text name = new Text(winner+" won!!!");
         name.setPosition(500, 500);
         name.setColor(Color.BLACK);
         stage.addActor(name);
     }
 
     @Override
-    public void dispose() {
+    public void dispose(){
         stage.dispose();
     }
 
     @Override
-    public void render(float delta) {
+    public void render(float delta){
         Gdx.gl.glClearColor(1, 1, 1, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         stage.draw();
     }
 
     @Override
-    public void resize(int width, int height) {
+    public void resize(int width, int height){
         // Nothing
     }
 
     @Override
-    public void pause() {
+    public void pause(){
         // Implemented method
     }
 
     @Override
-    public void resume() {
+    public void resume(){
         // Implemented method
     }
 
     @Override
-    public void hide() {
+    public void hide(){
         // TODO Auto-generated method stub
-
+        
     }
 }
