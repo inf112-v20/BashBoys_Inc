@@ -9,7 +9,6 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
-
 import inf112.skeleton.app.Board;
 import inf112.skeleton.app.enums.Metrics;
 import inf112.skeleton.app.interfaces.ICard;
@@ -106,11 +105,10 @@ public class GuiFactoryUtil {
      * @param path - path of Text-style
      * @return TextButton.TextButtonStyle Style
      */
-    public static TextButton.TextButtonStyle getTextStyle(String path){
-        BitmapFont font = new BitmapFont(Gdx.files.internal("assets/Fonts/CustomFont15.fnt"));
-        Skin skin = new Skin();
-        TextureAtlas atlas = new TextureAtlas(path);
-        skin.addRegions(atlas);
+    public static TextButton.TextButtonStyle getTextStyle(String path) {
+        Skin skin = new Skin(Gdx.files.internal("assets/gui/skin/CustomSkin.json"));
+        TextureAtlas atlas = new TextureAtlas("assets/gui/skin/CustomSkin.atlas");
+        BitmapFont font = new BitmapFont(Gdx.files.internal("assets/gui/skin/CustomFont20.fnt"), atlas.findRegion("CustomFont20"));
         TextButton.TextButtonStyle style = new TextButton.TextButtonStyle();
         style.font = font;
         return style;
@@ -118,23 +116,25 @@ public class GuiFactoryUtil {
 
     /**
      * Get Base Width which each Gui element is based on
+     *
      * @return Base Width
      */
-    public static float getWidth(){
+    public static float getWidth() {
         return WIDTH;
     }
 
     /**
      * Get Base Height which each Gui element is based on
+     *
      * @return Base Height
      */
-    public static float getHeight(){
+    public static float getHeight() {
         return HEIGHT;
     }
 
-    public static float getScaleConstant(Board b){
+    public static float getScaleConstant(Board b) {
         float scale = 1f;
-        if(Gdx.graphics.getHeight()<(Metrics.TILE.height*b.height)){
+        if (Gdx.graphics.getHeight() < (Metrics.TILE.height * b.height)) {
             scale = 1.3f;
         }
         return scale;

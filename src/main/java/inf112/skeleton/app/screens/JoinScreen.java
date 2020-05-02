@@ -6,8 +6,6 @@ import com.badlogic.gdx.Net.Protocol;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.net.ServerSocket;
 import com.badlogic.gdx.net.ServerSocketHints;
 import com.badlogic.gdx.net.Socket;
@@ -51,19 +49,11 @@ public class JoinScreen implements Screen {
         Image img = new Image(imgTexture);
         img.setPosition(0, Gdx.graphics.getHeight() - img.getHeight());
         stage.addActor(img);
-
         Gdx.input.setInputProcessor(stage);
-        BitmapFont font = new BitmapFont(Gdx.files.internal("assets/Fonts/ButtonFont.fnt"), Gdx.files.internal("assets/Fonts/ButtonFont.png"), false);
+
         Skin skin = new Skin(Gdx.files.internal("assets/gui/skin/CustomSkin.json"));
-        TextureAtlas atlas = new TextureAtlas("assets/gui/skin/CustomSkin.atlas");
-        skin.addRegions(atlas);
-        TextButton.TextButtonStyle style = new TextButton.TextButtonStyle();
-        style.font = font;
 
-        style.up = skin.getDrawable("TextButton");
-        style.down = skin.getDrawable("TextButtonPressed");
-
-        TextButton backButton = new TextButton("Back", style);
+        TextButton backButton = new TextButton("Back", skin);
         backButton.addListener(new ClickListener() {
 
             @Override
@@ -79,7 +69,7 @@ public class JoinScreen implements Screen {
         ip = new TextField("84.215.102.111", skin);
         ownIp = new TextField("192.168.0.13", skin);
         name = new TextField("Name", skin);
-        TextButton button = new TextButton("Join", style);
+        TextButton button = new TextButton("Join", skin);
 
 
         button.addListener(new ClickListener() {

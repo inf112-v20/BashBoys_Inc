@@ -4,8 +4,11 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import inf112.skeleton.app.gui.Text;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 
 public class Win implements Screen {
     private Stage stage;
@@ -20,7 +23,12 @@ public class Win implements Screen {
     @Override
     public void show(){
         stage = new Stage();
-        Text name = new Text(winner+" won!!!");
+        Texture imgTexture = new Texture(Gdx.files.internal("assets/Background.png"));
+        Image img = new Image(imgTexture);
+        img.setPosition(0, Gdx.graphics.getHeight() - img.getHeight());
+        stage.addActor(img);
+        Skin skin = new Skin(Gdx.files.internal("assets/gui/skin/CustomSkin.json"));
+        Label name = new Label(winner + " won!!!", skin);
         name.setPosition(500, 500);
         name.setColor(Color.BLACK);
         stage.addActor(name);
