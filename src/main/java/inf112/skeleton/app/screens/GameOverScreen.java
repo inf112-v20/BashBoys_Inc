@@ -6,8 +6,6 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
@@ -36,22 +34,14 @@ public class GameOverScreen implements Screen {
         img.setPosition(0, Gdx.graphics.getHeight() - img.getHeight());
         stage.addActor(img);
 
-        BitmapFont font = new BitmapFont(Gdx.files.internal("assets/Fonts/ButtonFont.fnt"), Gdx.files.internal("assets/Fonts/ButtonFont.png"), false);
         Skin skin = new Skin(Gdx.files.internal("assets/gui/skin/CustomSkin.json"));
-        TextureAtlas atlas = new TextureAtlas("assets/gui/skin/CustomSkin.atlas");
-        skin.addRegions(atlas);
-        TextButton.TextButtonStyle style = new TextButton.TextButtonStyle();
-        style.font = font;
 
         Label name = new Label("You lost", skin);
         name.setPosition(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2);
         name.setColor(Color.RED);
         stage.addActor(name);
 
-        style.up = skin.getDrawable("TextButton");
-        style.down = skin.getDrawable("TextButtonPressed");
-
-        TextButton start = new TextButton("Play", style);
+        TextButton start = new TextButton("Play", skin);
         start.setPosition(150, 550);
         start.addListener(new ClickListener() {
             @Override
