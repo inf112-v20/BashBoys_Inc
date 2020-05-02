@@ -5,53 +5,57 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-
 import inf112.skeleton.app.Setting;
-import inf112.skeleton.app.gui.Text;
 
 public class GameOverScreen implements Screen {
     private Stage stage;
     private GameView g;
     private Setting set;
-    
-    public GameOverScreen(GameView g,Setting set) {
+
+    public GameOverScreen(GameView g, Setting set) {
         this.g = g;
         this.set = set;
     }
-    
+
     @Override
-    public void show(){
+    public void show() {
         stage = new Stage();
-        
-        Text name = new Text("You lost");
-        name.setPosition(500, 500);
-        name.setColor(Color.BLACK);
-        stage.addActor(name);
-        
-        BitmapFont font = new BitmapFont();
-        Skin skin = new Skin(Gdx.files.internal("assets/gui/skin/uiskin.json"));
-        TextureAtlas atlas = new TextureAtlas("assets/gui/skin/uiskin.atlas");
+
+        Texture imgTexture = new Texture(Gdx.files.internal("assets/Background.png"));
+        Image img = new Image(imgTexture);
+        img.setPosition(0, Gdx.graphics.getHeight() - img.getHeight());
+        stage.addActor(img);
+
+        BitmapFont font = new BitmapFont(Gdx.files.internal("assets/Fonts/ButtonFont.fnt"), Gdx.files.internal("assets/Fonts/ButtonFont.png"), false);
+        Skin skin = new Skin(Gdx.files.internal("assets/gui/skin/CustomSkin.json"));
+        TextureAtlas atlas = new TextureAtlas("assets/gui/skin/CustomSkin.atlas");
         skin.addRegions(atlas);
         TextButton.TextButtonStyle style = new TextButton.TextButtonStyle();
         style.font = font;
 
-        style.up = skin.getDrawable("apptheme_btn_radio_on_holo_light");
-        style.down = skin.getDrawable("apptheme_btn_radio_on_focused_holo_light");
-        
-        TextButton start = new TextButton("Play", style);
-        start.setWidth(100);
-        start.setHeight(100);
-        start.setPosition(150, 100);
+        Label name = new Label("You lost", skin);
+        name.setPosition(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2);
+        name.setColor(Color.RED);
+        stage.addActor(name);
+
+        style.up = skin.getDrawable("TextButton");
+        style.down = skin.getDrawable("TextButtonPressed");
+
+        TextButton start = new TextButton("Play Again", style);
+        start.setPosition(150, 550);
         start.addListener(new ClickListener() {
             @Override
-            public void clicked(InputEvent event, float xx, float yy){
+            public void clicked(InputEvent event, float xx, float yy) {
                 set.spectator = true;
                 ((Game) Gdx.app.getApplicationListener()).setScreen(g);
             }
@@ -61,35 +65,35 @@ public class GameOverScreen implements Screen {
     }
 
     @Override
-    public void dispose(){
+    public void dispose() {
         stage.dispose();
     }
 
     @Override
-    public void render(float delta){
+    public void render(float delta) {
         Gdx.gl.glClearColor(1, 1, 1, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         stage.draw();
     }
 
     @Override
-    public void resize(int width, int height){
+    public void resize(int width, int height) {
         // Nothing
     }
 
     @Override
-    public void pause(){
+    public void pause() {
         // Implemented method
     }
 
     @Override
-    public void resume(){
+    public void resume() {
         // Implemented method
     }
 
     @Override
-    public void hide(){
+    public void hide() {
         // TODO Auto-generated method stub
-        
+
     }
 }
