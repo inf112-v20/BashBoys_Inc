@@ -51,7 +51,7 @@ public class GameOverScreen implements Screen {
         style.up = skin.getDrawable("TextButton");
         style.down = skin.getDrawable("TextButtonPressed");
 
-        TextButton start = new TextButton("Play Again", style);
+        TextButton start = new TextButton("Play", style);
         start.setPosition(150, 550);
         start.addListener(new ClickListener() {
             @Override
