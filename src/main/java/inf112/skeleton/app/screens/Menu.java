@@ -5,6 +5,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
@@ -37,9 +39,19 @@ public class Menu implements Screen {
         img.setPosition(0, Gdx.graphics.getHeight() - img.getHeight());
         stage.addActor(img);
 
+        BitmapFont font = new BitmapFont(Gdx.files.internal("assets/Fonts/ButtonFont.fnt"), Gdx.files.internal("assets/Fonts/ButtonFont.png"), false);
         Skin skin = new Skin(Gdx.files.internal("assets/gui/skin/CustomSkin.json"));
+        TextureAtlas atlas = new TextureAtlas("assets/gui/skin/CustomSkin.atlas");
+        skin.addRegions(atlas);
+        TextButton.TextButtonStyle style = new TextButton.TextButtonStyle();
+        style.font = font;
 
-        TextButton playButton = new TextButton("Play", skin);
+        style.up = skin.getDrawable("TextButton");
+        style.down = skin.getDrawable("TextButtonPressed");
+
+        TextButton playButton = new TextButton("Play", style);
+        playButton.setWidth(300);
+        playButton.setHeight(100);
         playButton.setPosition(150, 100);
         playButton.addListener(new ClickListener() {
             @Override
@@ -52,7 +64,9 @@ public class Menu implements Screen {
         });
         stage.addActor(playButton);
 
-        TextButton settingsButton = new TextButton("Settings", skin);
+        TextButton settingsButton = new TextButton("Settings", style);
+        settingsButton.setWidth(300);
+        settingsButton.setHeight(100);
         settingsButton.setPosition(150, 250);
         settingsButton.addListener(new ClickListener() {
             @Override
@@ -62,8 +76,9 @@ public class Menu implements Screen {
         });
         stage.addActor(settingsButton);
 
-        TextButton hostButton = new TextButton("Host", skin);
-        ;
+        TextButton hostButton = new TextButton("Host", style);
+        hostButton.setWidth(300);
+        hostButton.setHeight(100);
         hostButton.setPosition(150, 400);
         hostButton.addListener(new ClickListener() {
             @Override
@@ -74,7 +89,9 @@ public class Menu implements Screen {
         });
         stage.addActor(hostButton);
 
-        TextButton joinButton = new TextButton("Join", skin);
+        TextButton joinButton = new TextButton("Join", style);
+        joinButton.setWidth(300);
+        joinButton.setHeight(100);
         joinButton.setPosition(150, 550);
         joinButton.addListener(new ClickListener() {
             @Override

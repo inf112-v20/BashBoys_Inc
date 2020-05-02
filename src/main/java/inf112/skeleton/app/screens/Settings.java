@@ -5,6 +5,10 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.EventListener;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.CheckBox;
@@ -35,9 +39,18 @@ public class Settings implements Screen {
         img.setPosition(0, Gdx.graphics.getHeight() - img.getHeight());
         stage.addActor(img);
 
-        Skin skin = new Skin(Gdx.files.internal("assets/gui/skin/CustomSkin.json"));
 
-        TextButton button = new TextButton("Back", skin);
+        BitmapFont font = new BitmapFont(Gdx.files.internal("assets/Fonts/ButtonFont.fnt"), Gdx.files.internal("assets/Fonts/ButtonFont.png"), false);
+        Skin skin = new Skin(Gdx.files.internal("assets/gui/skin/CustomSkin.json"));
+        TextureAtlas atlas = new TextureAtlas("assets/gui/skin/CustomSkin.atlas");
+        skin.addRegions(atlas);
+        TextButton.TextButtonStyle style = new TextButton.TextButtonStyle();
+        style.font = font;
+
+        style.up = skin.getDrawable("TextButton");
+        style.down = skin.getDrawable("TextButtonPressed");
+
+        TextButton button = new TextButton("Back", style);
         button.addListener(new ClickListener() {
 
             @Override

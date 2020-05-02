@@ -7,8 +7,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import inf112.skeleton.app.gui.Text;
 
 public class Win implements Screen {
     private Stage stage;
@@ -28,9 +27,7 @@ public class Win implements Screen {
         img.setPosition(0, Gdx.graphics.getHeight() - img.getHeight());
         stage.addActor(img);
 
-        Skin skin = new Skin(Gdx.files.internal("assets/gui/skin/CustomSkin.json"));
-
-        Label name = new Label(winner + " won!!!", skin);
+        Text name = new Text(winner + " won!!!");
         name.setPosition(500, 500);
         name.setColor(Color.BLACK);
         stage.addActor(name);
