@@ -5,13 +5,22 @@
 [![Build Status](https://travis-ci.com/inf112-v20/BashBoys_Inc.svg?branch=master)](https://travis-ci.com/inf112-v20/BashBoys_Inc)
 
 
-
 ### Participants:
 - Mathias Haugsbø
 - Egil Bru 
 - Elias Bendixen
 - Erlend Dahl
 - Terje Baklund
+
+### Requirements:
+1. Java 8
+2. Something to build the maven project, we have used IntelliJ Community Edition.
+
+### How to run:
+1. Open project in IntelliJ Community Edition or other editors that supports Java Maven projects.
+2. Click `Run 'Main'` or key shortcut: `SHIFT + F10` in IntelliJ
+3. IntelliJ will now download dependencies and build project.
+4. After compiling, the game will launch
 
 ### Our target high level specifications:
 - [x] Working game with RoboRally rules
@@ -39,12 +48,29 @@
   - [x] dragabble/clickable cards
   - [x] visual card selection
 
-### How to run:
-1. Open project in IntelliJ Community Edition or other editors that supports Java Maven projects.
-2. Click `Run 'Main'` or key shortcut: `SHIFT + F10` in IntelliJ
-3. IntelliJ will now download dependencies and build project.
-4. After compiling, the game will launch
-
-#### Requirements:
-1. Java 8
-2. Something to build the maven project, we have used IntelliJ Community Edition.
+### Requirements from customer (Taken from lecture slides early in INF112 course)
+- [x] Show a playing board
+- [x] Show a pice
+- [x] Move a pice
+- [x] Play from different machines
+- [x] Give out cards
+- [x] Pick cards (5 of 9)
+- [x] Move piece based on card
+- [x] Give out cards in the beginning of a new round
+- [x] Show more (at least two) pieces at the same playing board
+- [x] Give out cards to each robot
+- [x] Move pieces at the same time
+- [x] Move pices based on priority on the programming cards
+- [x] Flag on playing board
+- [x] Registrate that a robot has been on a flag
+- [x] Handle conflicts on movements correctly
+- [x] Place backups
+- [x] Respawn on backup when destroyed
+- [x] Moving into a hole leads to destroyed robot, player lose life if the robot is destroyed and respawn from last backup
+- [x] Moving outside of board leads to destroyed robot, lose of life and respawn on last backup
+- [x] If the robot is shot 9 times, lose a life and respawn from last backup
+- [x] If a robot is pointed towards another in the end of a phase, shoot laser and the receiving robot gets damage
+- [x] If robot has damage, then you get less cards according to how high the damage is
+- [x] Robot can not move through walls
+- [ ] Too much damage leads to programming cards stuck in programming sequence
+      - Misunderstood this one, we thought the player got fewer and fewer available spots for programming cards. Not that cards were supposed to be stuck until you get enough HP.
