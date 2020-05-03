@@ -466,4 +466,44 @@
                 <property name="flag" value="flag8" />
             </properties>
         </tile>
+        <tile id="93">
+            <properties>
+                <property name="spawn" value="spawn1" />
+            </properties>
+        </tile>
+        <tile id="94">
+            <properties>
+                <property name="spawn" value="spawn2" />
+            </properties>
+        </tile>
+        <tile id="95">
+            <properties>
+                <property name="spawn" value="spawn3" />
+            </properties>
+        </tile>
+        <tile id="96">
+            <properties>
+                <property name="spawn" value="spawn4" />
+            </properties>
+        </tile>
+        <tile id="97">
+            <properties>
+                <property name="spawn" value="spawn5" />
+            </properties>
+        </tile>
+        <tile id="98">
+            <properties>
+                <property name="spawn" value="spawn6" />
+            </properties>
+        </tile>
+        <tile id="99">
+            <properties>
+                <property name="spawn" value="spawn7" />
+            </properties>
+        </tile>
+        <tile id="100">
+            <properties>
+                <property name="spawn" value="spawn8" />
+            </properties>
+        </tile>
     </tileset>
