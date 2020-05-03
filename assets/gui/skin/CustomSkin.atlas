@@ -18,6 +18,13 @@ Cursor
   orig: 8, 14
   offset: 0, 0
   index: -1
+CustomFont15
+  rotate: false
+  xy: 1, 301
+  size: 512, 512
+  orig: 512, 512
+  offset: 0, 0
+  index: -1
 CustomFont20
   rotate: false
   xy: 515, 815
