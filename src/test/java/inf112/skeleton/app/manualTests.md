@@ -17,3 +17,14 @@ When in game, the graphics shall load correctly.
 3. Game should launch with a board
 4. There shall now not be any black "holes" on the screen.
     - All cards and tiles shall have graphics.
+
+### Music shall play (last tested: 03.05.2020)
+When in game, music shall be heard if enabled in settings before entering game.
+1. Launch game
+2. When in main menu:
+    a. Click `Settings`
+    b. If Sound is not checked -> click the checkbox to enable sound.
+    c. Go back
+    d. Click "Play"
+3. Game should launch with a board
+4. Music shall now be playing if volume on pc is on.
