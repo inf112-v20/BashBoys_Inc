@@ -14,10 +14,10 @@
 - Terje Baklund
 
 ### Our target high level specifications:
-- [ ] Working game with RoboRally rules
-- [ ] Online multiplayer
-- [ ] Work on all operating systems
-- [ ] Work on laptops with 1366x768px or larger resolution with screen size of 13" or larger.
+- [x] Working game with RoboRally rules
+- [x] LAN multiplayer
+- [x] Work on all operating systems
+- [x] Work on laptops with 1366x768px or larger resolution with screen size of 13" or larger.
 
 ### Development goals for assignment 1:
 - [x] Display board on screen
@@ -40,7 +40,11 @@
   - [x] visual card selection
 
 ### How to run:
+1. Open project in IntelliJ Community Edition or other editors that supports Java Maven projects.
+2. Click `Run 'Main'` or key shortcut: `SHIFT + F10` in IntelliJ
+3. IntelliJ will now download dependencies and build project.
+4. After compiling, the game will launch
 
 #### Requirements:
 1. Java 8
-2. Something to build the maven project (For development), we have used IntelliJ Community Edition.
+2. Something to build the maven project, we have used IntelliJ Community Edition.
