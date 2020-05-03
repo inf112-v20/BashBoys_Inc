@@ -87,3 +87,9 @@ Oppmøte: Mathias, Terje, Erlend, Egil
 Begynte møtet med å gå gjennom og begynne på dokumentasjon til oblig 4 i tillegg til presentasjonen. Testet at spillet
 virket på linux (det gjorde det). Gikk gjennom hvem som skulle gjøre hva i forhold til presentasjon og dokumentasjon til
 innleveringen. Til slutt avtalte å ha et nytt møte søndag for å gå gjennom prentasjonen felles.
+
+03.05:  
+Oppmøte: Alle  
+Startet med å teste at zoom virket som det skal hos alle og at delt skjerm virket på den som skal holde demoen. Gikk så
+gjennom det vi hadde så langt til presentasjonen og skrev ferdig det. Resten av møtet ble brukt til å skrive videre på
+dokumentasjonen til innlevering. 
