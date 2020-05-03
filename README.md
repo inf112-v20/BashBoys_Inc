@@ -72,5 +72,4 @@
 - [x] If a robot is pointed towards another in the end of a phase, shoot laser and the receiving robot gets damage
 - [x] If robot has damage, then you get less cards according to how high the damage is
 - [x] Robot can not move through walls
-- [ ] Too much damage leads to programming cards stuck in programming sequence
-      - Misunderstood this one, we thought the player got fewer and fewer available spots for programming cards. Not that cards were supposed to be stuck until you get enough HP.
+- [x] Too much damage leads to programming cards stuck in programming sequence
