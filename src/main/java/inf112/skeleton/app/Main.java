@@ -16,6 +16,7 @@ public class Main {
         cfg.width = 1920;
         cfg.height = 1080;
         cfg.useHDPI = true;
+        cfg.fullscreen = false;
 
         GameClass game = new GameClass();
         game.play(cfg);

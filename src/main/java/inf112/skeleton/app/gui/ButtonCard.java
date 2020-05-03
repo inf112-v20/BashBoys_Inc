@@ -19,6 +19,7 @@ public class ButtonCard extends ImageButton {
     private Text priority;
     public float start_width;
     public float start_height;
+    public boolean locked = false;
     private float boost = 0;
 
     ButtonCard(TextureRegionDrawable texture, ICard type) {
