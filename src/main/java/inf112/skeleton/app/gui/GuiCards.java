@@ -45,11 +45,17 @@ public class GuiCards implements IGuiElement {
     public void update(Stage stage, GameClass game){
         if(!player.getHand().equals(hand)) {
             for (Register r : registers) {
-                unRegisterCard(r);
+                if(!(registers.indexOf(r) >= (player.getRobot().getHp()-1))){
+                    unRegisterCard(r);
+                }
                 r.disabled = registers.indexOf(r) >= (player.getRobot().getHp() - 1);
             }
             for(ButtonCard bc : cards) {
-                bc.remove();
+                if(bc.register==null){
+                    bc.remove();
+                } else {
+                    bc.locked = true;
+                }
             }
             addCards(player,stage);
         }
@@ -298,8 +304,10 @@ public class GuiCards implements IGuiElement {
 
             @Override
             public void drag(InputEvent event, float x, float y, int pointer){
-                temp.moveBy(x - offsetX, y - offsetY);
-                click = false;
+                if(!temp.locked){
+                    temp.moveBy(x - offsetX, y - offsetY);
+                    click = false;
+                }
                 super.drag(event, x, y, pointer);
             }
 
@@ -309,7 +317,7 @@ public class GuiCards implements IGuiElement {
                 offsetY = y;
 
                 // If it's a simple click
-                if (click) {
+                if (click && !temp.locked) {
                     if (temp.register != null) {
                         unRegisterCard(temp, temp.register);
                     } else {
@@ -321,7 +329,7 @@ public class GuiCards implements IGuiElement {
                             }
                         }
                     }
-                } else {
+                } else if(!temp.locked) {
                     boolean hit = false;
                     for (Register register : registers) {
                         // Register is hit by dragging motion
