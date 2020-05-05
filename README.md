@@ -73,3 +73,12 @@
 - [x] If robot has damage, then you get less cards according to how high the damage is
 - [x] Robot can not move through walls
 - [x] Too much damage leads to programming cards stuck in programming sequence
+
+### Dev mode
+- piler : move
+- enter : turn do
+- j : remove card
+- k : add card
+- r : respawn
+- n : remove life tokens
+- m : add life tokens
