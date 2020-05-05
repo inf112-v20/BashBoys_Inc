@@ -6,7 +6,11 @@ public class SpawnPoint implements ICheckPoint {
 
     private int x;
     private int y;
+    private int id;
     
+    public SpawnPoint(int id){
+        this.id = id;
+    }
     @Override
     public int getX(){
         return x;
@@ -30,7 +34,7 @@ public class SpawnPoint implements ICheckPoint {
 
     @Override
     public String getName(){
-        return "1NORTHbelt";
+        return "spawn"+id;
     }
 
 }

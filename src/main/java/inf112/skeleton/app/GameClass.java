@@ -457,14 +457,14 @@ public class GameClass {
         board.addItem(flag1, 2, 4);
         board.addItem(flag2, 8, 7);
         /**/
-        SpawnPoint s1 = new SpawnPoint();
-        SpawnPoint s2 = new SpawnPoint();
-        SpawnPoint s3 = new SpawnPoint();
-        SpawnPoint s4 = new SpawnPoint();
-        SpawnPoint s5 = new SpawnPoint();
-        SpawnPoint s6 = new SpawnPoint();
-        SpawnPoint s7 = new SpawnPoint();
-        SpawnPoint s8 = new SpawnPoint();
+        SpawnPoint s1 = new SpawnPoint(1);
+        SpawnPoint s2 = new SpawnPoint(2);
+        SpawnPoint s3 = new SpawnPoint(3);
+        SpawnPoint s4 = new SpawnPoint(4);
+        SpawnPoint s5 = new SpawnPoint(5);
+        SpawnPoint s6 = new SpawnPoint(6);
+        SpawnPoint s7 = new SpawnPoint(7);
+        SpawnPoint s8 = new SpawnPoint(8);
 
         board.addItem(s1, 1, 14);
         board.addItem(s2, 2, 13);
