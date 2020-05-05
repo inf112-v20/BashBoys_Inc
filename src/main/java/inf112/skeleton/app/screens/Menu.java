@@ -158,10 +158,11 @@ public class Menu implements Screen {
 
     }
     
+    //Temp notepad opener, opens from notes in assets folder
     static private void notepad(String file) {
         Runtime rs = Runtime.getRuntime();
         try {
-            rs.exec("notepad ./assets/"+file+".txt");
+            rs.exec("notepad ./assets/notes/"+file+".txt");
         }
         catch (IOException e) {
             System.out.println(e);
