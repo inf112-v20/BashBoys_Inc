@@ -1,0 +1,7 @@
+Arrows: Move
+Enter: Automated turn stuff
+N: Remove lifetoken
+M: Add lifetoken
+J: Remove card
+K: Add new card from deck
+R: Force respawn; on last checkpoint with full hp

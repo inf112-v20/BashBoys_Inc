@@ -1,5 +1,7 @@
 package inf112.skeleton.app.screens;
 
+import java.io.IOException;
+
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -40,7 +42,7 @@ public class Menu implements Screen {
         Skin skin = new Skin(Gdx.files.internal("assets/gui/skin/CustomSkin.json"));
 
         TextButton playButton = new TextButton("Play", skin);
-        playButton.setPosition(150, 100);
+        playButton.setPosition(150, 900);
         playButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float xx, float yy) {
@@ -52,18 +54,8 @@ public class Menu implements Screen {
         });
         stage.addActor(playButton);
 
-        TextButton settingsButton = new TextButton("Settings", skin);
-        settingsButton.setPosition(150, 250);
-        settingsButton.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float xx, float yy) {
-                ((Game) Gdx.app.getApplicationListener()).setScreen(new Settings(m, set));
-            }
-        });
-        stage.addActor(settingsButton);
-
         TextButton hostButton = new TextButton("Host", skin);
-        hostButton.setPosition(150, 400);
+        hostButton.setPosition(150, 750);
         hostButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float xx, float yy) {
@@ -74,7 +66,7 @@ public class Menu implements Screen {
         stage.addActor(hostButton);
 
         TextButton joinButton = new TextButton("Join", skin);
-        joinButton.setPosition(150, 550);
+        joinButton.setPosition(150, 600);
         joinButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float xx, float yy) {
@@ -82,6 +74,37 @@ public class Menu implements Screen {
             }
         });
         stage.addActor(joinButton);
+        
+        TextButton settingsButton = new TextButton("Settings", skin);
+        settingsButton.setPosition(150, 450);
+        settingsButton.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float xx, float yy) {
+                ((Game) Gdx.app.getApplicationListener()).setScreen(new Settings(m, set));
+            }
+        });
+        stage.addActor(settingsButton);
+        
+        TextButton devNotes = new TextButton("Dev Notes", skin);
+        devNotes.setPosition(150, 300);
+        devNotes.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float xx, float yy) {
+                notepad("Devmode");
+            }
+        });
+        stage.addActor(devNotes);
+        
+        TextButton credits = new TextButton("Credits", skin);
+        credits.setPosition(150, 150);
+        credits.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float xx, float yy) {
+                notepad("Credits");
+            }
+        });
+        stage.addActor(credits);
+        
 
         Label nameStr = new Label("Name", skin);
         nameStr.setPosition(710, 510);
@@ -133,5 +156,15 @@ public class Menu implements Screen {
     public void hide() {
         // TODO Auto-generated method stub
 
+    }
+    
+    static private void notepad(String file) {
+        Runtime rs = Runtime.getRuntime();
+        try {
+            rs.exec("notepad ./assets/"+file+".txt");
+        }
+        catch (IOException e) {
+            System.out.println(e);
+        }
     }
 }
