@@ -85,12 +85,12 @@ public class Menu implements Screen {
         });
         stage.addActor(settingsButton);
         
-        TextButton devNotes = new TextButton("Dev Notes", skin);
+        TextButton devNotes = new TextButton("Help", skin);
         devNotes.setPosition(150, 300);
         devNotes.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float xx, float yy) {
-                notepad("Devmode");
+                notepad("Help");
             }
         });
         stage.addActor(devNotes);

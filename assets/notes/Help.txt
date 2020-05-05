@@ -1,0 +1,23 @@
+How to:
+
+Host:
+	(open port(25565) needed for online not lan)
+	In the main menu in the upper box write name of your robot(Not nesesary if joining)
+	In lower box write your ip, press host
+	Wait for all players to join, then press start
+
+Join:
+	(Open port(25565) needed for online, not lan)
+	Press join in main menu
+	Write ip of host in host ip box and own in own
+	Give name of your robot and press join
+	Wait for host to start
+
+Dev mode:
+	Arrows: Move
+	Enter: Automated turn stuff
+	N: Remove lifetoken
+	M: Add lifetoken
+	J: Remove card
+	K: Add new card from deck
+	R: Force respawn; on last checkpoint with full hp
