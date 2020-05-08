@@ -10,6 +10,11 @@ public enum Metrics {
     public final float width;
     public final float height;
 
+    /**
+     * Some Metrics for gui-elements
+     * @param width - Width of element
+     * @param height - Height of element
+     */
     Metrics(float width, float height) {
         this.width = width;
         this.height = height;

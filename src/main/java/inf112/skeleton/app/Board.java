@@ -4,13 +4,7 @@ import inf112.skeleton.app.enums.Direction;
 import inf112.skeleton.app.interfaces.ICheckPoint;
 import inf112.skeleton.app.interfaces.IDirectionalObject;
 import inf112.skeleton.app.interfaces.IMapObject;
-import inf112.skeleton.app.object.Gear;
-import inf112.skeleton.app.object.HealDraw;
-import inf112.skeleton.app.object.Hole;
-import inf112.skeleton.app.object.Laser;
-import inf112.skeleton.app.object.Pusher;
-import inf112.skeleton.app.object.Robot;
-import inf112.skeleton.app.object.Wall;
+import inf112.skeleton.app.object.*;
 import inf112.skeleton.app.object.belts.Belt;
 
 import java.util.ArrayList;
@@ -574,8 +568,6 @@ public class Board {
         fireLasers();
         healDo();
         flagCheck();
-        // energy();
-        // checkpoint();
     }
 
     /**

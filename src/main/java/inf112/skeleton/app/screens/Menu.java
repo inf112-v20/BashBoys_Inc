@@ -1,7 +1,5 @@
 package inf112.skeleton.app.screens;
 
-import java.io.IOException;
-
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -16,6 +14,11 @@ import inf112.skeleton.app.Player;
 import inf112.skeleton.app.Setting;
 import inf112.skeleton.app.object.Robot;
 
+import java.io.IOException;
+
+/**
+ * Main Menu Screen
+ */
 public class Menu implements Screen {
     private Stage stage;
     private TextField name, ipBox;
@@ -154,7 +157,7 @@ public class Menu implements Screen {
 
     @Override
     public void hide() {
-        // TODO Auto-generated method stub
+        // Auto-generated method stub
 
     }
     

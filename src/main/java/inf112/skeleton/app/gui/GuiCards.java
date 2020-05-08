@@ -1,6 +1,5 @@
 package inf112.skeleton.app.gui;
 
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
@@ -226,6 +225,12 @@ public class GuiCards implements IGuiElement {
         stage.addActor(lockIn);
     }
 
+    /**
+     * Adds power down button to gui panel
+     * @param stage - UiStage to add
+     * @param game - GameClass
+     * @param player - Player who powers down
+     */
     private void addPowerDownButton(Stage stage, GameClass game, int player){
         powerDown = new ImageButton(
                 GuiFactoryUtil.getTexture("assets/gui/Signs/PowerDown.png"),
@@ -259,22 +264,21 @@ public class GuiCards implements IGuiElement {
     }
 
     /**
-     * Get if this gui-stage is finished
-     * 
-     * @return - boolean if gui-stage is finished
+     * Sets the panel for gui-elements on the panel
+     * @param panel - Panel to set from GuiPanel
      */
-    public boolean isFinished(){
-        return finished;
-    }
-
     public void setPanel(ImageButton panel){
         this.panel = panel;
     }
 
 
-    private void addListener(ButtonCard temp){
+    /**
+     * Adds Drag Listener to ButtonCard
+     * @param btn - Btn to add listener to
+     */
+    private void addListener(ButtonCard btn){
         // Adds a drag listener to actor
-        temp.addListener(new DragListener() {
+        btn.addListener(new DragListener() {
 
             // OffsetX,Y of mouse click to button position
             float offsetX = 0;
@@ -292,8 +296,8 @@ public class GuiCards implements IGuiElement {
                         index = c.getZIndex();
                     }
                 }
-                temp.setZIndex(index + 1);
-                temp.displayPriority().setZIndex(index + 2);
+                btn.setZIndex(index + 1);
+                btn.displayPriority().setZIndex(index + 2);
 
                 offsetX = x;
                 offsetY = y;
@@ -304,8 +308,8 @@ public class GuiCards implements IGuiElement {
 
             @Override
             public void drag(InputEvent event, float x, float y, int pointer){
-                if(!temp.locked){
-                    temp.moveBy(x - offsetX, y - offsetY);
+                if(!btn.locked){
+                    btn.moveBy(x - offsetX, y - offsetY);
                     click = false;
                 }
                 super.drag(event, x, y, pointer);
@@ -317,52 +321,52 @@ public class GuiCards implements IGuiElement {
                 offsetY = y;
 
                 // If it's a simple click
-                if (click && !temp.locked) {
-                    if (temp.register != null) {
-                        unRegisterCard(temp, temp.register);
+                if (click && !btn.locked) {
+                    if (btn.register != null) {
+                        unRegisterCard(btn, btn.register);
                     } else {
                         // Find fist open register
                         for (Register register : registers) {
                             if (!register.getStatus() && !register.disabled) {
-                                registerCard(temp, register);
+                                registerCard(btn, register);
                                 break;
                             }
                         }
                     }
-                } else if(!temp.locked) {
+                } else if(!btn.locked) {
                     boolean hit = false;
                     for (Register register : registers) {
                         // Register is hit by dragging motion
-                        if (register.contains(temp.getX() + offsetX, temp.getY() + offsetY)) {
+                        if (register.contains(btn.getX() + offsetX, btn.getY() + offsetY)) {
                             hit = true;
                             if (!register.getStatus()) { // Register is empty
-                                if (temp.register == null) {
-                                    registerCard(temp, register);
+                                if (btn.register == null) {
+                                    registerCard(btn, register);
                                     break;
                                 } else {
-                                    unRegisterCard(temp, temp.register);
-                                    registerCard(temp, register);
+                                    unRegisterCard(btn, btn.register);
+                                    registerCard(btn, register);
                                     break;
                                 }
-                            } else if (temp.register != null) { // Register is not empty, then swap registers and temp
-                                if (temp.register == register) {
-                                    unRegisterCard(temp, register);
+                            } else if (btn.register != null) { // Register is not empty, then swap registers and temp
+                                if (btn.register == register) {
+                                    unRegisterCard(btn, register);
                                     break;
                                 } else {
-                                    swapRegister(temp, temp.register, register);
+                                    swapRegister(btn, btn.register, register);
                                     break;
                                 }
                             } else { // // Reset to origin point
-                                temp.setPosition(temp.getOriginX(), temp.getOriginY());
+                                btn.setPosition(btn.getOriginX(), btn.getOriginY());
                             }
                         }
                     }
                     if (!hit) { // If dragging was a miss, then unregister/return to origin point
-                        if (temp.register == null) {
-                            temp.setPosition(temp.getOriginX(), temp.getOriginY());
+                        if (btn.register == null) {
+                            btn.setPosition(btn.getOriginX(), btn.getOriginY());
                         } else {
-                            unRegisterCard(temp, temp.register);
-                            temp.reSize(temp.start_width,temp.start_height,uiStage);
+                            unRegisterCard(btn, btn.register);
+                            btn.reSize(btn.start_width, btn.start_height,uiStage);
 
                         }
                     }

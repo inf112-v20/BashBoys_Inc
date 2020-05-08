@@ -10,6 +10,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 
+/**
+ * Win screen
+ */
 public class Win implements Screen {
     private Stage stage;
     private String winner;
@@ -63,7 +66,7 @@ public class Win implements Screen {
 
     @Override
     public void hide(){
-        // TODO Auto-generated method stub
+        // Auto-generated method stub
         
     }
 }

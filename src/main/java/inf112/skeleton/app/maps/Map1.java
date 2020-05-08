@@ -10,6 +10,9 @@ import inf112.skeleton.app.object.belts.Belt;
 import inf112.skeleton.app.object.belts.CornerBelt;
 import inf112.skeleton.app.object.belts.CornerJoinBelt;
 
+/**
+ * A map for RobotRally
+ */
 public class Map1 {
     private Direction west = Direction.WEST;
     private Direction east = Direction.EAST;

@@ -46,10 +46,18 @@ public class GuiHud implements IGuiElement {
         this.divRes = div;
     }
 
+    /**
+     * Set Panel for ui elements dependent on the panel
+     * @param panel - Panel form GuiPanel
+     */
     public void setPanel(ImageButton panel){
         this.panel = panel;
     }
 
+    /**
+     * Adds hud elements to gui
+     * @param stage - UiStage to add hud to
+     */
     private void addPlayerHud(Stage stage){
         float x = stage.getWidth()/10;
 

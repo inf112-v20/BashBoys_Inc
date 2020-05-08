@@ -6,7 +6,6 @@ import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import com.badlogic.gdx.net.Socket;
 import com.badlogic.gdx.net.SocketHints;
-
 import inf112.skeleton.app.ai.Ai;
 import inf112.skeleton.app.cards.Deck;
 import inf112.skeleton.app.cards.MoveCard;
@@ -17,6 +16,7 @@ import inf112.skeleton.app.maps.Map1;
 import inf112.skeleton.app.object.Flag;
 import inf112.skeleton.app.object.Robot;
 import inf112.skeleton.app.object.SpawnPoint;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -54,13 +54,16 @@ public class GameClass {
         return players.get(player);
     }
 
+    /**
+     * Main play function
+     * @param cfg - libgdx application
+     */
     public void play(LwjglApplicationConfiguration cfg){
         ViewEngine view = new ViewEngine(this);
         new LwjglApplication(view, cfg);
 
         while (!t) {
             sleep(1);
-            // System.out.println("");
         }
 
         getMap();
@@ -112,6 +115,9 @@ public class GameClass {
         }
     }
 
+    /**
+     * Function for programming phase
+     */
     public void programmingPhase(){
         boolean all_ready = false;
 
@@ -150,10 +156,12 @@ public class GameClass {
 
     }
 
+    /**
+     * Function for programming moves
+     */
     public void programmingMove(){
         turn = new ArrayList<ICard>();
-        // for (Player p : players)
-        // p.setSpawn(flag1);
+
         for (int card_nr = 0; card_nr < 5; card_nr++) {
             ICard[] priority = new ICard[players.size() - out];
             for (Player p : players) {

@@ -11,6 +11,7 @@ public class SpawnPoint implements ICheckPoint {
     public SpawnPoint(int id){
         this.id = id;
     }
+
     @Override
     public int getX(){
         return x;
@@ -18,7 +19,6 @@ public class SpawnPoint implements ICheckPoint {
 
     @Override
     public int getY(){
-        // TODO Auto-generated method stub
         return y;
     }
 

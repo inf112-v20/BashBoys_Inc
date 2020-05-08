@@ -14,6 +14,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import inf112.skeleton.app.Setting;
 
+/**
+ * Settings Screen
+ */
 public class Settings implements Screen {
 
     private Stage stage;
@@ -49,13 +52,16 @@ public class Settings implements Screen {
         });
 
         stage.addActor(button);
+
+        // Adds Music setting check box
         musicBox = new CheckBox("Music", skin);
         musicBox.setPosition(400, 350);
         if (set.music)
             musicBox.toggle();
         stage.addActor(musicBox);
 
-        devBox = new CheckBox("Delevoper Mode", skin);
+        // Add devMode Settings check box
+        devBox = new CheckBox("Developer Mode", skin);
         if (set.devMode)
             devBox.toggle();
         devBox.setPosition(400, 500);
@@ -70,36 +76,35 @@ public class Settings implements Screen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         stage.draw();
-
     }
 
     @Override
     public void resize(int width, int height) {
-        // TODO Auto-generated method stub
+        // Auto-generated method stub
 
     }
 
     @Override
     public void pause() {
-        // TODO Auto-generated method stub
+        // Auto-generated method stub
 
     }
 
     @Override
     public void resume() {
-        // TODO Auto-generated method stub
+        // Auto-generated method stub
 
     }
 
     @Override
     public void hide() {
-        // TODO Auto-generated method stub
+        // Auto-generated method stub
 
     }
 
     @Override
     public void dispose() {
-        // TODO Auto-generated method stub
+        // Auto-generated method stub
 
     }
 

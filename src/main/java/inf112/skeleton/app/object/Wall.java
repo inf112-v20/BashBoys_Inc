@@ -34,7 +34,6 @@ public class Wall implements IDirectionalObject {
         laserDmg = dmg;
     }
 
-
     @Override
     public int getX() {
         return x;

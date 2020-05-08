@@ -23,6 +23,9 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+/**
+ * Join Screen
+ */
 public class JoinScreen implements Screen {
 
     private Menu m;
@@ -144,7 +147,6 @@ public class JoinScreen implements Screen {
                         swap = true;
                         server.dispose();
                     } catch (IOException e) {
-                        // TODO Auto-generated catch block
                         e.printStackTrace();
                     }
                 }
@@ -169,34 +171,32 @@ public class JoinScreen implements Screen {
 
     @Override
     public void resize(int width, int height) {
-        // TODO Auto-generated method stub
-
+        // Auto-generated method stub
     }
 
     @Override
     public void pause() {
-        // TODO Auto-generated method stub
-
+        // Auto-generated method stub
     }
 
     @Override
     public void resume() {
-        // TODO Auto-generated method stub
-
+        // Auto-generated method stub
     }
 
     @Override
     public void hide() {
-        // TODO Auto-generated method stub
-
+        // Auto-generated method stub
     }
 
     @Override
     public void dispose() {
-        // TODO Auto-generated method stub
-
+        // Auto-generated method stub
     }
 
+    /**
+     * Swap libgdx screen
+     */
     private void swap() {
         ((Game) Gdx.app.getApplicationListener()).setScreen(new GameView(g, player, set));
     }

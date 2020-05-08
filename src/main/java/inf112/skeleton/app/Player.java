@@ -270,13 +270,18 @@ public class Player implements IPlayer {
     }
 
     /**
-     * 
-     * @return
+     * Get lives of player
+     * @return lives
      */
     public int getLifes(){
         return lifes;
     }
 
+    /**
+     * Gives i amount of lives to player
+     * @param i - amount of lives
+     * @return new amount of lives
+     */
     public int giveLife(int i){
         return lifes = Math.min(++lifes, 3);
     }
@@ -285,6 +290,11 @@ public class Player implements IPlayer {
         return giveLife(1);
     }
 
+    /**
+     * Takes i amount of lives
+     * @param i - amount of lives to take
+     * @return - new amount of lives
+     */
     public int takeLife(int i){
         return lifes = Math.max(--lifes, 0);
     }

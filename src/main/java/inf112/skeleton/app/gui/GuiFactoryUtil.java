@@ -8,8 +8,6 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
-import inf112.skeleton.app.Board;
-import inf112.skeleton.app.enums.Metrics;
 import inf112.skeleton.app.interfaces.ICard;
 
 /**
@@ -128,14 +126,6 @@ public class GuiFactoryUtil {
      */
     public static float getHeight() {
         return HEIGHT;
-    }
-
-    public static float getScaleConstant(Board b) {
-        float scale = 1f;
-        if (Gdx.graphics.getHeight() < (Metrics.TILE.height * b.height)) {
-            scale = 1.3f;
-        }
-        return scale;
     }
 
 }

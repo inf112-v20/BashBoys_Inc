@@ -63,6 +63,11 @@ public class GuiPanel implements IGuiElement {
         this.divRes = div;
     }
 
+    /**
+     * Adds Damage tokens to panel
+     * @param stage - UiStage to add tokens to
+     * @param game - GameClass
+     */
     public void addDmgTokens(Stage stage, GameClass game){
         int hp = game.players().get(player).getRobot().getHp();
 
@@ -90,6 +95,11 @@ public class GuiPanel implements IGuiElement {
         }
     }
 
+    /**
+     * Adds life tokens to panel
+     * @param stage - UiStage to add tokens to
+     * @param game - GameClass
+     */
     public void addLifeTokens(Stage stage, GameClass game){
         life = game.getPlayer().getLifes();
         for (int i = 0; i < 3; i++) {

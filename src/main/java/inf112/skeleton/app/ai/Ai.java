@@ -18,7 +18,9 @@ public class Ai extends Player {
         super(name, r);
     }
 
-
+    /**
+     * Sets the Ai's moves, simply takes random romes in hand
+     */
     public void setMoves(){
         ArrayList<Integer> list = new ArrayList<>();
         Random r = new Random();
