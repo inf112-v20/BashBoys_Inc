@@ -3,7 +3,6 @@ package inf112.skeleton.app.gui;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
-
 import inf112.skeleton.app.interfaces.ICard;
 
 import java.awt.*;

@@ -10,7 +10,6 @@ public interface ICard {
 
     /**
      * Do given card ability
-     * @param robot Which robot to affect
      * @param board Current board
      */
     void doStuff(Board board);
@@ -19,7 +18,6 @@ public interface ICard {
      * Get the priority of the card
      * @return int priority of this card
      */
-    // Not being used, but is used by all ICard object so not removed
     int getPriority();
 
     /**

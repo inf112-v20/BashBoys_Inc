@@ -4,7 +4,6 @@ import inf112.skeleton.app.cards.Deck;
 import inf112.skeleton.app.cards.MoveCard;
 import inf112.skeleton.app.cards.RotateCard;
 import inf112.skeleton.app.interfaces.ICard;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

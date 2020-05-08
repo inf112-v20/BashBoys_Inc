@@ -1,15 +1,5 @@
 package inf112.skeleton.app.screens;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.concurrent.TimeUnit;
-
-import javax.naming.NameNotFoundException;
-
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -20,22 +10,15 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.maps.MapProperties;
-import com.badlogic.gdx.maps.tiled.TiledMap;
-import com.badlogic.gdx.maps.tiled.TiledMapTile;
-import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
-import com.badlogic.gdx.maps.tiled.TiledMapTileSet;
-import com.badlogic.gdx.maps.tiled.TmxMapLoader;
+import com.badlogic.gdx.maps.tiled.*;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.net.ServerSocket;
 import com.badlogic.gdx.net.ServerSocketHints;
 import com.badlogic.gdx.net.Socket;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.ui.SelectBox;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
-
 import inf112.skeleton.app.Board;
 import inf112.skeleton.app.GameClass;
 import inf112.skeleton.app.Player;
@@ -47,12 +30,23 @@ import inf112.skeleton.app.cards.ShutDown;
 import inf112.skeleton.app.enums.Direction;
 import inf112.skeleton.app.enums.LeftRight;
 import inf112.skeleton.app.enums.Metrics;
-import inf112.skeleton.app.gui.*;
+import inf112.skeleton.app.gui.GuiCards;
+import inf112.skeleton.app.gui.GuiHud;
+import inf112.skeleton.app.gui.GuiPanel;
 import inf112.skeleton.app.interfaces.ICard;
 import inf112.skeleton.app.interfaces.IMapObject;
 import inf112.skeleton.app.object.Laser;
 import inf112.skeleton.app.object.Robot;
 import inf112.skeleton.app.object.Wall;
+
+import javax.naming.NameNotFoundException;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.concurrent.TimeUnit;
 
 public class GameView implements Screen {
     private final Board board;

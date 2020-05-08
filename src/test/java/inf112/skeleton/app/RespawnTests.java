@@ -1,12 +1,11 @@
 package inf112.skeleton.app;
 
-import static org.junit.Assert.assertEquals;
-
+import inf112.skeleton.app.object.Flag;
+import inf112.skeleton.app.object.Robot;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import inf112.skeleton.app.object.Flag;
-import inf112.skeleton.app.object.Robot;
+import static org.junit.Assert.assertEquals;
 
 class RespawnTests {
 
