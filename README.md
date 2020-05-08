@@ -53,6 +53,7 @@
 - [x] Game has a main menu
   - [x] Settings
   - [x] Join and Host
+  - [x] Help and Credits (Bug: Only works on Windows)
 - [x] Togglable music for game
   - [x] Option in settings
 - [x] Ability to host a multiplayer and LAN game
