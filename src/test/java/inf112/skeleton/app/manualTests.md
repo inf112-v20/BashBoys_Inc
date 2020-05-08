@@ -28,3 +28,9 @@ When in game, music shall be heard if enabled in settings before entering game.
     d. Click "Play"
 3. Game should launch with a board
 4. Music shall now be playing if volume on pc is on.
+
+### Gui works on all diffrent resolutions between (1366x768 and upwards) (last tested: 05.05.2020)
+When game is launchen on diffrent resolutions the game still looks nice and all gui elments are drawn correctly
+1. Launch game on a pc with diffrent resolutions or manualy choose resoulution
+2. Check each screen, `Settings`, `Menu`, `Join`, `Host` and `Play`
+3. See that all gui elements are drawn correctly and it looks ok
