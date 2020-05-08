@@ -204,7 +204,7 @@ public class GuiCards implements IGuiElement {
                     finished = true;
                     powerDown.setDisabled(true);
                     lockIn.setDisabled(true);
-                    System.out.println("");
+                    System.out.println();
                     for (Register register : registers) {
                         if (register.getStatus()) {
                             System.out.print(register.getCard().getType().getName() + " - ");
@@ -215,7 +215,7 @@ public class GuiCards implements IGuiElement {
                         }
                     }
                     game.players().get(player).setReady(true); // temp
-                    System.out.println("");
+                    System.out.println();
                 }
                 if (player != 0) {
                     game.sendHand();

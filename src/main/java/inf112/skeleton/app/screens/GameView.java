@@ -119,7 +119,7 @@ public class GameView implements Screen {
                             p.setReady(true);
 
                         } catch (IOException e) {
-                            // TODO Auto-generated catch block
+                            // Auto-generated catch block
                             e.printStackTrace();
                         }
                     }
@@ -153,7 +153,7 @@ public class GameView implements Screen {
                                 p.setReady(true);
                             }
                         } catch (IOException e) {
-                            // TODO Auto-generated catch block
+                            // Auto-generated catch block
                             e.printStackTrace();
                         }
                     }
@@ -177,7 +177,6 @@ public class GameView implements Screen {
         Gdx.input.setInputProcessor(uiStage);
 
         map = new TmxMapLoader().load("assets/maps/roborallyCleanBoard.tmx");
-        // boardLayer = (TiledMapTileLayer) map.getLayers().get("Board");
 
         objectLayer = (TiledMapTileLayer) map.getLayers().get("Objects");
         robotLayer = (TiledMapTileLayer) map.getLayers().get("Robots");
@@ -201,7 +200,7 @@ public class GameView implements Screen {
                 mapTiles.put((String) val, tile);
             }
             if (properties != null) {
-                mapTiles.put((String) "wall", tile);
+                mapTiles.put("wall", tile);
             }
         }
 
@@ -503,8 +502,7 @@ public class GameView implements Screen {
 
     @Override
     public void hide(){
-        // TODO Auto-generated method stub
-
+        // Auto-generated method stub
     }
 
     /**
@@ -568,8 +566,6 @@ public class GameView implements Screen {
         guiPanel.setDivRes(divRes);
         guiPanel.initialize(uiStage, g, player);
 
-
-
         guiCards.setDivRes(divRes);
         guiCards.setPanel(guiPanel.panel);
         guiCards.initialize(uiStage, g, player);
@@ -577,10 +573,5 @@ public class GameView implements Screen {
         guiHud.setDivRes(divRes);
         guiHud.setPanel(guiPanel.panel);
         guiHud.initialize(uiStage, g, player);
-
-
-
-
-
     }
 }

@@ -56,6 +56,13 @@ public enum Direction {
             
         }
     }
+
+    /**
+     * Get related direction
+     * @param oldD - old direction
+     * @param newD - new direction
+     * @return new LeftRight direction
+     */
     public static LeftRight relation(Direction oldD, Direction newD) {
         if(oldD == NORTH && newD == EAST) {
             return LeftRight.RIGHT;

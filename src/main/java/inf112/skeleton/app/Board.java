@@ -586,7 +586,7 @@ public class Board {
                 if (dmg > 0) { // If dmg
                     int x = obj.getX(); // x
                     int y = obj.getY(); // y
-                    Direction dir = Direction.uTurn(((Wall) obj).getDir());
+                    Direction dir = Direction.uTurn(obj.getDir());
                     boolean stop = false;
                     boolean add = true;
                     while (x < width && x >= 0 && y >= 0 && y < height && !stop) {

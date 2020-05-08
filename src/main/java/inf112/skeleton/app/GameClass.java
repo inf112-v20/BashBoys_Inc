@@ -184,7 +184,7 @@ public class GameClass {
                     priority[i] = next;
                 }
             }
-            for (ICard c : Arrays.asList(priority)) {
+            for (ICard c : priority) {
                 if (priority.length != 0 && priority[0] != null) {
                     System.out.println(c == null);
                     System.out.println(c.getPlayer());
@@ -483,7 +483,7 @@ public class GameClass {
         board.addItem(s7, 10, 14);
         board.addItem(s8, 11, 13);
 
-        spawns.addAll(Arrays.asList(new SpawnPoint[] { s1, s2, s3, s4, s5, s6, s7, s8 }));
+        spawns.addAll(Arrays.asList(s1, s2, s3, s4, s5, s6, s7, s8));
         for (int i = 0; i < players.size(); i++) {
             players.get(i).setSpawn(spawns.get(i));
             board.removeItem(players.get(i).getRobot());

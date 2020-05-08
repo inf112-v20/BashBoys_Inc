@@ -4,7 +4,10 @@ import com.badlogic.gdx.Gdx;
 
 public enum Metrics {
 
+    // width and height of gdx screen
     SCREEN(Gdx.graphics.getWidth(),Gdx.graphics.getHeight()),
+
+    // width and height of tiles
     TILE(64,64);
 
     public final float width;
