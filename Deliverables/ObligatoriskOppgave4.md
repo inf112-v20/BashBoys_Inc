@@ -8,3 +8,9 @@ Hvis vi skulle gjort prosjektet på ny er det noen ting vi ville ha gjort annerl
 
 Gruppedynamikken og kommunikasjonen har vært bra stort sett gjennom hele prosjektet. Karantene og nedstengning var en liten utfordring i starten men det gikk ikke lenge før vi jobbet nesten like effektivt over discord som i de vanlige gruppetimene. Det eneste som var litt mer stress å få til var å diskutere små kode problemer over discord. Litt mer vrient å ta på skjermdeling og vise enn å bare lene seg over og se på skjermen til de du jobber med.
 
+## WorkBoard
+![WorkBoard](https://github.com/inf112-v20/BashBoys_Inc/blob/master/Deliverables/WordBoards/WorkBoardOblig4.PNG)
+
+## UML
+![Oblig3UML](https://github.com/inf112-v20/BashBoys_Inc/blob/master/Deliverables/UMLs/uml4.png)
+
