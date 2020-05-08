@@ -47,7 +47,26 @@
 - [x] Usable Gui and buttons
   - [x] dragabble/clickable cards
   - [x] visual card selection
+  
+  
+### Development goals for assignment 4:
+- [x] Game has a main menu
+  - [x] Settings
+  - [x] Join and Host
+  - [x] Help and Credits (Bug: Only works on Windows)
+- [x] Togglable music for game
+  - [x] Option in settings
+- [x] Ability to host a multiplayer and LAN game
+  - [x] Host menu button
+  - [x] Working LAN multiplayer
+  - [x] Working Online Multiplayer
+- [x] Ability to join a hosted game
+- [x] Player can win game by taking flags
+  - [x] Flags that has to be taken i correcty order
+  - [x] Player can win the game by taking all the flags
+  - [x] Win screen
 
+ 
 ### Requirements from customer (Taken from lecture slides early in INF112 course)
 - [x] Show a playing board
 - [x] Show a pice
